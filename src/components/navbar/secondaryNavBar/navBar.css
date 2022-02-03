@@ -1,0 +1,11 @@
+.secondary-navbar{
+    max-width: 1894px !important;
+}
+.navbar-background{
+    background-color: var(--color--bg-navbar) !important;
+}
+.bg-royal-transparent{
+    background-color: var(--color-secondary-header) !important;
+    transition: 1s;
+    box-shadow: none !important;
+}

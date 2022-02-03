@@ -1,0 +1,23 @@
+html {
+    --color-text: black;
+    --color-heading: #d82a4f;
+    --color-background: #eef4f6;
+    --color-border: grey;
+    --color-primary: #12273f;
+    --color-secondary: #12273f;
+    --gutter: 16px;
+    --stories-slider-height: 600px;
+    --color-footer: #000000;
+    --color-footer-bottom: #2c2c2c;
+    --color-white: white;
+    --color-light-pink: #fbaed2;
+    --color-green-icon: green;
+    --color-red-icon: red;
+    --color-secondary-header: #26445c;
+    /* --bg-image: url(./Assets/Images/bg.jpg); */
+    --color--bg-navbar: white;
+    /* --color-navbar-text: #333; */
+    --color-navbar-text: black;
+    --border-color: #a4508b;
+    scroll-behavior: smooth;
+}
