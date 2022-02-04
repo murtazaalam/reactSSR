@@ -1,11 +1,11 @@
 import { BrowserRouter } from "react-router-dom";
 // import MainRoute from "./Main/routes/MainRoute";
-import NavBar from "./components/navbar/secondaryNavBar/NavBar";
+import { SecondaryNavBar } from "./components";
 // import Footer from "./Main/components/Footer";
 function App() {
     return (
       <BrowserRouter>
-        <NavBar />
+        <SecondaryNavBar />
         {/* <MainRoute />
         <Footer /> */}
         <h1>hi react</h1>

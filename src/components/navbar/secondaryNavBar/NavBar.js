@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
-import { Container, Typography, Button } from "@mui/material";
+import { Container } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import PrimaryNavBar from '../primaryNavBar/PrimaryNavBar'
 import logo from '../../../assets/images/logo-print-hd-transparent-removebg-preview.png';
