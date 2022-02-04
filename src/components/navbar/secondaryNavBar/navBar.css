@@ -1,6 +1,9 @@
 .secondary-navbar{
     max-width: 1894px !important;
 }
+.main-logo{
+    padding: 10px 24px;
+}
 .navbar-background{
     background-color: var(--color--bg-navbar) !important;
 }
@@ -8,4 +11,34 @@
     background-color: var(--color-secondary-header) !important;
     transition: 1s;
     box-shadow: none !important;
+}
+.secondary-navbar{
+    display: flex !important;
+}
+.menu-item{
+    font-size: 18px;
+    margin-right: 20px !important;
+}
+.menu-item:hover .arrow-icon{
+    transform: rotate(180deg);
+    transition: 0.3s;
+}
+
+.menu-icon{
+    display: block !important;
+}
+.techvanto-navbar-service-accordian {
+    width: 100% !important;
+}
+.courses{
+    position: absolute;
+    display: none;
+}
+.menu-item:hover .courses{
+    display: block;
+}
+@media screen and (min-width: 1024px){
+    .menu-icon{
+        display: none !important;
+    }
 }
