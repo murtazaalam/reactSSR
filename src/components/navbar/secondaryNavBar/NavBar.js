@@ -2,9 +2,8 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { styled } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
@@ -18,27 +17,15 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import PrimaryNavBar from '../primaryNavBar/PrimaryNavBar'
 import logo from '../../../assets/images/logo-print-hd-transparent-removebg-preview.png';
 import logoOnScroll from '../../../assets/images/on-scroll-logo.png';
-import MenuItem from '../../../data/menu-items/MenuList';
-import Courses from '../../../data/courses/Courses';
+import SchoolIcon from '../../../assets/images/new-course-icon-school.svg';
+import IntermediateIcon from '../../../assets/images/new-course-icon-intermediate.svg';
+import CollegeIconIcon from '../../../assets/images/new-course-icon-college.svg';
+import Services from '../../../data/services/Services';
 import './navBar.css';
-
-
-const ExpandMore = styled((props) => {
-        const { expand, ...other } = props;
-        return <IconButton {...other} />;
-    })(({ theme, expand }) => ({
-        transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-        marginLeft: "auto",
-        transition: theme.transitions.create("transform", {
-        duration: theme.transitions.duration.shortest,
-    }),
-}));
 
 const NavBar = () => {
 
     const [scroll, setScroll] = useState(false);
-    const [serviceAnchorEl, setServiceAnchorEl] = useState(null);
-    const [serviceOpen, setServiceOpen] = useState(false);
     const [state, setState] = useState({
         top: false,
         left: false,
@@ -55,16 +42,6 @@ const NavBar = () => {
             setScroll(window.scrollY > 100);
         })
     })
-
-    const handleServiceOpen = (e) => {
-        setServiceOpen(true);
-        setServiceAnchorEl(e.currentTarget);
-    };
-
-    const handleServiceClose = (e) => {
-        setServiceOpen(false);
-        setServiceAnchorEl(null);
-    };
     const list = (anchor) => {
         <Box
             sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
@@ -86,7 +63,7 @@ const NavBar = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                     <List>
-                        {/* {Services.map((data, index) => (
+                        {Services.map((data, index) => (
                         <ListItem
                             component={Link}
                             to={data.link}
@@ -95,7 +72,7 @@ const NavBar = () => {
                         >
                             <ListItemText primary={data.text} />
                         </ListItem>
-                        ))} */}
+                        ))}
                         <ListItem>
                             <ListItemText primary="list is working" />
                         </ListItem>
@@ -137,42 +114,242 @@ const NavBar = () => {
                             >
                             {list("left")}
                         </SwipeableDrawer>
-                        <Container className="mobile-menu">
-                            {MenuItem.map((item, index) => {
-                                return(
-                                    <Typography 
-                                        variant="a"
-                                        onMouseEnter={handleServiceOpen}
-                                        onMouseLeave={handleServiceClose}
-                                        className="menu-item"
-                                        sx={scroll === false ? { color: "white" } : { color: "black" }}
-                                        key={index}
-                                    >
-                                        <a>
-                                            {item.menuItem}
-                                            <ExpandMoreIcon className="arrow-icon"/>
-                                        </a>
-                                        <div className="courses">
-                                            {item.menuItem === 'Courses' &&
-                                                <div>
-                                                    {Courses.map((course, index) => {
-                                                        return(
-                                                            <>
-                                                                <h1>{course.category}</h1>
-                                                            </>
-                                                        )
-                                                    })}
-                                                </div>
-                                            }
-                                            {item.menuItem === 'Services' &&
-                                                <div>
-                                                    hellosss
-                                                </div>
-                                            }
-                                        </div>
-                                    </Typography>
-                                )
-                            })}
+                        <Container className="navbar-category"> 
+                            <div className="menu-item">
+                                <div className="item courses">
+                                    <a className="menu-text">
+                                        <span
+                                            
+                                            className={scroll === false ? "color-white" : "color-black"}
+                                        >
+                                            Courses
+                                        </span>
+                                        <ExpandMoreIcon
+                                            sx={scroll == false ? { color: "white" } : { color: "black" }}
+                                            className="arrow-icon"
+                                        />
+                                    </a>
+                                    <div className="dropdown-content">
+                                        <ul className="dropdown-menu-multi-level">
+                                            <li>
+                                                <a href="#">
+                                                    For Schools
+                                                    <div className="course-list school-course">
+                                                        <div className="image-section">
+                                                            <img src={`${SchoolIcon}`}/>
+                                                        </div>
+                                                        <div className="school-course-list">
+                                                            <span>Courses</span>
+                                                            <ul>
+                                                                <li>
+                                                                    Course 1
+                                                                    <div className="course-desc desc default-desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Course 1 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    Course 2
+                                                                    <div className="course-desc desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Course 2 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    Course 3
+                                                                    <div className="course-desc desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Course 3 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    Course 4
+                                                                    <div className="course-desc desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Course 4 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                        
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    For Colleges
+                                                    <div className="course-list">
+                                                        <div 
+                                                            className="image-section" 
+                                                            style={{background: "linear-gradient(120deg, #fc8955 0%, #fc8955 50%, #fcb82f 100%"}}
+                                                        >
+                                                            <img src={`${CollegeIconIcon}`}/>
+                                                        </div>
+                                                        <div className="school-course-list">
+                                                            <span>Courses</span>
+                                                            <ul>
+                                                                <li>
+                                                                    Colleges 1
+                                                                    <div className="course-desc desc default-desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Colleges 1 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    Colleges 2
+                                                                    <div className="course-desc desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Colleges 2 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    Colleges 3
+                                                                    <div className="course-desc desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Colleges 3 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    Colleges 4
+                                                                    <div className="course-desc desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Colleges 4 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                        
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    For Intermediate
+                                                    <div className="course-list">
+                                                        <div 
+                                                            className="image-section"
+                                                            style={{background: "linear-gradient(120deg, #307bf2 0%, #307bf2 50%, #c38efd 100%"}}
+                                                        >
+                                                            <img src={`${IntermediateIcon}`}/>
+                                                        </div>
+                                                        <div className="school-course-list">
+                                                            <span>Courses</span>
+                                                            <ul>
+                                                                <li>
+                                                                    Intermediate 1
+                                                                    <div className="course-desc desc default-desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Intermediate 1 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    Intermediate 2
+                                                                    <div className="course-desc desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Intermediate 2 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    Intermediate 3
+                                                                    <div className="course-desc desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Intermediate 3 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    Intermediate 4
+                                                                    <div className="course-desc desc">
+                                                                        <div className="desc-heading">Description</div>
+                                                                        <div>
+                                                                            Intermediate 4 Description
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                        
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="item">
+                                    <a className="menu-text">
+                                        <span
+                                            className={scroll === false ? "color-white" : "color-black"}
+                                        >
+                                            Services
+                                        </span>
+                                        <ExpandMoreIcon
+                                            sx={scroll == false ? { color: "white" } : { color: "black" }}
+                                            className="arrow-icon"
+                                        />
+                                    </a>
+                                </div>
+                                <div className="item">
+                                    <a className="menu-text">
+                                        <span
+                                            className={scroll === false ? "color-white" : "color-black"}
+                                        >
+                                            Events
+                                        </span>
+                                        <ExpandMoreIcon
+                                            sx={scroll == false ? { color: "white" } : { color: "black" }}
+                                            className="arrow-icon"
+                                        />
+                                    </a>
+                                </div>
+                                <div className="item">
+                                    <a className="menu-text">
+                                        <span
+                                            className={scroll === false ? "color-white" : "color-black"}
+                                        >
+                                            Contact Us
+                                        </span>
+                                        <ExpandMoreIcon
+                                            sx={scroll == false ? { color: "white" } : { color: "black" }}
+                                            className="arrow-icon"
+                                        />
+                                    </a>
+                                </div>
+                                <div className="item"> 
+                                    <a className="menu-text">
+                                        <span
+                                            className={scroll === false ? "color-white" : "color-black"}
+                                        >
+                                            Blogs
+                                        </span>
+                                        <ExpandMoreIcon
+                                            sx={scroll == false ? { color: "white" } : { color: "black" }}
+                                            className="arrow-icon"
+                                        />
+                                    </a>
+                                </div>
+                                
+                            </div>
                         </Container>
                     </Toolbar>
                 </Container>
