@@ -7,19 +7,85 @@ html {
   --color-secondary: #12273f;
   --gutter: 16px;
   --stories-slider-height: 600px;
-  --color-footer: #000000;
-  --color-footer-bottom: #2c2c2c;
+  --color-footer: #4078af;
+  --color-footer-bottom: #cf5982;
   --color-white: white;
   --color-light-pink: #fbaed2;
   --color-green-icon: green;
   --color-red-icon: red;
-  --color-secondary-header: #26445c;
+  --color-secondary-header: #578bc0;
   /* --bg-image: url(./Assets/Images/bg.jpg); */
   --color--bg-navbar: white;
   /* --color-navbar-text: #333; */
   --color-navbar-text: black;
   --border-color: #a4508b;
   scroll-behavior: smooth;
+}
+
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #f5496e 0%,
+    #26a0da 51%,
+    #5e849c 100%
+  );
+}
+.btn-grad {
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+
+  border-radius: 10px;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.techvanto-whyus {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.techvanto-whyus-heading {
+  margin: 25px !important;
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+}
+
+.techvanto-whyus-grid-item {
+  height: 200px;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.techvanto-whyus-grid {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+.techvanto-whyus-cloudupload-icon {
+  font-size: 30px !important;
+}
+
+.techvanto-whyus-grid-item-count {
+  font-size: 40px;
+  color: var(--color-primary);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+* {
+  font-family: "Raleway", sans-serif !important;
+  /* font-size: 16px; */
+  /* font-weight: 400; */
+}
+.section-spacing {
+  margin: 20px 17% 20px 17%;
 }
 .display-grid {
   display: grid;
@@ -42,4 +108,19 @@ html {
 
 .text-medium {
   font-size: 20px;
+}
+.text-large {
+  font-size: 30px;
+}
+.background {
+  background: var(--color-background);
+  padding: 18px;
+}
+@media only screen and (max-width: 1000px) {
+  .fr4 {
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 30px;
+    width: 70%;
+    margin: 0 auto;
+  }
 }

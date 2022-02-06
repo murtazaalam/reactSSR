@@ -1,18 +1,18 @@
 .primary-navbar {
-    display: flex;
-    justify-content: center;
-    padding: 18px;
-    color: white;
-    font-size: 10px;
-    font-weight: 600;
-    background-color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  padding: 18px;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  background-color: #cf5982;
 }
 
-.hide-primary-navbar{
-    display: none;
+.hide-primary-navbar {
+  display: none;
 }
-@media screen and (min-width: 540px){
-    .primary-navbar{
-        font-size: 14px;
-    }
+@media screen and (min-width: 540px) {
+  .primary-navbar {
+    font-size: 14px;
+  }
 }
