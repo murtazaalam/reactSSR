@@ -132,11 +132,13 @@ const NavBar = () => {
                                     <div className="dropdown-content">
                                         <ul className="dropdown-menu-multi-level">
                                             <li>
-                                                <a href="#">
+                                                <a>
                                                     For Schools
                                                     <div className="course-list school-course">
                                                         <div className="image-section">
-                                                            <img src={`${SchoolIcon}`}/>
+                                                            <Link to="/courses" className="course-image">
+                                                                <img src={`${SchoolIcon}`}/>
+                                                            </Link>
                                                         </div>
                                                         <div className="school-course-list">
                                                             <span>Courses</span>
@@ -184,7 +186,7 @@ const NavBar = () => {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a>
                                                     For Colleges
                                                     <div className="course-list">
                                                         <div 
@@ -239,7 +241,7 @@ const NavBar = () => {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a>
                                                     For Intermediate
                                                     <div className="course-list">
                                                         <div 

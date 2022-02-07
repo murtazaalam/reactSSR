@@ -128,7 +128,10 @@
     font-weight: 600;
     padding: 7px 25px;
     white-space: normal;
-    color: #333;
+    color: #333 !important;
+}
+.course-image:hover{
+    background: transparent !important;
 }
 .dropdown-menu-multi-level li a:hover{
     background-color: #d9ddeb;

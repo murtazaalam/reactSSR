@@ -1,0 +1,37 @@
+.page-heading{   
+    padding-top: 15px;
+    font-weight: 00;
+    padding-bottom: 60px;
+}
+.page-heading h1{
+    text-align: center;
+    font-weight: 600;
+    margin: 40px 0;
+}
+.page-heading{
+    background: #f8f8f8;
+    padding: 15px 0 60px 0;
+}
+.page-heading ol a{
+    position: relative;
+    text-decoration: none;
+    color: #ababab;
+    transition: 0.3s;
+}
+.page-heading ol a:hover{
+    color: #252525;
+}
+.page-heading ol a .line{
+    position: absolute;
+    height: 2px;
+    width: 0px;
+    left: 0;
+    background: #252525;
+    transition: width 0.3s;
+}
+.page-heading ol a:hover .line{
+    width: 100%;
+} 
+.page-heading ol li{
+    font-size: 14px;
+}

@@ -4,6 +4,7 @@ import Footer from "./footer/Footer";
 import ContentHeaderImage from "./content-header-image/ContentHeaderImage";
 import ServiceGrid from './serviceGrid/ServiceGrid';
 import Sliderr from "./3DSlider/Sliderr";
+import CourseHeader from './courses/courseHeader/CourseHeader'
 
 export { 
     PrimaryNavBar, 
@@ -11,5 +12,7 @@ export {
     Footer,
     ContentHeaderImage,
     ServiceGrid,
-    Sliderr
+    Sliderr,
+    CourseHeader
  };
+ 
