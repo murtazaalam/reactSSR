@@ -1,29 +1,29 @@
-.techvanto-content-header-image{
-    min-height: 70vh !important;
-    width: 100%;
-    background: #26445c url("../../assets/images/header.jpeg") 0 0 no-repeat;
-    background-size: auto 100%;
-    background-position: right;
+.techvanto-content-header-image {
+  min-height: 70vh !important;
+  width: 100%;
+  background: #578bc0 url("../../assets/Svgs/hero.svg") 0 0 no-repeat;
+  background-size: auto 100%;
+  background-position: right;
 }
 .techvanto-content-header-image .css-1oqqzyl-MuiContainer-root {
-    max-width: 1894px;
+  max-width: 1894px;
 }
 .techvanto-header-content {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    color: white;
-    height: 60vh;
-    font-family: "Segoe UI", sans-serif;
-    text-align: left;
-    margin: 50px 50px 50px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color: white;
+  height: 60vh;
+  font-family: "Segoe UI", sans-serif;
+  text-align: left;
+  margin: 50px 50px 50px 32px;
 }
 .techvanto-campus-ambassador-right-content {
-    text-align: center !important;
+  text-align: center !important;
 }
 .text-large {
-    font-size: 30px;
+  font-size: 30px;
 }
 .text-small {
-    font-size: 14px;
+  font-size: 14px;
 }

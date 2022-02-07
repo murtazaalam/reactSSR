@@ -1,8 +1,9 @@
-import { CourseHeader } from '../../components'
+import { CourseHeader, CourseBody } from '../../components'
 const Courses = () => {
     return (
         <>
            <CourseHeader />
+           <CourseBody/>
         </>
     )
 }

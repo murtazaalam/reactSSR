@@ -1,23 +1,20 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ShareIcon from '@material-ui/icons/Share';
+import Badge from '@material-ui/core/Badge';
 import './courseHeader.css';
 
 const CourseHeader = () => {
 
   return (
     <>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
       <section class="page-heading">
-            <div class="container">
+            <div class="course-container">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
@@ -39,27 +36,10 @@ const CourseHeader = () => {
                 </nav>
                 <div class="my-container">
                     <div class="course-head">
-                        <h4>
-                            <a href="#">Programming Languages</a>
-                        </h4>
                         <h2>
                             Angular – The Complete Guide (2020 Edition)
                         </h2>
-                        <div class="instructor-info">
-                            <div class="instr-pic">
-                                <img src="images/instructor_1.jpg" class="img-fluid" alt="instructor-image"/>
-                            </div>
-                            <div class="instr-name">
-                                <span>Cikgu Siti Negro</span>
-                            </div>
-                            <div class="update-date">
-                                <span>Last Update July 5, 2021</span>
-                            </div>
-                        </div>
-                        <div class="total-enrolled">
-                            <i class="fa fa-user"></i>
-                            <span>3 already enrolled</span>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

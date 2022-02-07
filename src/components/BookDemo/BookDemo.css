@@ -1,0 +1,40 @@
+.techvanto-book-a-demo {
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+/* 
+  .techvanto-book-a-demo img{
+      width: 350px;
+  } */
+
+.techvanto-book-a-demo > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.techvanto-book-a-demo > p {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.techvanto-demo-right-content {
+  display: block;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+}
+
+.techvanto-book {
+  display: flex;
+}
+
+.techvanto-book input,
+.techvanto-book {
+  background-color: white;
+  border-radius: 99px;
+}

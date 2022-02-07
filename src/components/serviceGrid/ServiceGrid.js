@@ -1,11 +1,17 @@
 import * as React from "react";
-import { Tab, Typography, Box  } from "@mui/material";
+import { Tab, Typography, Box } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import ServiceCard from "../widgets/ServiceCard/ServiceCard";
+import ServiceCard from "./ServiceCard/ServiceCard";
 import "./serviceGrid.css";
 import Services from "../../data/services/Services";
+// const Item = styled(Paper)(({ theme }) => ({
+//   ...theme.typography.body2,
+//   padding: theme.spacing(2),
+//   textAlign: "center",
+//   color: theme.palette.text.secondary,
+// }));
 
 const ServiceGrid = () => {
   const [value, setValue] = React.useState("1");
@@ -38,80 +44,81 @@ const ServiceGrid = () => {
             <TabPanel value="1">
               <div className="row service-grid">
                 {Services.map((data) => {
-                  if (data.tab === "School") {
-                    return (
+                  return (
+                    data.tab === "School" && (
                       <ServiceCard
                         icon={data.icon}
                         title={data.text}
                         description={data.description}
                         link={data.link}
                       ></ServiceCard>
-                    );
-                  }
+                    )
+                  );
                 })}
               </div>
             </TabPanel>
+
             <TabPanel value="2">
               <div className="row service-grid">
                 {Services.map((data) => {
-                  if (data.tab === "Intermediate") {
-                    return (
+                  return (
+                    data.tab === "Intermediate" && (
                       <ServiceCard
                         icon={data.icon}
                         title={data.text}
                         description={data.description}
                         link={data.link}
                       ></ServiceCard>
-                    );
-                  }
+                    )
+                  );
                 })}
               </div>
             </TabPanel>
             <TabPanel value="3">
               <div className="row service-grid">
                 {Services.map((data) => {
-                  if (data.tab === "Undergrads") {
-                    return (
+                  return (
+                    data.tab === "Undergrads" && (
                       <ServiceCard
                         icon={data.icon}
                         title={data.text}
                         description={data.description}
                         link={data.link}
                       ></ServiceCard>
-                    );
-                  }
+                    )
+                  );
                 })}
               </div>
             </TabPanel>
             <TabPanel value="4">
               <div className="row service-grid">
                 {Services.map((data) => {
-                  if (data.tab === "Companies") {
-                    return (
+                  return (
+                    data.tab === "Companies" && (
                       <ServiceCard
                         icon={data.icon}
                         title={data.text}
                         description={data.description}
                         link={data.link}
                       ></ServiceCard>
-                    );
-                  }
+                    )
+                  );
                 })}
               </div>
             </TabPanel>
             <TabPanel value="5">
               <div className="row service-grid">
                 {Services.map((data) => {
-                  if (data.tab === "Colleges") {
-                    return (
+                  return (
+                    data.tab === "Colleges" && (
                       <ServiceCard
                         icon={data.icon}
                         title={data.text}
                         description={data.description}
                         link={data.link}
                       ></ServiceCard>
-                    );
-                  }
+                    )
+                  );
                 })}
               </div>
             </TabPanel>

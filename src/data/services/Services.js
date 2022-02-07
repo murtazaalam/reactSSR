@@ -1,10 +1,10 @@
-import OneToOneIcon from "../../assets/images/oneToOne.svg";
-import ResumeIcon from "../../assets/images/resume.svg";
-import Webinar from "../../assets/images/webinar.svg";
-import Workshop from "../../assets/images/workshop.svg";
-import ITIcon from "../../assets/images/tp.svg";
-import CpIcon from "../../assets/images/cp.svg";
-import IpIcon from "../../assets/images/IP.svg";
+import OneToOneIcon from "../../assets/Svgs/ServicesIcon/oneToOne.svg";
+import ResumeIcon from "../../assets/Svgs/ServicesIcon/resume.svg";
+import Webinar from "../../assets/Svgs/ServicesIcon/webinar.svg";
+import Workshop from "../../assets/Svgs/ServicesIcon/workshop.svg";
+import ITIcon from "../../assets/Svgs/ServicesIcon/tp.svg";
+import CpIcon from "../../assets/Svgs/ServicesIcon/cp.svg";
+import IpIcon from "../../assets/Svgs/ServicesIcon/IP.svg";
 
 const Services = [
   {
