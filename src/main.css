@@ -95,6 +95,10 @@ html {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 20px;
 }
+.fr5 {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+}
 
 .fr2 {
   grid-template-columns: 2fr 2fr;
@@ -120,6 +124,14 @@ html {
 @media only screen and (max-width: 1000px) {
   .fr4 {
     grid-template-columns: 1fr 1fr;
+    grid-row-gap: 30px;
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .fr4 {
+    grid-template-columns: 1fr;
     grid-row-gap: 30px;
     width: 70%;
     margin: 0 auto;

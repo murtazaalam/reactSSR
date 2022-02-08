@@ -67,18 +67,10 @@ const WhatOurStudentSays = (props) => {
           mouseTracking
           items={items}
           renderPrevButton={() => {
-            return (
-              <div className="techvanto-training-arrow student-arrow-left">
-                ◄
-              </div>
-            );
+            return <div className="left-arrow-studentSays">◄</div>;
           }}
           renderNextButton={() => {
-            return (
-              <div className="techvanto-training-arrow student-arrow-right ">
-                ►
-              </div>
-            );
+            return <div className="right-arrow-studentSays">►</div>;
           }}
         />
       </div>

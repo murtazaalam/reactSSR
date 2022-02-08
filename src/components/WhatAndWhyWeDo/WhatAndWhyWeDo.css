@@ -31,3 +31,10 @@
 .techvanto-why-we-do li.MuiListItem-gutters div {
   justify-content: center;
 }
+
+@media screen and (max-width: 600px) {
+  .display-on-small-screen {
+    display: flex;
+    flex-direction: column;
+  }
+}

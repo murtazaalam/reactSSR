@@ -33,8 +33,23 @@
   display: flex;
 }
 
+.padding {
+  padding: 6px;
+}
+.inhert-width {
+  width: inherit;
+}
+
 .techvanto-book input,
 .techvanto-book {
   background-color: white;
   border-radius: 99px;
+}
+.form-book {
+  display: flex;
+  flex-direction: column;
+}
+.card-content {
+  display: flex;
+  flex-direction: column;
 }

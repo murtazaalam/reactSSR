@@ -3,7 +3,8 @@ import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
+import "./WhatWeDoList.css";
+//import ListItemAvatar from "@mui/material/ListItemAvatar";
 
 const StyleListItem = styled(ListItem)(({ theme }) => ({
   "&:hover": {
@@ -36,8 +37,7 @@ export default function WhatAndWhyList(props) {
     >
       {content[props.text].map((txt, index) => (
         <StyleListItem key={index}>
-          <ListItemAvatar></ListItemAvatar>
-          <ListItemText primary={txt} />
+          <ListItemText primary={txt} className="font-size" />
         </StyleListItem>
       ))}
     </List>

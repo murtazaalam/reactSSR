@@ -4,7 +4,7 @@ import image_1 from "../../assets/images/success-story-cyber-security.jpg";
 import image_2 from "../../assets/images/success-story-bridge-design.jpg";
 import image_3 from "../../assets/images/success-story-hackathon.jpg";
 import image_4 from "../../assets/images/success-story-machine-learning.jpg";
-import './sliderr.css';
+import "./sliderr.css";
 const Sliderr = () => {
   const [totalSlide] = React.useState(6);
   const [currentSlide, setCurrentSlide] = React.useState(0);
@@ -52,19 +52,22 @@ const Sliderr = () => {
 
   return (
     <div className="slider-div">
-        <div className="story-heading">
-            <Typography component="h2" className="techvanto-whyus-heading story-text">
-                Stories
-            </Typography>
-            <div className="arrow-button">
-                <div className="left-arrow" onClick={() => handleArrow(-1)}>
-                    ◄
-                </div>
-                <div className="right-arrow" onClick={() => handleArrow(1)}>
-                    ►
-                </div>
-            </div>
+      <div className="story-heading">
+        <Typography
+          component="h2"
+          className="techvanto-whyus-heading story-text"
+        >
+          Success Stories
+        </Typography>
+        <div className="arrow-button">
+          <div className="left-arrow" onClick={() => handleArrow(-1)}>
+            ◄
+          </div>
+          <div className="right-arrow" onClick={() => handleArrow(1)}>
+            ►
+          </div>
         </div>
+      </div>
       {imageObject.map((data, index) => {
         return (
           <>
@@ -78,7 +81,13 @@ const Sliderr = () => {
                 (currentSlide === (index + 1) % totalSlide ? "left-slide " : "")
               }
             >
-              <img src={`${data.url}`} width="100%" height="100%" className="active-image"></img>
+              <img
+                src={`${data.url}`}
+                width="100%"
+                height="100%"
+                className="active-image"
+                alt=""
+              ></img>
               {currentSlide === index ? (
                 <p
                   className={
@@ -88,7 +97,9 @@ const Sliderr = () => {
                 >
                   <span className="date">{data.date}</span>
                   <br></br>
-                  <span className="place">{data.name} - {data.place}</span>
+                  <span className="place">
+                    {data.name} - {data.place}
+                  </span>
                 </p>
               ) : (
                 ""

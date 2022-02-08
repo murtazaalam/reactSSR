@@ -1,69 +1,69 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-
-// import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-// import CopyrightIcon from "@mui/icons-material/Copyright";
-import { Container } from "@mui/material";
-
-//import Map from './Map/GoogleMap';
-//import navbarApi from "../../Core/api/services/navigation";
+import { Container, IconButton } from "@mui/material";
 import Services from "../../data/services/Services";
-//import "./Assets/footer.css";
+import logo from "../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import "./Footer.css";
-// const location = {
-//     address: 'Techvanto Academy.',
-//     lat: 30.160999,
-//     lng: 76.869698,
-// }
+import InputBase from "@mui/material/InputBase";
+
+import SearchIcon from "@mui/icons-material/Search";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+
 const Footer = () => {
-  //   const [navbarData, setNavbarData] = React.useState([]);
-  //   React.useEffect(() => {
-  //     setNavbarData(Services);
-  //   }, []);
-  //   console.log(navbarData);
   return (
     <section className="techvanto-footer">
       <section className="techvant-footer-upper-part">
         <br />
         <br />
-        <Container>
-          <div className="display-grid fr4 techvanto-footer-grid">
-            {/* <div>
-              <div className="techvanto-footer-text-header">Services </div>
-              {Services.map((data, index) => {
-                return (
-                  <Link
-                    to={data.link}
-                    className="techvanto-footer-link"
-                    key={index}
+        <Container className="maxWidthNone">
+          <div className="display-grid fr5 techvanto-footer-grid">
+            <div style={{ placeSelf: "start" }}>
+              <div className="techvanto-footer-text-header color">
+                <img src={logo} alt="" />{" "}
+              </div>
+              <div className="text-small techvanto-footer-text-header space-between">
+                {" "}
+                <LinkedInIcon />
+                <div className="search-item">
+                  <InputBase
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder="Search"
+                    inputProps={{ "aria-label": "search" }}
+                    color="secondary"
+                  />
+                  <IconButton
+                    type="submit"
+                    sx={{ p: "10px" }}
+                    aria-label="search"
                   >
+                    <SearchIcon />
+                  </IconButton>
+                </div>
+              </div>
+            </div>
+            <div style={{ placeSelf: "center" }}>
+              <div className="techvanto-footer-text-header color">Courses </div>
+              {["Web Development", "Data Science", "Machine Learning"].map(
+                (data, index) => (
+                  <p className="techvanto-footer-text text-small">{data}</p>
+                )
+              )}
+            </div>
+            <div>
+              <div className="techvanto-footer-text-header color">
+                Services{" "}
+              </div>
+              {Services.map(
+                (data, index) =>
+                  index <= 5 && (
                     <p className="techvanto-footer-text text-small">
                       {data.text}
                     </p>
-                  </Link>
-                );
-              })}
-            </div> */}
-            {/* <div>
-              <div className="techvanto-footer-text-header">Courses </div>
-              {navbarData && navbarData.length !== 0
-                ? navbarData[0].sectioncategories.map((data) => {
-                    return (
-                      <Link
-                        to={`/category/${data.title}/${data.id}`}
-                        className="techvanto-footer-link"
-                      >
-                        <p className="techvanto-footer-text text-small">
-                          {data.title}
-                        </p>
-                      </Link>
-                    );
-                  })
-                : ""}
-            </div> */}
+                  )
+              )}
+            </div>
+
             <div>
-              <div className="techvanto-footer-text-header">FAQ </div>
-              <div className="techvanto-footer-text-header">Resourses </div>
+              <div className="techvanto-footer-text-header color ">FAQ </div>
               <p className="techvanto-footer-text text-small">
                 Discussion Forum
               </p>
@@ -73,7 +73,9 @@ const Footer = () => {
               </p>
               <br />
 
-              <div className="techvanto-footer-text-header">Oppurtunities </div>
+              <div className="techvanto-footer-text-header color">
+                Oppurtunities{" "}
+              </div>
               <p className="techvanto-footer-text text-small">
                 Upcoming And Past Events
               </p>
@@ -84,16 +86,19 @@ const Footer = () => {
             </div>
             <div>
               <br />
-              <div className="techvanto-footer-text-header">Contact Us</div>
+              <div className="techvanto-footer-text-header color">
+                Contact Us
+              </div>
               <p className="techvanto-footer-text text-small">Hire With Us</p>
+              <p className="techvanto-footer-text text-small">Get Hired</p>
               <p className="techvanto-footer-text text-small">
-                Organise Workshop
+                Train Your Team
               </p>
               <p className="techvanto-footer-text text-small">
                 Reasearch & Project
               </p>
               <br />
-              <div className="techvanto-footer-text-header">Contact </div>
+              <div className="techvanto-footer-text-header color">Contact </div>
               <div className="techvanto-footer-text">
                 {/* <PermContactCalendarIcon></PermContactCalendarIcon> */}
                 <p className="text-extra-small">
@@ -110,8 +115,6 @@ const Footer = () => {
               </div>
 
               <br />
-              {/* <div className="techvanto-footer-text-header" >Find Us    </div> */}
-              {/* <Map location={location} zoomLevel={17}></Map> */}
             </div>
           </div>
         </Container>

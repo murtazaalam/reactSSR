@@ -45,10 +45,13 @@
   text-align: center;
 }
 .techvanto-footer-text-header {
-  border-bottom: solid var(--color-primary);
   border-bottom-width: 3px;
-  width: 125px;
+
   text-align: left;
+}
+.color {
+  color: #d02b48;
+  font-weight: bold;
 }
 .techvanto-footer-text {
   display: flex;
@@ -63,4 +66,18 @@
 .techvanto-footer-link {
   text-decoration: none;
   color: var(--color-white);
+}
+@media (min-width: 1200px) {
+  .techvanto-footer .css-1oqqzyl-MuiContainer-root {
+    max-width: none !important;
+  }
+}
+.search-item {
+  background: #e3c5cf;
+  max-inline-size: fit-content;
+  border-radius: 10px;
+}
+.space-between {
+  display: flex;
+  justify-content: space-around;
 }

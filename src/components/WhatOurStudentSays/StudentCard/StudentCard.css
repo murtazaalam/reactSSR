@@ -11,6 +11,9 @@ img {
   max-width: 100%;
 }
 
+/* .alice-carousel__stage-item {
+  margin: 19px;
+} */
 .main {
   width: 100%;
   height: 400px;
@@ -48,7 +51,7 @@ img {
 
 .review {
   width: 100%;
-  height: 500px;
+  height: 355px;
   display: flex;
   flex-direction: column;
   justify-content: center;

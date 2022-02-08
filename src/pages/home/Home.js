@@ -5,7 +5,8 @@ import {
   WhatAndWhyWeDo,
   AboutUs,
   TopClient,
-  Slider,
+  OurIndustryExperts,
+  Sliderr,
   HiringPartners,
   ServiceGrid,
   TopCourses,
@@ -26,7 +27,7 @@ const Home = () => {
         <TopClient title="Our College/University partners:"></TopClient>
       </section>
       <br />
-      <Slider />
+      <Sliderr />
       <br />
       <div className="bg-image bg-image hiring-partner-section">
         <Container className="section-spacing">
@@ -43,6 +44,14 @@ const Home = () => {
       <div className="bg-image">
         <TopCourses />
       </div>
+      <br />
+
+      <div className="bg-image bg-image hiring-partner-section">
+        <Container className="section-spacing">
+          <OurIndustryExperts />
+        </Container>
+      </div>
+
       <br />
       <CampusAmbassador />
       <br />

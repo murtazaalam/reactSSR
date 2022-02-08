@@ -8,7 +8,7 @@ const WhatAndWhyWeDo = () => {
   return (
     <section>
       <Container>
-        <div className="display-grid fr2 techvanto-what-why-item techvanto-why-grid">
+        <div className="display-grid fr2 techvanto-what-why-item techvanto-why-grid display-on-small-screen">
           <img src={question} alt="" />
           <div>
             <Typography component="div" className="techvanto-whyus">

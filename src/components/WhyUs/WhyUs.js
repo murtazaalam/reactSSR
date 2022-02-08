@@ -5,9 +5,10 @@ import Paper from "@mui/material/Paper";
 import CountUp from "react-countup";
 import VisibilitySensor from "react-visibility-sensor";
 import CloudUploadTwoToneIcon from "@mui/icons-material/CloudUploadTwoTone";
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import { Typography } from "@mui/material";
 import SupervisorAccountRoundedIcon from "@mui/icons-material/SupervisorAccountRounded";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import VolunteerActivismTwoToneIcon from "@mui/icons-material/VolunteerActivismTwoTone";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -55,7 +56,7 @@ function FormRow() {
       </Grid>
       <Grid item md={3} sm={6} xs={12}>
         <Item className="techvanto-whyus-grid-item">
-          <SettingsRoundedIcon className="techvanto-whyus-cloudupload-icon" />
+          <LocalLibraryIcon className="techvanto-whyus-cloudupload-icon" />
           <CountUp end={32} duration={1} redraw={true}>
             {({ countUpRef, start }) => (
               <VisibilitySensor onChange={start} delayedCall>
@@ -74,7 +75,7 @@ function FormRow() {
 
       <Grid item md={3} sm={6} xs={12}>
         <Item className="techvanto-whyus-grid-item">
-          <SettingsRoundedIcon className="techvanto-whyus-cloudupload-icon" />
+          <VolunteerActivismTwoToneIcon className="techvanto-whyus-cloudupload-icon" />
           <CountUp end={3669} duration={1} redraw={true}>
             {({ countUpRef, start }) => (
               <VisibilitySensor onChange={start} delayedCall>
