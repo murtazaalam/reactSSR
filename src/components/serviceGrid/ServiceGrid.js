@@ -4,7 +4,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import ServiceCard from "./ServiceCard/ServiceCard";
-import "./serviceGrid.css";
+import "./ServiceGrid.css";
 import Services from "../../data/services/Services";
 // const Item = styled(Paper)(({ theme }) => ({
 //   ...theme.typography.body2,
