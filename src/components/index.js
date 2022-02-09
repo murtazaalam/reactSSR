@@ -15,6 +15,7 @@ import WhyUs from "./WhyUs/WhyUs.js";
 import WhatOurStudentSays from "./WhatOurStudentSays/WhatOurStudentSays.js";
 import BookDemo from "./BookDemo/BookDemo.js";
 import CourseBody from './courses/courseBody/CourseBody';
+import Events from './events/Events';
 
 export { 
     PrimaryNavBar, 
@@ -33,6 +34,7 @@ export {
     WhatAndWhyWeDo,
     TopClient,
     Slider,
-    CourseBody
+    CourseBody,
+    Events
  };
  

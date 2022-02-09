@@ -91,11 +91,13 @@ const NavBar = () => {
                 </div>
                 <Container maxWidth="lg" className="secondary-navbar">
                     <Toolbar className="main-logo">
-                        <img
-                            src={scroll ? `${logo}` : `${logoOnScroll}`}
-                            height="100%"
-                            width="234px"
-                        />
+                        <Link to="/">
+                            <img
+                                src={scroll ? `${logo}` : `${logoOnScroll}`}
+                                height="100%"
+                                width="234px"
+                            />
+                        </Link>
                     </Toolbar>
                     <Toolbar>
                         <Button
@@ -312,7 +314,7 @@ const NavBar = () => {
                                     </a>
                                 </div>
                                 <div className="item">
-                                    <a className="menu-text">
+                                    <Link to="/events" className="menu-text">
                                         <span
                                             className={scroll === false ? "color-white" : "color-black"}
                                         >
@@ -322,7 +324,7 @@ const NavBar = () => {
                                             sx={scroll == false ? { color: "white" } : { color: "black" }}
                                             className="arrow-icon"
                                         />
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="item">
                                     <a className="menu-text">
