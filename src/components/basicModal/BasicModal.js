@@ -7,7 +7,7 @@ import Modal from "@mui/material/Modal";
 //import logo from "../../Assets/Images/logo-print-hd-transparent-removebg-preview.png";
 import logo from "../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import { Button } from "@mui/material";
-import './basicModal.css';
+import "./basicModal.css";
 
 const style = {
   position: "absolute",
@@ -28,22 +28,22 @@ export default function BasicModal(props) {
 
   return (
     <div>
-        <Button onClick={handleOpen} className="techvanto-modal-btn">
-            {props.text}
-        </Button>
-        <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-            <Box sx={style}>
-                <div className="techvanto-sidebar-logo">
-                    <img src={`${logo}`} height="100%" width="150px" alt=""></img>
-                </div>
-                {/* <BookDemoForm name={props.name}></BookDemoForm> */}
-            </Box>
-        </Modal>
+      <Button onClick={handleOpen} className="techvanto-modal-btn">
+        {props.text}
+      </Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <div className="techvanto-sidebar-logo">
+            <img src={`${logo}`} height="100%" width="150px" alt=""></img>
+          </div>
+          {/* <BookDemoForm name={props.name}></BookDemoForm> */}
+        </Box>
+      </Modal>
     </div>
   );
 }

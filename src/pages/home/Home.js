@@ -14,11 +14,17 @@ import {
   WhyUs,
   WhatOurStudentSays,
   BookDemo,
-} from "../../components/index1";
+} from "../../components";
+
+import backgroundImage from "../../assets/Svgs/hero.svg";
 const Home = () => {
   return (
     <>
-      <ContentHeaderImage />
+      <ContentHeaderImage
+        title="Indulge in limitless learning."
+        overview="Anytime, Anywhere."
+        background={backgroundImage}
+      />
       <br />
       <WhatAndWhyWeDo />
       <br />

@@ -138,11 +138,13 @@ const NavBar = () => {
                   <div className="dropdown-content">
                     <ul className="dropdown-menu-multi-level">
                       <li>
-                        <a href="#">
+                        <a>
                           For Schools
                           <div className="course-list school-course">
                             <div className="image-section">
-                              <img src={`${SchoolIcon}`} alt="" />
+                              <Link to="/courses" className="course-image">
+                                <img src={`${SchoolIcon}`} alt="" />
+                              </Link>
                             </div>
                             <div className="school-course-list">
                               <span>Courses</span>
@@ -189,7 +191,7 @@ const NavBar = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a>
                           For Colleges
                           <div className="course-list">
                             <div
@@ -246,7 +248,7 @@ const NavBar = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a>
                           For Intermediate
                           <div className="course-list">
                             <div
@@ -305,7 +307,6 @@ const NavBar = () => {
                     </ul>
                   </div>
                 </div>
-
                 <div className="item">
                   <a className="menu-text">
                     <span
@@ -336,7 +337,7 @@ const NavBar = () => {
                     </span>
                     <ExpandMoreIcon
                       sx={
-                        scroll === false
+                        scroll == false
                           ? { color: "white" }
                           : { color: "black" }
                       }
@@ -372,6 +373,14 @@ const NavBar = () => {
                     >
                       Blogs
                     </span>
+                    <ExpandMoreIcon
+                      sx={
+                        scroll === false
+                          ? { color: "white" }
+                          : { color: "black" }
+                      }
+                      className="arrow-icon"
+                    />
                   </a>
                 </div>
               </div>

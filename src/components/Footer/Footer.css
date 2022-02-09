@@ -72,6 +72,12 @@
     max-width: none !important;
   }
 }
+@media (max-width: 650px) {
+  .techvanto-footer-grid {
+    display: flow-root;
+  }
+}
+
 .search-item {
   background: #e3c5cf;
   max-inline-size: fit-content;

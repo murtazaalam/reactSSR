@@ -22,42 +22,50 @@ const OurIndustryExperts = (props) => {
   const itemData = [
     {
       pic: expert1,
-      title: "Software Engineer ~ Bharat Airtel",
+      title1: "Software Engineer",
+      title2: "Bharat Airtel",
       author: "Himanshu Singhal",
     },
     {
       pic: expert2,
-      title: "Sr. IOS Developer ~ GetMySlice",
+      title1: "Sr. IOS Developer",
+      title2: "GetMySlice",
       author: "Rahul Saini",
     },
     {
       pic: expert3,
-      title: "Angular Developer ~ Trainman",
+      title1: "Angular Developer",
+      title2: "Trainman",
       author: "Rishabh",
     },
     {
       pic: expert4,
-      title: "Software Engineer ~ Salesforce",
+      title1: "Software Engineer",
+      title2: "Salesforce",
       author: "Anoosha Chandra",
     },
     {
       pic: expert5,
-      title: "Sr. Full Stack Developer ~ Verizon Data Service",
+      title1: "Sr. Full Stack Developer",
+      title2: "Verizon Data Service",
       author: "Deepa Paikar",
     },
     {
       pic: expert6,
-      title: "Sr. Mechanical Engineer ~ Mercedes-Benz",
+      title1: "Sr. Mechanical Engineer",
+      title2: "Mercedes-Benz",
       author: "Ashish Jha",
     },
     {
       pic: expert7,
-      title: "Cyber Forensic Expert ~ Linearstack",
+      title1: "Cyber Forensic Expert",
+      title2: "Linearstack",
       author: "Ankit Bishnoi",
     },
     {
       pic: expert8,
-      title: "Sr. Java Developer ~ Delhivery",
+      title1: "Sr. Java Developer",
+      title2: " Delhivery",
       author: "Pawan Chandraval",
     },
   ];

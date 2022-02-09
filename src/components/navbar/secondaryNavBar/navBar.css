@@ -20,6 +20,11 @@
 }
 .secondary-navbar {
   display: flex !important;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.secondary-navbar .css-1t29gy6-MuiToolbar-root {
+  padding-left: 10px;
 }
 .menu-item {
   display: flex;
@@ -40,12 +45,17 @@
   position: absolute;
   display: none;
   left: 0;
+  width: 835px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  box-shadow: 0px 10px 14px grey;
 }
 .courses:hover .dropdown-content {
   display: block;
 }
 .menu-icon {
   display: block !important;
+  padding-left: 12px !important;
 }
 .techvanto-navbar-service-accordian {
   width: 100% !important;
@@ -111,7 +121,6 @@
   padding: 10px 0;
   width: 280px;
   top: 0;
-  margin-top: 8px;
   margin-bottom: 0;
   height: 534px;
   font-size: 14px;
@@ -119,7 +128,6 @@
   text-align: left;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  box-shadow: 0px 7px 10px grey;
 }
 .dropdown-menu-multi-level li a {
   text-decoration: none;
@@ -128,7 +136,10 @@
   font-weight: 600;
   padding: 7px 25px;
   white-space: normal;
-  color: #333;
+  color: #333 !important;
+}
+.course-image:hover {
+  background: transparent !important;
 }
 .dropdown-menu-multi-level li a:hover {
   background-color: #d9ddeb;
@@ -148,14 +159,12 @@
   height: 534px;
   box-shadow: none;
   border-right: none;
-  margin-top: 8px;
   list-style-type: none;
   padding-left: 0;
   color: black;
 }
 .course-list {
   border-right: 1px solid #d7d7d7;
-  box-shadow: 4px 4px 10px grey;
 }
 .school-course {
   display: flex;
@@ -211,7 +220,6 @@
 .school-course-list ul li .desc {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-  box-shadow: 8px 7px 10px grey;
 }
 .school-course-list ul li:hover .desc {
   display: block;
@@ -219,5 +227,28 @@
 @media screen and (min-width: 1024px) {
   .menu-icon {
     display: none !important;
+  }
+}
+.navbar-category {
+  display: none !important;
+}
+@media screen and (min-width: 600px) {
+  .secondary-navbar .css-1t29gy6-MuiToolbar-root {
+    padding-left: 4px;
+  }
+}
+@media screen and (min-width: 1025px) {
+  .menu-icon {
+    display: none !important;
+  }
+  .navbar-category {
+    display: block !important;
+  }
+  .secondary-navbar {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .secondary-navbar .css-1t29gy6-MuiToolbar-root {
+    padding-left: 18px;
   }
 }

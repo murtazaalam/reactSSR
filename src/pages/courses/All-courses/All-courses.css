@@ -1,0 +1,27 @@
+.allCourses {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.course-panelList-wrap,
+.course-panel-wrap,
+.course-list-wrap {
+  overflow: scroll;
+}
+
+.course-panelList-wrap {
+  display: flex;
+  flex: 1;
+}
+.course-panel-wrap {
+  /* background: red; */
+  flex-basis: 280px;
+  padding: 17px;
+}
+
+.course-list-wrap {
+  /* background: blue; */
+  flex: 1;
+  padding: 17px;
+}

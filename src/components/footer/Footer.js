@@ -4,9 +4,10 @@ import Services from "../../data/services/Services";
 import logo from "../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import "./Footer.css";
 import InputBase from "@mui/material/InputBase";
-
+import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import SearchIcon from "@mui/icons-material/Search";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const Footer = () => {
   return (
@@ -20,9 +21,9 @@ const Footer = () => {
               <div className="techvanto-footer-text-header color">
                 <img src={logo} alt="" />{" "}
               </div>
-              <div className="text-small techvanto-footer-text-header space-between">
-                {" "}
+              <div className="text-small techvanto-footer-text-header">
                 <LinkedInIcon />
+                <FacebookRoundedIcon /> <InstagramIcon />
                 <div className="search-item">
                   <InputBase
                     sx={{ ml: 1, flex: 1 }}
@@ -41,7 +42,9 @@ const Footer = () => {
               </div>
             </div>
             <div style={{ placeSelf: "center" }}>
-              <div className="techvanto-footer-text-header color">Courses </div>
+              <div className="techvanto-footer-text-header color">
+                Top Courses{" "}
+              </div>
               {["Web Development", "Data Science", "Machine Learning"].map(
                 (data, index) => (
                   <p className="techvanto-footer-text text-small">{data}</p>
