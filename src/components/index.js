@@ -16,6 +16,8 @@ import OurIndustryExperts from "./OurIndustriesExperts/OurIndustryExperts.js";
 import BookDemo from "./BookDemo/BookDemo.js";
 import CourseBody from "./courses/courseBody/CourseBody";
 import Events from "./events/Events";
+import SingleEvent from "./singleEvent/SingleEvent";
+import Footer from "./footer/Footer";
 
 export {
   PrimaryNavBar,
@@ -36,4 +38,6 @@ export {
   Sliderr,
   CourseBody,
   Events,
+  SingleEvent,
+  Footer
 };

@@ -19,5 +19,6 @@ const routes =  {
     Login : endpoint + "/api/auth/login",
     //new code from here
     GetCourses : "https://techvanto.herokuapp.com/course-list",
+    GetEvents : "https://techvanto.herokuapp.com/techvanto-events"
 }
 export default routes;

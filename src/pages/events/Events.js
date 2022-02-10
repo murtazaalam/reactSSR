@@ -1,9 +1,10 @@
 import { Events } from '../../components'
-const Courses = () => {
+const Event = () => {
+    let defaultEventCategory = "upcoming";
     return (
         <>
-           <Events />
+           <Events category={defaultEventCategory} />
         </>
     )
 }
-export default Courses;
+export default Event;
