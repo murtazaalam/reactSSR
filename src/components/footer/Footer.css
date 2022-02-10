@@ -1,0 +1,89 @@
+.techvanto-footer {
+  min-height: 580px;
+  width: 100%;
+}
+.techvant-footer-upper-part {
+  min-height: 480px;
+  width: 100%;
+  position: relative;
+  background-color: var(--color-footer);
+}
+
+.techvanto-footer-lower-part {
+  min-height: 100px;
+  width: 100%;
+  position: relative;
+  background-color: var(--color-footer-bottom);
+  bottom: 0;
+}
+.techvanto-footer-policies {
+  height: 90px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.techvanto-policies {
+  display: block;
+  color: white;
+}
+.techvanto-footer-copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 135.4%;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  top: 100%;
+}
+
+.techvanto-footer-grid {
+  color: var(--color-white);
+  align-items: center;
+  text-align: center;
+}
+.techvanto-footer-text-header {
+  border-bottom-width: 3px;
+
+  text-align: left;
+}
+.color {
+  color: #d02b48;
+  font-weight: bold;
+}
+.techvanto-footer-text {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.techvanto-footer-copyright svg {
+  width: 12px;
+}
+
+.techvanto-footer-link {
+  text-decoration: none;
+  color: var(--color-white);
+}
+@media (min-width: 1200px) {
+  .techvanto-footer .css-1oqqzyl-MuiContainer-root {
+    max-width: none !important;
+  }
+}
+@media (max-width: 650px) {
+  .techvanto-footer-grid {
+    display: flow-root;
+  }
+}
+
+.search-item {
+  background: #e3c5cf;
+  max-inline-size: fit-content;
+  border-radius: 10px;
+}
+.space-between {
+  display: flex;
+  justify-content: space-around;
+}

@@ -91,12 +91,14 @@ const NavBar = () => {
         </div>
         <Container maxWidth="lg" className="secondary-navbar">
           <Toolbar className="main-logo">
-            <img
-              src={scroll ? `${logo}` : `${logoOnScroll}`}
-              height="100%"
-              width="234px"
-              alt=""
-            />
+            <Link to="/">
+              <img
+                src={scroll ? `${logo}` : `${logoOnScroll}`}
+                height="100%"
+                width="234px"
+                alt=""
+              />
+            </Link>
           </Toolbar>
           <Toolbar>
             <Button
@@ -118,7 +120,7 @@ const NavBar = () => {
             <Container className="navbar-category">
               <div className="menu-item">
                 <div className="item courses">
-                  <a className="menu-text">
+                  <Link to="/all-courses" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -134,7 +136,7 @@ const NavBar = () => {
                       }
                       className="arrow-icon"
                     />
-                  </a>
+                  </Link>
                   <div className="dropdown-content">
                     <ul className="dropdown-menu-multi-level">
                       <li>
@@ -327,7 +329,7 @@ const NavBar = () => {
                   </a>
                 </div>
                 <div className="item">
-                  <a className="menu-text">
+                  <Link to="/events" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -337,13 +339,13 @@ const NavBar = () => {
                     </span>
                     <ExpandMoreIcon
                       sx={
-                        scroll == false
+                        scroll === false
                           ? { color: "white" }
                           : { color: "black" }
                       }
                       className="arrow-icon"
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="item">
                   <a className="menu-text">

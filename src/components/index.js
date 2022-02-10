@@ -1,8 +1,7 @@
 import PrimaryNavBar from "./navbar/primaryNavBar/PrimaryNavBar";
 import SecondaryNavBar from "./navbar/secondaryNavBar/NavBar";
-import Footer from "./footer/Footer";
 import ContentHeaderImage from "./content-header-image/ContentHeaderImage";
-import ServiceGrid from "./ServiceGrid/ServiceGrid";
+import ServiceGrid from "./serviceGrid/ServiceGrid";
 import Sliderr from "./3DSlider/Sliderr";
 import CourseHeader from "./courses/courseHeader/CourseHeader";
 import WhatAndWhyWeDo from "./WhatAndWhyWeDo/WhatAndWhyWeDo";
@@ -16,13 +15,12 @@ import WhatOurStudentSays from "./WhatOurStudentSays/WhatOurStudentSays.js";
 import OurIndustryExperts from "./OurIndustriesExperts/OurIndustryExperts.js";
 import BookDemo from "./BookDemo/BookDemo.js";
 import CourseBody from "./courses/courseBody/CourseBody";
+import Events from "./events/Events";
 
 export {
   PrimaryNavBar,
   SecondaryNavBar,
-  Footer,
   ContentHeaderImage,
-  Sliderr,
   CourseHeader,
   HiringPartners,
   ServiceGrid,
@@ -31,9 +29,11 @@ export {
   WhyUs,
   WhatOurStudentSays,
   BookDemo,
+  OurIndustryExperts,
   AboutUs,
   WhatAndWhyWeDo,
   TopClient,
+  Sliderr,
   CourseBody,
-  OurIndustryExperts,
+  Events,
 };

@@ -149,11 +149,14 @@
     font-size: 22px;
     margin-top: 20px;
 }
+.updated-price .MuiBadge-badge{
+    min-width: 90px;
+}
 @media screen and (min-width: 1024px){
     .tab-course-description{
-        width: 75%;
+        width: 60%;
     }
     .curriculum{
-        width: 75%;
+        width: 60%;
     }
 }

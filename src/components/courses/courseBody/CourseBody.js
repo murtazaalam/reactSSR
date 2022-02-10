@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { Tab, Typography, Box } from "@mui/material";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
@@ -14,13 +15,48 @@ import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ShareIcon from '@material-ui/icons/Share';
 import Badge from '@material-ui/core/Badge';
+import singleCourseApi from '../../../apis/api/SingleCourse';
+
 import './courseBody.css';
 
 const CourseBody = () => {
-    const [value, setValue] = React.useState("1");
+    const [value, setValue] = useState("1");
+    const [course, setCourses] = useState(null);
+    const [timeBadge, setTimerBadge] = useState(true)
+    //for timer
+    const daysHoursMinSecs = {day:2, hours:0, minutes: 0, seconds: 30}
+    const { day = 0, hours = 0, minutes = 0, seconds = 60 } = daysHoursMinSecs;
+    const [[days, hrs, mins, secs], setTime] = useState([day, hours, minutes, seconds]);
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+    useEffect(() => {
+        if(!course){
+            //id of course will be sent
+            singleCourseApi("6202084444f3cd1aa545bb7c", setCourses);
+        }
+    }, [course]);
+
+    const tick = () => {
+   
+        if (days === 0 && hrs === 0 && mins === 0 && secs === 0) 
+            setTimerBadge(false);
+        else if(hrs === 0 && mins === 0 && secs === 0){
+            setTime([days - 1, 23, 59, 59]);
+        }
+        else if (mins === 0 && secs === 0) {
+            setTime([days, hrs - 1, 59, 59]);
+        } else if (secs === 0) {
+            setTime([days, hrs, mins - 1, 59]);
+        } else {
+            setTime([days, hrs, mins, secs - 1]);
+        }
+    };
+    useEffect(() => {
+        const timerId = setInterval(() => tick(), 1000);
+        return () => clearInterval(timerId);
+    });
     return (
         <>
              <div className="course-tab-container">
@@ -44,62 +80,35 @@ const CourseBody = () => {
                                         Course Description
                                     </Typography>
                                     <Typography component="p" className="tab-course-description">
-                                        Sales is the main revenue source for any company. Without that, a company will crumble and it is universally acknowledged truth that Sales is the backbone of any organization. It plays an important role for the company to withstand the market.<br/><br/>
-                                        This Career Acceleration Program of 16 to 24-weeks, is handcrafted with the industry’s best minds and experts in the sales field. You will learn concepts, from basic to advanced level. The program will focus on the modern techniques required in this entrepreneurial world backed with placement assurance and industry certification.<br/><br/>
-                                        Get ready to be a part of any organization and be a stellar revenue maker. Learn from the best mentors and tutors with an absolute killer curriculum. Get career-ready within no time to ace yourself in placement, internships, traineeship, and beyond that.
-                                        We will cover the skills of Sales + Product Management + Introduction to Business Analytics + Professional Enhancement.
+                                        {course && course[0].description}
                                     </Typography>
                                 </div>
                             </TabPanel>
                             <TabPanel value="2">
-                                <div className="curriculum">
-                                    <Accordion>
-                                        <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel1a-content"
-                                        id="panel1a-header"
-                                        >
-                                        <Typography className="curriculum-heading">What Is Sales?</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                        <Typography>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                            sit amet blandit leo lobortis eget.
-                                        </Typography>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                    <Accordion>
-                                        <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel2a-content"
-                                        id="panel2a-header"
-                                        >
-                                            <Typography className="curriculum-heading">Opening Sales Pitches</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <Typography>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                                sit amet blandit leo lobortis eget.
-                                            </Typography>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                    <Accordion>
-                                        <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel3a-content"
-                                        id="panel3a-header"
-                                        >
-                                            <Typography className="curriculum-heading">Building Creative Calling Structures</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <Typography>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                                sit amet blandit leo lobortis eget.
-                                            </Typography>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                </div>
-                            </TabPanel>
+                                {course &&
+                                    <div className="curriculum">
+                                        {course[0].curriculum.map((curriculum, index) => {
+                                            return(
+                                            <Accordion key={index}>
+                                                <AccordionSummary
+                                                expandIcon={<ExpandMoreIcon />}
+                                                aria-controls="panel1a-content"
+                                                id="panel1a-header"
+                                                >
+                                                <Typography className="curriculum-heading">{curriculum.heading}</Typography>
+                                                </AccordionSummary>
+                                                <AccordionDetails>
+                                                <Typography>
+                                                    {curriculum.detail}
+                                                </Typography>
+                                                </AccordionDetails>
+                                            </Accordion>
+                                            )
+                                        })}
+                                        
+                                    </div>
+                                }
+                           </TabPanel>
                             <TabPanel value="3">
                                 <div className="row">
                                     Review Tab
@@ -110,37 +119,68 @@ const CourseBody = () => {
                 </Typography>
                 <div className="video-section">
                     <div class="video-box">
-                        <div class="video">
-                            <iframe src="https://www.youtube.com/embed/oOm66m59jLc" 
-                                title="YouTube video player" frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <div class="course-detail">
-                            <div class="course-price">
-                                <p>
-                                    Rs.&nbsp;
-                                    <del>
-                                        <span>499</span>
-                                        <span>.99</span>
-                                    </del>
-                                    &nbsp;
-                                    <span className="updated-price">
-                                    <Badge badgeContent={`3h:30m`} color="primary">
-                                        400
-                                    </Badge>
-                                    </span>
-                                </p>
+                        {course &&
+                            <div class="video">
+                                {
+                                course[0].thumbnail && 
+                                    <img src={course[0].thumbnail} className="img-fluid" />
+                                }
+                                {
+                                course[0].video &&
+                                    <iframe src={course[0].video} 
+                                        title="YouTube video player" frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                    </iframe>
                                 
+                                }
                             </div>
+                        }
+                        <div class="course-detail">
+                            {course &&
+                                <div class="course-price">
+                                    {course[0].discounted_price > 0 &&
+                                        <p>
+                                            Rs.&nbsp;
+                                            {timeBadge === true ?
+                                                <del>
+                                                    <span>{course && course[0].price}</span>
+                                                    <span>.99</span>
+                                                </del>
+                                                :
+                                                <span>
+                                                    <span>{course[0].price}</span>
+                                                    <span>.99</span>
+                                                </span>
+                                            }
+                                            
+                                            &nbsp;
+                                            {timeBadge === true ?
+                                                <span className="updated-price">
+                                                    <Badge badgeContent={`${days.toString().padStart(1, '0')}d ${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`} color="primary">
+                                                        {course[0].discounted_price}
+                                                    </Badge>
+                                                </span>
+                                                :""
+                                            }
+                                        </p>
+                                    }
+                                    {course[0].discounted_price === "0" &&
+                                        <p>
+                                            Rs.&nbsp;
+                                            <span>{course[0].price}</span>
+                                            <span>.99</span>
+                                        </p>
+                                    }
+                                </div>
+                            }
                             <div class="other">
                                 <p>
                                     <span class="icon"><AccessAlarmIcon/></span>
                                     <span class="heading">Duration</span>
                                 </p>
                                 <p class="sub-heading">
-                                    32.8 hours
+                                    {course && course[0].duration} hours
                                 </p>    
                             </div>   
                             <div class="other">
@@ -149,7 +189,7 @@ const CourseBody = () => {
                                     <span class="heading">Lession</span>
                                 </p>
                                 <p class="sub-heading">
-                                    6 Lectures
+                                    {course && course[0].lession} Lectures
                                 </p>   
                             </div> 
                             <div class="other">
@@ -158,7 +198,7 @@ const CourseBody = () => {
                                     <span class="heading">Enrolled</span>
                                 </p>
                                 <p class="sub-heading">
-                                    552 Students
+                                    {course && course[0].enrolled} Students
                                 </p>    
                             </div>     
                             <div class="other">
@@ -167,7 +207,7 @@ const CourseBody = () => {
                                     <span class="heading">Access</span>
                                 </p>
                                 <p class="sub-heading">
-                                    Lifetime
+                                    {course && course[0].access}
                                 </p>    
                             </div> 
                             <div> 

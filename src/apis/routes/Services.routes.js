@@ -17,5 +17,7 @@ const routes =  {
     GetCategoryCourse : endpoint+"/api/service/all?category=",
     BookDemo : endpoint + "/api/contact-us/post",
     Login : endpoint + "/api/auth/login",
+    //new code from here
+    GetCourses : "https://techvanto.herokuapp.com/course-list",
 }
 export default routes;
