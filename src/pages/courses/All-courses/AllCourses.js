@@ -16,6 +16,7 @@ function AllCourses() {
     { id: 1, checked: false, label: "For School" },
     { id: 2, checked: false, label: "For College" },
     { id: 3, checked: false, label: "For Intermediate" },
+    { id: 4, checked: false, label: "All" },
   ]);
 
   const [list, setList] = useState(dataList);
@@ -81,6 +82,7 @@ function AllCourses() {
 
   useEffect(() => {
     applyFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedRating, selectedCategory, searchInput, selectedPrice]);
 
   return (
@@ -115,7 +117,7 @@ function AllCourses() {
           <div className="course-list-wrap">
             {/* List and Empty View */}
             <h2> List</h2>
-            {/* {resultsFound ? <List list={list} /> : "<EmptyView />"} */}
+            {resultsFound ? <List list={list} /> : "<EmptyView />"}
           </div>
         </div>
       </div>

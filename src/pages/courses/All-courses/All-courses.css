@@ -18,6 +18,7 @@
   /* background: red; */
   flex-basis: 280px;
   padding: 17px;
+  padding-left: 10px;
 }
 
 .course-list-wrap {
