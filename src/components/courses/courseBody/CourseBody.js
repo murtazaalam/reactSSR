@@ -118,9 +118,9 @@ const CourseBody = () => {
                     </Box>
                 </Typography>
                 <div className="video-section">
-                    <div class="video-box">
+                    <div className="video-box">
                         {course &&
-                            <div class="video">
+                            <div className="video">
                                 {
                                 course[0].thumbnail && 
                                     <img src={course[0].thumbnail} className="img-fluid" />
@@ -136,9 +136,9 @@ const CourseBody = () => {
                                 }
                             </div>
                         }
-                        <div class="course-detail">
+                        <div className="course-detail">
                             {course &&
-                                <div class="course-price">
+                                <div className="course-price">
                                     {course[0].discounted_price > 0 &&
                                         <p>
                                             Rs.&nbsp;
@@ -174,39 +174,39 @@ const CourseBody = () => {
                                     }
                                 </div>
                             }
-                            <div class="other">
+                            <div className="other">
                                 <p>
-                                    <span class="icon"><AccessAlarmIcon/></span>
-                                    <span class="heading">Duration</span>
+                                    <span className="icon"><AccessAlarmIcon/></span>
+                                    <span className="heading">Duration</span>
                                 </p>
-                                <p class="sub-heading">
+                                <p className="sub-heading">
                                     {course && course[0].duration} hours
                                 </p>    
                             </div>   
-                            <div class="other">
+                            <div className="other">
                                 <p>
-                                    <span class="icon"><LocalLibraryIcon/></span>
-                                    <span class="heading">Lession</span>
+                                    <span className="icon"><LocalLibraryIcon/></span>
+                                    <span className="heading">Lession</span>
                                 </p>
-                                <p class="sub-heading">
+                                <p className="sub-heading">
                                     {course && course[0].lession} Lectures
                                 </p>   
                             </div> 
-                            <div class="other">
+                            <div className="other">
                                 <p>
-                                    <span class="icon"><BookmarkIcon/></span>
-                                    <span class="heading">Enrolled</span>
+                                    <span className="icon"><BookmarkIcon/></span>
+                                    <span className="heading">Enrolled</span>
                                 </p>
-                                <p class="sub-heading">
+                                <p className="sub-heading">
                                     {course && course[0].enrolled} Students
                                 </p>    
                             </div>     
-                            <div class="other">
+                            <div className="other">
                                 <p>
-                                    <span class="icon"><ChromeReaderModeIcon/></span>
-                                    <span class="heading">Access</span>
+                                    <span className="icon"><ChromeReaderModeIcon/></span>
+                                    <span className="heading">Access</span>
                                 </p>
-                                <p class="sub-heading">
+                                <p className="sub-heading">
                                     {course && course[0].access}
                                 </p>    
                             </div> 
@@ -218,7 +218,7 @@ const CourseBody = () => {
                                     Add to cart
                                 </button>
                             </div>
-                            <div class="share-now">
+                            <div className="share-now">
                                 <span className="share-text">share now</span>
                                 <span className="share-icon"><ShareIcon/></span>
                             </div>
@@ -226,7 +226,7 @@ const CourseBody = () => {
                     </div>
                 </div>
             </div>
-            <div class="thought">
+            <div className="thought">
                 <h2>Leave a Review</h2>
                 <p>Your email address will not be published. Required fields are marked *</p>
                 <form className="row review-form">

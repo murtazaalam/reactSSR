@@ -209,13 +209,15 @@ const NavBar = () => {
                               <span>Courses</span>
                               <ul>
                                 <li>
-                                  Colleges 1
-                                  <div className="course-desc desc default-desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Colleges 1 Description</div>
-                                  </div>
+                                  <Link to="/course/test-question">
+                                    Colleges 1
+                                      <div className="course-desc desc default-desc">
+                                        <div className="desc-heading">
+                                          Description
+                                        </div>
+                                        <div>Colleges 1 Description</div>
+                                      </div>
+                                    </Link>
                                 </li>
                                 <li>
                                   Colleges 2

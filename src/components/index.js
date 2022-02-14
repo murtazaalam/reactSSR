@@ -18,6 +18,7 @@ import CourseBody from "./courses/courseBody/CourseBody";
 import Events from "./events/Events";
 import SingleEvent from "./singleEvent/SingleEvent";
 import Footer from "./footer/Footer";
+import TestQuestion from "./testQuestion/TestQuestion";
 
 export {
   PrimaryNavBar,
@@ -39,5 +40,6 @@ export {
   CourseBody,
   Events,
   SingleEvent,
-  Footer
+  Footer,
+  TestQuestion
 };
