@@ -1,4 +1,8 @@
+/* eslint-disable eqeqeq */
 import * as React from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -8,13 +12,31 @@ import ViewComfyIcon from "@mui/icons-material/ViewComfy";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import EventBackgroundImage from "../../assets/images/event_header_image.svg";
 import EventImage from "../../assets/images/event_icon_demo.svg";
+import eventsApi from "../../apis/api/GetEvents";
 import "./events.css";
 
-const Events = () => {
-  let eventsCard = [1, 2, 3, 4, 5];
+const Events = (props) => {
+  const [events, setEventData] = useState();
+  const [category, setEventCategory] = useState();
+
+  useEffect(() => {
+    if (category === "upcoming") {
+      if (events == "") {
+        eventsApi(category, setEventData);
+      }
+    } else if (category === "past") {
+      if (events == "") {
+        eventsApi(category, setEventData);
+      }
+    } else {
+      if (!events) {
+        eventsApi(props.category, setEventData);
+      }
+    }
+  }, [events]);
+
   return (
     <>
       <Box
@@ -62,49 +84,89 @@ const Events = () => {
           className="event-body"
         >
           <div className="col-lg-3 col-md-3 col-sm-6 col-12">
-            <Box component="div" className="row event-menu">
-              <Typography component="h6" className="active-event-menu">
+            <Box component="div" className="row" className="event-menu">
+              <Typography
+                component="h6"
+                className={
+                  category === "upcoming"
+                    ? "active-event-menu"
+                    : "inactive-event-menu"
+                }
+                onClick={() => setEventCategory("upcoming", setEventData([]))}
+              >
                 Upcoming Events
               </Typography>
-              <Typography component="h6">Past Events</Typography>
+              <Typography
+                component="h6"
+                className={
+                  category === "past"
+                    ? "active-event-menu"
+                    : "inactive-event-menu"
+                }
+                onClick={() => setEventCategory("past", setEventData([]))}
+              >
+                Past Events
+              </Typography>
             </Box>
 
             <Box component="h6" className=""></Box>
           </div>
           <div className="col-lg-9 col-md-9 col-sm-6 col-12">
-            {eventsCard.map((cards, index) => {
-              return (
-                <Card
-                  sx={{ minWidth: 175, minHeight: 320 }}
-                  className="event-card-box"
-                  key={index}
-                >
-                  <CardContent className="event-card" sx={{ height: 200 }}>
-                    <img src={EventImage} width="100" alt="" />
-                  </CardContent>
-                  <CardActions sx={{ flexDirection: "column" }}>
-                    <Typography component="h6" className="event-name">
-                      Event Name
-                    </Typography>
-                    <Typography component="div" className="event-details">
-                      <Typography component="p" className="event-date">
-                        09-01-2021
+            {events &&
+              events.map((event, index) => {
+                return (
+                  <Card
+                    sx={{ minWidth: 175, minHeight: 320 }}
+                    className="event-card-box"
+                    key={index}
+                  >
+                    <CardContent className="event-card" sx={{ height: 200 }}>
+                      <img src={EventImage} width="100" />
+                      {/* for dynamic use below code */}
+                      {/* <img src={`${event.image}`} width="100"/> */}
+                    </CardContent>
+                    <CardActions sx={{ flexDirection: "column" }}>
+                      <Typography component="h6" className="event-name">
+                        {event.name}
                       </Typography>
-                      <Typography component="p" className="event-">
-                        <Button
-                          variant="contained"
-                          color="success"
-                          size="small"
-                          className=""
-                        >
-                          Register Now
-                        </Button>
+                      <Typography component="div" className="event-details">
+                        <Typography component="p" className="event-date">
+                          {event.date}
+                        </Typography>
+
+                        <Typography component="p">
+                          {event.category === "upcoming" && (
+                            <Link
+                              to={`/event/${event._id}`}
+                              style={{ textDecoration: "none" }}
+                            >
+                              <Button
+                                className="techvanto-know-more-button btn-grad event-btn"
+                                size="small"
+                              >
+                                Register Now
+                              </Button>
+                            </Link>
+                          )}
+                          {event.category === "past" && (
+                            <Link
+                              to={`/event/${event._id}`}
+                              style={{ textDecoration: "none" }}
+                            >
+                              <Button
+                                className="techvanto-know-more-button btn-grad event-btn"
+                                size="small"
+                              >
+                                See Detail
+                              </Button>
+                            </Link>
+                          )}
+                        </Typography>
                       </Typography>
-                    </Typography>
-                  </CardActions>
-                </Card>
-              );
-            })}
+                    </CardActions>
+                  </Card>
+                );
+              })}
             <div className="pagination">
               <Stack spacing={2}>
                 <Pagination count={5} color="success" />
