@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import abc from "../../../assets/Svgs/all-courses.svg";
-import ContentHeaderImage from "../../../components/content-header-image/ContentHeaderImage";
 import SearchBar from "../../../components/CoursesComponents/SearchBar/SearchBar";
 import FilterPanel from "../../../components/CoursesComponents/FilterPanel/FilterPanel.js";
 import List from "../../../components/CoursesComponents/List/List";
 //import EmptyView from "../../../components/EmptyView/EmptyView";
 import { dataList } from "../../../data/constants";
+import Box from "@mui/material/Box";
+import EventBackgroundImage from "../../../assets/images/event_header_image.svg";
 import "./All-courses.css";
 
 function AllCourses() {
@@ -88,11 +88,26 @@ function AllCourses() {
   return (
     <>
       {/* Header */}
-      <ContentHeaderImage
-        title="All Courses"
-        overview="Overview"
-        background={abc}
-      />
+      <Box
+        component="section"
+        className="page-heading"
+        sx={{ background: `url(${EventBackgroundImage})` }}
+      >
+        <div className="course-container">
+          <nav aria-label="breadcrumb">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <a href="index.html" className="home">
+                  Home
+                  <div className="line"></div>
+                </a>
+              </li>
+              <li className="breadcrumb-item active">All Courses</li>
+            </ol>
+          </nav>
+          <h1 className="event-heading">All Courses</h1>
+        </div>
+      </Box>
       <div className="allCourses">
         {/* SearchBar */}
         <SearchBar

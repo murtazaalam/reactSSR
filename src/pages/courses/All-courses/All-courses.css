@@ -16,9 +16,9 @@
 }
 .course-panel-wrap {
   /* background: red; */
-  flex-basis: 280px;
+  flex-basis: 300px;
   padding: 17px;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 }
 
 .course-list-wrap {

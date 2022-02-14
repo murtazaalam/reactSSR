@@ -16,6 +16,10 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import PrimaryNavBar from "../primaryNavBar/PrimaryNavBar";
+
+import Paper from "@mui/material/Paper";
+import Draggable from "react-draggable";
+
 import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
 import SchoolIcon from "../../../assets/images/new-course-icon-school.svg";
@@ -23,6 +27,18 @@ import IntermediateIcon from "../../../assets/images/new-course-icon-intermediat
 import CollegeIconIcon from "../../../assets/images/new-course-icon-college.svg";
 import Services from "../../../data/services/Services";
 import "./navBar.css";
+import Login from "../../Login/Login";
+
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
 
 const NavBar = () => {
   const [scroll, setScroll] = useState(false);
@@ -32,6 +48,16 @@ const NavBar = () => {
     bottom: false,
     right: false,
   });
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const toggleDrawer = (anchor, open) => (event) => {
     setState({ ...state, [anchor]: open });
@@ -318,14 +344,14 @@ const NavBar = () => {
                     >
                       Services
                     </span>
-                    <ExpandMoreIcon
+                    {/* <ExpandMoreIcon
                       sx={
                         scroll === false
                           ? { color: "white" }
                           : { color: "black" }
                       }
                       className="arrow-icon"
-                    />
+                    /> */}
                   </a>
                 </div>
                 <div className="item">
@@ -337,37 +363,18 @@ const NavBar = () => {
                     >
                       Events
                     </span>
-                    <ExpandMoreIcon
+                    {/* <ExpandMoreIcon
                       sx={
                         scroll === false
                           ? { color: "white" }
                           : { color: "black" }
                       }
                       className="arrow-icon"
-                    />
+                    /> */}
                   </Link>
                 </div>
                 <div className="item">
-                  <a className="menu-text">
-                    <span
-                      className={
-                        scroll === false ? "color-white" : "color-black"
-                      }
-                    >
-                      Contact Us
-                    </span>
-                    <ExpandMoreIcon
-                      sx={
-                        scroll === false
-                          ? { color: "white" }
-                          : { color: "black" }
-                      }
-                      className="arrow-icon"
-                    />
-                  </a>
-                </div>
-                <div className="item">
-                  <a className="menu-text">
+                  <Link to="/blogs" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -375,18 +382,51 @@ const NavBar = () => {
                     >
                       Blogs
                     </span>
-                    <ExpandMoreIcon
-                      sx={
-                        scroll === false
-                          ? { color: "white" }
-                          : { color: "black" }
-                      }
-                      className="arrow-icon"
-                    />
-                  </a>
+                  </Link>
+                </div>
+                <div className="item">
+                  <div class="dropdown">
+                    <Link to="/contact-us" className="menu-text">
+                      <span
+                        className={
+                          scroll === false ? "color-white" : "color-black"
+                        }
+                      >
+                        Contact Us
+                      </span>
+                      <ExpandMoreIcon
+                        sx={
+                          scroll === false
+                            ? { color: "white" }
+                            : { color: "black" }
+                        }
+                        className="arrow-icon"
+                      />
+                    </Link>
+                    <div class="dropdown-content-contact">
+                      <Link to="/contact-us-for-hiring">
+                        Contact Us for Hiring
+                      </Link>
+                      <Link to="/contact-us-getHired">Get Hired</Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </Container>
+            <div className="item">
+              <button className="menu-text btn-grad" onClick={handleClickOpen}>
+                <span
+                  className={scroll === false ? "color-white" : "color-black"}
+                >
+                  Login/SignUp
+                </span>
+              </button>
+              <Login
+                open={open}
+                handleClose={handleClose}
+                PaperComponent={PaperComponent}
+              />
+            </div>
           </Toolbar>
         </Container>
       </AppBar>

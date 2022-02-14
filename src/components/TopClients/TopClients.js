@@ -30,6 +30,7 @@ const TopClient = (props) => {
     r.keys().map((item, index) =>
       img.push(
         <img
+          height="134px"
           className="item"
           data-value={index + 1}
           src={`${r(item).default}`}

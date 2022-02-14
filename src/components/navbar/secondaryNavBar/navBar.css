@@ -32,6 +32,33 @@
 .menu-item .item {
   margin-right: 18px;
 }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content-contact {
+  display: none;
+  position: absolute;
+  background-color: #f7f1f1;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+.dropdown-content-contact a {
+  padding: 12px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content-contact a:hover {
+  background: #b3d3f3;
+}
+
+.dropdown:hover .dropdown-content-contact {
+  display: block;
+}
 .menu-text {
   font-size: 18px;
   font-weight: 600;
@@ -223,6 +250,9 @@
 }
 .school-course-list ul li:hover .desc {
   display: block;
+}
+.MuiToolbar-gutters {
+  flex: auto;
 }
 @media screen and (min-width: 1024px) {
   .menu-icon {

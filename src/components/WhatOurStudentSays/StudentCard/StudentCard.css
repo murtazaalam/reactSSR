@@ -20,7 +20,9 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fafafa;
+  background-color: white;
+  /* 
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2); */
   padding-right: 10px;
 }
 
