@@ -22,6 +22,7 @@ const routes =  {
     GetEvents : "https://techvanto.herokuapp.com/techvanto-events",
     SignUp : "https://techvantonew.herokuapp.com/auth/register",
     Login : "https://techvantonew.herokuapp.com/auth/login",
-    OrderTest : "http://localhost:4000/add-order"
+    OrderTest : "http://localhost:4000/add-order",
+    AddToCart : "https://techvantonew.herokuapp.com/add-to-cart"
 }
 export default routes;

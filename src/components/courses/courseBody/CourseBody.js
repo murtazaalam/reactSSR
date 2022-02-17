@@ -16,13 +16,15 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ShareIcon from "@material-ui/icons/Share";
 import Badge from "@material-ui/core/Badge";
 import singleCourseApi from "../../../apis/api/SingleCourse";
+import addToCartApi from "../../../apis/api/AddToCart";
 
 import "./courseBody.css";
 
 const CourseBody = () => {
   const [value, setValue] = useState("1");
-  const [course, setCourses] = useState(null);
+  const [course, setCourses] = useState();
   const [timeBadge, setTimerBadge] = useState(true);
+  const [itemMessage, setItemMessage] = useState();
   //for timer
   const daysHoursMinSecs = { day: 2, hours: 0, minutes: 0, seconds: 30 };
   const { day = 0, hours = 0, minutes = 0, seconds = 60 } = daysHoursMinSecs;
@@ -39,10 +41,10 @@ const CourseBody = () => {
   useEffect(() => {
     if (!course) {
       //id of course will be sent
-      //singleCourseApi("202084444f3cd1aa545bb7b", setCourses);
+      singleCourseApi("6202084444f3cd1aa545bb7b", setCourses);
+      if(course) localStorage.setItem("course",course.course_name);
     }
   }, [course]);
-  //console.log(">>>", course);
 
   const tick = () => {
     if (days === 0 && hrs === 0 && mins === 0 && secs === 0)
@@ -61,6 +63,15 @@ const CourseBody = () => {
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
   });
+  const addToCart = (id) => {
+    let body = {
+      course_id:id,
+      course_name:course.course_name,
+      price:course.price,
+      email:"murtuz@gmail.com"
+    }
+    addToCartApi(body, setItemMessage);
+  }
   return (
     <>
       <div className="course-tab-container">
@@ -82,14 +93,14 @@ const CourseBody = () => {
                 <div className="row tab-desc">
                   <Typography component="h2">Course Description</Typography>
                   <Typography component="p" className="tab-course-description">
-                    {course && course[0].description}
+                    {course && course.description}
                   </Typography>
                 </div>
               </TabPanel>
               <TabPanel value="2">
                 {course && (
                   <div className="curriculum">
-                    {course[0].curriculum.map((curriculum, index) => {
+                    {course.curriculum.map((curriculum, index) => {
                       return (
                         <Accordion key={index}>
                           <AccordionSummary
@@ -162,12 +173,12 @@ const CourseBody = () => {
           <div class="video-box">
             {course && (
               <div class="video">
-                {course[0].thumbnail && (
-                  <img src={course[0].thumbnail} className="img-fluid" alt="" />
+                {course.thumbnail && (
+                  <img src={course.thumbnail} className="img-fluid" alt="" />
                 )}
-                {course[0].video && (
+                {course.video && (
                   <iframe
-                    src={course[0].video}
+                    src={course.video}
                     title="YouTube video player"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -179,17 +190,17 @@ const CourseBody = () => {
             <div class="course-detail">
               {course && (
                 <div class="course-price">
-                  {course[0].discounted_price > 0 && (
+                  {course.discounted_price > 0 && (
                     <p>
                       Rs.&nbsp;
                       {timeBadge === true ? (
                         <del>
-                          <span>{course && course[0].price}</span>
+                          <span>{course && course.price}</span>
                           <span>.99</span>
                         </del>
                       ) : (
                         <span>
-                          <span>{course[0].price}</span>
+                          <span>{course.price}</span>
                           <span>.99</span>
                         </span>
                       )}
@@ -208,7 +219,7 @@ const CourseBody = () => {
                               .padStart(2, "0")}`}
                             color="primary"
                           >
-                            {course[0].discounted_price}
+                            {course.discounted_price}
                           </Badge>
                         </span>
                       ) : (
@@ -216,10 +227,10 @@ const CourseBody = () => {
                       )}
                     </p>
                   )}
-                  {course[0].discounted_price === "0" && (
+                  {course.discounted_price === "0" && (
                     <p>
                       Rs.&nbsp;
-                      <span>{course[0].price}</span>
+                      <span>{course.price}</span>
                       <span>.99</span>
                     </p>
                   )}
@@ -232,7 +243,7 @@ const CourseBody = () => {
                   </span>
                   <span class="heading">Duration</span>
                 </p>
-                <p class="sub-heading">{course && course[0].duration} hours</p>
+                <p class="sub-heading">{course && course.duration} hours</p>
               </div>
               <div class="other">
                 <p>
@@ -242,7 +253,7 @@ const CourseBody = () => {
                   <span class="heading">Lession</span>
                 </p>
                 <p class="sub-heading">
-                  {course && course[0].lession} Lectures
+                  {course && course.lession} Lectures
                 </p>
               </div>
               <div class="other">
@@ -253,7 +264,7 @@ const CourseBody = () => {
                   <span class="heading">Enrolled</span>
                 </p>
                 <p class="sub-heading">
-                  {course && course[0].enrolled} Students
+                  {course && course.enrolled} Students
                 </p>
               </div>
               <div class="other">
@@ -263,15 +274,16 @@ const CourseBody = () => {
                   </span>
                   <span class="heading">Access</span>
                 </p>
-                <p class="sub-heading">{course && course[0].access}</p>
+                <p class="sub-heading">{course && course.access}</p>
               </div>
               <div>
-                <button type="button">
+                <button type="button" onClick={() => addToCart("6202084444f3cd1aa545bb7b")}>
                   <span>
                     <ShoppingCartIcon />
                   </span>
                   Add to cart
                 </button>
+                <p>{itemMessage && itemMessage}</p>
               </div>
               <div class="share-now">
                 <span className="share-text">share now</span>

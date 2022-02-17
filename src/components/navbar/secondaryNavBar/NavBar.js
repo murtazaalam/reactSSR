@@ -28,6 +28,7 @@ import SchoolIcon from "../../../assets/images/new-course-icon-school.svg";
 import IntermediateIcon from "../../../assets/images/new-course-icon-intermediate.svg";
 import CollegeIconIcon from "../../../assets/images/new-course-icon-college.svg";
 import Services from "../../../data/services/Services";
+import AllCourseApi from "../../../apis/api/AllCourse";
 import "./navBar.css";
 import Login from "../../Login/Login";
 
@@ -44,6 +45,12 @@ function PaperComponent(props) {
 
 const NavBar = () => {
   const [scroll, setScroll] = useState(false);
+  const [allCourse, setAllCourse] = useState();
+  const [loading, setLoading] = useState();
+  let schoolCourses = [];
+  let intermediateCourses = [];
+  let collegeCourses = [];
+
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -70,6 +77,31 @@ const NavBar = () => {
       setScroll(window.scrollY > 100);
     });
   });
+
+  useEffect(() => {
+    if(!allCourse){
+      AllCourseApi(setAllCourse,setLoading)
+    }
+  },[allCourse]);
+  //console.log(allCourse);
+  if(allCourse){
+    allCourse.forEach(item => {
+      if(item.category === "For School"){
+        schoolCourses.push(item);
+      }
+      if(item.category === "For Intermediate"){
+        intermediateCourses.push(item);
+      }
+      if(item.category === "For College"){
+        collegeCourses.push(item);
+      }
+    })
+  }
+  //JSON.parse(localStorage.getItem) to retrieve
+  localStorage.setItem("forSchool",JSON.stringify(schoolCourses));
+  localStorage.setItem("forIntermediate",JSON.stringify(intermediateCourses));
+  localStorage.setItem("forCollege",JSON.stringify(collegeCourses));
+  
   const list = (anchor) => {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
@@ -171,42 +203,21 @@ const NavBar = () => {
                             <div className="school-course-list">
                               <span>Courses</span>
                               <ul>
-                                <li>
-                                  Course 1
-                                  <div className="course-desc desc default-desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Course 1 Description</div>
-                                  </div>
-                                </li>
-                                <li>
-                                  Course 2
-                                  <div className="course-desc desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Course 2 Description</div>
-                                  </div>
-                                </li>
-                                <li>
-                                  Course 3
-                                  <div className="course-desc desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Course 3 Description</div>
-                                  </div>
-                                </li>
-                                <li>
-                                  Course 4
-                                  <div className="course-desc desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Course 4 Description</div>
-                                  </div>
-                                </li>
+                                {schoolCourses && schoolCourses.map(item => {
+                                  return (
+                                      <li key={item._id}>
+                                        {item.course_name}
+                                        <div className="course-desc desc">
+                                          <div className="desc-heading">
+                                            Description
+                                          </div>
+                                          <div style={{width:'225px', textAlign:'justify'}}>{item.description}</div>
+                                        </div>
+                                      </li>
+                                    )
+                                  })
+                                  
+                                }
                               </ul>
                             </div>
                           </div>
@@ -228,44 +239,20 @@ const NavBar = () => {
                             <div className="school-course-list">
                               <span>Courses</span>
                               <ul>
-                                <li>
-                                  <Link to="/course/test-question">
-                                    Colleges 1
-                                    <div className="course-desc desc default-desc">
-                                      <div className="desc-heading">
-                                        Description
-                                      </div>
-                                      <div>Colleges 1 Description</div>
-                                    </div>
-                                  </Link>
-                                </li>
-                                <li>
-                                  Colleges 2
-                                  <div className="course-desc desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Colleges 2 Description</div>
-                                  </div>
-                                </li>
-                                <li>
-                                  Colleges 3
-                                  <div className="course-desc desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Colleges 3 Description</div>
-                                  </div>
-                                </li>
-                                <li>
-                                  Colleges 4
-                                  <div className="course-desc desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Colleges 4 Description</div>
-                                  </div>
-                                </li>
+                              {collegeCourses && collegeCourses.map(item => {
+                                  return (
+                                      <li key={item._id}>
+                                        {item.course_name}
+                                        <div className="course-desc desc">
+                                          <div className="desc-heading">
+                                            Description
+                                          </div>
+                                          <div style={{width:'225px', textAlign:'justify'}}>{item.description}</div>
+                                        </div>
+                                      </li>
+                                    )
+                                  })
+                                }
                               </ul>
                             </div>
                           </div>
@@ -287,42 +274,20 @@ const NavBar = () => {
                             <div className="school-course-list">
                               <span>Courses</span>
                               <ul>
-                                <li>
-                                  Intermediate 1
-                                  <div className="course-desc desc default-desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Intermediate 1 Description</div>
-                                  </div>
-                                </li>
-                                <li>
-                                  Intermediate 2
-                                  <div className="course-desc desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Intermediate 2 Description</div>
-                                  </div>
-                                </li>
-                                <li>
-                                  Intermediate 3
-                                  <div className="course-desc desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Intermediate 3 Description</div>
-                                  </div>
-                                </li>
-                                <li>
-                                  Intermediate 4
-                                  <div className="course-desc desc">
-                                    <div className="desc-heading">
-                                      Description
-                                    </div>
-                                    <div>Intermediate 4 Description</div>
-                                  </div>
-                                </li>
+                              {intermediateCourses && intermediateCourses.map(item => {
+                                  return (
+                                      <li key={item._id}>
+                                        {item.course_name}
+                                        <div className="course-desc desc">
+                                          <div className="desc-heading">
+                                            Description
+                                          </div>
+                                          <div style={{width:'225px', textAlign:'justify'}}>{item.description}</div>
+                                        </div>
+                                      </li>
+                                    )
+                                  })
+                                }
                               </ul>
                             </div>
                           </div>
