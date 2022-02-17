@@ -2,8 +2,17 @@
   /* min-height: 580px; */
   width: 100%;
 }
+
+.techvanto-footer img {
+  vertical-align: auto !important;
+  position: relative;
+  bottom: 32px;
+}
 .techvanto-footer p {
-  color: white;
+  /* color: white; */
+  display: flex;
+  place-content: space-between;
+  text-align: start;
 }
 .techvant-footer-upper-part {
   /* min-height: 480px; */
@@ -12,6 +21,33 @@
   background-color: var(--color-primary);
 }
 
+.social a.social-link {
+  color: #767677;
+  font-size: 30px;
+  border: 1px solid #767677;
+  text-align: center;
+  width: 38px;
+  height: 38px;
+  display: inline-block;
+  border-radius: 19px;
+  text-decoration: none;
+  vertical-align: middle !important;
+  /* background: #f3f3f7; */
+
+  width: 12%;
+}
+.social a:hover {
+  background-color: grey;
+  transition: color 0.15s linear, background-color 0.15s linear,
+    border-color 0.15s linear;
+}
+
+.social a.social-link svg {
+  width: 25px;
+  position: relative;
+  bottom: 6.5px;
+  fill: #e3c5cf;
+}
 .techvanto-footer-lower-part {
   /* min-height: 100px; */
   width: 100%;
@@ -41,6 +77,11 @@
   color: #ffffff;
   top: 100%;
 }
+.follow-links {
+  padding: 0 10px 0 12px;
+  position: relative;
+  bottom: 40px;
+}
 
 .techvanto-footer-grid {
   color: var(--color-white);
@@ -49,7 +90,9 @@
 }
 .techvanto-footer-text-header {
   border-bottom-width: 3px;
-
+  /* padding: 0 10px 0 12px;
+  position: relative;
+  bottom: 34px; */
   text-align: left;
 }
 .color {

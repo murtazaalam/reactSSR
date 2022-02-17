@@ -22,7 +22,7 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PrimaryNavBar from "../primaryNavBar/PrimaryNavBar";
-import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
+// import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
 import SchoolIcon from "../../../assets/images/new-course-icon-school.svg";
 import IntermediateIcon from "../../../assets/images/new-course-icon-intermediate.svg";
@@ -117,15 +117,14 @@ const NavBar = () => {
         <div className={scroll ? "hide-primary-navbar" : ""}>
           <PrimaryNavBar />
         </div>
-        <Container maxWidth="lg" className="secondary-navbar">
+        <Container
+          maxWidth="lg"
+          className="secondary-navbar"
+          style={{ whiteSpace: "nowrap" }}
+        >
           <Toolbar className="main-logo">
             <Link to="/">
-              <img
-                src={scroll ? `${logo}` : `${logoOnScroll}`}
-                height="100%"
-                width="234px"
-                alt=""
-              />
+              <img src={logoOnScroll} height="100%" width="234px" alt="" />
             </Link>
           </Toolbar>
           <Toolbar>
@@ -361,6 +360,17 @@ const NavBar = () => {
                       }
                     >
                       Blogs
+                    </span>
+                  </Link>
+                </div>
+                <div className="item">
+                  <Link to="/interview-question" className="menu-text">
+                    <span
+                      className={
+                        scroll === false ? "color-white" : "color-black"
+                      }
+                    >
+                      Interview Question
                     </span>
                   </Link>
                 </div>

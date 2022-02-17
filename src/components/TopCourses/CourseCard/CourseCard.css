@@ -6,6 +6,7 @@
   height: 300px;
   margin: 0 auto;
   transition: 1s !important;
+  max-width: 340px !important;
 }
 
 .technovanto-course-card:hover {

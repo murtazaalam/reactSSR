@@ -15,12 +15,9 @@ export default function CourseCard({
   gradient,
   price,
   discount,
-  review,
+  rating,
 }) {
-  const avarageRating =
-    review && review.length
-      ? review.reduce((total, next) => total + next.rating, 0) / review.length
-      : 0;
+  console.log(rating);
   return (
     <Link to={`/service/${title}/${id}`} style={{ textDecoration: "none" }}>
       <Card sx={{ maxWidth: 240 }} className="technovanto-course-card">
@@ -59,8 +56,8 @@ export default function CourseCard({
         >
           <Rating
             name="size-small"
-            defaultValue={5}
-            value={Math.round(avarageRating * 10) / 10}
+            // defaultValue={1}
+            value={rating}
             precision={0.1}
             readOnly
             size={"small"}

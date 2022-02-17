@@ -22,12 +22,12 @@ const useStyles = makeStyles({
     },
     "&.Mui-selected": {
       borderRadius: "10px",
-      background: "#cf5982",
+      background: "#ea395d",
       color: "#fff",
     },
     "&.MuiToggleButton-root": {
       "&:hover": {
-        background: "#cf5982",
+        background: "#ea395d",
         color: "#fff",
       },
     },

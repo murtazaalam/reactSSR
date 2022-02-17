@@ -15,6 +15,8 @@ import ChromeReaderModeIcon from "@material-ui/icons/ChromeReaderMode";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ShareIcon from "@material-ui/icons/Share";
 import Badge from "@material-ui/core/Badge";
+
+import Skeleton from "@mui/material/Skeleton";
 import singleCourseApi from "../../../apis/api/SingleCourse";
 
 import "./courseBody.css";
@@ -110,134 +112,143 @@ const CourseBody = () => {
                 )}
               </TabPanel>
               <TabPanel value="3">
-                <div className="row">Review Tab</div>
+                {/* <div className="row">Review Tab</div> */}
               </TabPanel>
             </TabContext>
           </Box>
         </Typography>
         <div className="video-section">
-          <div class="video-box">
-            {course && (
-              <div class="video">
-                {course[0].thumbnail && (
-                  <img src={course[0].thumbnail} className="img-fluid" alt="" />
-                )}
-                {course[0].video && (
-                  <iframe
-                    src={course[0].video}
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                )}
-              </div>
-            )}
-            <div class="course-detail">
+          {!course ? (
+            <Skeleton variant="rectangular" width={500} height={691} />
+          ) : (
+            <div class="video-box">
               {course && (
-                <div class="course-price">
-                  {course[0].discounted_price > 0 && (
-                    <p>
-                      Rs.&nbsp;
-                      {timeBadge === true ? (
-                        <del>
-                          <span>{course && course[0].price}</span>
-                          <span>.99</span>
-                        </del>
-                      ) : (
-                        <span>
-                          <span>{course[0].price}</span>
-                          <span>.99</span>
-                        </span>
-                      )}
-                      &nbsp;
-                      {timeBadge === true ? (
-                        <span className="updated-price">
-                          <Badge
-                            badgeContent={`${days
-                              .toString()
-                              .padStart(1, "0")}d ${hrs
-                              .toString()
-                              .padStart(2, "0")}:${mins
-                              .toString()
-                              .padStart(2, "0")}:${secs
-                              .toString()
-                              .padStart(2, "0")}`}
-                            color="primary"
-                          >
-                            {course[0].discounted_price}
-                          </Badge>
-                        </span>
-                      ) : (
-                        ""
-                      )}
-                    </p>
+                <div class="video">
+                  {course[0].thumbnail && (
+                    <img
+                      src={course[0].thumbnail}
+                      className="img-fluid"
+                      alt=""
+                    />
                   )}
-                  {course[0].discounted_price === "0" && (
-                    <p>
-                      Rs.&nbsp;
-                      <span>{course[0].price}</span>
-                      <span>.99</span>
-                    </p>
+                  {course[0].video && (
+                    <iframe
+                      src={course[0].video}
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
                   )}
                 </div>
               )}
-              <div class="other">
-                <p>
-                  <span class="icon">
-                    <AccessAlarmIcon />
+              <div class="course-detail">
+                {course && (
+                  <div class="course-price">
+                    {course[0].discounted_price > 0 && (
+                      <p>
+                        Rs.&nbsp;
+                        {timeBadge === true ? (
+                          <del>
+                            <span>{course && course[0].price}</span>
+                            <span>.99</span>
+                          </del>
+                        ) : (
+                          <span>
+                            <span>{course[0].price}</span>
+                            <span>.99</span>
+                          </span>
+                        )}
+                        &nbsp;
+                        {timeBadge === true ? (
+                          <span className="updated-price">
+                            <Badge
+                              // ${days!== 0 && days.toString().padStart(1, "0")}d
+                              badgeContent={` ${hrs
+                                .toString()
+                                .padStart(2, "0")}:${mins
+                                .toString()
+                                .padStart(2, "0")}:${secs
+                                .toString()
+                                .padStart(2, "0")}`}
+                              color="primary"
+                            >
+                              {course[0].discounted_price}
+                            </Badge>
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </p>
+                    )}
+                    {course[0].discounted_price === "0" && (
+                      <p>
+                        Rs.&nbsp;
+                        <span>{course[0].price}</span>
+                        <span>.99</span>
+                      </p>
+                    )}
+                  </div>
+                )}
+                <div class="other">
+                  <p>
+                    <span class="icon">
+                      <AccessAlarmIcon />
+                    </span>
+                    <span class="heading">Duration</span>
+                  </p>
+                  <p class="sub-heading">
+                    {course && course[0].duration} hours
+                  </p>
+                </div>
+                <div class="other">
+                  <p>
+                    <span class="icon">
+                      <LocalLibraryIcon />
+                    </span>
+                    <span class="heading">Lession</span>
+                  </p>
+                  <p class="sub-heading">
+                    {course && course[0].lession} Lectures
+                  </p>
+                </div>
+                <div class="other">
+                  <p>
+                    <span class="icon">
+                      <BookmarkIcon />
+                    </span>
+                    <span class="heading">Enrolled</span>
+                  </p>
+                  <p class="sub-heading">
+                    {course && course[0].enrolled} Students
+                  </p>
+                </div>
+                <div class="other">
+                  <p>
+                    <span class="icon">
+                      <ChromeReaderModeIcon />
+                    </span>
+                    <span class="heading">Access</span>
+                  </p>
+                  <p class="sub-heading">{course && course[0].access}</p>
+                </div>
+                <div>
+                  <button type="button" className="btn-grad">
+                    <span>
+                      <ShoppingCartIcon />
+                    </span>
+                    Add to cart
+                  </button>
+                </div>
+                <div className="share-now">
+                  <span className="share-text">share now</span>
+                  <span className="share-icon">
+                    <ShareIcon />
                   </span>
-                  <span class="heading">Duration</span>
-                </p>
-                <p class="sub-heading">{course && course[0].duration} hours</p>
-              </div>
-              <div class="other">
-                <p>
-                  <span class="icon">
-                    <LocalLibraryIcon />
-                  </span>
-                  <span class="heading">Lession</span>
-                </p>
-                <p class="sub-heading">
-                  {course && course[0].lession} Lectures
-                </p>
-              </div>
-              <div class="other">
-                <p>
-                  <span class="icon">
-                    <BookmarkIcon />
-                  </span>
-                  <span class="heading">Enrolled</span>
-                </p>
-                <p class="sub-heading">
-                  {course && course[0].enrolled} Students
-                </p>
-              </div>
-              <div class="other">
-                <p>
-                  <span class="icon">
-                    <ChromeReaderModeIcon />
-                  </span>
-                  <span class="heading">Access</span>
-                </p>
-                <p class="sub-heading">{course && course[0].access}</p>
-              </div>
-              <div>
-                <button type="button">
-                  <span>
-                    <ShoppingCartIcon />
-                  </span>
-                  Add to cart
-                </button>
-              </div>
-              <div class="share-now">
-                <span className="share-text">share now</span>
-                <span className="share-icon">
-                  <ShareIcon />
-                </span>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div class="thought">
@@ -267,15 +278,9 @@ const CourseBody = () => {
               rows="4"
             ></textarea>
           </div>
-          <div className="col-lg-12 col-md-12 col-sm-12 check">
-            <input type="checkbox" className="form-check-input" />
-            <span>
-              Save my name, email, and website in this browser for the next time
-              I comment.
-            </span>
-          </div>
+
           <div className="col-lg-12 col-md-12 col-sm-12 comment-btn-box">
-            <button type="submit" className="comment-submit">
+            <button type="submit" className="btn-grad">
               Submit
             </button>
           </div>
