@@ -10,10 +10,15 @@ import ContactUsForHiring from "../pages/contact-us/contactUsForHiring";
 
 import EventDetail from "../pages/SingleEvent/SingleEvent";
 import TestQuestion from "../pages/testQuestion/TestQuestion";
+import ContactUsToGetHired from "../pages/contact-us/contactUsToGetHired";
+import MyCart from "../pages/myCart/MyCart";
+import MyCourses from "../pages/myCourses/MyCourses";
+import ComingSoon from "../components/ComingSoon/ComingSoon";
 const MainRouters = () => {
   return (
     <Routes>
       <Route path="/" element={<Home></Home>}></Route>
+      <Route path="/coming-soon" element={<ComingSoon />}></Route>
       <Route path="/all-courses" element={<AllCourses></AllCourses>}></Route>
       <Route path="/courses" element={<Courses></Courses>}></Route>
       <Route
@@ -27,7 +32,14 @@ const MainRouters = () => {
         path="/contact-us-for-hiring"
         element={<ContactUsForHiring />}
       ></Route>
+      <Route
+        path="/contact-us-to-get-hired"
+        element={<ContactUsToGetHired />}
+      ></Route>
       <Route path="/event/:id" element={<EventDetail></EventDetail>}></Route>
+
+      <Route path="/my-cart" element={<MyCart />}></Route>
+      <Route path="/my-courses" element={<MyCourses />}></Route>
     </Routes>
   );
 };

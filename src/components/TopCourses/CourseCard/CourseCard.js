@@ -22,7 +22,7 @@ export default function CourseCard({
       ? review.reduce((total, next) => total + next.rating, 0) / review.length
       : 0;
   return (
-    <Link to={`/service/${title}/${id}`}>
+    <Link to={`/service/${title}/${id}`} style={{ textDecoration: "none" }}>
       <Card sx={{ maxWidth: 240 }} className="technovanto-course-card">
         <div
           style={{
@@ -38,22 +38,23 @@ export default function CourseCard({
             style={{ backgroundImage: `url("${pic}")`, height: "194px" }}
           />
         </div>
-        <CardContent style={{ borderBottom: "1px solid #d0d9df" }}>
+        <CardContent
+          style={{ borderBottom: "1px solid #d0d9df" }}
+          className="card-title"
+        >
           <Typography variant="body2" color="text.secondary">
             {title}{" "}
-            <Chip
-              label={`Rs ${price - discount}`}
-              style={{ float: "right", background: "#f1effe" }}
-            />
             {/* <span style={{ float: "right" }}>Rs.{price - discount}</span>
             </Chip> */}
           </Typography>
+          <Chip
+            label={`Rs ${price - discount}`}
+            style={{ float: "right", background: "#f1effe" }}
+          />
         </CardContent>
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
           }}
         >
           <Rating
@@ -63,12 +64,12 @@ export default function CourseCard({
             precision={0.1}
             readOnly
             size={"small"}
-            style={{ padding: "0.5rem", left: 1 }}
+            style={{ paddingTop: "0.5rem", left: 5 }}
           />
-          <span className="technovanto-course-card-review">
+          {/* <span className="technovanto-course-card-review">
             <b>{Math.round(avarageRating * 10) / 10}</b> (
             {review ? review.length : 0} reviews)
-          </span>
+          </span> */}
         </div>
       </Card>
     </Link>

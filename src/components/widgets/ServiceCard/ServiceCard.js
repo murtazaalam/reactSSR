@@ -1,6 +1,7 @@
 import * as React from "react";
 import "./serviceCard.css";
 import { Link } from "react-router-dom";
+import Chip from "@mui/material/Chip";
 const ServiceCard = (props) => {
   return (
     <div>
@@ -10,7 +11,14 @@ const ServiceCard = (props) => {
       >
         <div class="service">
           <img src={props.icon} alt=""></img>
-          <h2>{props.title}</h2>
+          <h2>
+            {props.title}{" "}
+            <Chip
+              label="coming soon"
+              className="chip-background"
+              size="small"
+            />
+          </h2>
           <p>{props.description}</p>
         </div>
       </Link>

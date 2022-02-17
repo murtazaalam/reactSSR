@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Container, IconButton } from "@mui/material";
+import { Container } from "@mui/material";
 import Services from "../../data/services/Services";
 import logo from "../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import "./Footer.css";
-import InputBase from "@mui/material/InputBase";
+// import InputBase from "@mui/material/InputBase";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 
@@ -17,47 +17,39 @@ const Footer = () => {
         <br />
         <Container className="maxWidthNone">
           <div className="display-grid fr5 techvanto-footer-grid">
-            <div style={{ placeSelf: "start" }}>
+            <div style={{ height: "-webkit-fill-available" }}>
               <div className="techvanto-footer-text-header color">
                 <img src={logo} alt="" />{" "}
               </div>
               <div className="text-small techvanto-footer-text-header">
-                <LinkedInIcon />
-                <FacebookRoundedIcon /> <InstagramIcon />
-                <div className="search-item">
-                  <InputBase
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="Search"
-                    inputProps={{ "aria-label": "search" }}
-                    color="secondary"
-                  />
-                  <IconButton
-                    type="submit"
-                    sx={{ p: "10px" }}
-                    aria-label="search"
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                </div>
+                <LinkedInIcon fontSize="small" style={{ color: "#0000ff" }} />
+                <FacebookRoundedIcon fontSize="small" color="action" />{" "}
+                <InstagramIcon fontSize="small" color="error" />
               </div>
             </div>
-            <div style={{ placeSelf: "center" }}>
+            <div style={{ height: "-webkit-fill-available" }}>
               <div className="techvanto-footer-text-header color">
                 Top Courses{" "}
               </div>
-              {["Web Development", "Data Science", "Machine Learning"].map(
-                (data, index) => (
-                  <p className="techvanto-footer-text text-small">{data}</p>
-                )
-              )}
+              {[
+                "Web Development",
+                "Data Science",
+                "Machine Learning",
+                "Full stack development",
+                "Data Structures and Algorithm",
+                "Basics of Java",
+                "Block Chain",
+              ].map((data, index) => (
+                <p className="techvanto-footer-text text-small">{data}</p>
+              ))}
             </div>
-            <div>
+            <div style={{ height: "-webkit-fill-available" }}>
               <div className="techvanto-footer-text-header color">
                 Services{" "}
               </div>
               {Services.map(
                 (data, index) =>
-                  index <= 5 && (
+                  index <= 6 && (
                     <p className="techvanto-footer-text text-small">
                       {data.text}
                     </p>
@@ -65,7 +57,7 @@ const Footer = () => {
               )}
             </div>
 
-            <div>
+            <div style={{ height: "-webkit-fill-available" }}>
               <div className="techvanto-footer-text-header color ">FAQ </div>
               <p className="techvanto-footer-text text-small">
                 Discussion Forum
@@ -74,11 +66,11 @@ const Footer = () => {
               <p className="techvanto-footer-text text-small">
                 Reasearch & Project
               </p>
-              <br />
 
               <div className="techvanto-footer-text-header color">
                 Oppurtunities{" "}
               </div>
+
               <p className="techvanto-footer-text text-small">
                 Upcoming And Past Events
               </p>
@@ -87,8 +79,7 @@ const Footer = () => {
               </p>
               <p className="techvanto-footer-text text-small">Carrer/ Jobs</p>
             </div>
-            <div>
-              <br />
+            <div style={{ height: "-webkit-fill-available" }}>
               <div className="techvanto-footer-text-header color">
                 Contact Us
               </div>
@@ -100,7 +91,7 @@ const Footer = () => {
               <p className="techvanto-footer-text text-small">
                 Reasearch & Project
               </p>
-              <br />
+
               <div className="techvanto-footer-text-header color">Contact </div>
               <div className="techvanto-footer-text">
                 {/* <PermContactCalendarIcon></PermContactCalendarIcon> */}
@@ -116,8 +107,6 @@ const Footer = () => {
                   India
                 </p>
               </div>
-
-              <br />
             </div>
           </div>
         </Container>

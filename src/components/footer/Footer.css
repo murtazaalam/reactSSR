@@ -1,19 +1,22 @@
 .techvanto-footer {
-  min-height: 580px;
+  /* min-height: 580px; */
   width: 100%;
 }
+.techvanto-footer p {
+  color: white;
+}
 .techvant-footer-upper-part {
-  min-height: 480px;
+  /* min-height: 480px; */
   width: 100%;
   position: relative;
-  background-color: var(--color-footer);
+  background-color: var(--color-primary);
 }
 
 .techvanto-footer-lower-part {
-  min-height: 100px;
+  /* min-height: 100px; */
   width: 100%;
   position: relative;
-  background-color: var(--color-footer-bottom);
+  background-color: var(--color-secondary);
   bottom: 0;
 }
 .techvanto-footer-policies {
@@ -50,7 +53,7 @@
   text-align: left;
 }
 .color {
-  color: #d02b48;
+  color: var(--color-secondary);
   font-weight: bold;
 }
 .techvanto-footer-text {

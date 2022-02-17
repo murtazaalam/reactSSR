@@ -13,10 +13,10 @@ const WhatAndWhyWeDo = () => {
           <div>
             <Typography component="div" className="techvanto-whyus">
               <Typography component="h2" className="techvanto-whyus-heading">
-                What We Do.
+                What We Do?
               </Typography>
             </Typography>
-            <div className="techvanto-grid-column techvanto-why-we-do text-medium">
+            <div className="techvanto-grid-column text-medium">
               <WhatAndWhyList text="what" />
             </div>
           </div>
@@ -24,7 +24,7 @@ const WhatAndWhyWeDo = () => {
           <div>
             <Typography component="div" className="techvanto-whyus ">
               <Typography component="h2" className="techvanto-whyus-heading">
-                Why We Do.
+                Why We Do?
               </Typography>
             </Typography>
             <div className="techvanto-why-we-do">

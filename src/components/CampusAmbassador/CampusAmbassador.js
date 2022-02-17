@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./CampusAmbassador.css";
 import "mui-player/dist/mui-player.min.css";
-import { Container, Button } from "@mui/material";
+import { Container } from "@mui/material";
 const CampusAmbassador = () => {
   // var Mp = new MuiPlayer({
   //     container:'#mui-player',
@@ -46,12 +46,9 @@ const CampusAmbassador = () => {
                 </div>
                 <span className="text-large">Campus Ambassador</span>
                 <br />
-                <Button
-                  variant="contained"
-                  className="techvanto-know-more-button btn-grad"
-                >
-                  Know More ►
-                </Button>
+                <button className="btn-grad btn-background-blue campus-btn">
+                  Know More
+                </button>
               </p>
             </div>
           </div>

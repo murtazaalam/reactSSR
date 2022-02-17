@@ -32,9 +32,6 @@ function BlogsContent() {
   const classes = useStyles();
   return (
     <Container maxWidth="lg" className={classes.blogsContainer}>
-      {/* <Typography variant="h4" className={classes.blogTitle}>
-        Articles
-      </Typography> */}
       <Grid container spacing={3}>
         {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>

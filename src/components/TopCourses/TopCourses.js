@@ -1,48 +1,45 @@
-import { Container, Typography, Button } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import * as React from "react";
 import CourseCard from "./CourseCard/CourseCard";
 import "./TopCourses.css";
 import { Link } from "react-router-dom";
-
+import image from "../../assets/Svgs/course.svg";
 const TopCourses = () => {
   //const [topCourses, setTopCourses] = React.useState([]);
   const topCourses = [
     {
       id: 1,
       title: "Web Development",
-      thumbnail:
-        "https://image.freepik.com/free-vector/web-development-programmer-engineering-coding-website-augmented-reality-interface-screens-developer-project-engineer-programming-software-application-design-cartoon-illustration_107791-3863.jpg",
+      thumbnail: image,
       price: 758,
-      gradient: "#e66465, #9198e5",
+      gradient: "rgb(28 71 124), #9198e5",
       discount: 500,
       reviwes: ["excellent", "good course", "good course"],
     },
     {
       id: 2,
       title: "Web Development",
-      thumbnail:
-        "https://image.freepik.com/free-vector/web-development-programmer-engineering-coding-website-augmented-reality-interface-screens-developer-project-engineer-programming-software-application-design-cartoon-illustration_107791-3863.jpg",
+      thumbnail: image,
       price: 758,
-      gradient: "0.25turn, #3f87a6, #ebf8e1, #f69d3c",
+
+      gradient: "to right bottom, #ea395d, #eb6085, #e582a6, #dda0bf, #d6bcce",
       discount: 500,
       reviwes: ["excellent", "good course", "good course"],
     },
     {
       id: 3,
       title: "Web Development",
-      thumbnail:
-        "https://image.freepik.com/free-vector/web-development-programmer-engineering-coding-website-augmented-reality-interface-screens-developer-project-engineer-programming-software-application-design-cartoon-illustration_107791-3863.jpg",
+      thumbnail: image,
       price: 758,
-      gradient: "to right top, #051937, #00435c, #256f72, #699a82, #b5c298",
+      gradient: "to right bottom, #1c7455, #35916a, #4faf7f, #69ce93, #85eea8",
       discount: 500,
       reviwes: ["excellent", "good course", "good course"],
     },
     {
       id: 4,
       title: "Web Development",
-      gradient: "to right top, #051937, #00435c, #256f72, #699a82, #b5c298",
-      thumbnail:
-        "https://image.freepik.com/free-vector/web-development-programmer-engineering-coding-website-augmented-reality-interface-screens-developer-project-engineer-programming-software-application-design-cartoon-illustration_107791-3863.jpg",
+      gradient: "to right bottom, #fb8854, #fe924c, #ff9d44, #ffa83b, #fcb433",
+      thumbnail: image,
       price: 758,
       discount: 500,
       reviwes: ["excellent", "good course", "good course"],
@@ -82,12 +79,12 @@ const TopCourses = () => {
           </section>
           <div className="techvanto-all-course-button">
             <Link to="/all-courses" style={{ textDecoration: "none" }}>
-              <Button
-                variant="contained"
-                className="techvanto-know-more-button btn-grad"
+              <button
+                // variant="contained"
+                className="btn-grad"
               >
                 All Courses ►
-              </Button>
+              </button>
             </Link>
           </div>
           <br />

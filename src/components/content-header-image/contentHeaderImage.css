@@ -18,12 +18,17 @@
   text-align: left;
   margin: 50px 50px 50px 32px;
 }
+.btn-grad .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  color: white;
+}
 .techvanto-campus-ambassador-right-content {
   text-align: center !important;
 }
-.text-large {
-  font-size: 30px;
+.large-text {
+  font-size: 48px;
+  font-variant: petite-caps;
+  font-weight: bold;
 }
 .text-small {
-  font-size: 14px;
+  font-size: 21px;
 }

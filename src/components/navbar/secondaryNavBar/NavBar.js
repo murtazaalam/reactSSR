@@ -15,11 +15,13 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import PrimaryNavBar from "../primaryNavBar/PrimaryNavBar";
-
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
-
+import Badge from "@mui/material/Badge";
+import IconButton from "@mui/material/IconButton";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PrimaryNavBar from "../primaryNavBar/PrimaryNavBar";
 import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
 import SchoolIcon from "../../../assets/images/new-course-icon-school.svg";
@@ -48,7 +50,7 @@ const NavBar = () => {
     bottom: false,
     right: false,
   });
-
+  const [user, setUser] = useState(true);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -154,14 +156,6 @@ const NavBar = () => {
                     >
                       Courses
                     </span>
-                    <ExpandMoreIcon
-                      sx={
-                        scroll === false
-                          ? { color: "white" }
-                          : { color: "black" }
-                      }
-                      className="arrow-icon"
-                    />
                   </Link>
                   <div className="dropdown-content">
                     <ul className="dropdown-menu-multi-level">
@@ -237,13 +231,13 @@ const NavBar = () => {
                                 <li>
                                   <Link to="/course/test-question">
                                     Colleges 1
-                                      <div className="course-desc desc default-desc">
-                                        <div className="desc-heading">
-                                          Description
-                                        </div>
-                                        <div>Colleges 1 Description</div>
+                                    <div className="course-desc desc default-desc">
+                                      <div className="desc-heading">
+                                        Description
                                       </div>
-                                    </Link>
+                                      <div>Colleges 1 Description</div>
+                                    </div>
+                                  </Link>
                                 </li>
                                 <li>
                                   Colleges 2
@@ -346,14 +340,6 @@ const NavBar = () => {
                     >
                       Services
                     </span>
-                    {/* <ExpandMoreIcon
-                      sx={
-                        scroll === false
-                          ? { color: "white" }
-                          : { color: "black" }
-                      }
-                      className="arrow-icon"
-                    /> */}
                   </a>
                 </div>
                 <div className="item">
@@ -365,14 +351,6 @@ const NavBar = () => {
                     >
                       Events
                     </span>
-                    {/* <ExpandMoreIcon
-                      sx={
-                        scroll === false
-                          ? { color: "white" }
-                          : { color: "black" }
-                      }
-                      className="arrow-icon"
-                    /> */}
                   </Link>
                 </div>
                 <div className="item">
@@ -396,38 +374,63 @@ const NavBar = () => {
                       >
                         Contact Us
                       </span>
-                      <ExpandMoreIcon
-                        sx={
-                          scroll === false
-                            ? { color: "white" }
-                            : { color: "black" }
-                        }
-                        className="arrow-icon"
-                      />
                     </Link>
                     <div class="dropdown-content-contact">
-                      <Link to="/contact-us-for-hiring">
-                        Contact Us for Hiring
-                      </Link>
-                      <Link to="/contact-us-getHired">Get Hired</Link>
+                      <Link to="/contact-us-for-hiring">For Hiring</Link>
+                      <Link to="/contact-us-to-get-hired">To Get Hired</Link>
+                      <Link to="/coming-soon">know More</Link>
                     </div>
                   </div>
                 </div>
               </div>
             </Container>
             <div className="item">
-              <button className="menu-text btn-grad" onClick={handleClickOpen}>
-                <span
-                  className={scroll === false ? "color-white" : "color-black"}
-                >
-                  Login/SignUp
-                </span>
-              </button>
-              <Login
-                open={open}
-                handleClose={handleClose}
-                PaperComponent={PaperComponent}
-              />
+              {user ? (
+                <>
+                  <Link to="/my-cart" style={{ marginRight: "30px" }}>
+                    <IconButton aria-label="cart" className="color-white">
+                      <Badge badgeContent={4} color="error">
+                        <ShoppingCartIcon fontSize="large" />
+                      </Badge>
+                    </IconButton>
+                  </Link>
+
+                  <div class="dropdown">
+                    <Link to="/">
+                      <span
+                        className="color-white"
+                        // className={
+                        //   scroll === false ? "color-white" : "color-black"
+                        // }
+                      >
+                        <AccountCircleIcon fontSize="large" />
+                      </span>
+                    </Link>
+                    <div class="dropdown-content-contact">
+                      <Link to="/my-courses">My Courses</Link>
+                      <a style={{ color: "black" }}>Log Out</a>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <button className="btn-grad" onClick={handleClickOpen}>
+                    <span
+                      className={
+                        scroll === false ? "color-white" : "color-black"
+                      }
+                    >
+                      Login/SignUp
+                    </span>
+                  </button>
+
+                  <Login
+                    open={open}
+                    handleClose={handleClose}
+                    PaperComponent={PaperComponent}
+                  />
+                </>
+              )}
             </div>
           </Toolbar>
         </Container>

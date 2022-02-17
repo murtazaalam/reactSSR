@@ -2,7 +2,7 @@ import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { Category } from "@material-ui/icons";
+// import { Category } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {

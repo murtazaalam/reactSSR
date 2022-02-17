@@ -5,13 +5,14 @@
   padding: 10px 24px;
 }
 .color-white {
+  color: var(--color-white) !important;
+}
+
+.color-black {
   color: var(--color-white);
 }
-.color-black {
-  color: var(--color-black);
-}
 .navbar-background {
-  background-color: var(--color--bg-navbar) !important;
+  background-color: var(--color-primary) !important;
 }
 .bg-royal-transparent {
   background-color: var(--color-secondary-header) !important;
@@ -22,12 +23,18 @@
   display: flex !important;
   flex-direction: row-reverse;
   justify-content: flex-end;
+  background-color: var(--color-primary);
 }
+
 .secondary-navbar .css-1t29gy6-MuiToolbar-root {
   padding-left: 10px;
 }
 .menu-item {
   display: flex;
+}
+.item {
+  text-align: end;
+  text-align-last: center;
 }
 .menu-item .item {
   margin-right: 18px;
@@ -45,6 +52,8 @@
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
   z-index: 1;
+  right: 0;
+  border-radius: 2%;
 }
 .dropdown-content-contact a {
   padding: 12px;
@@ -142,6 +151,7 @@
 .dropdown-menu-multi-level {
   display: block;
   border: medium none;
+  text-align-last: start;
   box-shadow: none;
   border-right: 1px solid #d7d7d7;
   background: linear-gradient(to right, #f1f1f1, #f4f4f4);
@@ -247,6 +257,7 @@
 .school-course-list ul li .desc {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+  padding-left: 18px;
 }
 .school-course-list ul li:hover .desc {
   display: block;

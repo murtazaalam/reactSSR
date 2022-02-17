@@ -1,0 +1,18 @@
+.right-form-position {
+  position: absolute;
+  right: 112px;
+  top: 22rem;
+  background: azure;
+  z-index: 101;
+  padding: 20px;
+  text-align: center;
+  width: 30em;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  border-radius: 2%;
+}
+
+.left-card-position {
+  margin-top: 10px !important;
+  margin-left: 10px !important;
+}

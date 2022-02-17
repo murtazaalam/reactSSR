@@ -11,6 +11,7 @@ import {
 import needAssistance from "../../assets/Svgs/needAssistance.svg";
 
 import "./BookDemo.css";
+import { CardActions } from "@material-ui/core";
 
 const BookADemo = () => {
   const [email, setEmail] = React.useState("");
@@ -35,7 +36,7 @@ const BookADemo = () => {
                 subheader=""
               />
               <form onSubmit={handleSubmit} className="form-book">
-                <CardContent className="card-content">
+                <CardContent className="card-content" sx={{ p: 1 }}>
                   <TextField
                     id="name"
                     label="Name"
@@ -54,7 +55,14 @@ const BookADemo = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </CardContent>
-                <button className="btn-grad padding">Submit</button>
+                <CardActions>
+                  <button
+                    style={{ width: "-webkit-fill-available" }}
+                    className="btn-grad "
+                  >
+                    Submit
+                  </button>
+                </CardActions>
               </form>
             </Card>
           </div>
