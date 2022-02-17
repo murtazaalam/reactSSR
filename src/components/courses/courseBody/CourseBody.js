@@ -39,9 +39,10 @@ const CourseBody = () => {
   useEffect(() => {
     if (!course) {
       //id of course will be sent
-      singleCourseApi("6202084444f3cd1aa545bb7c", setCourses);
+      //singleCourseApi("202084444f3cd1aa545bb7b", setCourses);
     }
   }, [course]);
+  //console.log(">>>", course);
 
   const tick = () => {
     if (days === 0 && hrs === 0 && mins === 0 && secs === 0)
@@ -110,7 +111,49 @@ const CourseBody = () => {
                 )}
               </TabPanel>
               <TabPanel value="3">
-                <div className="row">Review Tab</div>
+                <div className="row" style={{justifyContent: 'left'}}>
+                <div class="thought">
+                    <h2>Leave a Review</h2>
+                    <p>
+                      Your email address will not be published. Required fields are marked *
+                    </p>
+                    <form className="row review-form">
+                      <div className="col-lg-12 col-md-12 col-sm-12 thought-input-field">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Your Name *"
+                        />
+                      </div>
+                      <div className="col-lg-12 col-md-12 col-sm-12 thought-input-field">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Your Email *"
+                        />
+                      </div>
+                      <div className="col-lg-12 col-md-12 col-sm-12 thought-input-field">
+                        <textarea
+                          className="form-control"
+                          placeholder="Your Comment"
+                          rows="4"
+                        ></textarea>
+                      </div>
+                      <div className="col-lg-12 col-md-12 col-sm-12 check">
+                        <input type="checkbox" className="form-check-input" />
+                        <span>
+                          Save my name, email, and website in this browser for the next time
+                          I comment.
+                        </span>
+                      </div>
+                      <div className="col-lg-12 col-md-12 col-sm-12 comment-btn-box">
+                        <button type="submit" className="comment-submit">
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </TabPanel>
             </TabContext>
           </Box>
@@ -239,47 +282,6 @@ const CourseBody = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div class="thought">
-        <h2>Leave a Review</h2>
-        <p>
-          Your email address will not be published. Required fields are marked *
-        </p>
-        <form className="row review-form">
-          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Name *"
-            />
-          </div>
-          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Email *"
-            />
-          </div>
-          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field">
-            <textarea
-              className="form-control"
-              placeholder="Your Comment"
-              rows="4"
-            ></textarea>
-          </div>
-          <div className="col-lg-12 col-md-12 col-sm-12 check">
-            <input type="checkbox" className="form-check-input" />
-            <span>
-              Save my name, email, and website in this browser for the next time
-              I comment.
-            </span>
-          </div>
-          <div className="col-lg-12 col-md-12 col-sm-12 comment-btn-box">
-            <button type="submit" className="comment-submit">
-              Submit
-            </button>
-          </div>
-        </form>
       </div>
     </>
   );
