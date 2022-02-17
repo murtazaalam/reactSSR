@@ -1,0 +1,49 @@
+input {
+  padding-left: 10px;
+}
+.cart-content-block {
+  margin-top: 40px;
+}
+.cart-form {
+  display: flex;
+  width: 80%;
+}
+.cart-priceCard {
+  margin-left: 20px;
+  width: 50%;
+}
+.table-wrap {
+  width: 80%;
+}
+.apply-coupon,
+.remove-coupon {
+  width: 120px;
+  font-size: smaller;
+}
+
+.apply-coupon:hover {
+  background-color: #a862dd;
+  border-color: #a862dd;
+  color: white;
+}
+
+.remove-coupon:hover {
+  background-color: #d9534f;
+  border-color: #d9534f;
+  color: white;
+}
+
+.green {
+  font-size: smaller;
+  color: green;
+}
+
+.remove-coupon1 {
+  font-size: smaller;
+  width: 120px;
+}
+.remove-coupon1:hover {
+  background-color: #d9534f;
+  border-color: #d9534f;
+  color: white;
+}

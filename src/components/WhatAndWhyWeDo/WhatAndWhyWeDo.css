@@ -1,5 +1,5 @@
 .techvanto-grid-column {
-  border-right: var(--border-color) solid 1.5px;
+  border-right: black solid 1.5px;
 }
 
 .whatwedoWhywedotabs {
@@ -25,6 +25,7 @@
 .techvanto-why-we-do {
   display: flex;
   justify-content: center;
+  border-left: black solid 1.5px;
 }
 
 .techvanto-why-we-do li.MuiListItem-gutters,

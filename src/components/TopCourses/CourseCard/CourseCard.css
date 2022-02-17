@@ -21,3 +21,7 @@
 .technovanto-course-card-review {
   font-size: 10px;
 }
+.card-title {
+  padding: 16px 0 16px 7px !important;
+  text-decoration: none;
+}

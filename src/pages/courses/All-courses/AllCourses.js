@@ -16,7 +16,6 @@ function AllCourses() {
     { id: 1, checked: false, label: "For School" },
     { id: 2, checked: false, label: "For College" },
     { id: 3, checked: false, label: "For Intermediate" },
-    { id: 4, checked: false, label: "All" },
   ]);
 
   const [list, setList] = useState(dataList);
@@ -119,8 +118,6 @@ function AllCourses() {
           <div className="course-panel-wrap">
             {/* Side Panels */}
             <FilterPanel
-              // selectedCategory={selectedCategory}
-              //  selectCategory={handleSelectCategory}
               selectedRating={selectedRating}
               selectedPrice={selectedPrice}
               selectRating={handleSelectRating}

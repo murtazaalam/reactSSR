@@ -10,7 +10,7 @@ const AboutUs = (props) => {
       <Typography component="div" className="techvanto-whyus ">
         <Typography component="h2" className="techvanto-whyus-heading">
           Partnerships with top universities to make{" "}
-          <span style={{ color: "blue" }}>WORLD-CLASS EDUCATION</span>{" "}
+          <span style={{ color: "#ea395d" }}>WORLD-CLASS EDUCATION</span>{" "}
           accessible globally.
         </Typography>
       </Typography>

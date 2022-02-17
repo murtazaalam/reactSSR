@@ -18,7 +18,7 @@ const Sliderr = () => {
   const imageObject = [
     {
       url: image_1,
-      date: "1-2nd feb 2020",
+      date: "1-2 Feb 2020",
       name: "Cyber Security",
       place: "IIT, Bhubaneswar",
       details:
@@ -26,7 +26,7 @@ const Sliderr = () => {
     },
     {
       url: image_2,
-      date: "1-2nd feb 2020",
+      date: "1-2 Feb 2020",
       name: "Bridge Design",
       place: "IIT, Bhubaneswar",
       details:
@@ -34,7 +34,7 @@ const Sliderr = () => {
     },
     {
       url: image_3,
-      date: "NaN",
+      // date: "NaN",
       name: "Hackathon",
       place: "LPU",
       details:
@@ -42,7 +42,7 @@ const Sliderr = () => {
     },
     {
       url: image_4,
-      date: "NaN",
+      // date: "NaN",
       name: "Machine Learning",
       place: "Osmania University",
       details:
@@ -95,8 +95,12 @@ const Sliderr = () => {
                     (currentSlide !== index ? "none" : "")
                   }
                 >
-                  <span className="date">{data.date}</span>
-                  <br></br>
+                  {data.date && (
+                    <>
+                      <span className="date">{data.date}</span>
+                      <br></br>
+                    </>
+                  )}
                   <span className="place">
                     {data.name} - {data.place}
                   </span>

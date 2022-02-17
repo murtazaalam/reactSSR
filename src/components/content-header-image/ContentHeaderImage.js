@@ -7,7 +7,7 @@ const ContentHeaderImage = (props) => {
   return (
     <div
       className="techvanto-content-header-image"
-      style={{ background: `#578bc0 url(${props.background}) 0 0 no-repeat` }}
+      style={{ background: `#1C477C url(${props.background}) 0 0 no-repeat` }}
     >
       <Container>
         <div className="techvanto-header-content">
@@ -15,14 +15,18 @@ const ContentHeaderImage = (props) => {
             <br />
             <br />
             <br />
-            <span className="text-large">{props.title}</span>
+            <span className="large-text">{props.title}</span>
             <div style={{ lineHeight: "normal" }}>
               <span className="text-small">{props.overview} </span>
               <br />
             </div>
             <br />
-            <div className="techvanto-know-more-button btn-grad">
-              <BasicModal text="Book Demo ►" name="Home"></BasicModal>
+            <div className="btn-grad">
+              <BasicModal
+                text="Book Demo ►"
+                name="Home"
+                sx={{ color: "white" }}
+              ></BasicModal>
             </div>
           </p>
         </div>

@@ -1,8 +1,9 @@
+import { Link } from "@mui/material";
 import React from "react";
 import "./ListItem.css";
 
 const ListItem = ({
-  item: { coverSrc, title, price, deliveryFee, serviceTime, rating },
+  item: { coverSrc, title, price, serviceTime, rating, myCourseCheck },
 }) => (
   <div className="listItem-wrap">
     <img
@@ -18,9 +19,15 @@ const ListItem = ({
         <b>{serviceTime}</b>
         {/* <span> Delivery Fee ${deliveryFee}</span> */}
       </p>
-      <p>
-        <b>${price}</b>
-      </p>
+      {myCourseCheck ? (
+        <p>
+          <Link style={{ textDecoration: "none" }}> View Details</Link>
+        </p>
+      ) : (
+        <p>
+          <b>${price}</b>
+        </p>
+      )}
     </footer>
   </div>
 );

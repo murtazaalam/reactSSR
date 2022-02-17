@@ -1,6 +1,6 @@
 @import url("http://fonts.cdnfonts.com/css/segoe-ui-4");
 .background {
-  background: var(--color-background);
+  background: #f4f6f9;
   padding: 18px;
 }
 
@@ -17,6 +17,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.campus-btn {
+  border-radius: 21px;
+  padding: 5px 30px 5px 30px;
 }
 
 .techvanto-campus-ambassador-left-image-upper {
@@ -43,12 +47,12 @@
   font-family: "Segoe UI", sans-serif;
   text-align: left !important;
 }
-.techvanto-know-more-button {
+/* .techvanto-know-more-button {
   border-radius: 15px !important;
-  background-color: var(--color-secondary) !important;
+  background-color: #dd1642 !important;
 
   display: inline-flex;
-}
+} */
 .techvanto-know-more-button button {
   color: white;
 }

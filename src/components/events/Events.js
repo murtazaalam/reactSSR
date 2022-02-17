@@ -35,6 +35,7 @@ const Events = (props) => {
         eventsApi(props.category, setEventData);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events]);
 
   return (
@@ -84,7 +85,7 @@ const Events = (props) => {
           className="event-body"
         >
           <div className="col-lg-3 col-md-3 col-sm-6 col-12">
-            <Box component="div" className="row" className="event-menu">
+            <Box component="div" className="row event-menu">
               <Typography
                 component="h6"
                 className={
@@ -121,7 +122,7 @@ const Events = (props) => {
                     key={index}
                   >
                     <CardContent className="event-card" sx={{ height: 200 }}>
-                      <img src={EventImage} width="100" />
+                      <img src={EventImage} width="100" alt="" />
                       {/* for dynamic use below code */}
                       {/* <img src={`${event.image}`} width="100"/> */}
                     </CardContent>

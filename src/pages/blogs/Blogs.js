@@ -6,6 +6,7 @@ function Blogs() {
   return (
     <div>
       <BlogHeader />
+
       <BlogsContent />
     </div>
   );

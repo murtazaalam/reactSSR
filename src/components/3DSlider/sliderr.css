@@ -3,7 +3,7 @@
   height: 600px;
   position: relative;
   transform-style: preserve-3d;
-  background: #e3c5cf;
+  background: #f4f6f9;
 }
 .slide {
   box-sizing: border-box;
@@ -46,7 +46,6 @@
   font-size: 21px;
   text-align: center;
   padding: 10px;
-  font-weight: bold;
 }
 .left-arrow:hover,
 .techvanto-student-says-arrow:hover {
@@ -55,7 +54,7 @@
 .left-arrow {
   width: 30px;
   height: 30px;
-  background: #578bc0;
+  background: var(--color-secondary);
   border-radius: 50%;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.1);
   line-height: 30px;
@@ -70,7 +69,7 @@
 .right-arrow {
   width: 30px;
   height: 30px;
-  background: #578bc0;
+  background: var(--color-secondary);
   border-radius: 50%;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.1);
   line-height: 30px;
@@ -83,8 +82,7 @@
   box-shadow: 9px 9px 7px rgb(0 0 0 / 50%);
 }
 .date {
-  font-style: italic;
-  font: bold;
+  color: var(--color-secondary-text);
 }
 .place {
   font-weight: 600;

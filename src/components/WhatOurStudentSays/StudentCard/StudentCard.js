@@ -4,7 +4,7 @@ import "./StudentCard.css";
 export default function StudentCard(props) {
   return (
     <main class="main">
-      <section class="container">
+      <section class="container container-width">
         <article class="review">
           <div class="img-container">
             <img src={props.data.pic} alt="" id="person-img" />
