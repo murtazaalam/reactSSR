@@ -58,15 +58,17 @@ const CourseBody = ({ course }) => {
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
   });
-  // const addToCart = (id) => {
-  //   let body = {
-  //     course_id: id,
-  //     course_name: course.course_name,
-  //     price: course.price,
-  //     email: "murtuz@gmail.com",
-  //   };
-  //   addToCartApi(body, setItemMessage);
-  // };
+  const addToCart = (id) => {
+    let body = {
+      course_id: id,
+      course_name: course.course_name,
+      course_image: course.thumbnail ? course.thumbnail : course.video,
+      price: course.price,
+      email: "murtuz@gmail.com",
+    };
+    console.log(">>>",course);
+    addToCartApi(body, setItemMessage);
+  };
   return (
     <>
       <div className="course-tab-container">
@@ -230,7 +232,7 @@ const CourseBody = ({ course }) => {
                   <p class="sub-heading">{course && course.access}</p>
                 </div>
                 <div>
-                  <button type="button" className="btn-grad">
+                  <button type="button" className="btn-grad" onClick={() => addToCart("6202084444f3cd1aa545bb7b")}>
                     <span>
                       <ShoppingCartIcon />
                     </span>

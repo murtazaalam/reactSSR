@@ -1,14 +1,14 @@
 import routes from '../routes/Services.routes';
 import axios from 'axios';
 
-export default function addToCartApi(body, setItemMessage){
-    axios.post(routes.AddToCart,body,{
+export default async function addOrderApi(body){
+    return axios.post(routes.AddOrder,body,{
         headers: {
             'token': localStorage.getItem('token')
         },
     }).then(res => {
-        setItemMessage(res.data.message);
+        return res.data.response;
     }).catch(err => {
-        setItemMessage(err.response.data.message);
+        console.log(err.response.data.message);
     })
 }

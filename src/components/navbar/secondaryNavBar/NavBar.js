@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -32,6 +33,7 @@ import AllCourseApi from "../../../apis/api/AllCourse";
 import getFromCartApi from "../../../apis/api/GetFromCart";
 import "./navBar.css";
 import Login from "../../Login/Login";
+import { cartItemList } from "../../../recoil/store";
 
 function PaperComponent(props) {
   return (
@@ -50,7 +52,8 @@ const NavBar = () => {
   const [loading, setLoading] = useState();
   const [cartData, setCartData] = useState();
   const [cartCount, setCartCount] = useState();
-
+  const [cartItem, setCartItem] = useRecoilState(cartItemList);
+  
   let schoolCourses = [];
   let intermediateCourses = [];
   let collegeCourses = [];
@@ -82,13 +85,12 @@ const NavBar = () => {
   });
 
   useEffect(() => {
-    getFromCartApi(setCartData);
-    if(cartData){
-      setCartCount(cartData.length);
-      localStorage.setItem("cartItem",JSON.stringify(cartData));
+    if(!cartData){
+      getFromCartApi(setCartData);
     }
+    setCartItem(cartData);
+    
   },[])
-  console.log("cart count",cartCount);
   useEffect(() => {
     if(!allCourse){
       AllCourseApi(setAllCourse,setLoading)

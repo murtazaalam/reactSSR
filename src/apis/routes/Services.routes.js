@@ -25,6 +25,9 @@ const routes =  {
     OrderTest : "http://localhost:4000/add-order",
     AddToCart : "https://techvantonew.herokuapp.com/add-to-cart",
     GetCartItems : "https://techvantonew.herokuapp.com/items-by-email",
-    MyOrder : "https://techvantonew.herokuapp.com/my-orders"
+    MyOrder : "https://techvantonew.herokuapp.com/my-orders",
+    RemoveFromCart : "https://techvantonew.herokuapp.com/remove-from-cart/",
+    AddOrder : "https://techvantonew.herokuapp.com/add-order",
+    OrderVerify : "https://techvantonew.herokuapp.com/verify-order"
 }
 export default routes;
