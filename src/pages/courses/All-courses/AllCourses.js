@@ -32,7 +32,7 @@ function AllCourses() {
     );
     setSelectedCategory(changeCheckedCategories);
   };
-
+  console.log(">>>>",JSON.parse(localStorage.getItem("forSchool")));
   const handleChangePrice = (event, value) => {
     setSelectedPrice(value);
   };

@@ -29,6 +29,7 @@ import IntermediateIcon from "../../../assets/images/new-course-icon-intermediat
 import CollegeIconIcon from "../../../assets/images/new-course-icon-college.svg";
 import Services from "../../../data/services/Services";
 import AllCourseApi from "../../../apis/api/AllCourse";
+import getFromCartApi from "../../../apis/api/GetFromCart";
 import "./navBar.css";
 import Login from "../../Login/Login";
 
@@ -47,6 +48,9 @@ const NavBar = () => {
   const [scroll, setScroll] = useState(false);
   const [allCourse, setAllCourse] = useState();
   const [loading, setLoading] = useState();
+  const [cartData, setCartData] = useState();
+  const [cartCount, setCartCount] = useState();
+
   let schoolCourses = [];
   let intermediateCourses = [];
   let collegeCourses = [];
@@ -67,7 +71,6 @@ const NavBar = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
   const toggleDrawer = (anchor, open) => (event) => {
     setState({ ...state, [anchor]: open });
   };
@@ -79,11 +82,18 @@ const NavBar = () => {
   });
 
   useEffect(() => {
+    getFromCartApi(setCartData);
+    if(cartData){
+      setCartCount(cartData.length);
+      localStorage.setItem("cartItem",JSON.stringify(cartData));
+    }
+  },[])
+  console.log("cart count",cartCount);
+  useEffect(() => {
     if(!allCourse){
       AllCourseApi(setAllCourse,setLoading)
     }
   },[allCourse]);
-  //console.log(allCourse);
   if(allCourse){
     allCourse.forEach(item => {
       if(item.category === "For School"){
@@ -354,7 +364,7 @@ const NavBar = () => {
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>
                     <IconButton aria-label="cart" className="color-white">
-                      <Badge badgeContent={4} color="error">
+                      <Badge badgeContent={cartCount ? cartCount : ''} color="error">
                         <ShoppingCartIcon fontSize="large" />
                       </Badge>
                     </IconButton>

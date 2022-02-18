@@ -152,6 +152,12 @@
 .updated-price .MuiBadge-badge{
     min-width: 90px;
 }
+.add-to-cart-msg{
+    text-align: center;
+    font-weight: 600;
+    color: green;
+    margin: 0;
+}
 @media screen and (min-width: 1024px){
     .tab-course-description{
         width: 60%;

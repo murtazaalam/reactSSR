@@ -23,6 +23,8 @@ const routes =  {
     SignUp : "https://techvantonew.herokuapp.com/auth/register",
     Login : "https://techvantonew.herokuapp.com/auth/login",
     OrderTest : "http://localhost:4000/add-order",
-    AddToCart : "https://techvantonew.herokuapp.com/add-to-cart"
+    AddToCart : "https://techvantonew.herokuapp.com/add-to-cart",
+    GetCartItems : "https://techvantonew.herokuapp.com/items-by-email",
+    MyOrder : "https://techvantonew.herokuapp.com/my-orders"
 }
 export default routes;

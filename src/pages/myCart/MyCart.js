@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Banner from "../../components/Generic/Banner/Banner";
 import cartImage from "../../assets/images/cart1.jpg";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -6,29 +6,13 @@ import "./myCart.css";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 function MyCart() {
   const [loading, setLoading] = useState(false);
-  const [cartItems, setCartItems] = useState([
-    {
-      image_url:
-        "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg",
-      product_name: "web development",
-      price_before_coupon: 600,
-      net_price: 200,
-    },
-    {
-      image_url:
-        "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg",
-      product_name: "web development",
-      price_before_coupon: 600,
-      net_price: 200,
-    },
-    {
-      image_url:
-        "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg",
-      product_name: "web development",
-      price_before_coupon: 600,
-      net_price: 200,
-    },
-  ]);
+  const [cartItems, setCartItems] = useState();
+
+  useEffect(() => {
+    setCartItems(JSON.parse(localStorage.getItem("cartItem")));
+  },[]);
+
+  console.log("cart items >>",cartItems);
   return (
     <div>
       {" "}
@@ -82,13 +66,15 @@ function MyCart() {
                     <tbody>
                       {cartItems.map((item, index) => (
                         <tr>
-                          <td>{index + 1}</td>
+                          <td>
+                            {/* {index + 1} */}
+                          </td>
                           <td data-title="Product" className="col01">
                             <div>
                               <div className="pro-name-wrap">
                                 <div className="alignleft no-shrink hidden-xs">
                                   <img
-                                    src={item.image_url}
+                                    src=""
                                     alt="description"
                                     width="200px"
                                     height="120px"
@@ -96,7 +82,9 @@ function MyCart() {
                                 </div>
                               </div>
                               <div className="descr-wrap">
-                                <p className="fw-normal">{item.product_name}</p>
+                                <p className="fw-normal">
+                                  {item.course_name}
+                                </p>
                               </div>
                             </div>
                           </td>
@@ -104,7 +92,7 @@ function MyCart() {
                             <span>
                               <strong className="price element-block">
                                 {" "}
-                                ₹{item.price_before_coupon.toFixed(2)}
+                                ₹{item.price}
                               </strong>
                             </span>
                           </td>

@@ -24,7 +24,7 @@ const CourseBody = () => {
   const [value, setValue] = useState("1");
   const [course, setCourses] = useState();
   const [timeBadge, setTimerBadge] = useState(true);
-  const [itemMessage, setItemMessage] = useState();
+  const [itemMessage, setItemMessage] = useState("");
   //for timer
   const daysHoursMinSecs = { day: 2, hours: 0, minutes: 0, seconds: 30 };
   const { day = 0, hours = 0, minutes = 0, seconds = 60 } = daysHoursMinSecs;
@@ -283,7 +283,7 @@ const CourseBody = () => {
                   </span>
                   Add to cart
                 </button>
-                <p>{itemMessage && itemMessage}</p>
+                <p className="add-to-cart-msg">{itemMessage && itemMessage}</p>
               </div>
               <div class="share-now">
                 <span className="share-text">share now</span>
