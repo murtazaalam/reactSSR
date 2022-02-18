@@ -46,6 +46,8 @@ html {
   border-radius: 10px;
   text-decoration: none;
   border: none;
+  height: 56px;
+  width: -webkit-fill-available;
 }
 .btn-background-blue {
   background-color: var(--color-primary);

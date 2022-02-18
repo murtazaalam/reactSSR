@@ -3,7 +3,6 @@ import "./List.css";
 import CourseCard from "../../TopCourses/CourseCard/CourseCard";
 
 const List = ({ list }) => {
-  console.log(list);
   const discount = 0;
   return (
     <div className="list-wrap">

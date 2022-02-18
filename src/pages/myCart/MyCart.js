@@ -4,6 +4,12 @@ import cartImage from "../../assets/images/cart1.jpg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./myCart.css";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import CardMedia from "@mui/material/CardMedia";
+import IconButton from "@mui/material/IconButton";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
 function MyCart() {
   const [loading, setLoading] = useState(false);
   const [cartItems, setCartItems] = useState([
@@ -44,7 +50,6 @@ function MyCart() {
           </div>
           {/* heading banner */}
           {/* breadcrumb nav */}
-
           {/* cart content block */}
           {/* {fetchError && <MessageBox variant="danger">{fetchError}</MessageBox>} */}
           {/* {applyCouponError && (
@@ -57,7 +62,6 @@ function MyCart() {
         <MessageBox variant="danger">{removeItemError}</MessageBox>
       )} */}
           {/* {payError && <MessageBox variant="danger">{payError}</MessageBox>} */}
-
           {cartItems && (
             <section className="cart-content-block container">
               {!cartItems.length && (
@@ -66,120 +70,40 @@ function MyCart() {
               {/* cart form */}
               <form action="#" className="cart-form">
                 <div className="table-wrap">
-                  {/* cart data table */}
-                  <table className="table tab-full-responsive cart-data-table font-lato">
-                    <thead className="hidden-xs">
-                      <tr>
-                        <th>&nbsp;</th>
-                        <th className="col01">Product</th>
-                        <th>Price</th>
-                        {/* <th>Coupon</th>
-                        <th>Discount</th>
-                        <th>Total</th> */}
-                        <th>&nbsp;</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {cartItems.map((item, index) => (
-                        <tr>
-                          <td>{index + 1}</td>
-                          <td data-title="Product" className="col01">
-                            <div>
-                              <div className="pro-name-wrap">
-                                <div className="alignleft no-shrink hidden-xs">
-                                  <img
-                                    src={item.image_url}
-                                    alt="description"
-                                    width="200px"
-                                    height="120px"
-                                  />
-                                </div>
-                              </div>
-                              <div className="descr-wrap">
-                                <p className="fw-normal">{item.product_name}</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td data-title="Price">
-                            <span>
-                              <strong className="price element-block">
-                                {" "}
-                                ₹{item.price_before_coupon.toFixed(2)}
-                              </strong>
-                            </span>
-                          </td>
-                          {/* {item.coupon_id ? (
-                            <td data-title="Coupon Id">
-                              <div>
-                                <div classNameName="quantity green">
-                                  Applied: {item.coupon_name}
-                                </div>
-                                <button
-                                  classNameName="remove-coupon1"
-                                  //   onClick={() => removeCoupon(item.product_id)}
-                                >
-                                  Remove Coupon
-                                </button>
-                              </div>
-                            </td>
-                          ) : (
-                            <td data-title="Coupon">
-                              <div>
-                                <div className="quantity">
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    // onChange={(e) =>
-                                    //   setcouponCode(e.target.value)
-                                    // }
-                                    placeholder="Coupon Code"
-                                  />
-                                  <button
-                                    className="apply-coupon btn-grad"
-                                    // onClick={() =>
-                                    //   applyCoupon(item.product_id, couponCode)
-                                    // }
-                                  >
-                                    Apply
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          )} */}
-
-                          {/* <td data-title="Discount">
-                            <span>
-                              <strong className="price element-block">
-                                {" "}
-                                ₹
-                                {(
-                                  item.price_before_coupon - item.net_price
-                                ).toFixed(2)}
-                              </strong>
-                            </span>
-                          </td>
-                          <td data-title="Total">
-                            <span>
-                              <strong className="element-block price">
-                                ₹{item.net_price.toFixed(2)}
-                              </strong>
-                            </span>
-                          </td> */}
-                          <td>
-                            <i
-                              href="#"
-                              className="btn-remove fas fa-times"
-                              //   onClick={() => removeItem(item.product_id)}
-                            >
-                              <span className="sr-only">
-                                <DeleteIcon />
-                              </span>
-                            </i>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  <p>{cartItems.length} Courses in the cart.</p>
+                  {cartItems.map((item, index) => (
+                    <Card
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      <CardMedia
+                        component="img"
+                        sx={{ width: 151 }}
+                        image={item.image_url}
+                        alt="Live from space album cover"
+                      />
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <CardContent sx={{ flex: "1 0 auto" }}>
+                          <Typography component="div" variant="h5">
+                            {item.product_name}
+                          </Typography>
+                          <Typography
+                            variant="subtitle1"
+                            color="text.secondary"
+                            component="div"
+                          >
+                            Mac Miller
+                          </Typography>
+                        </CardContent>
+                      </Box>
+                      <CardActions>
+                        <DeleteIcon />
+                      </CardActions>
+                    </Card>
+                  ))}
                 </div>
                 <div className="cart-priceCard">
                   <Card>

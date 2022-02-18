@@ -18,7 +18,11 @@ const routes =  {
     BookDemo : endpoint + "/api/contact-us/post",
     Login : endpoint + "/api/auth/login",
     //new code from here
-    GetCourses : "https://techvanto.herokuapp.com/course-list",
-    GetEvents : "https://techvanto.herokuapp.com/techvanto-events"
+    GetCourses : "https://techvantonew.herokuapp.com/all-courses",
+    GetEvents : "https://techvanto.herokuapp.com/techvanto-events",
+    SignUp : "https://techvantonew.herokuapp.com/auth/register",
+    Login : "https://techvantonew.herokuapp.com/auth/login",
+    OrderTest : "http://localhost:4000/add-order",
+    AddToCart : "https://techvantonew.herokuapp.com/add-to-cart"
 }
 export default routes;

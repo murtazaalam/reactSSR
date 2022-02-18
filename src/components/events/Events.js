@@ -168,11 +168,6 @@ const Events = (props) => {
                   </Card>
                 );
               })}
-            <div className="pagination">
-              <Stack spacing={2}>
-                <Pagination count={5} color="success" />
-              </Stack>
-            </div>
           </div>
         </Box>
       </Box>

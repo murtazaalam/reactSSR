@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,18 +13,24 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import LoginApi from "../../../apis/api/Login";
 
 const theme = createTheme();
 
 export default function LoginContent() {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    setError("");
     // eslint-disable-next-line no-console
-    console.log({
+    let body = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+    };
+    if(!body.email || !body.password) return setError("Email And Password Required");
+    LoginApi(body, setError, setLoading);
   };
 
   return (
@@ -46,6 +53,32 @@ export default function LoginContent() {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
+          {error === 'Login Success' &&
+            <Typography 
+            component="p" 
+            variant="p"
+            sx={{
+              fontSize: '14px', 
+              fontWeight:600,
+              color:'success.dark',
+            }}
+          >
+            {error}
+          </Typography>
+          }
+          {error !== 'Login Success' &&
+            <Typography 
+            component="p" 
+            variant="p"
+            sx={{
+              fontSize: '14px', 
+              fontWeight:600,
+              color:'error.dark',
+            }}
+          >
+            {error}
+          </Typography>
+          }          
           <Box
             component="form"
             onSubmit={handleSubmit}

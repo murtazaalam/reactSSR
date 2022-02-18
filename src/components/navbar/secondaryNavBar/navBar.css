@@ -269,6 +269,9 @@
 .navbar-category {
   padding-left: 10rem !important;
 }
+.school-course-list ul li:first-child .desc {
+  display: block;
+}
 @media screen and (min-width: 1024px) {
   .menu-icon {
     display: none !important;

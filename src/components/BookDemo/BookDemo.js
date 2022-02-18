@@ -9,7 +9,6 @@ import {
   Card,
 } from "@mui/material";
 import needAssistance from "../../assets/Svgs/needAssistance.svg";
-
 import "./BookDemo.css";
 import { CardActions } from "@material-ui/core";
 
@@ -20,7 +19,7 @@ const BookADemo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("booked!");
+    alert("hello world")
   };
   return (
     <section>

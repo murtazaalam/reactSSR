@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,6 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import RegisterApi from "../../../apis/api/SignUp";
 
 function Copyright(props) {
   return (
@@ -34,14 +36,28 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    setError("");
     // eslint-disable-next-line no-console
-    console.log({
+    let body = {
+      name: data.get('firstName')+" "+ data.get('lastName'),
       email: data.get("email"),
+      mobile: data.get('mobile'),
       password: data.get("password"),
-    });
+    };
+    if(!body.name || !body.email || !body.mobile || !body.password){
+      return setError("Star Fields Are Required");
+    }else{
+      if(body.mobile.length !== 10 || !Number(body.mobile)) return setError("Invalid Mobile Number");
+      if(body.password !== data.get("repassword")) return setError("Password Does Not Match");
+      RegisterApi(body, setError, setLoading);
+    }
+    //RegisterApi(body, setError, setLoading);
   };
 
   return (
@@ -61,6 +77,17 @@ export default function SignUp() {
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
+          </Typography>
+          <Typography 
+            component="p" 
+            variant="p"
+            sx={{
+              fontSize: '14px', 
+              fontWeight:600,
+              color:"error.dark"
+            }}
+          >
+            {error}
           </Typography>
           <Box
             component="form"
@@ -104,11 +131,32 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  id="mobile"
+                  label="Mobile Number"
+                  name="mobile"
+                  autoComplete="mobile"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   name="password"
                   label="Password"
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="repassword"
+                  label="Re Enter Password"
+                  type="password"
+                  id="re-password"
+                  autoComplete="re-password"
                 />
               </Grid>
             </Grid>

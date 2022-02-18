@@ -2,7 +2,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Events from "../pages/events/Events";
-import Courses from "../pages/courses/Courses";
+import Course from "../pages/courses/Course";
 import AllCourses from "../pages/courses/All-courses/AllCourses";
 import Blogs from "../pages/blogs/Blogs";
 import Single from "../pages/blogs/singleBlog/Single";
@@ -19,8 +19,11 @@ const MainRouters = () => {
     <Routes>
       <Route path="/" element={<Home></Home>}></Route>
       <Route path="/coming-soon" element={<ComingSoon />}></Route>
-      <Route path="/all-courses" element={<AllCourses></AllCourses>}></Route>
-      <Route path="/courses" element={<Courses></Courses>}></Route>
+      <Route
+        path="/all-courses/:id"
+        element={<AllCourses></AllCourses>}
+      ></Route>
+      <Route path="/courses/:id" element={<Course></Course>}></Route>
       <Route
         path="/course/test-question"
         element={<TestQuestion></TestQuestion>}
