@@ -51,7 +51,7 @@ const TopCourses = () => {
   return (
     <>
       {topCourses && topCourses.length !== 0 ? (
-        <Container>
+        <Container sx={{ maxWidth: "none !important" }}>
           <section>
             <Typography component="div" className="techvanto-whyus ">
               <Typography component="h2" className="techvanto-whyus-heading">
@@ -79,7 +79,7 @@ const TopCourses = () => {
             </section>
           </section>
           <div className="techvanto-all-course-button">
-            <Link to="/all-courses" style={{ textDecoration: "none" }}>
+            <Link to="/all-courses/all" style={{ textDecoration: "none" }}>
               <button
                 // variant="contained"
                 className="btn-grad"

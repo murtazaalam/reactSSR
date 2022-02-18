@@ -19,7 +19,7 @@ export default function CourseCard({
 }) {
   return (
     <Link to={`/courses/${id}`} style={{ textDecoration: "none" }}>
-      <Card sx={{ maxWidth: 240 }} className="technovanto-course-card">
+      <Card sx={{ width: "340px" }} className="technovanto-course-card">
         <div
           style={{
             background: `linear-gradient(${gradient})`,

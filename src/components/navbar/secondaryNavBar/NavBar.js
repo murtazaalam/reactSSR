@@ -83,20 +83,20 @@ const NavBar = () => {
 
   useEffect(() => {
     getFromCartApi(setCartData);
-    if(cartData){
+    if (cartData) {
       setCartCount(cartData.length);
-      localStorage.setItem("cartItem",JSON.stringify(cartData));
+      localStorage.setItem("cartItem", JSON.stringify(cartData));
     }
-  },[])
-  console.log("cart count",cartCount);
+  }, []);
+  console.log("cart count", cartCount);
   useEffect(() => {
-    if(!allCourse){
-      AllCourseApi(setAllCourse,setLoading)
+    if (!allCourse) {
+      AllCourseApi(setAllCourse, setLoading);
     }
-  },[allCourse]);
-  if(allCourse){
-    allCourse.forEach(item => {
-      if(item.category === "For School"){
+  }, [allCourse]);
+  if (allCourse) {
+    allCourse.forEach((item) => {
+      if (item.category === "For School") {
         schoolCourses.push(item);
       }
       if (item.category === "For Intermediate") {
@@ -112,9 +112,6 @@ const NavBar = () => {
   localStorage.setItem("forIntermediate", JSON.stringify(intermediateCourses));
   localStorage.setItem("forCollege", JSON.stringify(collegeCourses));
 
-  const refreshPage = () => {
-    window.location.reload();
-  };
   const list = (anchor) => {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
@@ -192,7 +189,7 @@ const NavBar = () => {
             <Container className="navbar-category">
               <div className="menu-item">
                 <div className="item courses">
-                  <Link to="/all-courses/0" className="menu-text">
+                  <Link to="/all-courses/all" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -205,7 +202,7 @@ const NavBar = () => {
                     <ul className="dropdown-menu-multi-level">
                       <li>
                         <a>
-                          <Link to="/all-courses/1">For Schools</Link>
+                          <Link to="/all-courses/school">For Schools</Link>
                           <div className="course-list school-course">
                             <div className="image-section">
                               <img src={`${SchoolIcon}`} alt="" />
@@ -217,9 +214,9 @@ const NavBar = () => {
                                   schoolCourses.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <Link to={`/courses/${item._id}`}>
+                                        <a href={`/courses/${item._id}`}>
                                           {item.course_name}
-                                        </Link>
+                                        </a>
                                         <div className="course-desc desc">
                                           <div className="desc-heading">
                                             Description
@@ -228,6 +225,7 @@ const NavBar = () => {
                                             style={{
                                               width: "225px",
                                               textAlign: "justify",
+                                              whiteSpace: "pre-wrap",
                                             }}
                                           >
                                             {item.description}
@@ -243,7 +241,7 @@ const NavBar = () => {
                       </li>
                       <li>
                         <a>
-                          For Colleges
+                          <Link to="/all-courses/college">For Colleges</Link>
                           <div className="course-list">
                             <div
                               className="image-section"
@@ -261,9 +259,9 @@ const NavBar = () => {
                                   collegeCourses.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <Link to={`/courses/${item._id}`}>
+                                        <a href={`/courses/${item._id}`}>
                                           {item.course_name}
-                                        </Link>
+                                        </a>
                                         <div className="course-desc desc">
                                           <div className="desc-heading">
                                             Description
@@ -272,6 +270,7 @@ const NavBar = () => {
                                             style={{
                                               width: "225px",
                                               textAlign: "justify",
+                                              whiteSpace: "pre-wrap",
                                             }}
                                           >
                                             {item.description}
@@ -287,7 +286,9 @@ const NavBar = () => {
                       </li>
                       <li>
                         <a>
-                          For Intermediate
+                          <Link to="/all-courses/intermediate">
+                            For Intermediate{" "}
+                          </Link>
                           <div className="course-list">
                             <div
                               className="image-section"
@@ -305,12 +306,12 @@ const NavBar = () => {
                                   intermediateCourses.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <Link
+                                        <a
                                           // onClick={refreshPage}
-                                          to={`/courses/${item._id}`}
+                                          href={`/courses/${item._id}`}
                                         >
                                           {item.course_name}
-                                        </Link>
+                                        </a>
                                         <div className="course-desc desc">
                                           <div className="desc-heading">
                                             Description
@@ -319,6 +320,7 @@ const NavBar = () => {
                                             style={{
                                               width: "225px",
                                               textAlign: "justify",
+                                              whiteSpace: "pre-wrap",
                                             }}
                                           >
                                             {item.description}
@@ -336,7 +338,7 @@ const NavBar = () => {
                   </div>
                 </div>
                 <div className="item">
-                  <a className="menu-text">
+                  <Link to="/coming-soon" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -344,7 +346,7 @@ const NavBar = () => {
                     >
                       Services
                     </span>
-                  </a>
+                  </Link>
                 </div>
                 <div className="item">
                   <Link to="/events" className="menu-text">
@@ -369,19 +371,19 @@ const NavBar = () => {
                   </Link>
                 </div>
                 <div className="item">
-                  <Link to="/interview-question" className="menu-text">
+                  <Link to="/interview-questions" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
                       }
                     >
-                      Interview Question
+                      Interview Questions
                     </span>
                   </Link>
                 </div>
                 <div className="item">
                   <div class="dropdown">
-                    <Link to="/contact-us" className="menu-text">
+                    <a className="menu-text">
                       <span
                         className={
                           scroll === false ? "color-white" : "color-black"
@@ -389,7 +391,7 @@ const NavBar = () => {
                       >
                         Contact Us
                       </span>
-                    </Link>
+                    </a>
                     <div class="dropdown-content-contact">
                       <Link to="/contact-us-for-hiring">For Hiring</Link>
                       <Link to="/contact-us-to-get-hired">To Get Hired</Link>
@@ -404,7 +406,10 @@ const NavBar = () => {
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>
                     <IconButton aria-label="cart" className="color-white">
-                      <Badge badgeContent={cartCount ? cartCount : ''} color="error">
+                      <Badge
+                        badgeContent={cartCount ? cartCount : ""}
+                        color="error"
+                      >
                         <ShoppingCartIcon fontSize="large" />
                       </Badge>
                     </IconButton>

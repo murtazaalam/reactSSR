@@ -20,17 +20,17 @@ const MainRouters = () => {
       <Route path="/" element={<Home></Home>}></Route>
       <Route path="/coming-soon" element={<ComingSoon />}></Route>
       <Route
-        path="/all-courses/:id"
+        path="/all-courses/:categoryRoute"
         element={<AllCourses></AllCourses>}
       ></Route>
       <Route path="/courses/:id" element={<Course></Course>}></Route>
       <Route
-        path="/course/test-question"
+        path="/interview-questions"
         element={<TestQuestion></TestQuestion>}
       ></Route>
       <Route path="/events" element={<Events></Events>}></Route>
       <Route path="/blogs" element={<Blogs />}></Route>
-      <Route path="/single-blog" element={<Single />}></Route>
+      <Route path="/blogs/abc123" element={<Single />}></Route>
       <Route
         path="/contact-us-for-hiring"
         element={<ContactUsForHiring />}

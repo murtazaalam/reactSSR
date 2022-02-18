@@ -6,7 +6,7 @@ function ComingSoon() {
   return (
     <div className="coming-container">
       <img src={comingSoon} height="500" alt="" />
-      <h1>
+      <h1 style={{ fontWeight: "bolder" }}>
         Feature
         <br />
         Coming Soon
