@@ -9,7 +9,11 @@
 .course-list-wrap {
   overflow: scroll;
 }
-
+.list-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
 .course-panelList-wrap {
   display: flex;
   flex: 1;

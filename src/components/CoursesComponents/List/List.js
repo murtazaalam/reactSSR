@@ -1,13 +1,26 @@
 import React from "react";
-import ListItem from "./ListItem/ListItem";
 import "./List.css";
+import CourseCard from "../../TopCourses/CourseCard/CourseCard";
 
-const List = ({ list }) => (
-  <div className="list-wrap">
-    {list.map((item) => (
-      <ListItem key={item.id} item={item} />
-    ))}
-  </div>
-);
+const List = ({ list }) => {
+  const discount = 0;
+  return (
+    <div className="list-wrap">
+      {list.map((data, index) => (
+        <CourseCard
+          key={index}
+          id={data.id}
+          title={data.title}
+          pic={data.thumbnail}
+          gradient={data.gradient}
+          price={data.price}
+          discount={discount}
+          rating={data.rating}
+          // review={data.reviews}
+        ></CourseCard>
+      ))}
+    </div>
+  );
+};
 
 export default List;

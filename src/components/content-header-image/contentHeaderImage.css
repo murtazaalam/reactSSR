@@ -14,7 +14,6 @@
   justify-content: left;
   color: white;
   height: 60vh;
-  font-family: "Segoe UI", sans-serif;
   text-align: left;
   margin: 50px 50px 50px 32px;
 }
@@ -29,6 +28,6 @@
   font-variant: petite-caps;
   font-weight: bold;
 }
-.text-small {
+.small-text {
   font-size: 21px;
 }

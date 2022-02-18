@@ -25,7 +25,6 @@
 
 .techvanto-demo-right-content {
   display: block;
-  font-family: "Segoe UI", sans-serif;
   text-align: center;
 }
 
@@ -48,6 +47,7 @@
 .form-book {
   display: flex;
   flex-direction: column;
+  width: -webkit-fill-available;
 }
 .card-content {
   display: flex;

@@ -17,7 +17,7 @@ const ContentHeaderImage = (props) => {
             <br />
             <span className="large-text">{props.title}</span>
             <div style={{ lineHeight: "normal" }}>
-              <span className="text-small">{props.overview} </span>
+              <span className="small-text">{props.overview} </span>
               <br />
             </div>
             <br />

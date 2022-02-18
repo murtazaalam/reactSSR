@@ -31,7 +31,7 @@ const TopClient = (props) => {
       img.push(
         <img
           height="134px"
-          className="item"
+          className="topclient-item"
           data-value={index + 1}
           src={`${r(item).default}`}
           onDragStart={handleDragStart}

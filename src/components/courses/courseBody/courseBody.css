@@ -1,168 +1,157 @@
-.course-tab-container{
-    margin: 52px 52px 10px;
-    position: relative;
+.course-tab-container {
+  margin: 52px 52px 10px;
+  position: relative;
 }
-.course-tab-container .css-13xfq8m-MuiTabPanel-root{
-    padding-left: 0;
+.course-tab-container .css-13xfq8m-MuiTabPanel-root {
+  padding-left: 0;
 }
-.course-tab-container .css-1h9z7r5-MuiButtonBase-root-MuiTab-root{
-    width: 200px;
+.course-tab-container .css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+  width: 200px;
 }
-.course-tab-container h2{
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--color-primary);
+.course-tab-container h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-primary-text);
 }
-.tab-course-description{
-    width: 100%;
-    margin-top: 10px !important;
+.tab-course-description {
+  width: 100%;
+  margin-top: 10px !important;
 }
-.tab-desc{
-    justify-content: left;
+.tab-desc {
+  justify-content: left;
 }
-.curriculum{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.curriculum {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
-.curriculum .MuiAccordionSummary-content{
-    margin: 24px 0;
+.curriculum .MuiAccordionSummary-content {
+  margin: 24px 0;
 }
-.curriculum .curriculum-heading{
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--color-red-icon);
+.curriculum .curriculum-heading {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-primary-text);
 }
-.thought{
-    padding-bottom: 20px;
-    margin: 0 54px;
+.thought {
+  padding-bottom: 20px;
+  margin: 0 54px;
 }
-.thought p{
-    font-size: 15px;
-    color: #696969;
+.thought p {
+  font-size: 15px;
+  color: #696969;
 }
-.thought-input-field{
-    margin: 0 !important;
-    padding: 10px 14px !important;
+.thought-input-field {
+  margin: 0 !important;
+  padding: 10px 14px !important;
 }
-.review-form{
-    flex-direction: column;
+.review-form {
+  flex-direction: column;
 }
-.thought input[type="text"], .thought textarea{
-    background: #f8f8f8;
-    border-color: #f8f8f8;
-    color: #252525;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 2.5;
-    transition: 0.3s;
-    padding: 3px 20px;
-    min-height: 52px;
-    outline: none;
-    transition: 0.3s;
+.thought input[type="text"],
+.thought textarea {
+  background: #f8f8f8;
+  border-color: #f8f8f8;
+  color: #252525;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 2.5;
+  transition: 0.3s;
+  padding: 3px 20px;
+  min-height: 52px;
+  outline: none;
+  transition: 0.3s;
 }
-.thought textarea{
-    resize: none;
+.thought textarea {
+  resize: none;
 }
-.thought input[type="text"]:focus, .thought textarea:focus{
-    border-color: #88797a;
-    box-shadow: none;
-    background: #fff;
+.thought input[type="text"]:focus,
+.thought textarea:focus {
+  border-color: #88797a;
+  box-shadow: none;
+  background: #fff;
 }
-.thought .check{
-    padding: 0px 10px;
-    width: fit-content;
+.thought .check {
+  padding: 0px 10px;
+  width: fit-content;
 }
-.thought .check input{
-    cursor: pointer;
-    transition: 0.3s;
+.thought .check input {
+  cursor: pointer;
+  transition: 0.3s;
 }
-.thought .check input[type="checkbox"]:focus{
-    box-shadow: none;
-
+.thought .check input[type="checkbox"]:focus {
+  box-shadow: none;
 }
-.thought .check span{
-    font-size: 15px;
-    color: #696969;
-    margin-left: 10px;
-    cursor: pointer;
+.thought .check span {
+  font-size: 15px;
+  color: #696969;
+  margin-left: 10px;
+  cursor: pointer;
 }
-.thought .check:hover input{
-    border-color: var(--red);
+.thought .check:hover input {
+  border-color: var(--red);
 }
-.thought .comment-submit{
-    width: 140px;
+.thought .comment-submit {
+  width: 140px;
 }
-.thought h2{
-    font-size: 24px;
-    font-weight: 600;
+.thought h2 {
+  font-size: 24px;
+  font-weight: 600;
 }
-.comment-submit{
-    width: 100%;
-    background: var(--color-primary);
-    border: none;
-    height: 52px;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    transition: 0.3s;
+.comment-submit {
+  width: 100%;
+  background: var(--color-primary);
+  border: none;
+  height: 52px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s;
 }
-.comment-btn-box{
-    padding: 0px 10px !important;
+.comment-btn-box {
+  padding: 0px 10px !important;
 }
-.comment-submit:hover{
-    background: #FFC221;
-    color: #031f42;
-    transition: 0.3s;
+.comment-submit:hover {
+  background: #ffc221;
+  color: #031f42;
+  transition: 0.3s;
 }
-.course-tab-container .video-box .course-detail button{
-    width: 100%;
-    background: var(--color-primary);
-    border: none;
-    height: 52px;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    transition: 0.3s;
+.course-tab-container .video-box .course-detail button {
+  width: -webkit-fill-available;
 }
 .course-tab-container .video-box .course-detail button:hover {
-    background: #FFC221;
-    color: #031f42;
+  background: var(--color-primary);
+  /* color: #031f42; */
 }
-.video-section{
-    display: flex;
-    position: absolute;
-    z-index: 1;
-    right: 0;
-    top: -188px;
-    background: var(--color-white);
-    padding: 10px;
-    border-radius: 4px;
-    box-shadow: 0px 5px 10px #918b8b;
+.video-section {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: -188px;
+  background: var(--color-white);
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 5px 10px #918b8b;
 }
-.course-price{
-    font-weight: 600;
-    font-size: 22px;
-    margin-top: 20px;
+.course-price {
+  font-weight: 600;
+  font-size: 22px;
+  margin-top: 20px;
 }
-.updated-price .MuiBadge-badge{
-    min-width: 90px;
+.updated-price .MuiBadge-badge {
+  background-color: var(--color-secondary);
+
+  position: relative;
+  right: 42px;
 }
-.add-to-cart-msg{
-    text-align: center;
-    font-weight: 600;
-    color: green;
-    margin: 0;
-}
-@media screen and (min-width: 1024px){
-    .tab-course-description{
-        width: 60%;
-    }
-    .curriculum{
-        width: 60%;
-    }
+@media screen and (min-width: 1024px) {
+  .tab-course-description {
+    width: 60%;
+  }
+  .curriculum {
+    width: 60%;
+  }
 }

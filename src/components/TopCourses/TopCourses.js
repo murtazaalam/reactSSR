@@ -14,7 +14,7 @@ const TopCourses = () => {
       price: 758,
       gradient: "rgb(28 71 124), #9198e5",
       discount: 500,
-      reviwes: ["excellent", "good course", "good course"],
+      rating: 4.5,
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ const TopCourses = () => {
 
       gradient: "to right bottom, #ea395d, #eb6085, #e582a6, #dda0bf, #d6bcce",
       discount: 500,
-      reviwes: ["excellent", "good course", "good course"],
+      rating: 3,
     },
     {
       id: 3,
@@ -33,7 +33,7 @@ const TopCourses = () => {
       price: 758,
       gradient: "to right bottom, #1c7455, #35916a, #4faf7f, #69ce93, #85eea8",
       discount: 500,
-      reviwes: ["excellent", "good course", "good course"],
+      rating: 5,
     },
     {
       id: 4,
@@ -42,7 +42,7 @@ const TopCourses = () => {
       thumbnail: image,
       price: 758,
       discount: 500,
-      reviwes: ["excellent", "good course", "good course"],
+      rating: 5,
     },
   ];
   // React.useEffect(() => {
@@ -70,6 +70,7 @@ const TopCourses = () => {
                         gradient={data.gradient}
                         price={data.price}
                         discount={data.discount}
+                        rating={data.rating}
                         // review={data.reviews}
                       ></CourseCard>
                     );

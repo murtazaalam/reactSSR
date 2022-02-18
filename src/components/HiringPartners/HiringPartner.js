@@ -14,7 +14,7 @@ const HiringPartner = (props) => {
     const topClients = importAll(
       require.context("../../assets/images/hiring", false, /\.(png|jpe?g|svg)$/)
     );
-    console.log(images, "read images");
+    // console.log(images, "read images");
     setImages(topClients);
   }, []);
 
