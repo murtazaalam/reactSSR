@@ -28,6 +28,6 @@ const routes =  {
     MyOrder : "https://techvantonew.herokuapp.com/my-orders",
     RemoveFromCart : "https://techvantonew.herokuapp.com/remove-from-cart/",
     AddOrder : "https://techvantonew.herokuapp.com/add-order",
-    OrderVerify : "https://techvantonew.herokuapp.com/verify-order"
+    OrderVerify : "https://techvantonew.herokuapp.com/verify-order",
 }
 export default routes;
