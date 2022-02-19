@@ -3,13 +3,18 @@ import singleCourseApi from "../../apis/api/SingleCourse";
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { CircularProgress } from "@material-ui/core";
+import Loading from "../../components/Loader";
 const Courses = () => {
-  const [course, setCourses] = useState();
+  const [course, setCourses] = useState({});
+
   const { id } = useParams();
   console.log(id);
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+  console.log(isEmpty(course));
   useEffect(() => {
-    if (!course) {
+    if (isEmpty(course)) {
       //id of course will be sent
       singleCourseApi(id, setCourses);
       if (course) localStorage.setItem("course", course.course_name);
@@ -17,8 +22,9 @@ const Courses = () => {
   }, [course, id]);
   return (
     <>
-      {!course && <CircularProgress />}
-      {course && (
+      {isEmpty(course) ? (
+        <Loading />
+      ) : (
         <>
           <CourseHeader title={course.course_name} category={course.category} />
           <CourseBody course={course} />

@@ -5,12 +5,11 @@ import cartImage from "../../assets/images/cart1.jpg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./myCart.css";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
+import { ToastContainer, toast } from "react-toastify";
+
 import removeItemFromCart from "../../apis/api/RemoveFromCart";
 import getFromCartApi from "../../apis/api/GetFromCart";
 import addOrderApi from "../../apis/api/AddOrder";
@@ -40,23 +39,23 @@ function MyCart() {
 
   const checkout = async () => {
     cartItems.forEach((item) => {
-      totalPrice = totalPrice + item.price;
-    })
+      totalPrice = parseFloat(totalPrice) + parseFloat(item.price);
+    });
     let body = {
       total_amount: totalPrice,
       cart_item: cartItems,
     };
     console.log(totalPrice);
     let order = await addOrderApi(body);
-    console.log(">>>",order);
+    console.log(">>>", order);
     const options = {
-      key: "rzp_test_rDOF9MHexhjJYj", 
+      key: "rzp_test_rDOF9MHexhjJYj",
       amount: totalPrice,
       currency: "INR",
       name: "Acme Corp",
       description: "Test Transaction",
       image: "https://example.com/your_logo",
-      order_id: order.id, 
+      order_id: order.id,
       handler: function (response) {
         // alert(response.razorpay_payment_id);
         // alert(response.razorpay_order_id);
@@ -66,6 +65,9 @@ function MyCart() {
           order_id: response.razorpay_order_id,
         };
         verifyOrderApi(verificationDetail, setPaymentMessage);
+        // if (paymentMessage === "Payment Success") {
+        //   notify();
+        // }
       },
       prefill: {
         name: "Piyush Garg",
@@ -80,21 +82,42 @@ function MyCart() {
       },
     };
     const rzp1 = new Razorpay(options);
-    // rzp1.on("payment.failed", function (response) {
-    //   alert(response.error.code);
-    //   alert(response.error.description);
-    //   alert(response.error.source);
-    //   alert(response.error.step);
-    //   alert(response.error.reason);
-    //   alert(response.error.metadata.order_id);
-    //   alert(response.error.metadata.payment_id);
-    // });
-    // rzp1.open();
+    rzp1.on("payment.failed", function (response) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
+    rzp1.open();
+  };
+  const notify = () => {
+    toast.success("Payment Successful", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
   return (
     <div>
-      {" "}
       <div>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />{" "}
         <div>
           {loading && <h1>loading</h1>}
           <div>
@@ -108,15 +131,26 @@ function MyCart() {
           {cartItems && (
             <section className="cart-content-block container">
               {!cartItems.length && (
-                <h6> Empty Cart!!! Go to Marketplace and get some courses.</h6>
+                <h6>
+                  {" "}
+                  Empty Cart!!! Go to{" "}
+                  <Link to="/all-courses/all">Marketplace</Link> and get some
+                  courses.
+                </h6>
               )}
               <Typography variant="p">
-                {paymentMessage !== "" ? paymentMessage : ""}
+                {paymentMessage !== ""
+                  ? {
+                      paymentMessage,
+                    }
+                  : ""}
               </Typography>
               {/* cart form */}
               <form action="#" className="cart-form">
                 <div className="table-wrap">
-                  <p>{cartItems.length} Courses in the cart.</p>
+                  {cartItems.length > 0 && (
+                    <p>{cartItems.length} Courses in the cart.</p>
+                  )}
                   <p style={{ color: "red", fontWeight: 600 }}>
                     {deteteMessage
                       ? `${deteteMessage} Course deleted successfully.`
@@ -193,57 +227,61 @@ function MyCart() {
                     </Card>
                   ))}
                 </div>
-                <div className="cart-priceCard">
-                  <Card>
-                    <CardContent>
-                      <Typography variant="h4" color="initial">
-                        Total &nbsp; ₹
-                        {cartItems.reduce(
-                          (a, curr) =>
-                            parseInt(a) +
-                            parseInt(curr.price) -
-                            parseInt(curr.discount),
-                          0
-                        )}
-                      </Typography>
-                      <Typography variant="h2"></Typography>
-                      <Typography variant="body1" color="initial">
-                        Subtotal:&nbsp; ₹
-                        <span
-                          className="price"
-                          style={{ textDecoration: "line-through" }}
-                        >
-                          {cartItems.reduce(
-                            (a, curr) => parseInt(a) + parseInt(curr.price),
-                            0
-                          )}
-                        </span>
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        Total Discount: &nbsp; ₹
-                        <span>
+                {cartItems.length > 0 && (
+                  <div className="cart-priceCard">
+                    <Card>
+                      <CardContent>
+                        <Typography variant="h4" color="initial">
+                          Total &nbsp; ₹
                           {cartItems.reduce(
                             (a, curr) =>
                               parseInt(a) +
-                              (parseInt(curr.discount)
-                                ? parseInt(curr.discount)
-                                : 0),
+                              parseInt(curr.price) -
+                              parseInt(curr.discount),
                             0
-                          )}{" "}
-                        </span>
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <button
-                        type="button"
-                        className="btn-grad"
-                        onClick={() => checkout(totalPrice)}
-                      >
-                        CheckOut
-                      </button>
-                    </CardActions>
-                  </Card>
-                </div>
+                          )}
+                        </Typography>
+                        <Typography variant="h2"></Typography>
+                        <Typography variant="body1" color="initial">
+                          Subtotal:&nbsp; ₹
+                          <span
+                            className="price"
+                            style={{ textDecoration: "line-through" }}
+                          >
+                            {cartItems.reduce(
+                              (a, curr) => parseInt(a) + parseInt(curr.price),
+                              0
+                            )}
+                          </span>
+                        </Typography>
+                        <Typography variant="body1" color="initial">
+                          Total Discount: &nbsp; ₹
+                          <span>
+                            {cartItems.reduce(
+                              (a, curr) =>
+                                parseInt(a) +
+                                (parseInt(curr.discount)
+                                  ? parseInt(curr.discount)
+                                  : 0),
+                              0
+                            )}{" "}
+                          </span>
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <button
+                          type="button"
+                          className="btn-grad"
+                          onClick={() => {
+                            checkout(totalPrice);
+                          }}
+                        >
+                          CheckOut
+                        </button>
+                      </CardActions>
+                    </Card>
+                  </div>
+                )}
               </form>
             </section>
           )}

@@ -2,6 +2,7 @@ import * as React from "react";
 import "./CampusAmbassador.css";
 import "mui-player/dist/mui-player.min.css";
 import { Container } from "@mui/material";
+import { Link } from "react-router-dom";
 const CampusAmbassador = () => {
   // var Mp = new MuiPlayer({
   //     container:'#mui-player',
@@ -16,16 +17,13 @@ const CampusAmbassador = () => {
             <div className="techvanto-campus-ambassador-left">
               <div className="techvanto-campus-ambassador-left-image">
                 <div>
-                  <video
-                    src="https://www.youtube.com/watch?v=s1RtrrA8A_0"
-                    playsinline
-                    loop
-                    controls
-                    controlsList="nodownload"
-                    width="100%"
-                    height="100%"
-                  />
-                  {/* <MuiPlayer src="video/ca.mp4" container={'#mui-player'} ></MuiPlayer> */}
+                  <iframe
+                    width="450"
+                    title="techvanto"
+                    height="300"
+                    style={{ borderRadius: "21px" }}
+                    src="https://www.youtube.com/embed/HH8us39zlYs?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=http://youtubeembedcode.com"
+                  ></iframe>
                 </div>
               </div>
             </div>
@@ -47,7 +45,12 @@ const CampusAmbassador = () => {
                 <span className="text-large">Campus Ambassador</span>
                 <br />
                 <button className="btn-grad btn-background-blue campus-btn">
-                  Know More
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/coming-soon"
+                  >
+                    Know More
+                  </Link>
                 </button>
               </p>
             </div>

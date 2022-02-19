@@ -73,8 +73,8 @@ export default function SignUp() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, borderRadius: "0", background: "white" }}>
+            <img src="https://i.ibb.co/jVR0Kyc/logo-3.png" alt=""></img>
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -161,19 +161,22 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
-            <button className="btn-grad" style={{ marginTop: "20px" }}>
+            <button
+              className="btn-grad full-width"
+              style={{ marginTop: "20px" }}
+            >
               Sign Up
             </button>
             <Grid container justifyContent="flex-end">
               <Grid item>
+                Already have an account?{" "}
                 <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                  Login
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

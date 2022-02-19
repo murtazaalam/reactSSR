@@ -9,17 +9,13 @@ const CourseHeader = (props) => {
         <div class="course-container">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <Link to="/" class="home">
-                  Home
-                  <div class="line"></div>
-                </Link>
+              <li class="breadcrumb-item active">
+                Home
+                <div class="line"></div>
               </li>
-              <li class="breadcrumb-item">
-                <Link to="/" class="home">
-                  Courses
-                  <div class="line"></div>
-                </Link>
+              <li class="breadcrumb-item active">
+                Courses
+                <div class="line"></div>
               </li>
               <li class="breadcrumb-item active">{props.category}</li>
             </ol>

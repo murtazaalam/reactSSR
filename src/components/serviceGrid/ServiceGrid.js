@@ -34,18 +34,18 @@ const ServiceGrid = () => {
                 aria-label="lab API tabs"
                 className="services-tabs"
               >
-                <Tab label="SCHOOLS" value="1" />
+                <Tab label="COLLEGES" value="1" />
                 <Tab label="Intermediate" value="2" />
                 <Tab label="UNDERGRADS" value="3" />
                 <Tab label="COMPANIES" value="4" />
-                <Tab label="COLLEGES" value="5" />
+                <Tab label="Schools" value="5" />
               </TabList>
             </Box>
             <TabPanel value="1">
               <div className="row service-grid">
                 {Services.map((data) => {
                   return (
-                    data.tab === "School" && (
+                    data.tab === "Colleges" && (
                       <ServiceCard
                         icon={data.icon}
                         title={data.text}
@@ -110,7 +110,7 @@ const ServiceGrid = () => {
               <div className="row service-grid">
                 {Services.map((data) => {
                   return (
-                    data.tab === "Colleges" && (
+                    data.tab === "School" && (
                       <ServiceCard
                         icon={data.icon}
                         title={data.text}

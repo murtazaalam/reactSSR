@@ -1,19 +1,10 @@
-import { Category } from "@material-ui/icons";
 import React from "react";
+import { Category } from "@material-ui/icons";
 import { ratingList } from "../../../data/constants/index";
 import CheckboxProton from "../../Generic/CheckboxProton/CheckboxProton";
-import FilterListToggle from "../../Generic/FilterListToggle/FilterListToggle";
-// import SliderProton from "../../Generic/SliderProton/SliderProton";
 import "./FilterPanel.css";
 
-const FilterPanel = ({
-  selectedRating,
-  // selectedPrice,
-  selectRating,
-  category,
-  changeChecked,
-  // changePrice,
-}) => {
+const FilterPanel = ({ category, changeChecked }) => {
   console.log(ratingList);
   return (
     <div>
@@ -30,22 +21,6 @@ const FilterPanel = ({
             changeChecked={changeChecked}
           />
         ))}
-      </div>
-
-      {/* Price Range */}
-      {/* <div className="input-group">
-      <p className="label-range">Price Range</p>
-      <SliderProton value={selectedPrice} changePrice={changePrice} />
-    </div> */}
-
-      {/* Rating */}
-      <div className="input-group">
-        <p className="label">Star Rating</p>
-        <FilterListToggle
-          options={ratingList}
-          value={selectedRating}
-          selectToggle={selectRating}
-        />
       </div>
     </div>
   );

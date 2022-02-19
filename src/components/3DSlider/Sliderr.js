@@ -34,7 +34,7 @@ const Sliderr = () => {
     },
     {
       url: image_3,
-      // date: "NaN",
+      date: "5 Nov 2021",
       name: "Hackathon",
       place: "LPU",
       details:
@@ -42,7 +42,7 @@ const Sliderr = () => {
     },
     {
       url: image_4,
-      // date: "NaN",
+      date: "6 Dec 2021",
       name: "Machine Learning",
       place: "Osmania University",
       details:

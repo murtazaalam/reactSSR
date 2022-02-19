@@ -26,7 +26,7 @@ function Login({ open, handleClose, PaperComponent }) {
       >
         <TabContext value={value}>
           <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Box>
               <TabList
                 onChange={handleChange}
                 aria-label="lab API tabs example"

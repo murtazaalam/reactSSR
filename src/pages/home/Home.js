@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <>
       <ContentHeaderImage
-        title="Indulge in limitless learning."
+        title="Indulge in limitless learning"
         overview="Anytime, Anywhere."
         background={backgroundImage}
       />
@@ -67,7 +67,7 @@ const Home = () => {
       <div className="background">
         <WhatOurStudentSays name="Home"></WhatOurStudentSays>
       </div>
-      <div className="bg-image section-spacing">
+      <div className="bg-image section-spacing" id="need-assistance">
         <BookDemo />
       </div>
     </>

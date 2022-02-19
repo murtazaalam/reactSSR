@@ -17,7 +17,6 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
@@ -35,6 +34,7 @@ import "./navBar.css";
 import Login from "../../Login/Login";
 import { cartItemList, userAuth } from "../../../recoil/store";
 
+import Paper from "@mui/material/Paper";
 function PaperComponent(props) {
   return (
     <Draggable
@@ -51,7 +51,7 @@ const NavBar = () => {
   const [allCourse, setAllCourse] = useState();
   const [loading, setLoading] = useState();
   const [cartData, setCartData] = useState();
-  const [cartCount, setCartCount] = useState();
+  const [cartCount, setCartCount] = useState(0);
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
 
@@ -65,6 +65,9 @@ const NavBar = () => {
     bottom: false,
     right: false,
   });
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
   const logoutHandler = () => {
     localStorage.removeItem("token");
     setIsLogged(false);
@@ -94,20 +97,27 @@ const NavBar = () => {
       console.log("true");
       setUser(true);
     } else {
-      console.log("false");
+      // console.log("false");
       setUser(false);
     }
   }, [user]);
   useEffect(() => {
-    if (!cartData) {
-      getFromCartApi(setCartData);
-    }
+    const getCartData = async () => {
+      if (!cartData) {
+        let data = await getFromCartApi(setCartData);
+        setCartCount(data?.length);
+      }
+    };
+    getCartData();
     setCartItem(cartData);
   }, []);
   useEffect(() => {
-    if (!allCourse) {
-      AllCourseApi(setAllCourse, setLoading);
-    }
+    const getAllCourses = async () => {
+      if (!allCourse) {
+        AllCourseApi(setAllCourse, setLoading);
+      }
+    };
+    getAllCourses();
   }, [allCourse]);
 
   if (allCourse) {
@@ -218,7 +228,7 @@ const NavBar = () => {
                     <ul className="dropdown-menu-multi-level">
                       <li>
                         <a>
-                          <Link to="/all-courses/school">For Schools</Link>
+                          <Link to="/all-courses/school"> Schools</Link>
                           <div className="course-list school-course">
                             <div className="image-section">
                               <img src={`${SchoolIcon}`} alt="" />
@@ -257,7 +267,7 @@ const NavBar = () => {
                       </li>
                       <li>
                         <a>
-                          <Link to="/all-courses/college">For Colleges</Link>
+                          <Link to="/all-courses/college"> Colleges</Link>
                           <div className="course-list">
                             <div
                               className="image-section"
@@ -303,7 +313,7 @@ const NavBar = () => {
                       <li>
                         <a>
                           <Link to="/all-courses/intermediate">
-                            For Intermediate{" "}
+                            Intermediate{" "}
                           </Link>
                           <div className="course-list">
                             <div
@@ -376,17 +386,6 @@ const NavBar = () => {
                   </Link>
                 </div>
                 <div className="item">
-                  <Link to="/blogs" className="menu-text">
-                    <span
-                      className={
-                        scroll === false ? "color-white" : "color-black"
-                      }
-                    >
-                      Blogs
-                    </span>
-                  </Link>
-                </div>
-                <div className="item">
                   <Link to="/interview-questions" className="menu-text">
                     <span
                       className={
@@ -397,6 +396,18 @@ const NavBar = () => {
                     </span>
                   </Link>
                 </div>
+                <div className="item">
+                  <Link to="/blogs" className="menu-text">
+                    <span
+                      className={
+                        scroll === false ? "color-white" : "color-black"
+                      }
+                    >
+                      Blogs
+                    </span>
+                  </Link>
+                </div>
+
                 <div className="item">
                   <div class="dropdown">
                     <a className="menu-text">
@@ -422,10 +433,7 @@ const NavBar = () => {
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>
                     <IconButton aria-label="cart" className="color-white">
-                      <Badge
-                        badgeContent={cartCount ? cartCount : ""}
-                        color="error"
-                      >
+                      <Badge badgeContent={cartCount} color="error">
                         <ShoppingCartIcon fontSize="large" />
                       </Badge>
                     </IconButton>

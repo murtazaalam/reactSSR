@@ -5,7 +5,7 @@ const ServiceCard = (props) => {
   return (
     <div>
       <Link
-        to={props.link}
+        to="/coming-soon"
         style={{ color: "var(--color-primary)", textDecoration: "none" }}
       >
         <div class="service">

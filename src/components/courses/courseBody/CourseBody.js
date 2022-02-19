@@ -16,18 +16,36 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ShareIcon from "@material-ui/icons/Share";
 import Badge from "@material-ui/core/Badge";
 
+import Draggable from "react-draggable";
 import Skeleton from "@mui/material/Skeleton";
 
 import addToCartApi from "../../../apis/api/AddToCart";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./courseBody.css";
-
+import Login from "../../Login/Login";
+import Paper from "@mui/material/Paper";
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
 const CourseBody = ({ course }) => {
   const [value, setValue] = useState("1");
 
   const [timeBadge, setTimerBadge] = useState(true);
   const [itemMessage, setItemMessage] = useState("");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   //for timer
+
   const daysHoursMinSecs = { day: 2, hours: 0, minutes: 0, seconds: 30 };
   const { day = 0, hours = 0, minutes = 0, seconds = 60 } = daysHoursMinSecs;
   const [[days, hrs, mins, secs], setTime] = useState([
@@ -37,10 +55,15 @@ const CourseBody = ({ course }) => {
     seconds,
   ]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   const tick = () => {
     if (days === 0 && hrs === 0 && mins === 0 && secs === 0)
       setTimerBadge(false);
@@ -58,23 +81,75 @@ const CourseBody = ({ course }) => {
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
   });
-  const addToCart = (id) => {
+  // console.log(open);
+  const addToCart = async (id) => {
     let body = {
-      course_name:course.course_name,
-      thumbnail:course.thumbnail,
-      description:course.description,
-      avg_rating:course.avg_rating,
-      gradient:course.gradient,
-      discount:course.discount,
-      reviews:course.reviews,
-      price:course.price,
-      course_id:id
+      course_name: course.course_name,
+      thumbnail: course.thumbnail,
+      description: course.description,
+      avg_rating: course.avg_rating,
+      gradient: course.gradient,
+      discount: course.discount,
+      reviews: course.reviews,
+      price: course.price,
+      course_id: id,
     };
-    addToCartApi(body, setItemMessage);
+    let message = await addToCartApi(body, setItemMessage);
+    console.log(message);
+    if (message === "Item Already Added") {
+      toast.warn("Course already added ", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (message === "Item Added")
+      toast.success("Course added to your cart", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    // else if (message === "Unauthorized") {
+    //   setOpen(true);
+    //   console.log(open);
+    // }
+    else {
+      toast.error(message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
   return (
     <>
       <div className="course-tab-container">
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+
         <Typography component="div">
           <Box sx={{ width: "100%", typography: "body1" }}>
             <TabContext value={value}>
@@ -98,7 +173,7 @@ const CourseBody = ({ course }) => {
                 </div>
               </TabPanel>
               <TabPanel value="2">
-                {course && (
+                {isEmpty(course) === false && (
                   <div className="curriculum">
                     {course.curriculum.map((curriculum, index) => {
                       return (
@@ -137,7 +212,7 @@ const CourseBody = ({ course }) => {
                   {course.thumbnail && (
                     <img src={course.thumbnail} className="img-fluid" alt="" />
                   )}
-                  {course.video && (
+                  {/* {course.video && (
                     <iframe
                       src={course.video}
                       title="YouTube video player"
@@ -145,6 +220,14 @@ const CourseBody = ({ course }) => {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowfullscreen
                     ></iframe>
+                  )} */}
+                  {!course.thumbnail && (
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRckyYf2C8fp95kgcVhT2L-gJgEz5_UUuIWnA&usqp=CAU"
+                      className="img-fluid"
+                      alt=""
+                      style={{ width: "25rem" }}
+                    />
                   )}
                 </div>
               )}
@@ -235,13 +318,25 @@ const CourseBody = ({ course }) => {
                   <p class="sub-heading">{course && course.access}</p>
                 </div>
                 <div>
-                  <button type="button" className="btn-grad" onClick={() => addToCart(course._id)}>
+                  {/* <button onClick={handleClickOpen}>open</button>
+                  <Login
+                    open={open}
+                    handleClose={handleClose}
+                    PaperComponent={PaperComponent}
+                  /> */}
+                  <button
+                    type="button"
+                    className="btn-grad"
+                    onClick={() => addToCart(course._id)}
+                  >
                     <span>
                       <ShoppingCartIcon />
                     </span>
                     Add to cart
                   </button>
-                  <p className="add-to-cart-msg">{itemMessage && itemMessage}</p>
+                  {/* <p className="add-to-cart-msg">
+                    {itemMessage && itemMessage}
+                  </p> */}
                 </div>
                 <div className="share-now">
                   <span className="share-text">share now</span>

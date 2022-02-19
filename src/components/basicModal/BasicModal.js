@@ -28,7 +28,7 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen} className="techvanto-modal-btn">
+      <Button href="#need-assistance" className="techvanto-modal-btn">
         {props.text}
       </Button>
       <Modal

@@ -40,7 +40,7 @@ function FormRow() {
       <Grid item md={3} sm={6} xs={12}>
         <Item className="techvanto-whyus-grid-item">
           <SupervisorAccountRoundedIcon className="techvanto-whyus-cloudupload-icon" />
-          <CountUp end={8453} duration={1} redraw={true}>
+          <CountUp end={10000} duration={1} redraw={true}>
             {({ countUpRef, start }) => (
               <VisibilitySensor onChange={start} delayedCall>
                 <div className="techvanto-whyus-grid-item-count">

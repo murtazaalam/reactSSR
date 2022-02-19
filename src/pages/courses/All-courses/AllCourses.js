@@ -24,9 +24,6 @@ function AllCourses() {
   const [list, setList] = useRecoilState(courseList);
   const [searchInput, setSearchInput] = useState("");
 
-  const handleSelectRating = (event, value) =>
-    !value ? null : setSelectedRating(value);
-
   console.log(category);
 
   const handleChangeChecked = (id) => {
@@ -57,16 +54,8 @@ function AllCourses() {
       ) {
         return val;
       }
-      return val;
     })
-    ?.filter((val) => {
-      if (selectedRating === null) {
-        return val;
-      } else if (val.rating === selectedRating) {
-        return val;
-      }
-      return val;
-    })
+
     ?.filter((val) => {
       if (categoryRoute === "all") return val;
       else if (category === "All") return val;
@@ -111,11 +100,9 @@ function AllCourses() {
         <div className="course-container">
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <a href="index.html" className="home">
-                  Home
-                  <div className="line"></div>
-                </a>
+              <li className="breadcrumb-item active">
+                Home
+                <div className="line"></div>
               </li>
               <li className="breadcrumb-item active">All Courses</li>
             </ol>
@@ -134,8 +121,6 @@ function AllCourses() {
           <div className="course-panel-wrap">
             {/* Side Panels */}
             <FilterPanel
-              selectedRating={selectedRating}
-              selectRating={handleSelectRating}
               category={selectedCategory}
               changeChecked={handleChangeChecked}
             />

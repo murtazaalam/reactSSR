@@ -62,8 +62,8 @@ export default function LoginContent() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, borderRadius: "0", background: "white" }}>
+            <img src="https://i.ibb.co/jVR0Kyc/logo-3.png" alt=""></img>
           </Avatar>
           <Typography component="h1" variant="h5">
             Log in
@@ -131,7 +131,7 @@ export default function LoginContent() {
             />
             <button
               type="submit"
-              className="btn-grad"
+              className="btn-grad full-width"
               style={{ marginTop: "10px" }}
             >
               Log In
@@ -143,8 +143,10 @@ export default function LoginContent() {
                 </Link>
               </Grid>
               <Grid item>
+                Don't have an account?{" "}
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {" "}
+                  Sign Up
                 </Link>
               </Grid>
             </Grid>

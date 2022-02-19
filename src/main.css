@@ -34,7 +34,9 @@ html {
 .secondary-background {
   background-color: var(--color-secondary);
 }
-
+.full-width {
+  width: -webkit-fill-available;
+}
 .btn-grad {
   background-color: var(--color-secondary);
   text-align: center;
@@ -47,17 +49,12 @@ html {
   text-decoration: none;
   border: none;
   height: 56px;
-  width: -webkit-fill-available;
+  /* width: -webkit-fill-available; */
 }
 .btn-background-blue {
   background-color: var(--color-primary);
 }
 
-/* .btn-grad:hover {
-  background-position: right center;
-  color: #fff;
-  text-decoration: none;
-} */
 .techvanto-whyus {
   display: flex;
   justify-content: center;

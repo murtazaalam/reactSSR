@@ -10,6 +10,7 @@
   transition: transform 0.5s, background 0.5s;
 }
 .service p {
+  font-size: large;
   -webkit-line-clamp: 1;
   line-clamp: 2;
   overflow: hidden;
@@ -17,6 +18,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   transition: 1s;
+  color: var(--color-secondary-text);
 }
 .chip-background {
   background-color: var(--color-primary) !important;
@@ -34,6 +36,7 @@
 .service h2 {
   font-weight: 600;
   margin-bottom: 8px;
+  color: var(--color-primary-text);
 }
 .service:hover {
   border-top-color: var(--color-primary);
