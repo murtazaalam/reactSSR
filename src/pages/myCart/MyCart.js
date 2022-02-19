@@ -39,20 +39,24 @@ function MyCart() {
   }
 
   const checkout = async () => {
+    cartItems.forEach((item) => {
+      totalPrice = totalPrice + item.price;
+    })
     let body = {
-      total_amount: "100",
+      total_amount: totalPrice,
       cart_item: cartItems,
     };
+    console.log(totalPrice);
     let order = await addOrderApi(body);
     console.log(">>>",order);
     const options = {
-      key: "rzp_test_rDOF9MHexhjJYj", // Enter the Key ID generated from the Dashboard
-      amount: totalPrice, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      key: "rzp_test_rDOF9MHexhjJYj", 
+      amount: totalPrice,
       currency: "INR",
       name: "Acme Corp",
       description: "Test Transaction",
       image: "https://example.com/your_logo",
-      order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
+      order_id: order.id, 
       handler: function (response) {
         // alert(response.razorpay_payment_id);
         // alert(response.razorpay_order_id);
@@ -76,16 +80,16 @@ function MyCart() {
       },
     };
     const rzp1 = new Razorpay(options);
-    rzp1.on("payment.failed", function (response) {
-      alert(response.error.code);
-      alert(response.error.description);
-      alert(response.error.source);
-      alert(response.error.step);
-      alert(response.error.reason);
-      alert(response.error.metadata.order_id);
-      alert(response.error.metadata.payment_id);
-    });
-    rzp1.open();
+    // rzp1.on("payment.failed", function (response) {
+    //   alert(response.error.code);
+    //   alert(response.error.description);
+    //   alert(response.error.source);
+    //   alert(response.error.step);
+    //   alert(response.error.reason);
+    //   alert(response.error.metadata.order_id);
+    //   alert(response.error.metadata.payment_id);
+    // });
+    // rzp1.open();
   };
   return (
     <div>

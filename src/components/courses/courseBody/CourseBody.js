@@ -60,13 +60,16 @@ const CourseBody = ({ course }) => {
   });
   const addToCart = (id) => {
     let body = {
-      course_id: id,
-      course_name: course.course_name,
-      course_image: course.thumbnail ? course.thumbnail : course.video,
-      price: course.price,
-      email: "murtuz@gmail.com",
+      course_name:course.course_name,
+      thumbnail:course.thumbnail,
+      description:course.description,
+      avg_rating:course.avg_rating,
+      gradient:course.gradient,
+      discount:course.discount,
+      reviews:course.reviews,
+      price:course.price,
+      course_id:id
     };
-    console.log(">>>",course);
     addToCartApi(body, setItemMessage);
   };
   return (
@@ -148,18 +151,18 @@ const CourseBody = ({ course }) => {
               <div class="course-detail">
                 {course && (
                   <div class="course-price">
-                    {course.discounted_price > 0 && (
+                    {course.discount > 0 && (
                       <p>
                         Rs.&nbsp;
                         {timeBadge === true ? (
-                          <del>
-                            <span>{course && course.price}</span>
-                            <span>.99</span>
-                          </del>
+                          <>
+                            <del>
+                              <span>{course.price}</span>
+                            </del>
+                          </>
                         ) : (
                           <span>
                             <span>{course.price}</span>
-                            <span>.99</span>
                           </span>
                         )}
                         &nbsp;
@@ -176,7 +179,7 @@ const CourseBody = ({ course }) => {
                                 .padStart(2, "0")}`}
                               color="primary"
                             >
-                              {course.discounted_price}
+                              {course.price - course.discount}
                             </Badge>
                           </span>
                         ) : (
@@ -184,7 +187,7 @@ const CourseBody = ({ course }) => {
                         )}
                       </p>
                     )}
-                    {course.discounted_price === "0" && (
+                    {course.discount === "0" && (
                       <p>
                         Rs.&nbsp;
                         <span>{course.price}</span>
@@ -232,7 +235,7 @@ const CourseBody = ({ course }) => {
                   <p class="sub-heading">{course && course.access}</p>
                 </div>
                 <div>
-                  <button type="button" className="btn-grad" onClick={() => addToCart("6202084444f3cd1aa545bb7b")}>
+                  <button type="button" className="btn-grad" onClick={() => addToCart(course._id)}>
                     <span>
                       <ShoppingCartIcon />
                     </span>
