@@ -11,3 +11,7 @@ export const token = atom({
   key: "token",
   default: "",
 });
+export const userAuth = atom({
+  key: "userAuth",
+  default: false,
+});

@@ -15,13 +15,13 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginApi from "../../../apis/api/Login";
 import { useRecoilState } from "recoil";
-import { token } from "../../../recoil/store";
 
 const theme = createTheme();
 
 export default function LoginContent() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState();
+  //const [user, setUser] = useRecoilState(userAuth);
   // const [userToken, setUserToken] = useRecoilState(token);
   const handleSubmit = (event) => {
     event.preventDefault();

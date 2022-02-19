@@ -33,7 +33,7 @@ import AllCourseApi from "../../../apis/api/AllCourse";
 import getFromCartApi from "../../../apis/api/GetFromCart";
 import "./navBar.css";
 import Login from "../../Login/Login";
-import { cartItemList } from "../../../recoil/store";
+import { cartItemList, userAuth } from "../../../recoil/store";
 
 function PaperComponent(props) {
   return (
@@ -53,6 +53,7 @@ const NavBar = () => {
   const [cartData, setCartData] = useState();
   const [cartCount, setCartCount] = useState();
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
+  const [isLogged, setIsLogged] = useRecoilState(userAuth);
 
   let schoolCourses = [];
   let intermediateCourses = [];
@@ -64,6 +65,11 @@ const NavBar = () => {
     bottom: false,
     right: false,
   });
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    setIsLogged(false);
+    window.location.reload(false);
+  };
   const [user, setUser] = useState(false);
   const [open, setOpen] = React.useState(false);
 
@@ -438,13 +444,7 @@ const NavBar = () => {
                     </Link>
                     <div class="dropdown-content-contact">
                       <Link to="/my-courses">My Courses</Link>
-                      <a
-                        style={{ color: "black" }}
-                        onClick={() => {
-                          console.log("dele");
-                          localStorage.removeItem("token");
-                        }}
-                      >
+                      <a style={{ color: "black" }} onClick={logoutHandler}>
                         Log Out
                       </a>
                     </div>
