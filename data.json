@@ -26,3 +26,71 @@
 
     }
 ]
+[
+    {
+        "name": "C++",
+        "list": 
+        [
+            {
+                "question": "What is a built-in function in C?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            },
+            {
+                "question": "What is a built-in function in C?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            },
+            {
+                "question": "What is a built-in function in C?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            },
+            {
+                "question": "What is a built-in function in C?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            }
+        ]
+    },
+    {
+        "name": "C++",
+        "list": 
+        [
+            {
+                "question": "What is a built-in function in C?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            },
+            {
+                "question": "What is a built-in function in C?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            },
+            {
+                "question": "What is a built-in function in C?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            },
+            {
+                "question": "What is a built-in function in C?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            }
+        ]
+    },
+    {
+        "name": "Java",
+        "list": 
+        [
+            {
+                "question": "What is a built-in function in Java?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            },
+            {
+                "question": "What is a built-in function in Java?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            },
+            {
+                "question": "What is a built-in function in Java?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C."
+            },
+            {
+                "question": "What is a built-in function in Java?",
+                "answer":"Built-function is also known as library functions that are provided by the system to make the life of a developer easy by assisting them to do certain commonly used predefined tasks. For example, if you need to print output or your program into the terminal, we use printf() in C.
+            }
+        ]
+    }
+]

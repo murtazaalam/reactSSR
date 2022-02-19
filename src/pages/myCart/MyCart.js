@@ -40,10 +40,11 @@ function MyCart() {
 
   const checkout = async () => {
     let body = {
-      total_amount: totalPrice,
+      total_amount: "100",
       cart_item: cartItems,
     };
     let order = await addOrderApi(body);
+    console.log(">>>",order);
     const options = {
       key: "rzp_test_rDOF9MHexhjJYj", // Enter the Key ID generated from the Dashboard
       amount: totalPrice, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
