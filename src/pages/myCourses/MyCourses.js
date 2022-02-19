@@ -6,7 +6,7 @@ import ListItem from "../../components/CoursesComponents/List/ListItem/ListItem"
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import myOrdersApi from "../../apis/api/MyOders";
-
+import CourseCard from "../../components/TopCourses/CourseCard/CourseCard";
 function MyCourses() {
   const [course, setCourse] = useState();
   const item = {
@@ -30,20 +30,21 @@ function MyCourses() {
       />
       <Container maxWidth="lg" sx={{ p: 2 }}>
         <Grid container spacing={3}>
-          {course && course.map((item, index) => {
-            <Grid item xs={4}>
-              <ListItem item={item} />
+          {course && course.map((data, index) => (
+            <Grid item>
+              <CourseCard
+                key={index}
+                id={data.id}
+                title={data.title}
+                pic={data.thumbnail}
+                gradient={data.gradient}
+                price={data.price}
+                discount={data.discount}
+                rating={data.rating}
+                // review={data.reviews}
+              ></CourseCard>
             </Grid>
-          })}
-          <Grid item xs={4}>
-            <ListItem item={item} />
-          </Grid>
-          <Grid item xs={4}>
-            <ListItem item={item} />
-          </Grid>
-          <Grid item xs={4}>
-            <ListItem item={item} />
-          </Grid>
+          ))}
         </Grid>
       </Container>
     </div>

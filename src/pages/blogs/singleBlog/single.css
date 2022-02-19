@@ -1,5 +1,6 @@
 .single {
   display: flex;
-  padding-top: 129px;
-  padding-right: 11px;
+  flex-direction: column;
+  /* margin-top: 50px; */
+  /* padding-right: 11px; */
 }

@@ -2,7 +2,7 @@ import routes from '../routes/Services.routes';
 import axios from 'axios';
 
 export default async function addOrderApi(body){
-    return axios.post(routes.AddOrder,body,{
+    return await axios.post(routes.AddOrder,body,{
         headers: {
             'token': localStorage.getItem('token')
         },

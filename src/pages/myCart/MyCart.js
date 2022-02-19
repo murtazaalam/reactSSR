@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback  } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import useRazorpay from "react-razorpay";
 import Banner from "../../components/Generic/Banner/Banner";
 import cartImage from "../../assets/images/cart1.jpg";
@@ -15,6 +15,8 @@ import removeItemFromCart from "../../apis/api/RemoveFromCart";
 import getFromCartApi from "../../apis/api/GetFromCart";
 import addOrderApi from "../../apis/api/AddOrder";
 import verifyOrderApi from "../../apis/api/OrderVerify";
+import { Rating } from "@material-ui/lab";
+import { Chip } from "@material-ui/core";
 
 function MyCart() {
   const [loading, setLoading] = useState(false);
@@ -27,21 +29,22 @@ function MyCart() {
 
   useEffect(() => {
     getFromCartApi(setCartItems);
-  },[]);
+  }, []);
 
   const removeFromCart = (id) => {
     removeItemFromCart(id, setDeleteMessage);
-  } 
-  if(deteteMessage > 0){
+  };
+  if (deteteMessage > 0) {
     getFromCartApi(setCartItems);
   }
-  
-  const checkout = async() =>{
+
+  const checkout = async () => {
     let body = {
-      total_amount: totalPrice,
-      cart_item: cartItems
-    }
+      total_amount: "100",
+      cart_item: cartItems,
+    };
     let order = await addOrderApi(body);
+    console.log(">>>",order);
     const options = {
       key: "rzp_test_rDOF9MHexhjJYj", // Enter the Key ID generated from the Dashboard
       amount: totalPrice, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -55,9 +58,9 @@ function MyCart() {
         // alert(response.razorpay_order_id);
         // alert(response.razorpay_signature);
         let verificationDetail = {
-          razorpay_payment_id:response.razorpay_payment_id,
-          order_id:response.razorpay_order_id
-        }
+          razorpay_payment_id: response.razorpay_payment_id,
+          order_id: response.razorpay_order_id,
+        };
         verifyOrderApi(verificationDetail, setPaymentMessage);
       },
       prefill: {
@@ -83,7 +86,7 @@ function MyCart() {
       alert(response.error.metadata.payment_id);
     });
     rzp1.open();
-  }
+  };
   return (
     <div>
       {" "}
@@ -97,32 +100,23 @@ function MyCart() {
               breadcrumb="cart"
             />
           </div>
-          {/* heading banner */}
-          {/* breadcrumb nav */}
-          {/* cart content block */}
-          {/* {fetchError && <MessageBox variant="danger">{fetchError}</MessageBox>} */}
-          {/* {applyCouponError && (
-        <MessageBox variant="danger">{applyCouponError}</MessageBox>
-      )} */}
-          {/* {removeCouponError && (
-        <MessageBox variant="danger">{removeCouponError}</MessageBox>
-      )} */}
-          {/* {removeItemError && (
-        <MessageBox variant="danger">{removeItemError}</MessageBox>
-      )} */}
-          {/* {payError && <MessageBox variant="danger">{payError}</MessageBox>} */}
+
           {cartItems && (
             <section className="cart-content-block container">
               {!cartItems.length && (
                 <h6> Empty Cart!!! Go to Marketplace and get some courses.</h6>
               )}
-              <Typography variant="p" variant="p">{paymentMessage !== "" ? paymentMessage : ''}</Typography>
+              <Typography variant="p">
+                {paymentMessage !== "" ? paymentMessage : ""}
+              </Typography>
               {/* cart form */}
               <form action="#" className="cart-form">
                 <div className="table-wrap">
                   <p>{cartItems.length} Courses in the cart.</p>
-                  <p style={{color: 'red', fontWeight: 600}}>
-                    {deteteMessage ? `${deteteMessage} Course deleted successfully.` : ''} 
+                  <p style={{ color: "red", fontWeight: 600 }}>
+                    {deteteMessage
+                      ? `${deteteMessage} Course deleted successfully.`
+                      : ""}
                   </p>
                   {cartItems.map((item, index) => (
                     <Card
@@ -133,12 +127,25 @@ function MyCart() {
                       }}
                       key={index}
                     >
-                      <CardMedia
-                        component="img"
-                        sx={{ width: 151 }}
-                        image={item.course_image}
-                        alt="Live from space album cover"
-                      />
+                      <div
+                        style={{
+                          background: `linear-gradient(${item.gradient})`,
+                          height: "194px",
+                        }}
+                      >
+                        <CardMedia
+                          component="img"
+                          className="techvanto-all-course-image"
+                          sx={{ width: 340 }}
+                          height="194"
+                          //  width="340"
+                          style={{
+                            backgroundImage: `url(${item.course_image})`,
+                            height: "194px",
+                          }}
+                        />
+                      </div>
+
                       <Box sx={{ display: "flex", flexDirection: "column" }}>
                         <CardContent sx={{ flex: "1 0 auto" }}>
                           <Typography component="div" variant="h5">
@@ -149,12 +156,35 @@ function MyCart() {
                             color="text.secondary"
                             component="div"
                           >
-                            Mac Miller
+                            {item.description}
                           </Typography>
+                          <Rating
+                            name="read-only"
+                            value={item.rating}
+                            readOnly
+                          />
                         </CardContent>
                       </Box>
-                      <CardActions >
-                        <DeleteIcon onClick={() => removeFromCart(item._id)} />
+                      <CardActions className="cart-action">
+                        <DeleteIcon
+                          onClick={() => removeFromCart(item._id)}
+                          style={{ placeSelf: "flex-end" }}
+                        />
+
+                        {item.discount !== 0 ? (
+                          <p>
+                            {" "}
+                            <span
+                              style={{ textDecorationLine: "line-through" }}
+                            >
+                              Rs.{item.price}
+                            </span>
+                            {"  "}
+                            Rs.{item.price - item.discount}
+                          </p>
+                        ) : (
+                          <p>Rs.{item.price}</p>
+                        )}
                       </CardActions>
                     </Card>
                   ))}
@@ -163,54 +193,52 @@ function MyCart() {
                   <Card>
                     <CardContent>
                       <Typography variant="h4" color="initial">
-                        Total &nbsp;
-                        {cartItems.forEach(item =>{
-                          totalPrice = totalPrice + parseFloat(item.price)
-                        })}
-                        {totalPrice}
+                        Total &nbsp; ₹
+                        {cartItems.reduce(
+                          (a, curr) =>
+                            parseInt(a) +
+                            parseInt(curr.price) -
+                            parseInt(curr.discount),
+                          0
+                        )}
                       </Typography>
-                      <Typography variant="h2">
-
-                      </Typography>
+                      <Typography variant="h2"></Typography>
                       <Typography variant="body1" color="initial">
-                        Subtotal: {"  "}
+                        Subtotal:&nbsp; ₹
                         <span
                           className="price"
                           style={{ textDecoration: "line-through" }}
                         >
-                          ₹
                           {cartItems.reduce(
-                              (a, curr) =>
-                                a + (curr.price ? curr.price : 0),0
-                            )}
+                            (a, curr) => parseInt(a) + parseInt(curr.price),
+                            0
+                          )}
                         </span>
                       </Typography>
                       <Typography variant="body1" color="initial">
-                        Discount:{"  "}
-                        <span> ₹500</span>
+                        Total Discount: &nbsp; ₹
+                        <span>
+                          {cartItems.reduce(
+                            (a, curr) =>
+                              parseInt(a) +
+                              (parseInt(curr.discount)
+                                ? parseInt(curr.discount)
+                                : 0),
+                            0
+                          )}{" "}
+                        </span>
                       </Typography>
-
-                      {/* {(
-                              cartItems.reduce(
-                                (a, curr) =>
-                                  a +
-                                  (curr.price_before_coupon
-                                    ? curr.price_before_coupon
-                                    : 0),
-                                0
-                              ) - payloader.total_amt
-                            ).toFixed(2)} */}
                     </CardContent>
                     <CardActions>
-                      <button type="button" className="btn-grad" onClick={() => checkout(totalPrice)}>CheckOut</button>
+                      <button
+                        type="button"
+                        className="btn-grad"
+                        onClick={() => checkout(totalPrice)}
+                      >
+                        CheckOut
+                      </button>
                     </CardActions>
                   </Card>
-
-                  {/* <RazorpayButton
-                  amount={payloader.total_amt * 100}
-                  order_id={paymentResponse.id}
-                  onSuccess={handleSuccessPayment}
-                /> */}
                 </div>
               </form>
             </section>

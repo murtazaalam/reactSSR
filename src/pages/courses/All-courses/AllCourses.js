@@ -2,21 +2,17 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../../../components/CoursesComponents/SearchBar/SearchBar";
 import FilterPanel from "../../../components/CoursesComponents/FilterPanel/FilterPanel.js";
-import List from "../../../components/CoursesComponents/List/List";
-//import EmptyView from "../../../components/EmptyView/EmptyView";
-import { dataList } from "../../../data/constants";
 import Box from "@mui/material/Box";
 import EventBackgroundImage from "../../../assets/images/event_header_image.svg";
 import "./All-courses.css";
 import { useRecoilState } from "recoil";
 import { courseList } from "../../../recoil/store";
 import CourseCard from "../../../components/TopCourses/CourseCard/CourseCard";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function AllCourses() {
   const [selectedRating, setSelectedRating] = useState(null);
-  const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
-  const { id } = useParams();
+  const { categoryRoute } = useParams();
 
   const [selectedCategory, setSelectedCategory] = useState([
     { id: 1, checked: false, label: "For School" },
@@ -26,12 +22,12 @@ function AllCourses() {
   ]);
   const [category, setCategory] = useState("");
   const [list, setList] = useRecoilState(courseList);
-  // const [resultsFound, setResultsFound] = useState(true);
   const [searchInput, setSearchInput] = useState("");
-  //const [loading, setLoading] = useState(false);
 
   const handleSelectRating = (event, value) =>
     !value ? null : setSelectedRating(value);
+
+  console.log(category);
 
   const handleChangeChecked = (id) => {
     setCategory(selectedCategory[id - 1].label);
@@ -45,14 +41,12 @@ function AllCourses() {
   console.log(selectedCategory);
 
   const fetchdata = async () => {
-    //setLoading(true);
     let forSchool = await JSON.parse(localStorage.getItem("forSchool"));
     let forCollege = await JSON.parse(localStorage.getItem("forCollege"));
     let forIntermediate = await JSON.parse(
       localStorage.getItem("forIntermediate")
     );
     setList([...forSchool, ...forCollege, ...forIntermediate]);
-    //  applyFilters();
   };
   const data = list
     ?.filter((val) => {
@@ -63,6 +57,7 @@ function AllCourses() {
       ) {
         return val;
       }
+      return val;
     })
     ?.filter((val) => {
       if (selectedRating === null) {
@@ -70,10 +65,21 @@ function AllCourses() {
       } else if (val.rating === selectedRating) {
         return val;
       }
+      return val;
+    })
+    ?.filter((val) => {
+      if (categoryRoute === "all") return val;
+      else if (category === "All") return val;
+      else if (
+        val.category.toLowerCase().includes(categoryRoute.toLowerCase()) ||
+        val.category === category
+      ) {
+        return val;
+      }
     })
 
     .map((data) => {
-      return (category || id) === data.category ||
+      return category === data.category ||
         category === "" ||
         category === "All" ? (
         <CourseCard
@@ -90,53 +96,6 @@ function AllCourses() {
     });
 
   console.log(data);
-  // const applyFilters = () => {
-  //   let updatedList = list;
-
-  //   //   // Rating Filter
-  //   //   if (selectedRating) {
-  //   //     updatedList = updatedList.filter(
-  //   //       (item) => parseInt(item.rating) === parseInt(selectedRating)
-  //   //     );
-  //   //   }
-
-  //   // Category Filter
-  //   const categoryChecked = selectedCategory
-  //     .filter((item) => item.checked)
-  //     .map((item) => item.label.toLowerCase());
-
-  //   if (categoryChecked.length) {
-  //     updatedList = updatedList.filter((item) =>
-  //       categoryChecked.includes(item.category)
-  //     );
-  //   }
-
-  // // Search Filter
-  // if (searchInput) {
-  //   updatedList = updatedList.filter(
-  //     (item) =>
-  //       item.title.toLowerCase().search(searchInput.toLowerCase().trim()) !==
-  //       -1
-  //   );
-  // }
-
-  //   // // Price Filter
-  //   // const minPrice = selectedPrice[0];
-  //   // const maxPrice = selectedPrice[1];
-
-  //   // updatedList = updatedList.filter(
-  //   //   (item) => item.price >= minPrice && item.price <= maxPrice
-  //   // );
-
-  //   setList(updatedList);
-
-  //   //   updatedList.length ? setResultsFound(true) : setResultsFound(false);
-  // };
-  // useEffect(() => {
-  //   applyFilters();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [selectedCategory]);
-
   useEffect(() => {
     fetchdata();
   }, []);
@@ -176,7 +135,6 @@ function AllCourses() {
             {/* Side Panels */}
             <FilterPanel
               selectedRating={selectedRating}
-              selectedPrice={selectedPrice}
               selectRating={handleSelectRating}
               category={selectedCategory}
               changeChecked={handleChangeChecked}

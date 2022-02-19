@@ -7,3 +7,7 @@ export const cartItemList = atom({
   key: "cartItemList",
   default: [],
 });
+export const token = atom({
+  key: "token",
+  default: "",
+});

@@ -116,56 +116,58 @@ const Events = (props) => {
             {events &&
               events.map((event, index) => {
                 return (
-                  <Card
-                    sx={{ minWidth: 175, minHeight: 320 }}
-                    className="event-card-box"
-                    key={index}
-                  >
-                    <CardContent className="event-card" sx={{ height: 200 }}>
-                      <img src={EventImage} width="100" alt="" />
-                      {/* for dynamic use below code */}
-                      {/* <img src={`${event.image}`} width="100"/> */}
-                    </CardContent>
-                    <CardActions sx={{ flexDirection: "column" }}>
-                      <Typography component="h6" className="event-name">
-                        {event.name}
-                      </Typography>
-                      <Typography component="div" className="event-details">
-                        <Typography component="p" className="event-date">
-                          {event.date}
+                  <Link to="/event/1">
+                    <Card
+                      sx={{ minWidth: 175, minHeight: 320 }}
+                      className="event-card-box"
+                      key={index}
+                    >
+                      <CardContent className="event-card" sx={{ height: 200 }}>
+                        <img src={EventImage} width="100" alt="" />
+                        {/* for dynamic use below code */}
+                        {/* <img src={`${event.image}`} width="100"/> */}
+                      </CardContent>
+                      <CardActions sx={{ flexDirection: "column" }}>
+                        <Typography component="h6" className="event-name">
+                          {event.name}
                         </Typography>
+                        <Typography component="div" className="event-details">
+                          <Typography component="p" className="event-date">
+                            {event.date}
+                          </Typography>
 
-                        <Typography component="p">
-                          {event.category === "upcoming" && (
-                            <Link
-                              to={`/event/${event._id}`}
-                              style={{ textDecoration: "none" }}
-                            >
-                              <Button
-                                className="techvanto-know-more-button btn-grad event-btn"
-                                size="small"
+                          <Typography component="p">
+                            {event.category === "upcoming" && (
+                              <Link
+                                to={`/event/${event._id}`}
+                                style={{ textDecoration: "none" }}
                               >
-                                Register Now
-                              </Button>
-                            </Link>
-                          )}
-                          {event.category === "past" && (
-                            <Link
-                              to={`/event/${event._id}`}
-                              style={{ textDecoration: "none" }}
-                            >
-                              <Button
-                                className="techvanto-know-more-button btn-grad event-btn"
-                                size="small"
+                                <Button
+                                  className="techvanto-know-more-button btn-grad event-btn"
+                                  size="small"
+                                >
+                                  Register Now
+                                </Button>
+                              </Link>
+                            )}
+                            {event.category === "past" && (
+                              <Link
+                                to={`/event/${event._id}`}
+                                style={{ textDecoration: "none" }}
                               >
-                                See Detail
-                              </Button>
-                            </Link>
-                          )}
+                                <Button
+                                  className="techvanto-know-more-button btn-grad event-btn"
+                                  size="small"
+                                >
+                                  See Detail
+                                </Button>
+                              </Link>
+                            )}
+                          </Typography>
                         </Typography>
-                      </Typography>
-                    </CardActions>
-                  </Card>
+                      </CardActions>
+                    </Card>
+                  </Link>
                 );
               })}
           </div>

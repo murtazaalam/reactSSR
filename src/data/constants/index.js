@@ -1,5 +1,6 @@
 import forSchool from "../../assets/images/new-course-icon-college.svg";
 import image from "../../assets/images/new-course-icon-intermediate.svg";
+
 export const ratingList = [
   {
     id: 1,
