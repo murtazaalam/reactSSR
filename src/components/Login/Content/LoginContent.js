@@ -15,26 +15,37 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginApi from "../../../apis/api/Login";
 import { useRecoilState } from "recoil";
+import { userAuth } from "../../../recoil/store";
 
 const theme = createTheme();
 
 export default function LoginContent() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState();
-  //const [user, setUser] = useRecoilState(userAuth);
-  // const [userToken, setUserToken] = useRecoilState(token);
+  const [user, setUser] = useRecoilState(userAuth);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const emptyState = () => {
+    setEmail("");
+    setPassword("");
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     setError("");
-    // eslint-disable-next-line no-console
     let body = {
-      email: data.get("email"),
-      password: data.get("password"),
+      email: email,
+      password: password,
     };
+    emptyState();
     if (!body.email || !body.password)
       return setError("Email And Password Required");
     LoginApi(body, setError, setLoading);
+    if (error === "Login Success") {
+      setUser(true);
+      window.location.reload(false);
+      console.log(user);
+    }
   };
 
   return (
@@ -97,6 +108,8 @@ export default function LoginContent() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               autoFocus
             />
             <TextField
@@ -107,20 +120,22 @@ export default function LoginContent() {
               label="Password"
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
             />
             <FormControlLabel
+              sx={{ ml: "0 !important" }}
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
+            <button
               type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              className="btn-grad"
+              style={{ marginTop: "10px" }}
             >
               Log In
-            </Button>
+            </button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

@@ -45,16 +45,18 @@ export default function SignUp() {
     setError("");
     // eslint-disable-next-line no-console
     let body = {
-      name: data.get('firstName')+" "+ data.get('lastName'),
+      name: data.get("firstName") + " " + data.get("lastName"),
       email: data.get("email"),
-      mobile: data.get('mobile'),
+      mobile: data.get("mobile"),
       password: data.get("password"),
     };
-    if(!body.name || !body.email || !body.mobile || !body.password){
+    if (!body.name || !body.email || !body.mobile || !body.password) {
       return setError("Star Fields Are Required");
-    }else{
-      if(body.mobile.length !== 10 || !Number(body.mobile)) return setError("Invalid Mobile Number");
-      if(body.password !== data.get("repassword")) return setError("Password Does Not Match");
+    } else {
+      if (body.mobile.length !== 10 || !Number(body.mobile))
+        return setError("Invalid Mobile Number");
+      if (body.password !== data.get("repassword"))
+        return setError("Password Does Not Match");
       RegisterApi(body, setError, setLoading);
     }
     //RegisterApi(body, setError, setLoading);
@@ -66,7 +68,6 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -78,13 +79,13 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Typography 
-            component="p" 
+          <Typography
+            component="p"
             variant="p"
             sx={{
-              fontSize: '14px', 
-              fontWeight:600,
-              color:"error.dark"
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "error.dark",
             }}
           >
             {error}
@@ -160,14 +161,9 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <button className="btn-grad" style={{ marginTop: "20px" }}>
               Sign Up
-            </Button>
+            </button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">

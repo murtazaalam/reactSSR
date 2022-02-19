@@ -5,7 +5,7 @@ export const ratingList = [
   {
     id: 1,
     value: "1",
-    label: "⭐",
+    label: "1⭐",
   },
   {
     id: 2,
