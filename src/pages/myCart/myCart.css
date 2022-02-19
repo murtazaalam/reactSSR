@@ -4,16 +4,22 @@ input {
 .cart-content-block {
   margin-top: 40px;
 }
+.cart-action {
+  display: flex;
+  flex-direction: column;
+  place-content: space-between;
+  white-space: pre;
+}
 .cart-form {
   display: flex;
-  width: 80%;
+  width: 90%;
 }
 .cart-priceCard {
   margin-left: 20px;
-  width: 50%;
+  width: 321px;
 }
 .table-wrap {
-  width: 80%;
+  width: 72%;
 }
 .apply-coupon,
 .remove-coupon {

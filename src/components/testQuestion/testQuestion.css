@@ -1,0 +1,7 @@
+.questions-wrap {
+  overflow: scroll;
+  height: 500px;
+}
+.interview-answer {
+  color: var(--color-secondary-text);
+}

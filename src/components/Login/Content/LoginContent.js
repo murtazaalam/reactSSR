@@ -14,12 +14,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginApi from "../../../apis/api/Login";
+import { useRecoilState } from "recoil";
+import { token } from "../../../recoil/store";
 
 const theme = createTheme();
 
 export default function LoginContent() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState();
+  // const [userToken, setUserToken] = useRecoilState(token);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -29,7 +32,8 @@ export default function LoginContent() {
       email: data.get("email"),
       password: data.get("password"),
     };
-    if(!body.email || !body.password) return setError("Email And Password Required");
+    if (!body.email || !body.password)
+      return setError("Email And Password Required");
     LoginApi(body, setError, setLoading);
   };
 
@@ -53,32 +57,32 @@ export default function LoginContent() {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
-          {error === 'Login Success' &&
-            <Typography 
-            component="p" 
-            variant="p"
-            sx={{
-              fontSize: '14px', 
-              fontWeight:600,
-              color:'success.dark',
-            }}
-          >
-            {error}
-          </Typography>
-          }
-          {error !== 'Login Success' &&
-            <Typography 
-            component="p" 
-            variant="p"
-            sx={{
-              fontSize: '14px', 
-              fontWeight:600,
-              color:'error.dark',
-            }}
-          >
-            {error}
-          </Typography>
-          }          
+          {error === "Login Success" && (
+            <Typography
+              component="p"
+              variant="p"
+              sx={{
+                fontSize: "14px",
+                fontWeight: 600,
+                color: "success.dark",
+              }}
+            >
+              {error}
+            </Typography>
+          )}
+          {error !== "Login Success" && (
+            <Typography
+              component="p"
+              variant="p"
+              sx={{
+                fontSize: "14px",
+                fontWeight: 600,
+                color: "error.dark",
+              }}
+            >
+              {error}
+            </Typography>
+          )}
           <Box
             component="form"
             onSubmit={handleSubmit}

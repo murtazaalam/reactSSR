@@ -1,0 +1,28 @@
+[
+    {
+        "course_name":"Web Development",
+        "course_image":"https://i.ibb.co/Vmr3SjH/entrepreneurship.jpg",
+        "course_id":"6202084444f3cd1aa5bb7f",
+        "email":"murtaza24@gmail.com",
+        "price":"699",
+        "avg_rating":"5",
+        "description":"descriptions jshbveru sd",
+        "discount":"10",
+        "gradient":"gradient",
+        "total_reviews":"12"
+
+    },
+    {
+        "course_name":"Python",
+        "course_image":"https://i.ibb.co/Vmr3SjH/entrepreneurship.jpg",
+        "course_id":"6202084444f3cd1aa5bb7t",
+        "email":"murtaza24@gmail.com",
+        "price":"699",
+        "avg_rating":"5",
+        "description":"descriptions jshbveru sd",
+        "discount":"10",
+        "gradient":"gradient",
+        "total_reviews":"12"
+
+    }
+]

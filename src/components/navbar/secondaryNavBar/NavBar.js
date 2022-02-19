@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -32,6 +33,7 @@ import AllCourseApi from "../../../apis/api/AllCourse";
 import getFromCartApi from "../../../apis/api/GetFromCart";
 import "./navBar.css";
 import Login from "../../Login/Login";
+import { cartItemList } from "../../../recoil/store";
 
 function PaperComponent(props) {
   return (
@@ -50,6 +52,7 @@ const NavBar = () => {
   const [loading, setLoading] = useState();
   const [cartData, setCartData] = useState();
   const [cartCount, setCartCount] = useState();
+  const [cartItem, setCartItem] = useRecoilState(cartItemList);
 
   let schoolCourses = [];
   let intermediateCourses = [];
@@ -61,7 +64,7 @@ const NavBar = () => {
     bottom: false,
     right: false,
   });
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -80,20 +83,27 @@ const NavBar = () => {
       setScroll(window.scrollY > 100);
     });
   });
-
   useEffect(() => {
-    getFromCartApi(setCartData);
-    if (cartData) {
-      setCartCount(cartData.length);
-      localStorage.setItem("cartItem", JSON.stringify(cartData));
+    if (localStorage.getItem("token")) {
+      console.log("true");
+      setUser(true);
+    } else {
+      console.log("false");
+      setUser(false);
     }
+  }, [user]);
+  useEffect(() => {
+    if (!cartData) {
+      getFromCartApi(setCartData);
+    }
+    setCartItem(cartData);
   }, []);
-  console.log("cart count", cartCount);
   useEffect(() => {
     if (!allCourse) {
       AllCourseApi(setAllCourse, setLoading);
     }
   }, [allCourse]);
+
   if (allCourse) {
     allCourse.forEach((item) => {
       if (item.category === "For School") {
@@ -428,7 +438,15 @@ const NavBar = () => {
                     </Link>
                     <div class="dropdown-content-contact">
                       <Link to="/my-courses">My Courses</Link>
-                      <a style={{ color: "black" }}>Log Out</a>
+                      <a
+                        style={{ color: "black" }}
+                        onClick={() => {
+                          console.log("dele");
+                          localStorage.removeItem("token");
+                        }}
+                      >
+                        Log Out
+                      </a>
                     </div>
                   </div>
                 </>
