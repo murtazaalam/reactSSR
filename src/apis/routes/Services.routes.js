@@ -29,5 +29,8 @@ const routes =  {
     RemoveFromCart : "https://techvantonew.herokuapp.com/remove-from-cart/",
     AddOrder : "https://techvantonew.herokuapp.com/add-order",
     OrderVerify : "https://techvantonew.herokuapp.com/verify-order",
+    InterviewQuestion : "https://techvantonew.herokuapp.com/interview-questions",
+    Blogs : "https://techvantonew.herokuapp.com/blogs",
+    SendQuery : "https://techvantonew.herokuapp.com/add-query"
 }
 export default routes;

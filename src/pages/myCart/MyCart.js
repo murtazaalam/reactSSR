@@ -39,7 +39,7 @@ function MyCart() {
 
   const checkout = async () => {
     cartItems.forEach((item) => {
-      totalPrice = parseFloat(totalPrice) + parseFloat(item.price);
+      totalPrice = totalPrice + parseFloat(item.price);
     });
     let body = {
       total_amount: totalPrice,
@@ -139,11 +139,7 @@ function MyCart() {
                 </h6>
               )}
               <Typography variant="p">
-                {/* {paymentMessage !== ""
-                  ? {
-                      paymentMessage,
-                    }
-                  : ""} */}
+                {paymentMessage !== "" ? paymentMessage : ""}
               </Typography>
               {/* cart form */}
               <form action="#" className="cart-form">
@@ -272,9 +268,7 @@ function MyCart() {
                         <button
                           type="button"
                           className="btn-grad"
-                          onClick={() => {
-                            checkout(totalPrice);
-                          }}
+                          onClick={checkout}
                         >
                           CheckOut
                         </button>

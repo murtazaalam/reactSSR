@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -54,6 +54,7 @@ const NavBar = () => {
   const [cartCount, setCartCount] = useState(0);
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
+  const isUserLogIn = useRecoilValue(userAuth);
 
   let schoolCourses = [];
   let intermediateCourses = [];
@@ -137,6 +138,11 @@ const NavBar = () => {
   localStorage.setItem("forSchool", JSON.stringify(schoolCourses));
   localStorage.setItem("forIntermediate", JSON.stringify(intermediateCourses));
   localStorage.setItem("forCollege", JSON.stringify(collegeCourses));
+  React.useEffect(() => {
+    console.log(">>>>", isUserLogIn);
+    if (isUserLogIn) setOpen(false);
+    console.log(">>>>", isUserLogIn, ">>open", open);
+  }, []);
 
   const list = (anchor) => {
     <Box
@@ -364,7 +370,7 @@ const NavBar = () => {
                   </div>
                 </div>
                 <div className="item">
-                  <Link to="/coming-soon" className="menu-text">
+                  <a href="#services" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -372,7 +378,7 @@ const NavBar = () => {
                     >
                       Services
                     </span>
-                  </Link>
+                  </a>
                 </div>
                 <div className="item">
                   <Link to="/events" className="menu-text">
@@ -466,7 +472,7 @@ const NavBar = () => {
                         scroll === false ? "color-white" : "color-black"
                       }
                     >
-                      Login/SignUp
+                      Login / SignUp
                     </span>
                   </button>
 

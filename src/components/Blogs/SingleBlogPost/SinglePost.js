@@ -2,13 +2,14 @@ import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import "./singlePost.css";
 
-export default function SinglePost() {
+export default function SinglePost({blogDetails}) {
+ 
   return (
     <>
       <div className="singlePost">
         <div className="singlePostWrapper">
           <h1 className="singlePostTitle">
-            Lorem ipsum dolor
+            {blogDetails && blogDetails.title}
             <div className="singlePostEdit">
               <i className="singlePostIcon far fa-edit"></i>
               <i className="singlePostIcon far fa-trash-alt"></i>
@@ -19,55 +20,17 @@ export default function SinglePost() {
               Author:
               <b className="singlePostAuthor">
                 <Link className="link" to="/posts?username=Safak">
-                  Himani Gulati
+                  {blogDetails && blogDetails.author_name}
                 </Link>
               </b>
             </span>
-            <span>1 day ago</span>
+            <span>{blogDetails && blogDetails.posted_on}</span>
           </div>
           <p className="singlePostDesc">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-            quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-            Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-            eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-            error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-            impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-            odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-            iusto impedit! Voluptatum necessitatibus eum beatae, adipisci
-            voluptas a odit modi eos! Lorem, ipsum dolor sit amet consectetur
-            adipisicing elit. Iste error quibusdam ipsa quis quidem doloribus
-            eos, dolore ea iusto impedit! Voluptatum necessitatibus eum beatae,
-            adipisci voluptas a odit modi eos! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Iste error quibusdam ipsa quis quidem
-            doloribus eos, dolore ea iusto impedit! Voluptatum necessitatibus
-            eum beatae, adipisci voluptas a odit modi eos!
-            <br />
-            <br />
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-            quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-            Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-            eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-            error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-            impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-            odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-            iusto impedit! Voluptatum necessitatibus eum beatae, adipisci
-            voluptas a odit modi eos! Lorem, ipsum dolor sit amet consectetur.
-            <br />
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-            quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-            Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-            eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-            error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-            impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-            odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-            iusto impedit! Voluptatum necessitatibus eum beatae, adipisci
-            voluptas a odit modi eos! Lorem, ipsum dolor sit amet consectetur.
+            {blogDetails && blogDetails.description}
           </p>
         </div>
-        <Sidebar />
+        <Sidebar sideBarDetail={blogDetails} />
       </div>
     </>
   );

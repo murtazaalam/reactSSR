@@ -9,7 +9,16 @@
   .techvanto-book-a-demo img{
       width: 350px;
   } */
-
+.book-demo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.query-message{
+  text-align: center;
+  font-weight: 600;
+  margin:0;
+}
 .techvanto-book-a-demo > div {
   display: flex;
   justify-content: center;
