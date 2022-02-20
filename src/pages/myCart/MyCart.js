@@ -65,9 +65,9 @@ function MyCart() {
           order_id: response.razorpay_order_id,
         };
         verifyOrderApi(verificationDetail, setPaymentMessage);
-        // if (paymentMessage === "Payment Success") {
-        //   notify();
-        // }
+        if (paymentMessage === "Payment Success") {
+          alert(paymentMessage);
+        }
       },
       prefill: {
         name: "Piyush Garg",
@@ -139,11 +139,11 @@ function MyCart() {
                 </h6>
               )}
               <Typography variant="p">
-                {paymentMessage !== ""
+                {/* {paymentMessage !== ""
                   ? {
                       paymentMessage,
                     }
-                  : ""}
+                  : ""} */}
               </Typography>
               {/* cart form */}
               <form action="#" className="cart-form">
