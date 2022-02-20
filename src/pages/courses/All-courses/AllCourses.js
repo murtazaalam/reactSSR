@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import SearchBar from "../../../components/CoursesComponents/SearchBar/SearchBar";
 import FilterPanel from "../../../components/CoursesComponents/FilterPanel/FilterPanel.js";
@@ -70,6 +69,7 @@ function AllCourses() {
       return category === data.category ||
         category === "" ||
         category === "All" ? (
+          <>
         <CourseCard
           id={data._id}
           title={data.course_name}
@@ -80,6 +80,7 @@ function AllCourses() {
           rating={3}
           // review={data.reviews}
         ></CourseCard>
+        </>
       ) : null;
     });
 

@@ -15,7 +15,7 @@ export default function CourseCard({
   gradient,
   price,
   discount,
-  // rating,
+  rating,
 }) {
   console.log(id);
   return (
@@ -57,7 +57,7 @@ export default function CourseCard({
           <Rating
             name="size-small"
             // defaultValue={1}
-            value={3}
+            value={rating}
             precision={0.1}
             readOnly
             size={"small"}

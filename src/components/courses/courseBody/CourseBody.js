@@ -25,6 +25,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./courseBody.css";
 import Login from "../../Login/Login";
 import Paper from "@mui/material/Paper";
+import myOrdersApi from "../../../apis/api/MyOders";
+
 
 import { RWebShare } from "react-web-share";
 function PaperComponent(props) {
@@ -42,7 +44,24 @@ const CourseBody = ({ course }) => {
   const [value, setValue] = useState("1");
 
   const [timeBadge, setTimerBadge] = useState(true);
+  const [itemMessage, setItemMessage] = useState("");
+  const [baughtCourses, setBaughtCourses] = useState([]);
+  const [isBaughtCourse, setIsBaughtCourse]= useState(false);
 
+  useEffect(() => {
+    if(baughtCourses.length !== 0){ 
+      myOrdersApi(setBaughtCourses);
+      isBaught();
+    }
+  },[])
+  const isBaught = () => {
+    if(baughtCourses){
+      baughtCourses.forEach(item => {
+        console.log(item.course_id,course._id)
+        if(item.course_id === course._id) setIsBaughtCourse(true);
+      })
+    }
+  }
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -83,12 +102,13 @@ const CourseBody = ({ course }) => {
     console.log(window.location.href);
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
-  }, []);
+  },[]);
+  
   // console.log(open);
   const addToCart = async (id) => {
     let body = {
       course_name: course.course_name,
-      thumbnail: course.thumbnail,
+      course_image: course.thumbnail,
       description: course.description,
       avg_rating: course.avg_rating,
       gradient: course.gradient,
@@ -137,6 +157,7 @@ const CourseBody = ({ course }) => {
   function isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
+  
   return (
     <>
       <div className="course-tab-container">
@@ -348,12 +369,18 @@ const CourseBody = ({ course }) => {
                     handleClose={handleClose}
                     PaperComponent={PaperComponent}
                   /> */}
-                  <button
+                  {isBaughtCourse ?
+                    <button
                     type="button"
                     className="btn-grad"
-                    onClick={
-                      !open ? () => addToCart(course._id) : handleClickOpen
-                    }
+                  >
+                    Purchased
+                  </button>:
+                    <>
+                    <button
+                    type="button"
+                    className="btn-grad"
+                    onClick={() => addToCart(course._id)}
                   >
                     <span>
                       <ShoppingCartIcon />
@@ -361,10 +388,13 @@ const CourseBody = ({ course }) => {
                     Add to cart
                   </button>
                   <Login
-                    open={open}
-                    handleClose={handleClose}
-                    PaperComponent={PaperComponent}
+                  open={open}
+                  handleClose={handleClose}
+                  PaperComponent={PaperComponent}
                   />
+                </>
+                  }
+                  
                   {/* <p className="add-to-cart-msg">
                     {itemMessage && itemMessage}
                   </p> */}

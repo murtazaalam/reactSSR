@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     background: `url(${EventBackgroudImage})`,
     height: "374px",
     width: "100%",
-    marginTop: "136px",
+    marginTop: "129px",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     backgroundSize: "100%",
@@ -79,16 +79,15 @@ const SingleEvent = () => {
         sx={{ borderBottom: "1px solid" }}
       >
         <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
+          <a underline="hover" color="inherit">
             Home
-          </Link>
-          <Link
+          </a>
+          <a
             underline="hover"
             color="inherit"
-            href="/getting-started/installation/"
           >
             Event
-          </Link>
+          </a>
           <Typography color="text.primary">{event && event.name}</Typography>
         </Breadcrumbs>
       </Box>
