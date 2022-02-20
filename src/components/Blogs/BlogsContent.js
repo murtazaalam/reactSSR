@@ -32,14 +32,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function BlogsContent() {
+function BlogsContent(props) {
   const classes = useStyles();
+  const blogItems = props.blogs;
   return (
     <Container maxWidth="lg" className={classes.blogsContainer}>
       <Grid container spacing={3}>
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
+        {blogItems && blogItems.map((item, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            <BlogsCard classes={classes} />
+            <BlogsCard classes={classes} content={item} />
           </Grid>
         ))}
       </Grid>

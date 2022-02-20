@@ -40,7 +40,7 @@ function MyCart() {
 
   const checkout = async () => {
     cartItems.forEach((item) => {
-      totalPrice = totalPrice + item.price;
+      totalPrice = totalPrice + parseFloat(item.price);
     })
     let body = {
       total_amount: totalPrice,
@@ -80,16 +80,16 @@ function MyCart() {
       },
     };
     const rzp1 = new Razorpay(options);
-    // rzp1.on("payment.failed", function (response) {
-    //   alert(response.error.code);
-    //   alert(response.error.description);
-    //   alert(response.error.source);
-    //   alert(response.error.step);
-    //   alert(response.error.reason);
-    //   alert(response.error.metadata.order_id);
-    //   alert(response.error.metadata.payment_id);
-    // });
-    // rzp1.open();
+    rzp1.on("payment.failed", function (response) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
+    rzp1.open();
   };
   return (
     <div>
@@ -237,7 +237,7 @@ function MyCart() {
                       <button
                         type="button"
                         className="btn-grad"
-                        onClick={() => checkout(totalPrice)}
+                        onClick={checkout}
                       >
                         CheckOut
                       </button>

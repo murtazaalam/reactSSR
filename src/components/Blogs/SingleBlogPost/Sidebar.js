@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 import "./sidebar.css";
 
-export default function Sidebar() {
+export default function Sidebar({sideBarDetail}) {
   return (
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
-        <img
-          src="https://img.freepik.com/free-photo/medium-shot-man-wearing-vr-glasses_23-2149126949.jpg?w=1480"
-          alt=""
-        />
+        {sideBarDetail &&
+          <img
+            src={`${sideBarDetail.author_image}`}
+            alt=""
+          />
+        }
         <p>
-          Laboris sunt aute cupidatat velit magna velit ullamco dolore mollit
-          amet ex esse.Sunt eu ut nostrud id quis proident.
+          {sideBarDetail && sideBarDetail.author_detail}
         </p>
       </div>
       <div className="sidebarItem">

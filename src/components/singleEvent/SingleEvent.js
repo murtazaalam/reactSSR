@@ -70,7 +70,7 @@ const SingleEvent = () => {
                 {event &&
                     <Typography component="div" className={classes.heading}>
                         <Typography component="h2" className={classes.headingText}>
-                            {event[0].name}
+                            {event.name}
                         </Typography>
                     </Typography>
                 }
@@ -93,7 +93,7 @@ const SingleEvent = () => {
                     >
                         Event
                     </Link>
-                    <Typography color="text.primary">{event &&  event[0].name}</Typography>
+                    <Typography color="text.primary">{event &&  event.name}</Typography>
                 </Breadcrumbs>
             </Box>
             <Box
@@ -111,7 +111,13 @@ const SingleEvent = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={7}>
-                        <Typography 
+                        <Typography
+                            variant="p"
+                            sx={{lineHeight: '28px'}}
+                        >
+                            {event &&  event.description}
+                        </Typography>
+                        {/* <Typography 
                             variant="h5"
                             sx={{mb:2}}
                         >
@@ -138,7 +144,7 @@ const SingleEvent = () => {
                             Looking for Microsoft Excel training to improve your skills and save you time?
                             GoSkills Basic and Advanced online Excel courses can quickly get you up to speed with Excel, taking you 
                             from complete novice to Excel ninja.
-                        </Typography>
+                        </Typography> */}
                     </Grid>
                     <Grid item sx={3} className={classes.registerBox}>
                         <Typography 
@@ -167,13 +173,12 @@ const SingleEvent = () => {
                                 variant="standard" 
                                 sx={{mt:1,mb:2}}
                             />
-                            <Button 
-                                className="techvanto-know-more-button btn-grad"
-                                size="small"
-                                sx={{width: '70%', color: '#fff'}}
+                            <button 
+                                className=" btn-grad"
+                                style={{width: "200px"}}
                             >
                                 Register Now
-                            </Button>
+                            </button>
                         </Typography>
                         <Typography variant="div">
                             <div className="share-now" style={{marginBottom: '10px'}}>

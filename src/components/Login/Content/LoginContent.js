@@ -15,13 +15,14 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginApi from "../../../apis/api/Login";
 import { useRecoilState } from "recoil";
+import { userAuth } from "../../../recoil/store";
 
 const theme = createTheme();
 
 export default function LoginContent() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState();
-  //const [user, setUser] = useRecoilState(userAuth);
+  const [user, setUser] = useRecoilState(userAuth);
   // const [userToken, setUserToken] = useRecoilState(token);
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,7 +35,7 @@ export default function LoginContent() {
     };
     if (!body.email || !body.password)
       return setError("Email And Password Required");
-    LoginApi(body, setError, setLoading);
+    LoginApi(body, setError, setLoading, setUser);
   };
 
   return (

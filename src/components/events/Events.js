@@ -116,7 +116,7 @@ const Events = (props) => {
             {events &&
               events.map((event, index) => {
                 return (
-                  <Link to="/event/1">
+                  <Link to={`/event/${event._id}`} key={event._id}>
                     <Card
                       sx={{ minWidth: 175, minHeight: 320 }}
                       className="event-card-box"

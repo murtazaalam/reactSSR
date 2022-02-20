@@ -7,7 +7,6 @@ export default function verifyOrderApi(body, setPaymentMessage){
             'token': localStorage.getItem('token')
         },
     }).then(res => {
-        console.log(res.data.message)
         setPaymentMessage(res.data.message);
     }).catch(err => {
         console.log(err.response.data.message);

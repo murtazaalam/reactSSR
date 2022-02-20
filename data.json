@@ -94,3 +94,32 @@
         ]
     }
 ]
+[
+    {
+        "blog_image":"https://i.ibb.co/wc50Q6m/sales-training.jpg",
+        "title":"React useEffect",
+        "category":"tech",
+        "description":"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica",
+        "author_image":"https://i.ibb.co/mhKy3B6/i6.jpg",
+        "author_name":"Katherine Karen",
+        "posted_on":"Feb 11, 2022"
+    },
+    {
+        "blog_image":"https://i.ibb.co/wc50Q6m/sales-training.jpg",
+        "title":"React useState",
+        "category":"fashion",
+        "description":"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica",
+        "author_image":"https://i.ibb.co/mhKy3B6/i6.jpg",
+        "author_name":"Katherine Karen",
+        "posted_on":"Feb 11, 2022"
+    },
+    {
+        "blog_image":"https://i.ibb.co/wc50Q6m/sales-training.jpg",
+        "title":"React useCallback",
+        "category":"events",
+        "description":"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica",
+        "author_image":"https://i.ibb.co/mhKy3B6/i6.jpg",
+        "author_name":"Katherine Karen",
+        "posted_on":"Feb 11, 2022"
+    }
+]

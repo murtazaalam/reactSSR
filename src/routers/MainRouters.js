@@ -30,7 +30,7 @@ const MainRouters = () => {
       ></Route>
       <Route path="/events" element={<Events></Events>}></Route>
       <Route path="/blogs" element={<Blogs />}></Route>
-      <Route path="/blogs/abc123" element={<Single />}></Route>
+      <Route path="/blogs/:id" element={<Single />}></Route>
       <Route
         path="/contact-us-for-hiring"
         element={<ContactUsForHiring />}

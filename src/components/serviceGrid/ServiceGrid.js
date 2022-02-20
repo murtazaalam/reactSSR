@@ -21,7 +21,7 @@ const ServiceGrid = () => {
   };
 
   return (
-    <div className="service-container">
+    <div className="service-container" id="services">
       <Typography component="div">
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
