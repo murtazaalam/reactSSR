@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import SearchBar from "../../../components/CoursesComponents/SearchBar/SearchBar";
 import FilterPanel from "../../../components/CoursesComponents/FilterPanel/FilterPanel.js";
@@ -11,7 +10,6 @@ import CourseCard from "../../../components/TopCourses/CourseCard/CourseCard";
 import { useParams } from "react-router-dom";
 
 function AllCourses() {
-  const [selectedRating, setSelectedRating] = useState(null);
   const { categoryRoute } = useParams();
 
   const [selectedCategory, setSelectedCategory] = useState([
@@ -71,6 +69,7 @@ function AllCourses() {
       return category === data.category ||
         category === "" ||
         category === "All" ? (
+          <>
         <CourseCard
           id={data._id}
           title={data.course_name}
@@ -81,6 +80,7 @@ function AllCourses() {
           rating={3}
           // review={data.reviews}
         ></CourseCard>
+        </>
       ) : null;
     });
 

@@ -35,7 +35,7 @@
   background: var(--color-white);
 }
 .social a:hover {
-  background-color: grey;
+  background-color: #ede8e8;;
   transition: color 0.15s linear, background-color 0.15s linear,
     border-color 0.15s linear;
 }

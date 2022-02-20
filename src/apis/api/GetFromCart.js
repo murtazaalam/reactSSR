@@ -10,6 +10,7 @@ export default async function getFromCartApi(setCartData) {
     })
     .then((res) => {
       setCartData(res.data);
+
       return res.data;
     })
     .catch((err) => {

@@ -12,7 +12,7 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { Link } from "react-router-dom";
 
 export default function BlogsCard({ classes, content }) {
-  console.log(">>>",content)
+  console.log(">>>", content);
   return (
     <Card className={classes.card}>
       <Link to={`/blogs/${content._id}`} style={{ textDecoration: "none" }}>
@@ -43,9 +43,6 @@ export default function BlogsCard({ classes, content }) {
               {content.posted_on}
             </Typography>
           </Box>
-        </Box>
-        <Box>
-          <BookmarkIcon />
         </Box>
       </CardActions>
     </Card>

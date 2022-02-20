@@ -27,6 +27,8 @@ import Login from "../../Login/Login";
 import Paper from "@mui/material/Paper";
 import myOrdersApi from "../../../apis/api/MyOders";
 
+
+import { RWebShare } from "react-web-share";
 function PaperComponent(props) {
   return (
     <Draggable
@@ -38,6 +40,7 @@ function PaperComponent(props) {
   );
 }
 const CourseBody = ({ course }) => {
+  const url = window.location.href;
   const [value, setValue] = useState("1");
 
   const [timeBadge, setTimerBadge] = useState(true);
@@ -96,6 +99,7 @@ const CourseBody = ({ course }) => {
     }
   };
   useEffect(() => {
+    console.log(window.location.href);
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
   },[]);
@@ -113,7 +117,8 @@ const CourseBody = ({ course }) => {
       price: course.price,
       course_id: id,
     };
-    let message = await addToCartApi(body, setItemMessage);
+    let message = await addToCartApi(body);
+    console.log(message);
     if (message === "Item Already Added") {
       toast.warn("Course already added ", {
         position: "bottom-right",
@@ -134,11 +139,10 @@ const CourseBody = ({ course }) => {
         draggable: true,
         progress: undefined,
       });
-    // else if (message === "Unauthorized") {
-    //   setOpen(true);
-    //   console.log(open);
-    // }
-    else {
+    else if (message === "Unauthorized") {
+      setOpen(true);
+      console.log(open);
+    } else {
       toast.error(message, {
         position: "bottom-right",
         autoClose: 5000,
@@ -180,7 +184,7 @@ const CourseBody = ({ course }) => {
                 >
                   <Tab label="Overview" value="1" />
                   <Tab label="Curriculum" value="2" />
-                  <Tab label="Review" value="3" />
+                  {/* <Tab label="Review" value="3" /> */}
                 </TabList>
               </Box>
               <TabPanel value="1">
@@ -215,9 +219,9 @@ const CourseBody = ({ course }) => {
                   </div>
                 )}
               </TabPanel>
-              <TabPanel value="3">
-                {/* <div className="row">Review Tab</div> */}
-              </TabPanel>
+              {/* <TabPanel value="3">
+              
+              </TabPanel> */}
             </TabContext>
           </Box>
         </Typography>
@@ -350,24 +354,41 @@ const CourseBody = ({ course }) => {
                   >
                     Purchased
                   </button>:
-                  <button
-                  type="button"
-                  className="btn-grad"
-                  onClick={() => addToCart(course._id)}
-                >
-                  <span>
-                    <ShoppingCartIcon />
-                  </span>
-                  Add to cart
-                </button>
+                    <>
+                    <button
+                    type="button"
+                    className="btn-grad"
+                    onClick={() => addToCart(course._id)}
+                  >
+                    <span>
+                      <ShoppingCartIcon />
+                    </span>
+                    Add to cart
+                  </button>
+                  <Login
+                  open={open}
+                  handleClose={handleClose}
+                  PaperComponent={PaperComponent}
+                  />
+                </>
                   }
                   
                   {/* <p className="add-to-cart-msg">
                     {itemMessage && itemMessage}
                   </p> */}
                 </div>
+
                 <div className="share-now">
-                  <span className="share-text">share now</span>
+                  <RWebShare
+                    data={{
+                      text: "Web Share - GfG",
+                      url: `http://localhost:3000/courses/${course._id}`,
+                      title: "GfG",
+                    }}
+                    onClick={() => console.log("shared successfully!")}
+                  >
+                    <span className="share-text">share now</span>
+                  </RWebShare>
                   <span className="share-icon">
                     <ShareIcon />
                   </span>
@@ -377,7 +398,7 @@ const CourseBody = ({ course }) => {
           )}
         </div>
       </div>
-      <div class="thought">
+      {/* <div class="thought">
         <h2>Leave a Review</h2>
         <p>
           Your email address will not be published. Required fields are marked *
@@ -411,7 +432,7 @@ const CourseBody = ({ course }) => {
             </button>
           </div>
         </form>
-      </div>
+      </div> */}
     </>
   );
 };

@@ -44,7 +44,7 @@ export default function LoginContent(props) {
     LoginApi(body, setError, setLoading, setUser);
     if (error === "Login Success") {
       setUser(true);
-      window.location.reload(false);
+      window.location.reload();
       console.log(user);
     }
   };
@@ -141,13 +141,6 @@ export default function LoginContent(props) {
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                Don't have an account?{" "}
-                <Link href="#" variant="body2">
-                  {" "}
-                  Sign Up
                 </Link>
               </Grid>
             </Grid>

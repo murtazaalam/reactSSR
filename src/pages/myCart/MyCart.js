@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import useRazorpay from "react-razorpay";
 import Banner from "../../components/Generic/Banner/Banner";
 import cartImage from "../../assets/images/cart1.jpg";
@@ -9,45 +9,71 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import { ToastContainer, toast } from "react-toastify";
-
+import { Navigate } from "react-router-dom";
 import removeItemFromCart from "../../apis/api/RemoveFromCart";
 import getFromCartApi from "../../apis/api/GetFromCart";
 import addOrderApi from "../../apis/api/AddOrder";
 import verifyOrderApi from "../../apis/api/OrderVerify";
 import { Rating } from "@material-ui/lab";
-import { Chip } from "@material-ui/core";
+import Loading from "../../components/Loader";
+import PaymentSuccessDialog from "../../components/PaymentSuccessDialog";
 
 function MyCart() {
   const [loading, setLoading] = useState(false);
   const [cartItems, setCartItems] = useState();
-  const [deteteMessage, setDeleteMessage] = useState();
-  const [grandPrice, setTotalPrice] = useState();
   const [paymentMessage, setPaymentMessage] = useState("");
+  const [deleteCount, setDeleteCount] = useState("");
+  const [successAlert, setSuccessAlert] = useState(false);
+  const [open, setOpen] = useState(false);
   let totalPrice = 0;
   const Razorpay = useRazorpay();
 
   useEffect(() => {
-    getFromCartApi(setCartItems);
+    getFromCartApi(setCartItems, setLoading);
   }, []);
-
-  const removeFromCart = (id) => {
-    removeItemFromCart(id, setDeleteMessage);
+  const handleClose = () => {
+    setOpen(false);
+    window.location.assign("/my-courses");
   };
-  if (deteteMessage > 0) {
+
+  const removeFromCart = async (id) => {
+    const response = await removeItemFromCart(id, setDeleteCount);
+    if (response.status === 200) {
+      toast.success(response.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response.status === 400) {
+      toast.warn(response.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+  if (deleteCount > 0) {
     getFromCartApi(setCartItems);
   }
 
   const checkout = async () => {
-    cartItems.forEach((item) => {
-      totalPrice = totalPrice + parseFloat(item.price);
-    });
+    let totalPrice = cartItems.reduce(
+      (a, curr) => parseInt(a) + parseInt(curr.price) - parseInt(curr.discount),
+      0
+    );
     let body = {
       total_amount: totalPrice,
       cart_item: cartItems,
     };
-    console.log(totalPrice);
     let order = await addOrderApi(body);
-    console.log(">>>", order);
     const options = {
       key: "rzp_test_rDOF9MHexhjJYj",
       amount: totalPrice,
@@ -57,17 +83,11 @@ function MyCart() {
       image: "https://example.com/your_logo",
       order_id: order.id,
       handler: function (response) {
-        // alert(response.razorpay_payment_id);
-        // alert(response.razorpay_order_id);
-        // alert(response.razorpay_signature);
         let verificationDetail = {
           razorpay_payment_id: response.razorpay_payment_id,
           order_id: response.razorpay_order_id,
         };
-        verifyOrderApi(verificationDetail, setPaymentMessage);
-        if (paymentMessage === "Payment Success") {
-          alert(paymentMessage);
-        }
+        verifyOrderApi(verificationDetail, setPaymentMessage, setOpen);
       },
       prefill: {
         name: "Piyush Garg",
@@ -93,42 +113,31 @@ function MyCart() {
     });
     rzp1.open();
   };
-  const notify = () => {
-    toast.success("Payment Successful", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
+
   return (
     <div>
       <div>
         <ToastContainer
-          position="top-right"
+          position="bottom-right"
           autoClose={5000}
           hideProgressBar={false}
-          newestOnTop
+          newestOnTop={false}
           closeOnClick
           rtl={false}
           pauseOnFocusLoss
           draggable
           pauseOnHover
-        />{" "}
+        />
         <div>
-          {loading && <h1>loading</h1>}
           <div>
             <Banner
+              style={{ marginTop: "71px" }}
               heading="My Cart"
               backgroundImage={cartImage}
               breadcrumb="cart"
             />
           </div>
-
-          {cartItems && (
+          {cartItems ? (
             <section className="cart-content-block container">
               {!cartItems.length && (
                 <h6>
@@ -139,7 +148,17 @@ function MyCart() {
                 </h6>
               )}
               <Typography variant="p">
-                {paymentMessage !== "" ? paymentMessage : ""}
+                {paymentMessage !== "" ? (
+                  <>
+                    <PaymentSuccessDialog
+                      message={paymentMessage}
+                      open={open}
+                      handleClose={handleClose}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
               </Typography>
               {/* cart form */}
               <form action="#" className="cart-form">
@@ -147,11 +166,7 @@ function MyCart() {
                   {cartItems.length > 0 && (
                     <p>{cartItems.length} Courses in the cart.</p>
                   )}
-                  <p style={{ color: "red", fontWeight: 600 }}>
-                    {deteteMessage
-                      ? `${deteteMessage} Course deleted successfully.`
-                      : ""}
-                  </p>
+
                   {cartItems.map((item, index) => (
                     <Card
                       sx={{
@@ -267,7 +282,7 @@ function MyCart() {
                       <CardActions>
                         <button
                           type="button"
-                          className="btn-grad"
+                          className="btn-grad full-width"
                           onClick={checkout}
                         >
                           CheckOut
@@ -278,6 +293,8 @@ function MyCart() {
                 )}
               </form>
             </section>
+          ) : (
+            <Loading />
           )}
         </div>
       </div>

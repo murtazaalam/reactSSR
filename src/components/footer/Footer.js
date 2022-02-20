@@ -21,7 +21,7 @@ const Footer = () => {
                 <p className="social">
                   <a
                     rel="noopener"
-                    href="https://www.facebook.com"
+                    href="https://www.facebook.com/techvantoacademy/"
                     className="social-link icon-link-padding"
                     target="_blank"
                     style={{color: "red"}}
@@ -38,7 +38,7 @@ const Footer = () => {
                   </a>
                   <a
                     rel="noopener"
-                    href="https://twitter.com"
+                    href="https://twitter.com/TechvantoA?t=AZr-Uor2sg4-L2vvynXk4A&s=08"
                     className="social-link icon-link-padding"
                     target="_blank"
                   >
@@ -54,7 +54,7 @@ const Footer = () => {
                   </a>
                   <a
                     rel="noopener"
-                    href="https://www.linkedin.com/company"
+                    href="https://www.linkedin.com/company/techvantoacademy"
                     className="social-link icon-link-padding"
                     target="_blank"
                   >
@@ -70,7 +70,7 @@ const Footer = () => {
                   </a>
                   <a
                     rel="noopener"
-                    href="https://www.instagram.com/"
+                    href="https://instagram.com/techvanto.academy?utm_medium=copy_link"
                     className="social-link icon-link-padding"
                     target="_blank"
                   >
