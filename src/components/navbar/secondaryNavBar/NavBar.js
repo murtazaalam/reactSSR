@@ -23,6 +23,7 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PrimaryNavBar from "../primaryNavBar/PrimaryNavBar";
 // import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
+import { withRouter } from "react-router-dom";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
 import SchoolIcon from "../../../assets/images/new-course-icon-school.svg";
 import IntermediateIcon from "../../../assets/images/new-course-icon-intermediate.svg";
@@ -46,7 +47,7 @@ function PaperComponent(props) {
   );
 }
 
-const NavBar = () => {
+const NavBar = (props) => {
   const [scroll, setScroll] = useState(false);
   const [allCourse, setAllCourse] = useState();
   const [loading, setLoading] = useState();
@@ -55,7 +56,7 @@ const NavBar = () => {
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const isUserLogIn = useRecoilValue(userAuth);
-
+  console.log(props);
   let schoolCourses = [];
   let intermediateCourses = [];
   let collegeCourses = [];
@@ -122,7 +123,7 @@ const NavBar = () => {
   }, [allCourse]);
 
   if (allCourse) {
-    allCourse.forEach((item) => {
+    allCourse?.forEach((item) => {
       if (item.category === "For School") {
         schoolCourses.push(item);
       }

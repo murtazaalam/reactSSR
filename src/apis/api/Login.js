@@ -1,12 +1,11 @@
 import routes from "../routes/Services.routes";
 import axios from "axios";
 
-export default function LoginApi(data, setError, setLoading, setUser) {
+export default function LoginApi(data, setError, setLoading) {
   axios
     .post(routes.Login, data)
     .then((res) => {
       setError(res.data.message);
-      setUser(true);
       localStorage.setItem("token", res.data.token);
     })
     .catch((err) => {
