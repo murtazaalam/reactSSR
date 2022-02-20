@@ -31,6 +31,7 @@ const routes =  {
     OrderVerify : "https://techvantonew.herokuapp.com/verify-order",
     InterviewQuestion : "https://techvantonew.herokuapp.com/interview-questions",
     Blogs : "https://techvantonew.herokuapp.com/blogs",
-    SendQuery : "https://techvantonew.herokuapp.com/add-query"
+    SendQuery : "https://techvantonew.herokuapp.com/add-query",
+    TopCourse : "https://techvantonew.herokuapp.com/top-courses"
 }
 export default routes;

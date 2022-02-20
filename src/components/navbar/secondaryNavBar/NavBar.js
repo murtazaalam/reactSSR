@@ -52,6 +52,7 @@ const NavBar = () => {
   const [loading, setLoading] = useState();
   const [cartData, setCartData] = useState();
   const [cartCount, setCartCount] = useState(0);
+  const [isUser, setIsUser] = useState()
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const isUserLogIn = useRecoilValue(userAuth);
@@ -139,11 +140,12 @@ const NavBar = () => {
   localStorage.setItem("forIntermediate", JSON.stringify(intermediateCourses));
   localStorage.setItem("forCollege", JSON.stringify(collegeCourses));
   React.useEffect(() => {
+    
     console.log(">>>>", isUserLogIn);
     if (isUserLogIn) setOpen(false);
     console.log(">>>>", isUserLogIn, ">>open", open);
+    console.log()
   }, []);
-
   const list = (anchor) => {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
@@ -439,7 +441,7 @@ const NavBar = () => {
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>
                     <IconButton aria-label="cart" className="color-white">
-                      <Badge badgeContent={cartCount} color="error">
+                      <Badge badgeContent={4} color="error">
                         <ShoppingCartIcon fontSize="large" />
                       </Badge>
                     </IconButton>

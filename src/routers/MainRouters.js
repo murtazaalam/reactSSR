@@ -19,6 +19,7 @@ const MainRouters = () => {
     <Routes>
       <Route path="/" element={<Home></Home>}></Route>
       <Route path="/coming-soon" element={<ComingSoon />}></Route>
+      {/* doubt below route */}
       <Route
         path="/all-courses/:categoryRoute"
         element={<AllCourses></AllCourses>}

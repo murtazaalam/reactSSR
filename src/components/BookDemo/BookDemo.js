@@ -108,8 +108,7 @@ const BookADemo = () => {
               </CardContent>
               <CardActions>
                 <button
-                  style={{ width: "-webkit-fill-available" }, 
-                  loader ? {backgroundColor: 'var(--color-disable)'} : {backgroundColor: 'var(--color-secondary)'}
+                  style={loader ? {backgroundColor: 'var(--color-disable)'} : {backgroundColor: 'var(--color-secondary)'}
                   }
                   disabled={loader ? true : false}
                   className="btn-grad book-demo"

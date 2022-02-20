@@ -20,7 +20,8 @@ function MyCourses() {
   };
   useEffect(()=> {
     myOrdersApi(setCourse);
-  },[])
+  },[]);
+  console.log(">>>",course);
   return (
     <div style={{ placeContent: "center" }}>
       <Banner
@@ -34,13 +35,8 @@ function MyCourses() {
             <Grid item>
               <CourseCard
                 key={index}
-                id={data.id}
-                title={data.title}
-                pic={data.thumbnail}
-                gradient={data.gradient}
-                price={data.price}
-                discount={data.discount}
-                rating={data.rating}
+                couseData={data}
+                fromMycourse={true}
                 // review={data.reviews}
               ></CourseCard>
             </Grid>

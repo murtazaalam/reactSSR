@@ -8,21 +8,16 @@ import { Link } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import "./CourseCard.css";
 
-export default function CourseCard({
-  id,
-  title,
-  pic,
-  gradient,
-  price,
-  discount,
-  // rating,
-}) {
+export default function CourseCard({couseData, fromMycourse}) {
+
   return (
-    <Link to={`/courses/${id}`} style={{ textDecoration: "none" }}>
+    <>
+    {couseData &&
+    <Link to={fromMycourse ? `/courses/${couseData.course_id}` : `/courses/${couseData._id}`} style={{ textDecoration: "none" }}>
       <Card sx={{ width: "340px" }} className="technovanto-course-card">
         <div
           style={{
-            background: `linear-gradient(${gradient})`,
+            background: `linear-gradient(${couseData.gradient})`,
             height: "194px",
           }}
         >
@@ -31,7 +26,7 @@ export default function CourseCard({
             className="techvanto-all-course-image"
             width="100%"
             height="194"
-            style={{ backgroundImage: `url("${pic}")`, height: "194px" }}
+            style={{ backgroundImage: `url("${couseData.thumbnail}")`, height: "194px" }}
           />
         </div>
         <CardContent
@@ -39,12 +34,12 @@ export default function CourseCard({
           className="card-title"
         >
           <Typography variant="body2" color="text.secondary">
-            {title}{" "}
+            {couseData.course_name}{" "}
             {/* <span style={{ float: "right" }}>Rs.{price - discount}</span>
             </Chip> */}
           </Typography>
           <Chip
-            label={`Rs ${price}`}
+            label={`Rs ${couseData.price}`}
             style={{ float: "right", background: "#f1effe" }}
           />
         </CardContent>
@@ -56,7 +51,7 @@ export default function CourseCard({
           <Rating
             name="size-small"
             // defaultValue={1}
-            value={3}
+            value={couseData.avg_rating}
             precision={0.1}
             readOnly
             size={"small"}
@@ -69,5 +64,7 @@ export default function CourseCard({
         </div>
       </Card>
     </Link>
+    }
+    </>
   );
 }

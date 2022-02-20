@@ -25,6 +25,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./courseBody.css";
 import Login from "../../Login/Login";
 import Paper from "@mui/material/Paper";
+import myOrdersApi from "../../../apis/api/MyOders";
+
 function PaperComponent(props) {
   return (
     <Draggable
@@ -40,7 +42,23 @@ const CourseBody = ({ course }) => {
 
   const [timeBadge, setTimerBadge] = useState(true);
   const [itemMessage, setItemMessage] = useState("");
+  const [baughtCourses, setBaughtCourses] = useState([]);
+  const [isBaughtCourse, setIsBaughtCourse]= useState(false);
 
+  useEffect(() => {
+    if(baughtCourses.length !== 0){ 
+      myOrdersApi(setBaughtCourses);
+      isBaught();
+    }
+  },[])
+  const isBaught = () => {
+    if(baughtCourses){
+      baughtCourses.forEach(item => {
+        console.log(item.course_id,course._id)
+        if(item.course_id === course._id) setIsBaughtCourse(true);
+      })
+    }
+  }
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -80,12 +98,13 @@ const CourseBody = ({ course }) => {
   useEffect(() => {
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
-  });
+  },[]);
+  
   // console.log(open);
   const addToCart = async (id) => {
     let body = {
       course_name: course.course_name,
-      thumbnail: course.thumbnail,
+      course_image: course.thumbnail,
       description: course.description,
       avg_rating: course.avg_rating,
       gradient: course.gradient,
@@ -95,7 +114,6 @@ const CourseBody = ({ course }) => {
       course_id: id,
     };
     let message = await addToCartApi(body, setItemMessage);
-    console.log(message);
     if (message === "Item Already Added") {
       toast.warn("Course already added ", {
         position: "bottom-right",
@@ -135,6 +153,7 @@ const CourseBody = ({ course }) => {
   function isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
+  
   return (
     <>
       <div className="course-tab-container">
@@ -324,16 +343,25 @@ const CourseBody = ({ course }) => {
                     handleClose={handleClose}
                     PaperComponent={PaperComponent}
                   /> */}
-                  <button
+                  {isBaughtCourse ?
+                    <button
                     type="button"
                     className="btn-grad"
-                    onClick={() => addToCart(course._id)}
                   >
-                    <span>
-                      <ShoppingCartIcon />
-                    </span>
-                    Add to cart
-                  </button>
+                    Purchased
+                  </button>:
+                  <button
+                  type="button"
+                  className="btn-grad"
+                  onClick={() => addToCart(course._id)}
+                >
+                  <span>
+                    <ShoppingCartIcon />
+                  </span>
+                  Add to cart
+                </button>
+                  }
+                  
                   {/* <p className="add-to-cart-msg">
                     {itemMessage && itemMessage}
                   </p> */}

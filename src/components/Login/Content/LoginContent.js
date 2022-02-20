@@ -16,10 +16,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginApi from "../../../apis/api/Login";
 import { useRecoilState } from "recoil";
 import { userAuth } from "../../../recoil/store";
+import { withRouter } from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function LoginContent() {
+export default function LoginContent(props) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState();
   const [user, setUser] = useRecoilState(userAuth);
@@ -40,7 +41,7 @@ export default function LoginContent() {
     emptyState();
     if (!body.email || !body.password)
       return setError("Email And Password Required");
-    LoginApi(body, setError, setLoading);
+    LoginApi(body, setError, setLoading, setUser);
     if (error === "Login Success") {
       setUser(true);
       window.location.reload(false);
