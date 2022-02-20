@@ -11,7 +11,7 @@ export default function StudentCard(props) {
           </div>
 
           <h4 id="author">{props.data.title}</h4>
-          <p id="job">{props.data.designation}</p>
+          <p id="job">{props.data.destination}</p>
           <p id="info">"{props.data.overview}"</p>
         </article>
       </section>

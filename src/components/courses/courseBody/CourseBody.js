@@ -172,6 +172,28 @@ const CourseBody = ({ course }) => {
                   <Typography component="p" className="tab-course-description">
                     {course && course.description}
                   </Typography>
+                  <Typography component="h2">Learning Objectives</Typography>
+
+                  {/* MAP Learning Objectives */}
+                  <Typography component="p" className="tab-course-description">
+                    {course && course.description}
+                  </Typography>
+
+                  {/* Prerequisites */}
+                  <Typography component="h2">Prerequisites </Typography>
+
+                  {/* MAP Prerequisites  */}
+                  <Typography component="p" className="tab-course-description">
+                    {course && course.description}
+                  </Typography>
+
+                  {/* Training Benefits */}
+                  <Typography component="h2">Training Benefits</Typography>
+
+                  {/* MAP Training Benefits */}
+                  <Typography component="p" className="tab-course-description">
+                    {course && course.description}
+                  </Typography>
                 </div>
               </TabPanel>
               <TabPanel value="2">

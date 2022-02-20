@@ -11,7 +11,6 @@ import CourseCard from "../../../components/TopCourses/CourseCard/CourseCard";
 import { useParams } from "react-router-dom";
 
 function AllCourses() {
-  const [selectedRating, setSelectedRating] = useState(null);
   const { categoryRoute } = useParams();
 
   const [selectedCategory, setSelectedCategory] = useState([

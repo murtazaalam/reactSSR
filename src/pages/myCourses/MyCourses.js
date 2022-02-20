@@ -18,9 +18,9 @@ function MyCourses() {
     rating: 5,
     myCourseCheck: true,
   };
-  useEffect(()=> {
+  useEffect(() => {
     myOrdersApi(setCourse);
-  },[])
+  }, []);
   return (
     <div style={{ placeContent: "center" }}>
       <Banner
@@ -30,21 +30,22 @@ function MyCourses() {
       />
       <Container maxWidth="lg" sx={{ p: 2 }}>
         <Grid container spacing={3}>
-          {course && course.map((data, index) => (
-            <Grid item>
-              <CourseCard
-                key={index}
-                id={data.id}
-                title={data.title}
-                pic={data.thumbnail}
-                gradient={data.gradient}
-                price={data.price}
-                discount={data.discount}
-                rating={data.rating}
-                // review={data.reviews}
-              ></CourseCard>
-            </Grid>
-          ))}
+          {course &&
+            course.map((data, index) => (
+              <Grid item>
+                <CourseCard
+                  key={index}
+                  id={data._id}
+                  title={data.title}
+                  pic={data.thumbnail}
+                  gradient={data.gradient}
+                  price={data.price}
+                  discount={data.discount}
+                  rating={data.rating}
+                  // review={data.reviews}
+                ></CourseCard>
+              </Grid>
+            ))}
         </Grid>
       </Container>
     </div>
