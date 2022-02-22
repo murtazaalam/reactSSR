@@ -13,7 +13,15 @@ export default async function getFromCartApi(setCartData) {
 
       return res.data;
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      if (error.response) {
+        //setApiError(true);
+        //console.log(err.response.data.message);
+        //return error.response.data.message;
+      } else if (error.request) {
+        //setApiError(true);
+      } else {
+        //setApiError(true);
+      }
     });
 }

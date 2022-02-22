@@ -11,7 +11,14 @@ export default async function addToCartApi(body) {
     .then((res) => {
       return res.data.message;
     })
-    .catch((err) => {
-      return err.response.data.message;
+    .catch((error) => {
+      if (error.response) {
+        //setApiError(true);
+        return error.response.data.message;
+      } else if (error.request) {
+        //setApiError(true);
+      } else {
+        //setApiError(true);
+      }
     });
 }

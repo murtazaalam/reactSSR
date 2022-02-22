@@ -32,7 +32,7 @@ function Login({ open, handleClose, PaperComponent }) {
                 aria-label="lab API tabs example"
               >
                 <Tab label="Login" value="1" />
-                <Tab label="Sign up" value="2" />
+                <Tab label="SignUp" value="2" />
               </TabList>
             </Box>
           </DialogTitle>

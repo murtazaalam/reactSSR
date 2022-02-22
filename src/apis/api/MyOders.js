@@ -8,7 +8,13 @@ export default function myOrdersApi(setCourse){
         }
     }).then((response) => {
         setCourse(response.data);
-    }).catch((err) => {
-        console.log(err)
+    }).catch((error) => {
+        if (error) {
+            
+        } else if (error.request) {
+        //setApiError(true);
+        } else {
+        //setApiError(true);
+        }
     })
 }

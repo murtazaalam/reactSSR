@@ -11,7 +11,6 @@ const TopCourses = () => {
   React.useEffect(() => {
     getTopCourseApi(setTopCourses);
   }, []);
-  console.log(">>>",topCourses);
   return (
     <>
       {topCourses && topCourses.length !== 0 ? (

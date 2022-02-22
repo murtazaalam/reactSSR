@@ -2,10 +2,10 @@ import React from "react";
 
 function ExpertCard(props) {
   return (
-    <main class="main">
-      <section class="container">
-        <article class="review">
-          <div class="img-container">
+    <main className="main">
+      <section className="container">
+        <article className="review">
+          <div className="img-container">
             <img src={props.data.pic} alt="" id="person-img" />
           </div>
 

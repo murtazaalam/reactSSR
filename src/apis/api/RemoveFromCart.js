@@ -13,8 +13,6 @@ export default async function removeItemFromCart(id, setCount) {
       return { status: 200, message: "Course deleted successfully." };
     })
     .catch((err) => {
-      console.log(err.response.data.message);
-      console.log(err.response);
       return { status: 400, message: "Failed to delete " };
     });
 }

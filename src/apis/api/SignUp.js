@@ -1,18 +1,25 @@
 import routes from '../routes/Services.routes';
 import axios from 'axios';
 
-export default function RegisterApi(body, setError, setLoading){
-    console.log(">>",body);
+export default function RegisterApi(body, setError, setLoader){
     axios.post(routes.SignUp, body, {
         headers: {
             'Content-Type': 'application/json'
             },
     }).then((res) => {
-        console.log("error")
-        console.log(res.data.messgae)
-        //setError(res.data);
-    }).catch((err) => {
-        if(err.response.data.message) return setError(err.response.data.message);
-        setError(err.response.data.error[0].msg);
+        setLoader(false);
+        console.log(res);
+    }).catch((error) => {
+        if (error.response.data) {
+            setLoader(false);
+            if(error.response.data.message) return setError(error.response.data.message);
+            setError(error.response.data.error[0].msg);
+        } else if (error.request) {
+        //setApiError(true);
+            setLoader(false);
+        } else {
+        //setApiError(true);
+            setLoader(false);
+        }
     })
 }

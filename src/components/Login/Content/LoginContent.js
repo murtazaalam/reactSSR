@@ -13,38 +13,83 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginApi from "../../../apis/api/Login";
+import ButtonLoader from "../../../assets/images/button_loader.gif";
 import { useRecoilState } from "recoil";
 import { userAuth } from "../../../recoil/store";
 import { useNavigate } from 'react-router-dom';
+import { makeStyles } from "@material-ui/core/styles";
+import { ToastContainer, toast } from "react-toastify";
 
 const theme = createTheme();
 
+const useStyles = makeStyles(theme => ({
+  btnLogin:{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '10px'
+  }
+}));
+
 export default function LoginContent(props) {
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState();
   const [user, setUser] = useRecoilState(userAuth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [validateEmail, setValidateEmail] = useState(false);
+  const [validatePassword, setvalidatePassword] = useState(false);
+  const [loader, setLoader] = React.useState(false);
   const navigate = useNavigate();
+  const classes = useStyles();
 
   const emptyState = () => {
     setEmail("");
     setPassword("");
   };
+  const validation = (event) => {
+    
+    let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(event.target.name === "email"){
+      setEmail(event.target.value);
+      if(!event.target.value.match(emailValidate)) return setValidateEmail(true);
+      setValidateEmail(false);
+    }
+    if(event.target.name === "password"){
+      setPassword(event.target.value);
+      if(event.target.value == "") return setvalidatePassword(true);
+      setvalidatePassword(false); 
+    }
+  }
   const handleSubmit = async(event) => {
     event.preventDefault();
+    setLoader(true);
     setError("");
     let body = {
       email: email,
       password: password,
     };
-    emptyState();
-    if (!body.email || !body.password)
+    if (!body.email || !body.password){ 
+      setLoader(false);
       return setError("Email And Password Required");
-    let res = await LoginApi(body, setError, setLoading, setUser);
+    }
+    if(validateEmail === true){ 
+      setLoader(false);
+      return setError("Invalid Email");
+    }
+    let res = await LoginApi(body, setError, setLoader);
     if (res === "Login Success") {
       setUser(true);
+      emptyState();
       //window.location.reload();
+      toast.success("Login Success", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       navigate('/',{state:{openModel: false}});
     }
   };
@@ -57,7 +102,6 @@ export default function LoginContent(props) {
           sx={{
             marginTop: 2,
             marginBottom: 2,
-
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -67,7 +111,7 @@ export default function LoginContent(props) {
             <img src="https://i.ibb.co/jVR0Kyc/logo-3.png" alt=""></img>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Log in
+            LogIn
           </Typography>
           {error === "Login Success" && (
             <Typography
@@ -110,8 +154,10 @@ export default function LoginContent(props) {
               name="email"
               autoComplete="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => validation(e)}
               autoFocus
+              error={validateEmail}
+              helperText={validateEmail ? 'Invalid Email.' : ''}
             />
             <TextField
               margin="normal"
@@ -122,28 +168,33 @@ export default function LoginContent(props) {
               type="password"
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => validation(e)}
               autoComplete="current-password"
+              error={validatePassword}
+              helperText={validatePassword ? 'Enter Password.' : ''}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               sx={{ ml: "0 !important" }}
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <button
               type="submit"
-              className="btn-grad full-width"
-              style={{ marginTop: "10px" }}
+              style={loader ? {backgroundColor: 'var(--color-disable)'} : {backgroundColor: 'var(--color-secondary)'}
+              }
+              disabled={loader ? true : false}
+              className={`btn-grad full-width ${classes.btnLogin}`}
             >
-              Log In
+              {loader ? <img src={ButtonLoader} width="80" /> : 'LogIn'}
+              
             </button>
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         </Box>
       </Container>

@@ -15,25 +15,26 @@ import Loading from "../Loader";
 
 const Events = (props) => {
   const [events, setEventData] = useState();
-  const [category, setEventCategory] = useState();
+  const [upcomingTab, setUpcomingTab] = useState(true);
+  const [pastTab, setPastTab] = useState(false);
 
   useEffect(() => {
-    if (category === "upcoming") {
-      if (events == "") {
-        eventsApi(category, setEventData);
-      }
-    } else if (category === "past") {
-      if (events == "") {
-        eventsApi(category, setEventData);
-      }
-    } else {
       if (!events) {
         eventsApi(props.category, setEventData);
       }
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events]);
-
+  const setEventCategory = (category) => {
+    setEventData([]);
+    eventsApi(category, setEventData);
+    if(category === "upcoming"){
+      setUpcomingTab(true);
+      setPastTab(false);
+    }else{
+      setUpcomingTab(false);
+      setPastTab(true);
+    }
+  }
   return (
     <>
       <Box
@@ -70,23 +71,15 @@ const Events = (props) => {
               <Box component="div" className="row event-menu">
                 <Typography
                   component="h6"
-                  className={
-                    category === "upcoming"
-                      ? "active-event-menu"
-                      : "inactive-event-menu"
-                  }
-                  onClick={() => setEventCategory("upcoming", setEventData([]))}
+                  style={upcomingTab ? {fontWeight: 800, color: 'var(--color-secondary)'} : {fontWeight: 600, color: 'black'}}
+                  onClick={() => setEventCategory("upcoming")}
                 >
                   Upcoming Events
                 </Typography>
                 <Typography
                   component="h6"
-                  className={
-                    category === "past"
-                      ? "active-event-menu"
-                      : "inactive-event-menu"
-                  }
-                  onClick={() => setEventCategory("past", setEventData([]))}
+                  style={pastTab ? {fontWeight: 800, color: 'var(--color-secondary)'} : {fontWeight: 600, color: 'black'}}
+                  onClick={() => setEventCategory("past")}
                 >
                   Past Events
                 </Typography>

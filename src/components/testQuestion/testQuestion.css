@@ -5,3 +5,8 @@
 .interview-answer {
   color: var(--color-secondary-text);
 }
+.event-menu h6:first-child{
+  font-weight: 800;
+  color: var(--color-secondary);
+
+}

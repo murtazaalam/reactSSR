@@ -32,6 +32,7 @@ import getFromCartApi from "../../../apis/api/GetFromCart";
 import "./navBar.css";
 import Login from "../../Login/Login";
 import { cartItemList, userAuth } from "../../../recoil/store";
+import { ToastContainer, toast } from "react-toastify";
 
 import Paper from "@mui/material/Paper";
 function PaperComponent(props) {
@@ -53,6 +54,7 @@ const NavBar = (props) => {
   const [cartCount, setCartCount] = useState(0);
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
+  const [apiError, setApiError] = useState(false);
   const isUserLogIn = useRecoilValue(userAuth);
   const location = useLocation();
 
@@ -97,7 +99,6 @@ const NavBar = (props) => {
   });
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      console.log("true");
       setUser(true);
     } else {
       // console.log("false");
@@ -117,25 +118,38 @@ const NavBar = (props) => {
   useEffect(() => {
     const getAllCourses = async () => {
       if (!allCourse) {
-        AllCourseApi(setAllCourse, setLoading);
+        await AllCourseApi(setAllCourse, setLoading, setApiError);
+        if (allCourse) {
+          allCourse?.forEach((item) => {
+            if (item.category === "For School") {
+              schoolCourses.push(item);
+            }
+            if (item.category === "For Intermediate") {
+              intermediateCourses.push(item);
+            }
+            if (item.category === "For College") {
+              collegeCourses.push(item);
+            }
+          });
+        }
       }
     };
     getAllCourses();
   }, [allCourse]);
 
-  if (allCourse) {
-    allCourse?.forEach((item) => {
-      if (item.category === "For School") {
-        schoolCourses.push(item);
-      }
-      if (item.category === "For Intermediate") {
-        intermediateCourses.push(item);
-      }
-      if (item.category === "For College") {
-        collegeCourses.push(item);
-      }
+  if(apiError === true){
+    toast.error("Weak Network", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
     });
+    setApiError(false);
   }
+  
   //JSON.parse(localStorage.getItem) to retrieve
   localStorage.setItem("forSchool", JSON.stringify(schoolCourses));
   localStorage.setItem("forIntermediate", JSON.stringify(intermediateCourses));
@@ -146,12 +160,11 @@ const NavBar = (props) => {
     console.log(">>>>", isUserLogIn, ">>open", open);
     
   }, []);
-  //console.log("checking",location.state);
-  //setOpen(location.state.isUser);
+  // console.log("checking",location.state);
   // console.log("helloasd",location.state);
   // if(location.state){
-  //   console.log("hello",location.state);
   //   setOpen(location.state.openModel);
+  //   location.state.openModel = false;
   // }
   
   const list = (anchor) => {
@@ -208,7 +221,7 @@ const NavBar = (props) => {
         >
           <Toolbar className="main-logo">
             <Link to="/">
-              <img src={logoOnScroll} height="100%" width="234px" alt="" />
+              <img src={logoOnScroll} alt="" />
             </Link>
           </Toolbar>
           <Toolbar>
@@ -425,7 +438,7 @@ const NavBar = (props) => {
                 </div>
 
                 <div className="item">
-                  <div class="dropdown">
+                  <div className="dropdown">
                     <a className="menu-text">
                       <span
                         className={
@@ -435,7 +448,7 @@ const NavBar = (props) => {
                         Contact Us
                       </span>
                     </a>
-                    <div class="dropdown-content-contact">
+                    <div className="dropdown-content-contact">
                       <Link to="/contact-us-for-hiring">For Hiring</Link>
                       <Link to="/contact-us-to-get-hired">To Get Hired</Link>
                       <Link to="/coming-soon">know More</Link>
@@ -455,7 +468,7 @@ const NavBar = (props) => {
                     </IconButton>
                   </Link>
 
-                  <div class="dropdown">
+                  <div className="dropdown">
                     <Link to="/">
                       <span
                         className="color-white"
@@ -466,7 +479,7 @@ const NavBar = (props) => {
                         <AccountCircleIcon fontSize="large" />
                       </span>
                     </Link>
-                    <div class="dropdown-content-contact">
+                    <div className="dropdown-content-contact">
                       <Link to="/my-courses">My Courses</Link>
                       <a style={{ color: "black" }} onClick={logoutHandler}>
                         Log Out
@@ -476,13 +489,13 @@ const NavBar = (props) => {
                 </>
               ) : (
                 <>
-                  <button className="btn-grad" onClick={handleClickOpen}>
+                  <button className="btn-grad btn-nav" onClick={handleClickOpen}>
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
                       }
                     >
-                      Login / SignUp
+                      LogIn / SignUp
                     </span>
                   </button>
 
@@ -497,6 +510,17 @@ const NavBar = (props) => {
           </Toolbar>
         </Container>
       </AppBar>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };

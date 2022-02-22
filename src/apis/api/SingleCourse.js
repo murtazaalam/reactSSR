@@ -7,7 +7,15 @@ export default function singleCourseApi(course_id, setCourseData) {
     .then((res) => {
       setCourseData(res.data);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      if (error.response) {
+        ////setApiError(true);
+      } else if (error.request) {
+      //setApiError(true);
+          //setLoader(false);
+      } else {
+      //setApiError(true);
+          //setLoader(false);
+      }
     });
 }

@@ -3,10 +3,10 @@ import "./StudentCard.css";
 
 export default function StudentCard(props) {
   return (
-    <main class="main">
-      <section class="container container-width">
-        <article class="review">
-          <div class="img-container">
+    <main className="main">
+      <section className="container container-width">
+        <article className="review">
+          <div className="img-container">
             <img src={props.data.pic} alt="" id="person-img" />
           </div>
 
