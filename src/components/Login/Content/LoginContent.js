@@ -1,7 +1,6 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -16,7 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginApi from "../../../apis/api/Login";
 import { useRecoilState } from "recoil";
 import { userAuth } from "../../../recoil/store";
-import { withRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -26,12 +25,13 @@ export default function LoginContent(props) {
   const [user, setUser] = useRecoilState(userAuth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const emptyState = () => {
     setEmail("");
     setPassword("");
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     setError("");
     let body = {
@@ -41,11 +41,11 @@ export default function LoginContent(props) {
     emptyState();
     if (!body.email || !body.password)
       return setError("Email And Password Required");
-    LoginApi(body, setError, setLoading, setUser);
-    if (error === "Login Success") {
+    let res = await LoginApi(body, setError, setLoading, setUser);
+    if (res === "Login Success") {
       setUser(true);
-      window.location.reload();
-      console.log(user);
+      //window.location.reload();
+      navigate('/',{state:{openModel: false}});
     }
   };
 

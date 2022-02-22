@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -22,7 +22,6 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PrimaryNavBar from "../primaryNavBar/PrimaryNavBar";
 // import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
-import { withRouter } from "react-router-dom";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
 import SchoolIcon from "../../../assets/images/new-course-icon-school.svg";
 import IntermediateIcon from "../../../assets/images/new-course-icon-intermediate.svg";
@@ -55,7 +54,8 @@ const NavBar = (props) => {
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const isUserLogIn = useRecoilValue(userAuth);
-  console.log(props);
+  const location = useLocation();
+
   let schoolCourses = [];
   let intermediateCourses = [];
   let collegeCourses = [];
@@ -142,8 +142,16 @@ const NavBar = (props) => {
     console.log(">>>>", isUserLogIn);
     if (isUserLogIn) setOpen(false);
     console.log(">>>>", isUserLogIn, ">>open", open);
+    
   }, []);
-
+  //console.log("checking",location.state);
+  //setOpen(location.state.isUser);
+  // console.log("helloasd",location.state);
+  // if(location.state){
+  //   console.log("hello",location.state);
+  //   setOpen(location.state.openModel);
+  // }
+  
   const list = (anchor) => {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
