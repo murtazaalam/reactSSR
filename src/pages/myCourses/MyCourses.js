@@ -9,19 +9,10 @@ import myOrdersApi from "../../apis/api/MyOders";
 import CourseCard from "../../components/TopCourses/CourseCard/CourseCard";
 function MyCourses() {
   const [course, setCourse] = useState();
-  const item = {
-    coverSrc:
-      "https://img.freepik.com/free-photo/distance-learning-online-webpage-interface_53876-133740.jpg?w=1380",
-    title: "web development",
-    price: "500",
-    serviceTime: "2 hours",
-    rating: 5,
-    myCourseCheck: true,
-  };
-  useEffect(()=> {
+
+  useEffect(() => {
     myOrdersApi(setCourse);
-  },[]);
-  console.log(">>>",course);
+  }, []);
   return (
     <div style={{ placeContent: "center" }}>
       <Banner
@@ -31,16 +22,17 @@ function MyCourses() {
       />
       <Container maxWidth="lg" sx={{ p: 2 }}>
         <Grid container spacing={3}>
-          {course && course.map((data, index) => (
-            <Grid item>
-              <CourseCard
-                key={index}
-                couseData={data}
-                fromMycourse={true}
-                // review={data.reviews}
-              ></CourseCard>
-            </Grid>
-          ))}
+          {course &&
+            course.map((data, index) => (
+              <Grid item>
+                <CourseCard
+                  key={index}
+                  couseData={data}
+                  fromMycourse={true}
+                  // review={data.reviews}
+                ></CourseCard>
+              </Grid>
+            ))}
         </Grid>
       </Container>
     </div>

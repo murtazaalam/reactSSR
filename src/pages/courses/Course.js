@@ -24,7 +24,11 @@ const Courses = () => {
         <Loading />
       ) : (
         <>
-          <CourseHeader title={course.course_name} category={course.category} />
+          <CourseHeader
+            title={course.course_name}
+            category={course.category}
+            subtitle="subtitle"
+          />
           <CourseBody course={course} />
         </>
       )}

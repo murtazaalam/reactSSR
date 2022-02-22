@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import { ToastContainer, toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
 import removeItemFromCart from "../../apis/api/RemoveFromCart";
 import getFromCartApi from "../../apis/api/GetFromCart";
 import addOrderApi from "../../apis/api/AddOrder";

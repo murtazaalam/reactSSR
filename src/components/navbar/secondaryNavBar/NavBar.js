@@ -83,6 +83,8 @@ const NavBar = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+    setOpen(false);
+    setOpen(false);
   };
   const toggleDrawer = (anchor, open) => (event) => {
     setState({ ...state, [anchor]: open });
@@ -138,7 +140,7 @@ const NavBar = (props) => {
   localStorage.setItem("forSchool", JSON.stringify(schoolCourses));
   localStorage.setItem("forIntermediate", JSON.stringify(intermediateCourses));
   localStorage.setItem("forCollege", JSON.stringify(collegeCourses));
-  React.useEffect(() => {
+  useEffect(() => {
     console.log(">>>>", isUserLogIn);
     if (isUserLogIn) setOpen(false);
     console.log(">>>>", isUserLogIn, ">>open", open);
