@@ -1,10 +1,28 @@
-import OneToOneIcon from "../../assets/Svgs/ServicesIcon/oneToOne.svg";
+import OneToOneIcon from "../../assets/images/servicesIcon/management system.png";
 import ResumeIcon from "../../assets/Svgs/ServicesIcon/resume.svg";
-import Webinar from "../../assets/Svgs/ServicesIcon/webinar.svg";
 import Workshop from "../../assets/Svgs/ServicesIcon/workshop.svg";
-import ITIcon from "../../assets/Svgs/ServicesIcon/tp.svg";
+import English from "../../assets/images/servicesIcon/English.png";
 import CpIcon from "../../assets/Svgs/ServicesIcon/cp.svg";
 import IpIcon from "../../assets/Svgs/ServicesIcon/IP.svg";
+import labIcon from "../../assets/images/servicesIcon/Lab.png";
+import hireFromUs from "../../assets/images/servicesIcon/Hire from us.png";
+import sendStudentForInternships from "../../assets/images/servicesIcon/Send student for internship.png";
+import advertiseAmongStudents from "../../assets/images/servicesIcon/Adverties among students.png";
+import trainStaff from "../../assets/images/servicesIcon/Train staff.png";
+import conductDrive from "../../assets/images/servicesIcon/Lab.png";
+import stackTraining from "../../assets/images/servicesIcon/stack training.png";
+import softSkills from "../../assets/images/servicesIcon/Soft skill.png";
+import placementTraining from "../../assets/images/servicesIcon/Placement Training.png";
+import jobOpportunities from "../../assets/images/servicesIcon/job-opportunity.png";
+import internships from "../../assets/images/servicesIcon/Internship.png";
+import capstoneAssistance from "../../assets/images/servicesIcon/Capstone assistance.png";
+import counselling from "../../assets/images/servicesIcon/counselling.png";
+import iit from "../../assets/images/servicesIcon/IIT.png";
+import ncert from "../../assets/images/servicesIcon/NCERT.png";
+import getCompanies from "../../assets/images/servicesIcon/Get companies.png";
+import getTraining from "../../assets/images/servicesIcon/Get training proof.png";
+import connectWith from "../../assets/images/servicesIcon/Connect with +2 student.png";
+import managementSystem from "../../assets/images/servicesIcon/management system.png";
 
 const Services = [
   {
@@ -12,7 +30,7 @@ const Services = [
     tab: "School",
     text: "Labs",
     link: "/service/class-projects/",
-    icon: CpIcon,
+    icon: labIcon,
     description:
       "Major and Minor projects are a part of students’ academics, but how diligently they work on it makes them stand out from others. Techvanto Academy guides learners through choosing the project, supporting documents or tools and finally the documentation. Undertake real-life projects while revamping your analytical, problem-solving, communication and soft skills tremendously",
   },
@@ -30,7 +48,7 @@ const Services = [
     tab: "School",
     text: "IIT Basics",
     link: "/services/webinar",
-    icon: Webinar,
+    icon: iit,
     description:
       "Techvanto’s free webinars provide you with the stepping stones to success. They are freely scalable and engaging. Hear out our able speakers share their own experiences while associating it with an in-depth analysis of trending topics",
   },
@@ -39,7 +57,7 @@ const Services = [
     tab: "School",
     text: "English",
     link: "/service/techvanto-training-program/",
-    icon: ITIcon,
+    icon: English,
     description:
       "Techvanto Academy aspires to create a vibrant and informative environment wherein students are honed to perform their best in job roles. Industrial training is one of our core competencies that pushes you to put your knowledge to work with practical implementation of concepts. Grasp a thorough understanding of high-end problems and real-world applications via our Industrial Training program",
   },
@@ -66,7 +84,7 @@ const Services = [
     tab: "School",
     text: "Management System",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: managementSystem,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -75,7 +93,7 @@ const Services = [
     tab: "Intermediate",
     text: "Counselling",
     link: "/service/counselling/",
-    icon: OneToOneIcon,
+    icon: counselling,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -84,7 +102,7 @@ const Services = [
     tab: "Intermediate",
     text: "IIT Preparation",
     link: "/service/iit-preparation/",
-    icon: OneToOneIcon,
+    icon: iit,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -93,7 +111,7 @@ const Services = [
     tab: "Intermediate",
     text: "State/NCERT",
     link: "/service/state-ncert/",
-    icon: OneToOneIcon,
+    icon: ncert,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -102,7 +120,7 @@ const Services = [
     tab: "Intermediate",
     text: "Stack Training",
     link: "/service/stack-training/",
-    icon: OneToOneIcon,
+    icon: stackTraining,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -111,7 +129,7 @@ const Services = [
     tab: "Intermediate",
     text: "Soft Skills",
     link: "/service/soft-skills/",
-    icon: OneToOneIcon,
+    icon: softSkills,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -120,7 +138,7 @@ const Services = [
     tab: "Intermediate",
     text: "Management System",
     link: "/service/management-system/",
-    icon: OneToOneIcon,
+    icon: managementSystem,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -129,7 +147,7 @@ const Services = [
     tab: "Undergrads",
     text: "Stack training",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: stackTraining,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -138,7 +156,7 @@ const Services = [
     tab: "Undergrads",
     text: "Soft Skills",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: softSkills,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -147,7 +165,7 @@ const Services = [
     tab: "Undergrads",
     text: "Placement Training",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: placementTraining,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -156,7 +174,7 @@ const Services = [
     tab: "Undergrads",
     text: "Job Opportunities",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: jobOpportunities,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -165,7 +183,7 @@ const Services = [
     tab: "Undergrads",
     text: "Internships",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: internships,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -174,7 +192,7 @@ const Services = [
     tab: "Undergrads",
     text: "Capstone Assistance",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: capstoneAssistance,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -183,7 +201,7 @@ const Services = [
     tab: "Companies",
     text: "Hire From Us",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: hireFromUs,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -192,7 +210,7 @@ const Services = [
     tab: "Companies",
     text: "Send Students For Internships",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: sendStudentForInternships,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -201,7 +219,7 @@ const Services = [
     tab: "Companies",
     text: "Advertise Among Students",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: advertiseAmongStudents,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -210,7 +228,7 @@ const Services = [
     tab: "Companies",
     text: "Train Staff",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: trainStaff,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -219,7 +237,7 @@ const Services = [
     tab: "Companies",
     text: "Conduct Drives",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: conductDrive,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -228,7 +246,7 @@ const Services = [
     tab: "Colleges",
     text: "Get Companies",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: getCompanies,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -237,7 +255,7 @@ const Services = [
     tab: "Colleges",
     text: "Get Training Prof",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: getTraining,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -246,7 +264,7 @@ const Services = [
     tab: "Colleges",
     text: "Connect With +2 Students",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: connectWith,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },
@@ -255,7 +273,7 @@ const Services = [
     tab: "Colleges",
     text: "Management System",
     link: "/service/one-to-one/",
-    icon: OneToOneIcon,
+    icon: managementSystem,
     description:
       "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
   },

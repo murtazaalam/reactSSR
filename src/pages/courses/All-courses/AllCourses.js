@@ -8,6 +8,7 @@ import { useRecoilState } from "recoil";
 import { courseList } from "../../../recoil/store";
 import CourseCard from "../../../components/TopCourses/CourseCard/CourseCard";
 import { useParams } from "react-router-dom";
+import Loading from "../../../components/Loader";
 
 function AllCourses() {
   const { categoryRoute } = useParams();
@@ -21,14 +22,16 @@ function AllCourses() {
   const [category, setCategory] = useState("");
   const [list, setList] = useRecoilState(courseList);
   const [searchInput, setSearchInput] = useState("");
-
+  const [loading, setLoading] = useState(true);
   console.log(category);
 
   const handleChangeChecked = (id) => {
     setCategory(selectedCategory[id - 1].label);
     const categoryStateList = selectedCategory;
     const changeCheckedCategories = categoryStateList.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
+      item.id === id
+        ? { ...item, checked: !item.checked }
+        : { ...item, checked: false }
     );
     setSelectedCategory(changeCheckedCategories);
     console.log(selectedCategory[id - 1].label);
@@ -42,6 +45,14 @@ function AllCourses() {
       localStorage.getItem("forIntermediate")
     );
     setList([...forSchool, ...forCollege, ...forIntermediate]);
+    const categoryStateList = selectedCategory;
+    const changeCheckedCategories = categoryStateList.map((item) =>
+      item.label.toLowerCase().includes(categoryRoute.toLowerCase())
+        ? { ...item, checked: !item.checked }
+        : { ...item, checked: false }
+    );
+    setSelectedCategory(changeCheckedCategories);
+    setLoading(false);
   };
   const data = list
     ?.filter((val) => {
@@ -69,17 +80,17 @@ function AllCourses() {
       return category === data.category ||
         category === "" ||
         category === "All" ? (
-          <>
-        <CourseCard
-          id={data._id}
-          title={data.course_name}
-          pic={data.thumbnail}
-          gradient={data.gradient}
-          price={data.price}
-          discount={data.discount}
-          rating={3}
-          // review={data.reviews}
-        ></CourseCard>
+        <>
+          <CourseCard
+            id={data._id}
+            title={data.course_name}
+            pic={data.thumbnail}
+            gradient={data.gradient}
+            price={data.price}
+            discount={data.discount}
+            rating={3}
+            // review={data.reviews}
+          ></CourseCard>
         </>
       ) : null;
     });
@@ -125,13 +136,18 @@ function AllCourses() {
               changeChecked={handleChangeChecked}
             />
           </div>
-          <div className="course-list-wrap">
-            {/* List and Empty View */}
-            <div className="list-wrap">
-              {console.log("rendering")}
-              {data}
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className="course-list-wrap">
+              {/* List and Empty View */}
+
+              <div className="list-wrap">
+                {console.log("rendering")}
+                {data}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </>

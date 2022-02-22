@@ -1,41 +1,18 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import RegisterApi from "../../../apis/api/SignUp";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUp({ classes }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState();
 
@@ -77,7 +54,7 @@ export default function SignUp() {
             <img src="https://i.ibb.co/jVR0Kyc/logo-3.png" alt=""></img>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Signup
           </Typography>
           <Typography
             component="p"
@@ -97,29 +74,20 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                  className={classes.root}
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  id="name"
+                  label="Name"
+                  name="name"
+                  autoComplete="name"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.root}
                   required
                   fullWidth
                   id="email"
@@ -130,6 +98,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.root}
                   required
                   fullWidth
                   id="mobile"
@@ -140,6 +109,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.root}
                   required
                   fullWidth
                   name="password"
@@ -151,6 +121,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.root}
                   required
                   fullWidth
                   name="repassword"

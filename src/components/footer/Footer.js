@@ -3,8 +3,13 @@ import { Container } from "@mui/material";
 import Services from "../../data/services/Services";
 import logo from "../../assets/images/on-scroll-logo.png";
 import "./Footer.css";
-
+import { Link } from "react-router-dom";
+import getTopCourseApi from "../../apis/api/TopCourses";
 const Footer = () => {
+  const [topCourses, setTopCourses] = React.useState([]);
+  React.useEffect(() => {
+    getTopCourseApi(setTopCourses);
+  }, []);
   return (
     <section className="techvanto-footer">
       <section className="techvant-footer-upper-part">
@@ -24,7 +29,7 @@ const Footer = () => {
                     href="https://www.facebook.com/techvantoacademy/"
                     className="social-link icon-link-padding"
                     target="_blank"
-                    style={{color: "red"}}
+                    style={{ color: "red" }}
                   >
                     <svg
                       className="svg-icon "
@@ -91,16 +96,16 @@ const Footer = () => {
               <div className="techvanto-footer-text-header color">
                 Top Courses{" "}
               </div>
-              {[
-                "Web Development",
-                "Data Science",
-                "Machine Learning",
-                "Full stack development",
-                "Data Structures and Algorithm",
-                "Basics of Java",
-                "Block Chain",
-              ].map((data, index) => (
-                <p className="techvanto-footer-text text-small">{data}</p>
+              {topCourses.map((data, index) => (
+                <a
+                  style={{ textDecoration: "none", color: "white" }}
+                  href={`/courses/${data._id}`}
+                  className="techvanto-footer-text text-small"
+                >
+                  <p className="techvanto-footer-text text-small">
+                    {data.course_name}
+                  </p>
+                </a>
               ))}
             </div>
             <div style={{ height: "-webkit-fill-available" }}>
@@ -110,59 +115,108 @@ const Footer = () => {
               {Services.map(
                 (data, index) =>
                   index <= 6 && (
-                    <p className="techvanto-footer-text text-small">
-                      {data.text}
-                    </p>
+                    <a
+                      style={{ textDecoration: "none", color: "white" }}
+                      href="/coming-soon"
+                      className="techvanto-footer-text text-small"
+                    >
+                      <p>{data.text}</p>
+                    </a>
                   )
               )}
             </div>
 
             <div style={{ height: "-webkit-fill-available" }}>
               <div className="techvanto-footer-text-header color ">FAQ </div>
-              <p className="techvanto-footer-text text-small">
-                Discussion Forum
-              </p>
-              <p className="techvanto-footer-text text-small">Blog</p>
-              <p className="techvanto-footer-text text-small">
-                Reasearch & Project
-              </p>
+              <a
+                style={{ textDecoration: "none", color: "white" }}
+                href="/coming-soon"
+                className="techvanto-footer-text text-small"
+              >
+                <p className="techvanto-footer-text text-small">
+                  Discussion Forum
+                </p>
+              </a>
+
+              <a
+                style={{ textDecoration: "none", color: "white" }}
+                href="/blogs"
+                className="techvanto-footer-text text-small"
+              >
+                <p className="techvanto-footer-text text-small">Blog</p>
+              </a>
+              <a
+                style={{ textDecoration: "none", color: "white" }}
+                href="/coming-soon"
+                className="techvanto-footer-text text-small"
+              >
+                <p className="techvanto-footer-text text-small">
+                  Reasearch & Project
+                </p>
+              </a>
 
               <div className="techvanto-footer-text-header color">
                 Oppurtunities{" "}
               </div>
-
-              <p className="techvanto-footer-text text-small">
-                Upcoming And Past Events
-              </p>
-              <p className="techvanto-footer-text text-small">
-                Campus Ambassador
-              </p>
-              <p className="techvanto-footer-text text-small">Carrer/ Jobs</p>
+              <a
+                style={{ textDecoration: "none", color: "white" }}
+                href="/events"
+                className="techvanto-footer-text text-small"
+              >
+                <p className="techvanto-footer-text text-small">
+                  Upcoming And Past Events
+                </p>
+              </a>
+              <a
+                href="/#campusAmbassador"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <p className="techvanto-footer-text text-small">
+                  Campus Ambassador
+                </p>{" "}
+              </a>
+              <a
+                href="/coming-soon"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <p className="techvanto-footer-text text-small">Carrer/ Jobs</p>
+              </a>
             </div>
             <div style={{ height: "-webkit-fill-available" }}>
               <div className="techvanto-footer-text-header color">
                 Contact Us
               </div>
-              <p className="techvanto-footer-text text-small">Hire With Us</p>
-              <p className="techvanto-footer-text text-small">Get Hired</p>
-              <p className="techvanto-footer-text text-small">
-                Train Your Team
-              </p>
+              <a
+                href="/contact-us-for-hiring"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <p className="techvanto-footer-text text-small">Hire With Us</p>
+              </a>
+              <a
+                href="/contact-us-to-get-hired"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <p className="techvanto-footer-text text-small">Get Hired</p>
+              </a>
+              <a
+                href="/coming-soon"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <p className="techvanto-footer-text text-small">
+                  Train Your Team
+                </p>
+              </a>
 
               <div className="techvanto-footer-text-header color">Contact </div>
               <div className="techvanto-footer-text">
                 {/* <PermContactCalendarIcon></PermContactCalendarIcon> */}
                 <p className="text-small">
-                  12/13, New Horizon Complex,Near TXN Mall,M.B. Road, Banglore,
-                  India
+                  R7, 3rd floor, MG Road, Ghitorni, New Delhi 110030
                 </p>
               </div>
               <div className="techvanto-footer-text">
                 {/* <PermContactCalendarIcon></PermContactCalendarIcon> */}
-                <p className="text-small">
-                  12/13, New Horizon Complex,Near TXN Mall,M.B. Road, Banglore,
-                  India
-                </p>
+                <p className="text-small">+91-9646206032</p>
               </div>
             </div>
           </div>
@@ -180,11 +234,23 @@ const Footer = () => {
               className="text-small"
               style={{ display: "flex", placeContent: "space-between" }}
             >
-              <p>
-                Terms & Conditions / Privacy Policy / Payment Policy / Placement
-                Policy
-              </p>
-              <p>All Right Reserved. Techvanto Pvt. Ltd.</p>
+              <div style={{ display: "flex" }}>
+                <Link to="/terms-and-conditions" style={{ color: "white" }}>
+                  <p>Terms & Conditions </p>
+                </Link>
+                /
+                <Link to="/privacy-policy" style={{ color: "white" }}>
+                  <p>Privacy Policy </p>
+                </Link>
+                /
+                <Link to="/placement-policy" style={{ color: "white" }}>
+                  <p>Placement Policy </p>
+                </Link>
+                /
+                <Link to="/payment-policy" style={{ color: "white" }}>
+                  <p>Payment Policy </p>
+                </Link>
+              </div>
             </div>
           </Container>
           {/* <section className="techvanto-footer-copyright"> */}

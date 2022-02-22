@@ -8,18 +8,18 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { ToastContainer, toast } from "react-toastify";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginApi from "../../../apis/api/Login";
 import { useRecoilState } from "recoil";
 import { userAuth } from "../../../recoil/store";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
-export default function LoginContent(props) {
+export default function LoginContent({ classes, handleClose }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState();
   const [user, setUser] = useRecoilState(userAuth);
@@ -31,26 +31,62 @@ export default function LoginContent(props) {
     setEmail("");
     setPassword("");
   };
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     let body = {
       email: email,
       password: password,
     };
+    handleClose();
     emptyState();
     if (!body.email || !body.password)
       return setError("Email And Password Required");
-    let res = await LoginApi(body, setError, setLoading, setUser);
-    if (res === "Login Success") {
+    LoginApi(body, setError, setLoading, setUser);
+    if (error === "Login Success") {
       setUser(true);
-      //window.location.reload();
-      navigate('/',{state:{openModel: false}});
+      window.location.reload();
+      console.log(user);
     }
+    // event.preventDefault();
+    // setError("");
+    // let body = {
+    //   email: email,
+    //   password: password,
+    // };
+    // emptyState();
+    // if (!body.email || !body.password)
+    //   return setError("Email And Password Required");
+    // let res = await LoginApi(body, setError, setLoading, setUser);
+    // if (res === "Login Success") {
+    //   setUser(true);
+    //   //window.location.reload();
+    //   toast.success(res, {
+    //     position: "bottom-right",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //   });
+    //   navigate("/", { state: { openModel: false } });
+    // }
   };
 
   return (
     <ThemeProvider theme={theme}>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -67,7 +103,7 @@ export default function LoginContent(props) {
             <img src="https://i.ibb.co/jVR0Kyc/logo-3.png" alt=""></img>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Log in
+            Login
           </Typography>
           {error === "Login Success" && (
             <Typography
@@ -110,6 +146,7 @@ export default function LoginContent(props) {
               name="email"
               autoComplete="email"
               value={email}
+              className={classes.root}
               onChange={(e) => setEmail(e.target.value)}
               autoFocus
             />
@@ -121,15 +158,12 @@ export default function LoginContent(props) {
               label="Password"
               type="password"
               id="password"
+              className={classes.root}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
             />
-            <FormControlLabel
-              sx={{ ml: "0 !important" }}
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <button
               type="submit"
               className="btn-grad full-width"
@@ -137,13 +171,6 @@ export default function LoginContent(props) {
             >
               Log In
             </button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>

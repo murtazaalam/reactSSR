@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -54,7 +54,6 @@ const NavBar = (props) => {
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const isUserLogIn = useRecoilValue(userAuth);
-  const location = useLocation();
 
   let schoolCourses = [];
   let intermediateCourses = [];
@@ -66,9 +65,6 @@ const NavBar = (props) => {
     bottom: false,
     right: false,
   });
-  function isEmpty(obj) {
-    return Object.keys(obj).length === 0;
-  }
   const logoutHandler = () => {
     localStorage.removeItem("token");
     setIsLogged(false);
@@ -144,7 +140,6 @@ const NavBar = (props) => {
     console.log(">>>>", isUserLogIn);
     if (isUserLogIn) setOpen(false);
     console.log(">>>>", isUserLogIn, ">>open", open);
-    
   }, []);
   //console.log("checking",location.state);
   //setOpen(location.state.isUser);
@@ -153,7 +148,7 @@ const NavBar = (props) => {
   //   console.log("hello",location.state);
   //   setOpen(location.state.openModel);
   // }
-  
+
   const list = (anchor) => {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
@@ -206,9 +201,15 @@ const NavBar = (props) => {
           className="secondary-navbar"
           style={{ whiteSpace: "nowrap" }}
         >
-          <Toolbar className="main-logo">
+          <Toolbar className="main-logo" style={{ paddingTop: "3px" }}>
             <Link to="/">
-              <img src={logoOnScroll} height="100%" width="234px" alt="" />
+              <img
+                src={logoOnScroll}
+                height="100%"
+                width="234px"
+                alt=""
+                style={{ width: "-webkit-fill-available" }}
+              />
             </Link>
           </Toolbar>
           <Toolbar>
@@ -380,7 +381,7 @@ const NavBar = (props) => {
                   </div>
                 </div>
                 <div className="item">
-                  <a href="#services" className="menu-text">
+                  <a href="/#services" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -482,7 +483,7 @@ const NavBar = (props) => {
                         scroll === false ? "color-white" : "color-black"
                       }
                     >
-                      Login / SignUp
+                      Login / Signup
                     </span>
                   </button>
 

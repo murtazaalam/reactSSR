@@ -23,7 +23,7 @@ const CourseHeader = (props) => {
           <div class="my-container">
             <div class="course-head">
               <h2>{props.title}</h2>
-              <p style={{ color: "#8c9095" }}>{props.subtitle}</p>
+              <p style={{ color: "white" }}>{props.subtitle}</p>
             </div>
           </div>
         </div>
