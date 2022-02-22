@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import "./singlePost.css";
 
-export default function SinglePost({blogDetails}) {
- 
+export default function SinglePost({ blogDetails }) {
   return (
     <>
       <div className="singlePost">
@@ -19,9 +18,9 @@ export default function SinglePost({blogDetails}) {
             <span>
               Author:
               <b className="singlePostAuthor">
-                <Link className="link" to="/posts?username=Safak">
+                <span className="link">
                   {blogDetails && blogDetails.author_name}
-                </Link>
+                </span>
               </b>
             </span>
             <span>{blogDetails && blogDetails.posted_on}</span>
