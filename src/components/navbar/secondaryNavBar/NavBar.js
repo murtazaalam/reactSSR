@@ -56,8 +56,16 @@ const NavBar = (props) => {
   const [cartCount, setCartCount] = useState(0);
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
-  const [apiError, setApiError] = useState(false);
+  const [loggedin, isUser] = useState();
   let dispatch = useDispatch();
+
+  const [drawable, setDrawable] = useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
   let { admin, isLogin } = useSelector((state) => 
     state.AuthReducer
   )
@@ -75,7 +83,6 @@ const NavBar = (props) => {
     dispatch(logoutAction());
     localStorage.removeItem("token");
     setIsLogged(false);
-    window.location.reload(false);
   };
   const [user, setUser] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -90,7 +97,15 @@ const NavBar = (props) => {
     setOpen(false);
   };
   const toggleDrawer = (anchor, open) => (event) => {
-    setState({ ...state, [anchor]: open });
+    if (
+      event &&
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+
+    setDrawable({ ...drawable, [anchor]: open });
   };
 
   useEffect(() => {
@@ -109,7 +124,7 @@ const NavBar = (props) => {
   useEffect(() => {
     const getCartData = async () => {
       if (!cartData) {
-        let data = await getFromCartApi(setCartData);
+        let data = await getFromCartApi(setCartData, isUser);
         setCartCount(data?.length);
       }
     };
@@ -157,14 +172,55 @@ const NavBar = (props) => {
   localStorage.setItem("forIntermediate", JSON.stringify(intermediateCourses));
   localStorage.setItem("forCollege", JSON.stringify(collegeCourses));
 
-  const list = (anchor) => {
-    <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
-      role="presentation"
-      //   onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <ListItem button>
+  // const list = (anchor) => {
+  //   <Box
+  //     sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
+  //     role="presentation"
+      
+  //     onKeyDown={toggleDrawer(anchor, false)}
+  //   >
+  //     <ListItem button>
+        // <Accordion
+        //   className="techvanto-navbar-service-accordian"
+        //   style={{ boxShadow: "none" }}
+        // >
+        //   <AccordionSummary
+        //     expandIcon={<ExpandMoreIcon />}
+        //     aria-controls="panel1a-content"
+        //     id="panel1a-header"
+        //   >
+        //     <Typography>Services</Typography>
+        //   </AccordionSummary>
+        //   <AccordionDetails>
+        //     <List>
+        //       {Services.map((data, index) => (
+        //         <ListItem
+        //           component={Link}
+        //           to={data.link}
+        //           button
+        //           key={data.text}
+        //         >
+        //           <ListItemText primary={data.text} />
+        //         </ListItem>
+        //       ))}
+        //       <ListItem>
+        //         <ListItemText primary="list is working" />
+        //       </ListItem>
+        //     </List>
+        //   </AccordionDetails>
+        // </Accordion>
+  //     </ListItem>
+  //   </Box>;
+  // };
+
+  const list = (anchor) => (
+      <Box
+        sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+      >
+        <List>
         <Accordion
           className="techvanto-navbar-service-accordian"
           style={{ boxShadow: "none" }}
@@ -194,9 +250,12 @@ const NavBar = (props) => {
             </List>
           </AccordionDetails>
         </Accordion>
-      </ListItem>
-    </Box>;
-  };
+        </List>
+        <List>
+          hello world
+        </List>
+      </Box>
+    );
 
   return (
     <>
@@ -209,14 +268,13 @@ const NavBar = (props) => {
           className="secondary-navbar"
           style={{ whiteSpace: "nowrap" }}
         >
-          <Toolbar className="main-logo" style={{ paddingTop: "3px" }}>
+          <Toolbar className="main-logo" style={{ paddingTop: "3px", width: '250px' }}>
             <Link to="/">
               <img
                 src={logoOnScroll}
                 height="100%"
-                width="234px"
-                alt=""
-                style={{ width: "-webkit-fill-available" }}
+                width="250px"
+                alt="Logo"
               />
             </Link>
           </Toolbar>
@@ -231,7 +289,7 @@ const NavBar = (props) => {
             </Button>
             <SwipeableDrawer
               anchor={"left"}
-              open={state["left"]}
+              open={drawable["left"]}
               onClose={toggleDrawer("left", false)}
               onOpen={toggleDrawer("left", true)}
             >
@@ -453,7 +511,7 @@ const NavBar = (props) => {
                 </div>
               </div>
             </Container>
-            <div className="item">
+            <div className="item user-aria">
               {isLogin ? (
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>

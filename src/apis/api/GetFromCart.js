@@ -1,8 +1,8 @@
 import routes from "../routes/Services.routes";
 import axios from "axios";
 
-export default async function getFromCartApi(setCartData, isSession) {
-  return await axios
+export default async function getFromCartApi(setCartData, isUser) {
+  await axios
     .get(routes.GetCartItems, {
       headers: {
         token: localStorage.getItem("token"),
@@ -15,7 +15,7 @@ export default async function getFromCartApi(setCartData, isSession) {
     .catch((error) => {
       if (error.response) {
         //setApiError(true);
-        isSession(error.response.data.message)
+        isUser(error.response.data.message)
         //return error.response.data.message;
       } else if (error.request) {
         //setApiError(true);

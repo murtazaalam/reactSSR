@@ -25,13 +25,13 @@ function MyCart() {
   const [paymentMessage, setPaymentMessage] = useState("");
   const [deleteCount, setDeleteCount] = useState("");
   const [open, setOpen] = useState(false);
-  const [session, isSession] = useState();
+  const [user, isUser] = useState();
   const navigate = useNavigate();
   const Razorpay = useRazorpay();
   let dispatch = useDispatch();
 
   useEffect(() => {
-    getFromCartApi(setCartItems, isSession);
+    getFromCartApi(setCartItems, isUser);
   }, []);
   const handleClose = () => {
     setOpen(false);
@@ -63,7 +63,7 @@ function MyCart() {
     }
   };
   if (deleteCount > 0) {
-    getFromCartApi(setCartItems, isSession);
+    getFromCartApi(setCartItems, isUser);
   }
 
   const checkout = async () => {
@@ -115,8 +115,8 @@ function MyCart() {
     });
     rzp1.open();
   };
-  if(session === "Unauthorized" || session === "Session Expired"){
-    toast.warn(session, {
+  if(user === "Unauthorized" || user === "Session Expired"){
+    toast.warn(user, {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,

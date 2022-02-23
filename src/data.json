@@ -1,9 +1,7 @@
 {
     "course_name": "Internet of Things",
     "subtitle": "Curate novice IoT ideas and design your own IoT solutions effectively and cohesively.",
-    "description": "The intricate relationship of the Internet of Things and Big Data opens avenues to connect actuators, sensors, electronics, software to surpass connectivity through humans and personal computers. Revamping and boosting efficiency in performance, reducing human involvement and enhancing economic benefits, the demand for IoT devices is only increasing. It has taken over manual ways of running businesses like the medical industry, what more do you need to know?
-    This specialisation training takes you on an enthralling journey to discover some critical aspects of the Raspberry Pi Platform and image processing and object detection, among everything else.
-    ",
+    "description": "The intricate relationship of the Internet of Things and Big Data opens avenues to connect actuators, sensors, electronics, software to surpass connectivity through humans and personal computers. Revamping and boosting efficiency in performance, reducing human involvement and enhancing economic benefits, the demand for IoT devices is only increasing. It has taken over manual ways of running businesses like the medical industry, what more do you need to know? This specialisation training takes you on an enthralling journey to discover some critical aspects of the Raspberry Pi Platform and image processing and object detection, among everything else.",
     "learningObjective": [
         "How to create your own Internet of Things projects independently",
         "How to use ESP8266 development board using NodeMCU firmware",
@@ -11,7 +9,7 @@
         "How to implement MQTT and M2M practically, controlling things using voice commands",
         "The concepts surrounding different clouds, e.g. ThingSpeak, CloudMQTT etc",
         "Using IFTTT, Integration of IFTTT Maker service with ESP8266 Development Board",
-        "How to create your own HTTP to MQTT bridge using AWS Lambda",
+        "How to create your own HTTP to MQTT bridge using AWS Lambda"
     ],
     "preRequisites": [
         "Prior basic-level knowledge of Python.",

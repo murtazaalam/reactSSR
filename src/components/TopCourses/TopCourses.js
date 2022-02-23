@@ -21,7 +21,7 @@ const TopCourses = () => {
                 Top Courses:
               </Typography>
             </Typography>
-            <section className="display-grid fr4 ">
+            <section className="display-grid fr4 top-course-aria">
               {topCourses && topCourses.length !== 0
                 ? topCourses.map((data, index) => {
                     return (

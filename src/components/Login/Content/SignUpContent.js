@@ -97,6 +97,7 @@ export default function SignUp({ classess }) {
     if(name === false && email === false && 
       mobile === false && password === false &&
       confirmPass === false) {
+        console.log("hhh")
       RegisterApi(body, setError, setLoader);
       if(setError === "Registration Success"){
         toast.success(setError, {
