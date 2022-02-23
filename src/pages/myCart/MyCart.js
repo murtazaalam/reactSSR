@@ -329,7 +329,7 @@ function MyCart() {
                             <button
                               type="button"
                               className="btn-grad full-width"
-                              onClick={checkout}
+                              // onClick={checkout}
                             >
                               Checkout
                             </button>

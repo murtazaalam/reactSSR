@@ -30,11 +30,11 @@
     height: 270px;
   }
 }
-@media screen and (min-width: 1000px) {
+@media only screen and (min-width: 700px) {
   .techvanto-video {
     width: 400px;
     height: 270px;
-    flex-direction: row;
+    flex-direction: row !important;
   }
 }
 .techvanto-campus-ambassador-left-image-upper {
@@ -73,11 +73,11 @@
   transition: 2s;
   background-color: var(--color-primary) !important;
 }
-.campus-ambs-aria {
+/* .campus-ambs-aria {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
+} */
 @media only screen and (max-width: 1050px) {
   .techvanto-campus-ambassador {
     grid-template-columns: 1fr !important;

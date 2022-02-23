@@ -208,46 +208,57 @@ const NavBar = (props) => {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      sx={{
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
+        p: 2,
+      }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <Accordion
-          className="techvanto-navbar-service-accordian"
-          style={{ boxShadow: "none" }}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>Services</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <List>
-              {Services.map((data, index) => (
-                <ListItem
-                  component={Link}
-                  to={data.link}
-                  button
-                  key={data.text}
-                >
-                  <ListItemText primary={data.text} />
-                </ListItem>
-              ))}
-              <ListItem>
-                <ListItemText primary="list is working" />
-              </ListItem>
-            </List>
-          </AccordionDetails>
-        </Accordion>
-        </List>
+        <Typography>
+          <a className="sidebar-link" href="/#services">
+            Services
+          </a>
+        </Typography>
+      </List>
+
+      <List>
+        <a className="sidebar-link" href="/all-courses/all">
+          Courses
+        </a>
+      </List>
+      <List>
+        <a className="sidebar-link" href="/events">
+          Events
+        </a>
+      </List>
+      <List>
+        <a className="sidebar-link" href="/interview-questions">
+          Interview Questions
+        </a>
+      </List>
+      <List>
+        <a className="sidebar-link" href="/blogs">
+          Blogs
+        </a>
+      </List>
+      {isLogin ? (
         <List>
+          <a className="sidebar-link" href="/my-courses">
+            My Courses
+          </a>
         </List>
-      </Box>
-    );
+      ) : (
+        <button className="btn-grad btn-nav" onClick={handleClickOpen}>
+          <span className={scroll === false ? "color-white" : "color-black"}>
+            LogIn / SignUp
+          </span>
+        </button>
+      )}
+    </Box>
+  );
 
   return (
     <>
