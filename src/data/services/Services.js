@@ -23,6 +23,9 @@ import getCompanies from "../../assets/images/servicesIcon/Get companies.png";
 import getTraining from "../../assets/images/servicesIcon/Get training proof.png";
 import connectWith from "../../assets/images/servicesIcon/Connect with +2 student.png";
 import managementSystem from "../../assets/images/servicesIcon/management system.png";
+import logical from "../../assets/images/servicesIcon/Logical.png";
+import reasoning from "../../assets/images/servicesIcon/Reasoning.png";
+import tution from "../../assets/images/servicesIcon/Tuition for school.png";
 
 const Services = [
   {
@@ -39,7 +42,7 @@ const Services = [
     tab: "School",
     text: "Tution for Schools",
     link: "/services/workshop",
-    icon: Workshop,
+    icon: tution,
     description:
       "Workshops are surreal, creative experiences to demonstrate the most critical part of your association with us-career advancement. Participate, collaborate and interact with learners and instructors alike. Our trainers lead you through the way of optimum learning and try to broaden your horizons with hands-on projects.",
   },
@@ -66,7 +69,7 @@ const Services = [
     tab: "School",
     text: "Logical",
     link: "/service/interview-preprations/",
-    icon: IpIcon,
+    icon: logical,
     description:
       "If your profile is saturated with the skills you need, what’s holding you back? It could be the fickleness of qualifying interviews looming over your head. If this is so, you can give this a shot. This interview preparation shall comprise one on one sessions, mock interviews, professional networking and much more to help you gain the much-required confidence.",
   },
@@ -75,7 +78,7 @@ const Services = [
     tab: "School",
     text: "Reasoning",
     link: "/services/webinar",
-    icon: ResumeIcon,
+    icon: reasoning,
     description:
       "Summarising your professional acumen in a mere one to two-page resume could be a thorny affair. Our resume building services are quite affordable to make your content pop up before prospective recruiters.",
   },

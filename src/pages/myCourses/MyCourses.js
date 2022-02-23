@@ -28,7 +28,7 @@ function MyCourses() {
             component="section"
             className="page-heading"
             sx={{
-              background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/my+cart.jpg)`,
+              background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/My+courses.jpg)`,
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}

@@ -42,7 +42,7 @@
   position: relative;
   display: inline-block;
 }
-.user-aria{
+.user-aria {
   display: none;
 }
 .dropdown-content-contact {
@@ -269,10 +269,14 @@
 .school-course-list ul li:first-child .desc {
   display: block;
 }
-.btn-nav{
+.btn-nav {
   height: 44px;
   text-transform: capitalize;
   padding: 0 16px;
+}
+.sidebar-link {
+  text-decoration: none;
+  color: var(--color-secondary);
 }
 .navbar-category {
   display: none !important;
@@ -280,13 +284,12 @@
 @media screen and (min-width: 600px) {
 }
 @media screen and (min-width: 1025px) {
-  
 }
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
   .navbar-category {
     display: block !important;
   }
-  .user-aria{
+  .user-aria {
     display: block;
   }
   .menu-icon {
@@ -298,5 +301,5 @@
   }
   .secondary-navbar .css-1t29gy6-MuiToolbar-root {
     padding-left: 24px;
-}
+  }
 }
