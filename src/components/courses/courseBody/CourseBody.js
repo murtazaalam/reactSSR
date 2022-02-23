@@ -96,7 +96,6 @@ const CourseBody = ({ course }) => {
     }
   };
   useEffect(() => {
-    console.log(window.location.href);
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
   }, []);
@@ -256,9 +255,9 @@ const CourseBody = ({ course }) => {
           {!course ? (
             <Skeleton variant="rectangular" width={500} height={691} />
           ) : (
-            <div class="video-box">
+            <div className="video-box">
               {course && (
-                <div class="video">
+                <div className="video">
                   {course.thumbnail && (
                     <img src={course.thumbnail} className="img-fluid" alt="" />
                   )}
@@ -281,9 +280,9 @@ const CourseBody = ({ course }) => {
                   )}
                 </div>
               )}
-              <div class="course-detail">
+              <div className="course-detail">
                 {course && (
-                  <div class="course-price">
+                  <div className="course-price">
                     {course.discount > 0 && (
                       <p>
                         Rs.&nbsp;
@@ -329,43 +328,47 @@ const CourseBody = ({ course }) => {
                     )}
                   </div>
                 )}
-                <div class="other">
+                <div className="other">
                   <p>
-                    <span class="icon">
+                    <span className="icon">
                       <AccessAlarmIcon />
                     </span>
-                    <span class="heading">Duration</span>
+                    <span className="heading">Duration</span>
                   </p>
-                  <p class="sub-heading">{course && course.duration} hours</p>
+                  <p className="sub-heading">
+                    {course && course.duration} hours
+                  </p>
                 </div>
-                <div class="other">
+                <div className="other">
                   <p>
-                    <span class="icon">
+                    <span className="icon">
                       <LocalLibraryIcon />
                     </span>
-                    <span class="heading">Lession</span>
+                    <span className="heading">Lession</span>
                   </p>
-                  <p class="sub-heading">{course && course.lession} Lectures</p>
+                  <p className="sub-heading">
+                    {course && course.lession} Lectures
+                  </p>
                 </div>
-                <div class="other">
+                <div className="other">
                   <p>
-                    <span class="icon">
+                    <span className="icon">
                       <BookmarkIcon />
                     </span>
-                    <span class="heading">Enrolled</span>
+                    <span className="heading">Enrolled</span>
                   </p>
-                  <p class="sub-heading">
+                  <p className="sub-heading">
                     {course && course.enrolled} Students
                   </p>
                 </div>
-                <div class="other">
+                <div className="other">
                   <p>
-                    <span class="icon">
+                    <span className="icon">
                       <ChromeReaderModeIcon />
                     </span>
-                    <span class="heading">Access</span>
+                    <span className="heading">Access</span>
                   </p>
-                  <p class="sub-heading">{course && course.access}</p>
+                  <p className="sub-heading">{course && course.access}</p>
                 </div>
                 <div>
                   {/* <button onClick={handleClickOpen}>open</button>

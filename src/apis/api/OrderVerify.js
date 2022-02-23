@@ -9,11 +9,16 @@ export default function verifyOrderApi(body, setPaymentMessage, setOpen) {
       },
     })
     .then((res) => {
-      console.log(res.data.message);
       setPaymentMessage(res.data.message);
       setOpen(true);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      if (error) {
+            
+      } else if (error.request) {
+      //setApiError(true);
+      } else {
+      //setApiError(true);
+      }
     });
 }

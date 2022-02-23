@@ -8,7 +8,7 @@ const ServiceCard = (props) => {
         to="/coming-soon"
         style={{ color: "var(--color-primary)", textDecoration: "none" }}
       >
-        <div class="service">
+        <div className="service">
           <img src={props.icon} alt=""></img>
           <h2>{props.title} </h2>
           <p>{props.description}</p>

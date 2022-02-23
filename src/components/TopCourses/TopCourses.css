@@ -4,9 +4,17 @@
   margin-top: 40px;
   margin-right: 15px;
 }
+.top-course-aria{
+  display: inline-block;
+}
+.top-course-aria a{
+  display: inline-block;
+  margin: 16px;
+}
 
 @media only screen and (max-width: 1000px) {
   .techvanto-all-course-button {
     justify-content: center !important;
   }
 }
+

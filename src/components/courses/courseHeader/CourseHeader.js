@@ -5,23 +5,23 @@ import "./courseHeader.css";
 const CourseHeader = (props) => {
   return (
     <>
-      <section class="page-heading">
-        <div class="course-container">
+      <section className="page-heading">
+        <div className="course-container">
           <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item active">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item active">
                 Home
-                <div class="line"></div>
+                <div className="line"></div>
               </li>
-              <li class="breadcrumb-item active">
+              <li className="breadcrumb-item active">
                 Courses
-                <div class="line"></div>
+                <div className="line"></div>
               </li>
-              <li class="breadcrumb-item active">{props.category}</li>
+              <li className="breadcrumb-item active">{props.category}</li>
             </ol>
           </nav>
-          <div class="my-container">
-            <div class="course-head">
+          <div className="my-container">
+            <div className="course-head">
               <h2>{props.title}</h2>
               <p style={{ color: "white" }}>{props.subtitle}</p>
             </div>

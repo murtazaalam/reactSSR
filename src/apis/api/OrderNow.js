@@ -6,8 +6,14 @@ export default function orderNowApi(data, setError, setLoading){
     axios.post(routes.OrderTest, data).then((res) => {
         console.log(res);
         //setError(res.data.message);
-    }).catch((err) => {
-        if(err.response.data.message) return setError(err.response.data.message);
-        setError(err.response.data.error[0].msg);
+    }).catch((error) => {
+        if (error.response.data) {
+            if(error.response.data.message) return setError(error.response.data.message);
+            setError(error.response.data.error[0].msg);
+        } else if (error.request) {
+        //setApiError(true);
+        } else {
+        //setApiError(true);
+        }
     })
 }

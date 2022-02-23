@@ -73,7 +73,7 @@ function Login({ open, handleClose, PaperComponent }) {
               <LoginContent classes={classes} handleClose={handleClose} />
             </TabPanel>
             <TabPanel value="2">
-              <SignUp classes={classes} />
+              <SignUp classess={classes} />
             </TabPanel>
           </DialogContent>
         </TabContext>

@@ -13,14 +13,13 @@ const CampusAmbassador = () => {
     <div className="background" id="campusAmbassador">
       <Container className="section-spacing">
         <section>
-          <div className="techvanto-campus-ambassador">
+          <div className="techvanto-campus-ambassador campus-ambs-aria">
             <div className="techvanto-campus-ambassador-left">
               <div className="techvanto-campus-ambassador-left-image">
                 <div>
                   <iframe
-                    width="450"
                     title="techvanto"
-                    height="300"
+                    className="techvanto-video"
                     style={{ borderRadius: "21px" }}
                     src="https://www.youtube.com/embed/HH8us39zlYs?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=http://youtubeembedcode.com"
                   ></iframe>

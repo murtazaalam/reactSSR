@@ -7,9 +7,13 @@ export default function AllCourseApi(setAllCourses, setLoading) {
       setAllCourses(data);
       setLoading(false);
     })
-    .catch((err) => {
-      console.log(err);
-      setAllCourses({});
-      setLoading(false);
+    .catch((error) => {
+      if (error.response) {
+        setLoading(true)
+      } else if (error.request) {
+        setLoading(true)
+      } else {
+        setLoading(true)
+      }
     });
 }

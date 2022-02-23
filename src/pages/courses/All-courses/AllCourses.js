@@ -14,9 +14,9 @@ function AllCourses() {
   const { categoryRoute } = useParams();
 
   const [selectedCategory, setSelectedCategory] = useState([
-    { id: 1, checked: false, label: "School" },
-    { id: 2, checked: false, label: "College" },
-    { id: 3, checked: false, label: "Intermediate" },
+    { id: 1, checked: false, label: "For School" },
+    { id: 2, checked: false, label: "For College" },
+    { id: 3, checked: false, label: "For Intermediate" },
     { id: 4, checked: false, label: "All" },
   ]);
   const [category, setCategory] = useState("");

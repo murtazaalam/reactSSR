@@ -1,7 +1,11 @@
 import routes from "../routes/Services.routes";
 import axios from "axios";
 
-export default function getFromCartApi(setCartItems, setLoading, setError) {
+export default async function getFromCartApi(
+  setCartItems,
+  setLoading,
+  setError
+) {
   return axios
     .get(routes.GetCartItems, {
       headers: {

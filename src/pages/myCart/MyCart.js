@@ -5,7 +5,7 @@ import cartImage from "../../assets/images/cart1.jpg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./myCart.css";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,6 +17,8 @@ import { Rating } from "@material-ui/lab";
 import { Navigate } from "react-router-dom";
 import Loading from "../../components/Loader";
 import PaymentSuccessDialog from "../../components/PaymentSuccessDialog";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutAction } from "../../redux/slices/auth.slices";
 
 function MyCart() {
   const [loading, setLoading] = useState();
@@ -25,9 +27,12 @@ function MyCart() {
   const [deleteCount, setDeleteCount] = useState("");
 
   const [open, setOpen] = useState(false);
+  const [user, isUser] = useState();
   const [error, setError] = useState();
+  const navigate = useNavigate();
   let totalPrice = 0;
   const Razorpay = useRazorpay();
+  let dispatch = useDispatch();
 
   useEffect(() => {
     setLoading(true);
@@ -116,7 +121,19 @@ function MyCart() {
     });
     rzp1.open();
   };
-
+  if (user === "Unauthorized" || user === "Session Expired") {
+    toast.warn(user, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    dispatch(logoutAction);
+    navigate("/");
+  }
   return (
     <div>
       {loading ? (

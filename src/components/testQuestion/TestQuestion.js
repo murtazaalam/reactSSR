@@ -1,23 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Typography, Box } from "@mui/material";
-import Loader from "../Loader";
-import EventBackgroundImage from "../../assets/images/event_header_image.svg";
 import "./testQuestion.css";
 import getInterviewQuestionsApi from "../../apis/api/InterviewQuestion";
+import Loader from "../Loader";
 
 const TestQuestion = () => {
   const [questionList, setQuestionList] = useState("");
   const [subject, setSubject] = useState();
+  const [activeTavb, setActiveTab] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getInterviewQuestionsApi(setSubject, setLoading);
+    getInterviewQuestionsApi(setSubject, setLoading, setActiveTab);
   }, []);
 
   const changeTab = (id) => {
-    console.log(id);
     setQuestionList(id);
+    setActiveTab(id);
   };
   return (
     <>
@@ -59,14 +59,23 @@ const TestQuestion = () => {
               className="event-body"
             >
               <div className="col-lg-3 col-md-3 col-sm-6 col-12">
-                <Box component="div" className="row event-menu">
+                <Box component="div" className="row" className="event-menu">
                   {subject &&
                     subject.map((item, index) => {
+                      console.log(">>>>", activeTavb);
                       return (
                         <Typography
                           component="h6"
                           data-index={index}
                           onClick={() => changeTab(item._id)}
+                          style={
+                            activeTavb === item._id
+                              ? {
+                                  fontWeight: 800,
+                                  color: "var(--color-secondary)",
+                                }
+                              : { fontWeight: 600, color: "black" }
+                          }
                         >
                           {item.name}
                         </Typography>

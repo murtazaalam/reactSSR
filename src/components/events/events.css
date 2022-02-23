@@ -77,10 +77,10 @@
   justify-content: center;
 }
 .active-event-menu {
-  font-weight: 800 !important;
+  font-weight: 800;
 }
 .inactive-event-menu {
-  font-weight: 600 !important;
+  font-weight: 600;
 }
 .event-btn {
   color: var(--color-white) !important;
