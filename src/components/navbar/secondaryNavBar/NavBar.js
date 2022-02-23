@@ -252,7 +252,6 @@ const NavBar = (props) => {
         </Accordion>
         </List>
         <List>
-          hello world
         </List>
       </Box>
     );
