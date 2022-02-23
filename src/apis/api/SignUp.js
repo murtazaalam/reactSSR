@@ -2,18 +2,15 @@ import routes from "../routes/Services.routes";
 import axios from "axios";
 
 export default async function RegisterApi(body, setError, setLoader){
-    console.log("body", body);
-    try{
-    await axios.post(routes.SignUp, body, {
+    return await axios.post(routes.SignUp, body, {
         headers: {
             'Content-Type': 'application/json'
             }
     }).then((res) => {
         setLoader(false);
-        console.log("res",res);
         localStorage.setItem("token",res.data.token);
+        return res.data.message;
     }).catch((error) => {
-        console.log("error",error);
         if (error.response.data) {
             setLoader(false);
             if(error.response.data.message) return setError(error.response.data.message);
@@ -26,7 +23,4 @@ export default async function RegisterApi(body, setError, setLoader){
             setLoader(false);
         }
     })
-    }catch(err){
-        console.log(">>>", err);
-    }
 }

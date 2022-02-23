@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import { makeStyles } from "@material-ui/core/styles";
 import RegisterApi from "../../../apis/api/SignUp";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
+import { useDispatch } from "react-redux";
+import { loginAction } from "../../../redux/slices/auth.slices";
 
 const useStyles = makeStyles((theme) => ({
   btnSignUp: {
@@ -26,7 +28,6 @@ const theme = createTheme();
 
 export default function SignUp({ classess }) {
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState();
   const [name, validateName] = useState(false);
   const [email, validateEmail] = useState(false);
   const [mobile, validateMobile] = useState(false);
@@ -35,6 +36,7 @@ export default function SignUp({ classess }) {
   const [confirmPass, confirmPassword] = useState(false);
   const [loader, setLoader] = React.useState(false);
   const [pass, setPass] = useState();
+  let dispatch = useDispatch();
   const classes = useStyles();
 
   const validation = (event) => {
@@ -85,7 +87,7 @@ export default function SignUp({ classess }) {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     setLoader(true);
@@ -108,19 +110,24 @@ export default function SignUp({ classess }) {
       password === false &&
       confirmPass === false
     ) {
-      console.log("hhh");
-      RegisterApi(body, setError, setLoader);
-      console.log("sd");
-      if (setError === "Registration Success") {
-        toast.success(setError, {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+      console.log("out")
+      try{
+        let success = await RegisterApi(body, setError, setLoader);
+        console.log("in", success);
+        if (success === "Registration Success") {
+          toast.success(success, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          dispatch(loginAction({isLogin:true}));
+      }
+      }catch(err){
+
       }
     } else {
       setLoader(false);

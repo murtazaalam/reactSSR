@@ -14,7 +14,7 @@ export const authSlice = createSlice({
             state.user = action.payload.user;
         },
         loginAction: (state, action) => {
-            console.log(state)
+            console.log("red",state)
             state.admin = action?.payload?.admin;
             state.isLogin = true;
         },

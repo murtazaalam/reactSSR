@@ -58,7 +58,6 @@ const NavBar = (props) => {
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const [error, setError] = useState();
   const isUserLogIn = useRecoilValue(userAuth);
-  const [loggedin, isUser] = useState();
   let dispatch = useDispatch();
 
   const [drawable, setDrawable] = useState({
@@ -73,12 +72,6 @@ const NavBar = (props) => {
   let intermediateCourses = [];
   let collegeCourses = [];
 
-  const [state, setState] = useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
   const logoutHandler = () => {
     dispatch(logoutAction());
     localStorage.removeItem("token");
