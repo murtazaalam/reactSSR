@@ -19,6 +19,8 @@ import { userAuth } from "../../../recoil/store";
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import { ToastContainer, toast } from "react-toastify";
+import { useDispatch } from 'react-redux';
+import { loginAction } from "../../../redux/slices/auth.slices";
 
 const theme = createTheme();
 
@@ -41,6 +43,7 @@ export default function LoginContent(props) {
   const [loader, setLoader] = React.useState(false);
   const navigate = useNavigate();
   const classes = useStyles();
+  let dispatch = useDispatch();
 
   const emptyState = () => {
     setEmail("");
@@ -90,7 +93,7 @@ export default function LoginContent(props) {
         draggable: true,
         progress: undefined,
       });
-      navigate('/',{state:{openModel: false}});
+      dispatch(loginAction({admin:body}))
     }
   };
 

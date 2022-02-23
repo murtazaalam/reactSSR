@@ -33,8 +33,10 @@ import "./navBar.css";
 import Login from "../../Login/Login";
 import { cartItemList, userAuth } from "../../../recoil/store";
 import { ToastContainer, toast } from "react-toastify";
+import { useSelector, useDispatch } from 'react-redux';
 
 import Paper from "@mui/material/Paper";
+import { logoutAction } from "../../../redux/slices/auth.slices";
 function PaperComponent(props) {
   return (
     <Draggable
@@ -56,8 +58,11 @@ const NavBar = (props) => {
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const [apiError, setApiError] = useState(false);
   const isUserLogIn = useRecoilValue(userAuth);
-  const location = useLocation();
-
+  let dispatch = useDispatch();
+  let { admin, isLogin } = useSelector((state) => 
+    state.AuthReducer
+  )
+  console.log(">>>>",isLogin, admin);
   let schoolCourses = [];
   let intermediateCourses = [];
   let collegeCourses = [];
@@ -72,6 +77,7 @@ const NavBar = (props) => {
     return Object.keys(obj).length === 0;
   }
   const logoutHandler = () => {
+    dispatch(logoutAction());
     localStorage.removeItem("token");
     setIsLogged(false);
     window.location.reload(false);
@@ -500,7 +506,7 @@ const NavBar = (props) => {
                   </button>
 
                   <Login
-                    open={open}
+                    open={isLogin ? false : open}
                     handleClose={handleClose}
                     PaperComponent={PaperComponent}
                   />
