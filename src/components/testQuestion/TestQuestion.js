@@ -28,16 +28,18 @@ const TestQuestion = () => {
           <Box
             component="section"
             className="page-heading"
-            sx={{ background: `url(${EventBackgroundImage})` }}
+            sx={{
+              background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/Interview+questions.jpg)`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
           >
             <div className="course-container">
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <p className="home">
-                      Home
-                      <div className="line"></div>
-                    </p>
+                  <li className="breadcrumb-item active">
+                    Home
+                    <div className="line"></div>
                   </li>
                   <li className="breadcrumb-item active">
                     Interview Questions

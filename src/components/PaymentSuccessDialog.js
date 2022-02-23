@@ -13,7 +13,7 @@ export default function PaymentSuccessDialog(props) {
         <Check />
       </DialogTitle>
       <DialogContent>
-        <Typography variant="h4">{message}</Typography>
+        <Typography variant="h4">{message}!</Typography>
       </DialogContent>
 
       <DialogActions>

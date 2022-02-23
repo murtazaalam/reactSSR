@@ -14,21 +14,25 @@ import getFromCartApi from "../../apis/api/GetFromCart";
 import addOrderApi from "../../apis/api/AddOrder";
 import verifyOrderApi from "../../apis/api/OrderVerify";
 import { Rating } from "@material-ui/lab";
+import { Navigate } from "react-router-dom";
 import Loading from "../../components/Loader";
 import PaymentSuccessDialog from "../../components/PaymentSuccessDialog";
 
 function MyCart() {
-  const [loading, setLoading] = useState(false);
-  const [cartItems, setCartItems] = useState();
+  const [loading, setLoading] = useState();
+  const [cartItems, setCartItems] = useState([]);
   const [paymentMessage, setPaymentMessage] = useState("");
   const [deleteCount, setDeleteCount] = useState("");
-  const [successAlert, setSuccessAlert] = useState(false);
+
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState();
   let totalPrice = 0;
   const Razorpay = useRazorpay();
 
   useEffect(() => {
-    getFromCartApi(setCartItems, setLoading);
+    setLoading(true);
+    getFromCartApi(setCartItems, setLoading, setError);
+    console.log(loading);
   }, []);
   const handleClose = () => {
     setOpen(false);
@@ -60,7 +64,7 @@ function MyCart() {
     }
   };
   if (deleteCount > 0) {
-    getFromCartApi(setCartItems);
+    getFromCartApi(setCartItems, setLoading, setError);
   }
 
   const checkout = async () => {
@@ -115,188 +119,214 @@ function MyCart() {
 
   return (
     <div>
-      <div>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+      {loading ? (
+        <Loading />
+      ) : (
         <div>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <div>
-            <Banner
-              style={{ marginTop: "71px" }}
-              heading="My Cart"
-              backgroundImage={cartImage}
-              breadcrumb="cart"
-            />
-          </div>
-          {cartItems ? (
-            <section className="cart-content-block container">
-              {!cartItems.length && (
-                <h6>
-                  {" "}
-                  Empty Cart!!! Go to{" "}
-                  <Link to="/all-courses/all">Marketplace</Link> and get some
-                  courses.
-                </h6>
-              )}
-              <Typography variant="p">
-                {paymentMessage !== "" ? (
-                  <>
-                    <PaymentSuccessDialog
-                      message={paymentMessage}
-                      open={open}
-                      handleClose={handleClose}
-                    />
-                  </>
-                ) : (
-                  ""
-                )}
-              </Typography>
-              {/* cart form */}
-              <form action="#" className="cart-form">
-                <div className="table-wrap">
-                  {cartItems.length > 0 && (
-                    <p>{cartItems.length} Courses in the cart.</p>
-                  )}
-
-                  {cartItems.map((item, index) => (
-                    <Card
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        marginBottom: "20px",
-                      }}
-                      key={index}
-                    >
-                      <div
-                        style={{
-                          background: `linear-gradient(${item.gradient})`,
-                          height: "194px",
-                        }}
-                      >
-                        <CardMedia
-                          component="img"
-                          className="techvanto-all-course-image"
-                          sx={{ width: 340 }}
-                          height="194"
-                          //  width="340"
-                          style={{
-                            backgroundImage: `url(${item.course_image})`,
-                            height: "194px",
-                          }}
-                        />
-                      </div>
-
-                      <Box sx={{ display: "flex", flexDirection: "column" }}>
-                        <CardContent sx={{ flex: "1 0 auto" }}>
-                          <Typography component="div" variant="h5">
-                            {item.course_name}
-                          </Typography>
-                          <Typography
-                            variant="subtitle1"
-                            color="text.secondary"
-                            component="div"
-                          >
-                            {item.description}
-                          </Typography>
-                          <Rating
-                            name="read-only"
-                            value={item.rating}
-                            readOnly
-                          />
-                        </CardContent>
-                      </Box>
-                      <CardActions className="cart-action">
-                        <DeleteIcon
-                          onClick={() => removeFromCart(item._id)}
-                          style={{ placeSelf: "flex-end" }}
-                        />
-
-                        {item.discount !== 0 ? (
-                          <p>
-                            {" "}
-                            <span
-                              style={{ textDecorationLine: "line-through" }}
-                            >
-                              Rs.{item.price}
-                            </span>
-                            {"  "}
-                            Rs.{item.price - item.discount}
-                          </p>
-                        ) : (
-                          <p>Rs.{item.price}</p>
-                        )}
-                      </CardActions>
-                    </Card>
-                  ))}
+            <div>
+              <Box
+                component="section"
+                className="page-heading"
+                sx={{
+                  background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/my+cart.jpg)`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                }}
+              >
+                <div className="course-container">
+                  {/* <img src={BlogHead1} alt="" width="15" /> */}
+                  <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb">
+                      <li className="breadcrumb-item active">
+                        Home
+                        <div className="line"></div>
+                      </li>
+                      <li className="breadcrumb-item active">My Cart</li>
+                    </ol>
+                  </nav>
+                  <h1 className="event-heading">My Cart</h1>
                 </div>
-                {cartItems.length > 0 && (
-                  <div className="cart-priceCard">
-                    <Card>
-                      <CardContent>
-                        <Typography variant="h4" color="initial">
-                          Total &nbsp; ₹
-                          {cartItems.reduce(
-                            (a, curr) =>
-                              parseInt(a) +
-                              parseInt(curr.price) -
-                              parseInt(curr.discount),
-                            0
-                          )}
-                        </Typography>
-                        <Typography variant="h2"></Typography>
-                        <Typography variant="body1" color="initial">
-                          Subtotal:&nbsp; ₹
-                          <span
-                            className="price"
-                            style={{ textDecoration: "line-through" }}
-                          >
-                            {cartItems.reduce(
-                              (a, curr) => parseInt(a) + parseInt(curr.price),
-                              0
-                            )}
-                          </span>
-                        </Typography>
-                        <Typography variant="body1" color="initial">
-                          Total Discount: &nbsp; ₹
-                          <span>
-                            {cartItems.reduce(
-                              (a, curr) =>
-                                parseInt(a) +
-                                (parseInt(curr.discount)
-                                  ? parseInt(curr.discount)
-                                  : 0),
-                              0
-                            )}{" "}
-                          </span>
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <button
-                          type="button"
-                          className="btn-grad full-width"
-                          onClick={checkout}
-                        >
-                          CheckOut
-                        </button>
-                      </CardActions>
+              </Box>
+            </div>
+            {cartItems && (
+              <>
+                <section className="cart-content-block container">
+                  {!cartItems.length && (
+                    <Card sx={{ p: 2, mb: 15, mt: 2 }}>
+                      <h6>
+                        {" "}
+                        Empty Cart!!! Go to{" "}
+                        <Link to="/all-courses/all">Marketplace</Link> and get
+                        some courses.
+                      </h6>
                     </Card>
-                  </div>
-                )}
-              </form>
-            </section>
-          ) : (
-            <Loading />
-          )}
+                  )}
+                  <Typography variant="p">
+                    {paymentMessage !== "" ? (
+                      <>
+                        <PaymentSuccessDialog
+                          message={paymentMessage}
+                          open={open}
+                          handleClose={handleClose}
+                        />
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </Typography>
+                  {/* cart form */}
+                  <form action="#" className="cart-form">
+                    <div className="table-wrap">
+                      {cartItems.length > 0 && (
+                        <p>{cartItems.length} Courses in the cart.</p>
+                      )}
+
+                      {cartItems.map((item, index) => (
+                        <Card
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginBottom: "20px",
+                          }}
+                          key={index}
+                        >
+                          <div
+                            style={{
+                              background: `linear-gradient(${item.gradient})`,
+                              height: "194px",
+                            }}
+                          >
+                            <CardMedia
+                              component="img"
+                              className="techvanto-all-course-image"
+                              sx={{ width: 340 }}
+                              height="194"
+                              //  width="340"
+                              style={{
+                                backgroundImage: `url(${item.course_image})`,
+                                height: "194px",
+                              }}
+                            />
+                          </div>
+
+                          <Box
+                            sx={{ display: "flex", flexDirection: "column" }}
+                          >
+                            <CardContent sx={{ flex: "1 0 auto" }}>
+                              <Typography component="div" variant="h5">
+                                {item.course_name}
+                              </Typography>
+                              <Typography
+                                variant="subtitle1"
+                                color="text.secondary"
+                                component="div"
+                              >
+                                {item.description}
+                              </Typography>
+                              <Rating
+                                name="read-only"
+                                value={item.rating}
+                                readOnly
+                              />
+                            </CardContent>
+                          </Box>
+                          <CardActions className="cart-action">
+                            <DeleteIcon
+                              onClick={() => removeFromCart(item._id)}
+                              style={{ placeSelf: "flex-end" }}
+                            />
+
+                            {item.discount !== 0 ? (
+                              <p>
+                                {" "}
+                                <span
+                                  style={{ textDecorationLine: "line-through" }}
+                                >
+                                  Rs.{item.price}
+                                </span>
+                                {"  "}
+                                Rs.{item.price - item.discount}
+                              </p>
+                            ) : (
+                              <p>Rs.{item.price}</p>
+                            )}
+                          </CardActions>
+                        </Card>
+                      ))}
+                    </div>
+                    {cartItems.length > 0 && (
+                      <div className="cart-priceCard">
+                        <Card>
+                          <CardContent>
+                            <Typography variant="h4" color="initial">
+                              Total &nbsp; ₹
+                              {cartItems.reduce(
+                                (a, curr) =>
+                                  parseInt(a) +
+                                  parseInt(curr.price) -
+                                  parseInt(curr.discount),
+                                0
+                              )}
+                            </Typography>
+                            <Typography variant="h2"></Typography>
+                            <Typography variant="body1" color="initial">
+                              Subtotal:&nbsp; ₹
+                              <span
+                                className="price"
+                                style={{ textDecoration: "line-through" }}
+                              >
+                                {cartItems.reduce(
+                                  (a, curr) =>
+                                    parseInt(a) + parseInt(curr.price),
+                                  0
+                                )}
+                              </span>
+                            </Typography>
+                            <Typography variant="body1" color="initial">
+                              Total Discount: &nbsp; ₹
+                              <span>
+                                {cartItems.reduce(
+                                  (a, curr) =>
+                                    parseInt(a) +
+                                    (parseInt(curr.discount)
+                                      ? parseInt(curr.discount)
+                                      : 0),
+                                  0
+                                )}{" "}
+                              </span>
+                            </Typography>
+                          </CardContent>
+                          <CardActions>
+                            <button
+                              type="button"
+                              className="btn-grad full-width"
+                              onClick={checkout}
+                            >
+                              Checkout
+                            </button>
+                          </CardActions>
+                        </Card>
+                      </div>
+                    )}
+                  </form>
+                </section>
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

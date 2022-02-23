@@ -53,6 +53,7 @@ const NavBar = (props) => {
   const [cartCount, setCartCount] = useState(0);
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
+  const [error, setError] = useState();
   const isUserLogIn = useRecoilValue(userAuth);
 
   let schoolCourses = [];
@@ -103,7 +104,7 @@ const NavBar = (props) => {
   useEffect(() => {
     const getCartData = async () => {
       if (!cartData) {
-        let data = await getFromCartApi(setCartData);
+        let data = await getFromCartApi(setCartData, setLoading, setError);
         setCartCount(data?.length);
       }
     };

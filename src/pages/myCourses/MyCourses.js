@@ -7,35 +7,75 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import myOrdersApi from "../../apis/api/MyOders";
 import CourseCard from "../../components/TopCourses/CourseCard/CourseCard";
+import Box from "@mui/material/Box";
+import { Navigate } from "react-router-dom";
+
+import Loading from "../../components/Loader";
 function MyCourses() {
   const [course, setCourse] = useState();
-
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   useEffect(() => {
-    myOrdersApi(setCourse);
+    myOrdersApi(setCourse, setLoading, setError);
   }, []);
   return (
-    <div style={{ placeContent: "center" }}>
-      <Banner
-        backgroundImage={image}
-        heading="My Courses"
-        breadcrumb="My Courses"
-      />
-      <Container maxWidth="lg" sx={{ p: 2 }}>
-        <Grid container spacing={3}>
-          {course &&
-            course.map((data, index) => (
-              <Grid item>
-                <CourseCard
-                  key={index}
-                  couseData={data}
-                  fromMycourse={true}
-                  // review={data.reviews}
-                ></CourseCard>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div style={{ placeContent: "center" }}>
+          <Box
+            component="section"
+            className="page-heading"
+            sx={{
+              background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/my+cart.jpg)`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          >
+            <div className="course-container">
+              {/* <img src={BlogHead1} alt="" width="15" /> */}
+              <nav aria-label="breadcrumb">
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item active">
+                    Home
+                    <div className="line"></div>
+                  </li>
+                  <li className="breadcrumb-item active">My Cart</li>
+                </ol>
+              </nav>
+              <h1 className="event-heading">My Cart</h1>
+            </div>
+          </Box>
+          {error ? (
+            <Navigate to="/404" />
+          ) : (
+            <Container maxWidth="lg" sx={{ p: 2 }}>
+              <Grid container spacing={3}>
+                {course &&
+                  course.map((data, index) => (
+                    <Grid item>
+                      <CourseCard
+                        key={index}
+                        id={data._id}
+                        title={data.course_name}
+                        pic={data.course_image}
+                        // gradient,
+                        // price,
+                        // discount,
+                        // rating,
+                        //couseData={data}
+                        fromMycourse={true}
+                        // review={data.reviews}
+                      ></CourseCard>
+                    </Grid>
+                  ))}
               </Grid>
-            ))}
-        </Grid>
-      </Container>
-    </div>
+            </Container>
+          )}
+        </div>
+      )}
+    </>
   );
 }
 

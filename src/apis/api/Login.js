@@ -7,6 +7,7 @@ export default async function LoginApi(data, setError, setLoading) {
     .then((res) => {
       setError(res.data.message);
       localStorage.setItem("token", res.data.token);
+      console.log(res);
       return res.data.message;
     })
     .catch((err) => {

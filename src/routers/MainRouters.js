@@ -7,7 +7,7 @@ import AllCourses from "../pages/courses/All-courses/AllCourses";
 import Blogs from "../pages/blogs/Blogs";
 import Single from "../pages/blogs/singleBlog/Single";
 import ContactUsForHiring from "../pages/contact-us/contactUsForHiring";
-
+import NotFound from "../components/NotFound";
 import EventDetail from "../pages/SingleEvent/SingleEvent";
 import TestQuestion from "../pages/testQuestion/TestQuestion";
 import ContactUsToGetHired from "../pages/contact-us/contactUsToGetHired";
@@ -38,6 +38,7 @@ const MainRouters = () => {
         <Route path="/events" element={<Events></Events>}></Route>
         <Route path="/blogs" element={<Blogs />}></Route>
         <Route path="/blogs/:id" element={<Single />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
         <Route
           path="/contact-us-for-hiring"
           element={<ContactUsForHiring />}

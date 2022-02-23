@@ -14,9 +14,9 @@ function AllCourses() {
   const { categoryRoute } = useParams();
 
   const [selectedCategory, setSelectedCategory] = useState([
-    { id: 1, checked: false, label: "For School" },
-    { id: 2, checked: false, label: "For College" },
-    { id: 3, checked: false, label: "For Intermediate" },
+    { id: 1, checked: false, label: "School" },
+    { id: 2, checked: false, label: "College" },
+    { id: 3, checked: false, label: "Intermediate" },
     { id: 4, checked: false, label: "All" },
   ]);
   const [category, setCategory] = useState("");
@@ -104,9 +104,12 @@ function AllCourses() {
     <>
       {/* Header */}
       <Box
-        component="section"
         className="page-heading"
-        sx={{ background: `url(${EventBackgroundImage})` }}
+        sx={{
+          background: `url(${"https://tv-academy-assets.s3.eu-west-2.amazonaws.com/all+courses.jpg"})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
       >
         <div className="course-container">
           <nav aria-label="breadcrumb">
@@ -143,8 +146,8 @@ function AllCourses() {
               {/* List and Empty View */}
 
               <div className="list-wrap">
-                {console.log("rendering")}
-                {data}
+                {/* {data ? data : <h1>sd</h1>} */}
+                {data ? data : console.log("sdsd")}
               </div>
             </div>
           )}
