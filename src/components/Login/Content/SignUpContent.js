@@ -94,10 +94,10 @@ export default function SignUp({ classess }) {
     let body = {
       name: data.get("name"),
       email: data.get("email"),
-      mobile: data.get("mobile"),
+      phone: data.get("mobile"),
       password: data.get("password"),
     };
-    if (!body.name || !body.email || !body.mobile || !body.password) {
+    if (!body.name || !body.email || !body.phone || !body.password) {
       setLoader(false);
       return setError("Star Fields Are Required");
     }
