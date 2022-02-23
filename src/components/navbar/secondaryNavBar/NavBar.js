@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -57,12 +57,10 @@ const NavBar = (props) => {
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const [apiError, setApiError] = useState(false);
-  const isUserLogIn = useRecoilValue(userAuth);
   let dispatch = useDispatch();
   let { admin, isLogin } = useSelector((state) => 
     state.AuthReducer
   )
-  console.log(">>>>",isLogin, admin);
   let schoolCourses = [];
   let intermediateCourses = [];
   let collegeCourses = [];
@@ -73,9 +71,6 @@ const NavBar = (props) => {
     bottom: false,
     right: false,
   });
-  function isEmpty(obj) {
-    return Object.keys(obj).length === 0;
-  }
   const logoutHandler = () => {
     dispatch(logoutAction());
     localStorage.removeItem("token");
@@ -124,26 +119,27 @@ const NavBar = (props) => {
   useEffect(() => {
     const getAllCourses = async () => {
       if (!allCourse) {
-        await AllCourseApi(setAllCourse, setLoading, setApiError);
-        if (allCourse) {
-          allCourse?.forEach((item) => {
-            if (item.category === "For School") {
-              schoolCourses.push(item);
-            }
-            if (item.category === "For Intermediate") {
-              intermediateCourses.push(item);
-            }
-            if (item.category === "For College") {
-              collegeCourses.push(item);
-            }
-          });
-        }
+        AllCourseApi(setAllCourse, setLoading);
       }
     };
     getAllCourses();
   }, [allCourse]);
 
-  if(apiError === true){
+  if (allCourse) {
+    allCourse?.forEach((item) => {
+      if (item.category === "For School") {
+        schoolCourses.push(item);
+      }
+      if (item.category === "For Intermediate") {
+        intermediateCourses.push(item);
+      }
+      if (item.category === "For College") {
+        collegeCourses.push(item);
+      }
+    });
+  }
+
+  if(loading === true){
     toast.error("Weak Network", {
       position: "bottom-right",
       autoClose: 5000,
@@ -153,26 +149,14 @@ const NavBar = (props) => {
       draggable: true,
       progress: undefined,
     });
-    setApiError(false);
+    setLoading(false);
   }
   
   //JSON.parse(localStorage.getItem) to retrieve
   localStorage.setItem("forSchool", JSON.stringify(schoolCourses));
   localStorage.setItem("forIntermediate", JSON.stringify(intermediateCourses));
   localStorage.setItem("forCollege", JSON.stringify(collegeCourses));
-  useEffect(() => {
-    console.log(">>>>", isUserLogIn);
-    if (isUserLogIn) setOpen(false);
-    console.log(">>>>", isUserLogIn, ">>open", open);
-    
-  }, []);
-  // console.log("checking",location.state);
-  // console.log("helloasd",location.state);
-  // if(location.state){
-  //   setOpen(location.state.openModel);
-  //   location.state.openModel = false;
-  // }
-  
+
   const list = (anchor) => {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
@@ -225,9 +209,15 @@ const NavBar = (props) => {
           className="secondary-navbar"
           style={{ whiteSpace: "nowrap" }}
         >
-          <Toolbar className="main-logo">
+          <Toolbar className="main-logo" style={{ paddingTop: "3px" }}>
             <Link to="/">
-              <img src={logoOnScroll} alt="" />
+              <img
+                src={logoOnScroll}
+                height="100%"
+                width="234px"
+                alt=""
+                style={{ width: "-webkit-fill-available" }}
+              />
             </Link>
           </Toolbar>
           <Toolbar>
@@ -399,7 +389,7 @@ const NavBar = (props) => {
                   </div>
                 </div>
                 <div className="item">
-                  <a href="#services" className="menu-text">
+                  <a href="/#services" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -464,7 +454,7 @@ const NavBar = (props) => {
               </div>
             </Container>
             <div className="item">
-              {user ? (
+              {isLogin ? (
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>
                     <IconButton aria-label="cart" className="color-white">

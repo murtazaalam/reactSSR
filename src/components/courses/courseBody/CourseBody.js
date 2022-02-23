@@ -27,7 +27,6 @@ import Login from "../../Login/Login";
 import Paper from "@mui/material/Paper";
 import myOrdersApi from "../../../apis/api/MyOders";
 
-
 import { RWebShare } from "react-web-share";
 function PaperComponent(props) {
   return (
@@ -40,28 +39,26 @@ function PaperComponent(props) {
   );
 }
 const CourseBody = ({ course }) => {
-  const url = window.location.href;
   const [value, setValue] = useState("1");
 
   const [timeBadge, setTimerBadge] = useState(true);
-  const [itemMessage, setItemMessage] = useState("");
   const [baughtCourses, setBaughtCourses] = useState([]);
-  const [isBaughtCourse, setIsBaughtCourse]= useState(false);
+  const [isBaughtCourse, setIsBaughtCourse] = useState(false);
 
   useEffect(() => {
-    if(baughtCourses.length !== 0){ 
+    if (baughtCourses.length !== 0) {
       myOrdersApi(setBaughtCourses);
       isBaught();
     }
-  },[])
+  }, []);
   const isBaught = () => {
-    if(baughtCourses){
-      baughtCourses.forEach(item => {
-        console.log(item.course_id,course._id)
-        if(item.course_id === course._id) setIsBaughtCourse(true);
-      })
+    if (baughtCourses) {
+      baughtCourses.forEach((item) => {
+        console.log(item.course_id, course._id);
+        if (item.course_id === course._id) setIsBaughtCourse(true);
+      });
     }
-  }
+  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -102,8 +99,8 @@ const CourseBody = ({ course }) => {
     console.log(window.location.href);
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
-  },[]);
-  
+  }, []);
+
   // console.log(open);
   const addToCart = async (id) => {
     let body = {
@@ -157,7 +154,7 @@ const CourseBody = ({ course }) => {
   function isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
-  
+
   return (
     <>
       <div className="course-tab-container">
@@ -189,11 +186,15 @@ const CourseBody = ({ course }) => {
               </Box>
               <TabPanel value="1">
                 <div className="row tab-desc">
-                  <Typography component="h2">Course Description</Typography>
+                  <Typography sx={{ pt: "24px" }} component="h2">
+                    Course Description
+                  </Typography>
                   <Typography component="p" className="tab-course-description">
                     {course && course.description}
                   </Typography>
-                  <Typography component="h2">Learning Objectives</Typography>
+                  <Typography sx={{ pt: "24px" }} component="h2">
+                    Learning Objectives
+                  </Typography>
 
                   {/* MAP Learning Objectives */}
                   <Typography component="p" className="tab-course-description">
@@ -201,7 +202,9 @@ const CourseBody = ({ course }) => {
                   </Typography>
 
                   {/* Prerequisites */}
-                  <Typography component="h2">Prerequisites </Typography>
+                  <Typography sx={{ pt: "24px" }} component="h2">
+                    Prerequisites{" "}
+                  </Typography>
 
                   {/* MAP Prerequisites  */}
                   <Typography component="p" className="tab-course-description">
@@ -209,7 +212,9 @@ const CourseBody = ({ course }) => {
                   </Typography>
 
                   {/* Training Benefits */}
-                  <Typography component="h2">Training Benefits</Typography>
+                  <Typography sx={{ pt: "24px" }} component="h2">
+                    Training Benefits
+                  </Typography>
 
                   {/* MAP Training Benefits */}
                   <Typography component="p" className="tab-course-description">
@@ -369,32 +374,30 @@ const CourseBody = ({ course }) => {
                     handleClose={handleClose}
                     PaperComponent={PaperComponent}
                   /> */}
-                  {isBaughtCourse ?
-                    <button
-                    type="button"
-                    className="btn-grad"
-                  >
-                    Purchased
-                  </button>:
+                  {isBaughtCourse ? (
+                    <button type="button" className="btn-grad">
+                      Purchased
+                    </button>
+                  ) : (
                     <>
-                    <button
-                    type="button"
-                    className="btn-grad"
-                    onClick={() => addToCart(course._id)}
-                  >
-                    <span>
-                      <ShoppingCartIcon />
-                    </span>
-                    Add to cart
-                  </button>
-                  <Login
-                  open={open}
-                  handleClose={handleClose}
-                  PaperComponent={PaperComponent}
-                  />
-                </>
-                  }
-                  
+                      <button
+                        type="button"
+                        className="btn-grad"
+                        onClick={() => addToCart(course._id)}
+                      >
+                        <span>
+                          <ShoppingCartIcon />
+                        </span>
+                        Add to cart
+                      </button>
+                      <Login
+                        open={open}
+                        handleClose={handleClose}
+                        PaperComponent={PaperComponent}
+                      />
+                    </>
+                  )}
+
                   {/* <p className="add-to-cart-msg">
                     {itemMessage && itemMessage}
                   </p> */}

@@ -15,7 +15,7 @@ html {
   --color-light-pink: #fbaed2;
   --color-green-icon: green;
   --color-red-icon: red;
-  --color-disable:#ddd5d5;
+  --color-disable: #ddd5d5;
   --color-secondary-header: #578bc0;
   /* --bg-image: url(./Assets/Images/bg.jpg); */
   --color--bg-navbar: white;
@@ -41,15 +41,16 @@ html {
 .btn-grad {
   background-color: var(--color-secondary);
   text-align: center;
-  text-transform: uppercase;
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 10px;
   text-decoration: none;
   border: none;
   height: 56px;
+  text-transform: capitalize;
+  padding: 10px 16px;
   /* width: -webkit-fill-available; */
 }
 .btn-background-blue {

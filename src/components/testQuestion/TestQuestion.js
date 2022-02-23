@@ -8,22 +8,16 @@ import { Typography, Box } from "@mui/material";
 import EventBackgroundImage from "../../assets/images/event_header_image.svg";
 import "./testQuestion.css";
 import getInterviewQuestionsApi from "../../apis/api/InterviewQuestion";
+import Loader from "../Loader";
 
 const TestQuestion = () => {
   const [questionList, setQuestionList] = useState("");
   const [subject, setSubject] = useState();
   const [activeTavb, setActiveTab] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getInterviewQuestionsApi(setSubject)
-    if(subject){
-      subject.forEach((subject, index) => {
-        
-        if(index === 0){
-          setActiveTab(subject._id)
-        }
-      })
-    }
+    getInterviewQuestionsApi(setSubject, setLoading, setActiveTab)
   },[])
   
   const changeTab = (id) => {
@@ -32,6 +26,10 @@ const TestQuestion = () => {
   };
   return (
     <>
+    {loading ? (
+        <Loader />
+      ) : (
+        <>
       <Box
         component="section"
         className="page-heading"
@@ -64,7 +62,7 @@ const TestQuestion = () => {
           <div className="col-lg-3 col-md-3 col-sm-6 col-12">
             <Box component="div" className="row" className="event-menu">
               {subject && subject.map((item, index) => {
-                
+                console.log(">>>>",activeTavb)
                 return (
                   <Typography
                     component="h6"
@@ -130,6 +128,8 @@ const TestQuestion = () => {
           </div>
         </Box>
       </Box>
+      </>
+      )}
     </>
   );
 };

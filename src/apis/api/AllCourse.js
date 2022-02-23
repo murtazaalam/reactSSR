@@ -1,8 +1,7 @@
 import routes from "../routes/Services.routes";
 
-export default async function AllCourseApi(setAllCourses, setLoading, setApiError) {
-  console.log("coming");
-  await fetch(routes.GetCourses)
+export default function AllCourseApi(setAllCourses, setLoading) {
+  fetch(routes.GetCourses)
     .then((response) => response.json())
     .then((data) => {
       setAllCourses(data);
@@ -10,11 +9,11 @@ export default async function AllCourseApi(setAllCourses, setLoading, setApiErro
     })
     .catch((error) => {
       if (error.response) {
-        setApiError(true)
+        setLoading(true)
       } else if (error.request) {
-        setApiError(true)
+        setLoading(true)
       } else {
-        setApiError(true)
+        setLoading(true)
       }
     });
 }

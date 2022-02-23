@@ -8,7 +8,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { ToastContainer, toast } from "react-toastify";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -18,7 +18,6 @@ import { useRecoilState } from "recoil";
 import { userAuth } from "../../../recoil/store";
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
-import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from 'react-redux';
 import { loginAction } from "../../../redux/slices/auth.slices";
 
@@ -41,7 +40,6 @@ export default function LoginContent(props) {
   const [validateEmail, setValidateEmail] = useState(false);
   const [validatePassword, setvalidatePassword] = useState(false);
   const [loader, setLoader] = React.useState(false);
-  const navigate = useNavigate();
   const classes = useStyles();
   let dispatch = useDispatch();
 
@@ -95,10 +93,45 @@ export default function LoginContent(props) {
       });
       dispatch(loginAction({admin:body}))
     }
+    // event.preventDefault();
+    // setError("");
+    // let body = {
+    //   email: email,
+    //   password: password,
+    // };
+    // emptyState();
+    // if (!body.email || !body.password)
+    //   return setError("Email And Password Required");
+    // let res = await LoginApi(body, setError, setLoading, setUser);
+    // if (res === "Login Success") {
+    //   setUser(true);
+    //   //window.location.reload();
+    //   toast.success(res, {
+    //     position: "bottom-right",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //   });
+    //   navigate("/", { state: { openModel: false } });
+    // }
   };
 
   return (
     <ThemeProvider theme={theme}>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -170,6 +203,7 @@ export default function LoginContent(props) {
               label="Password"
               type="password"
               id="password"
+              className={classes.root}
               value={password}
               onChange={(e) => validation(e)}
               autoComplete="current-password"

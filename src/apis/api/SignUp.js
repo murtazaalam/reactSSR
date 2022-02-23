@@ -1,8 +1,8 @@
 import routes from '../routes/Services.routes';
 import axios from 'axios';
 
-export default function RegisterApi(body, setError, setLoader){
-    axios.post(routes.SignUp, body, {
+export default async function RegisterApi(body, setError, setLoader){
+    await axios.post(routes.SignUp, body, {
         headers: {
             'Content-Type': 'application/json'
             },

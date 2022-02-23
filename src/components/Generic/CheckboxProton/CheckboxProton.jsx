@@ -3,6 +3,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 // import { Category } from "@material-ui/icons";
+import Radio from "@mui/material/Radio";
+import FormControl from "@mui/material/FormControl";
 
 const useStyles = makeStyles({
   root: {
@@ -36,7 +38,7 @@ const CheckboxProton = ({ changeChecked, category }) => {
           root: classes.wrap,
         }}
         control={
-          <Checkbox
+          <Radio
             classes={{
               checked: classes.checked,
               root: classes.root,
@@ -44,7 +46,6 @@ const CheckboxProton = ({ changeChecked, category }) => {
             size="small"
             checked={checked}
             onChange={() => changeChecked(id)}
-            inputProps={{ "aria-label": "checkbox with small size" }}
           />
         }
         label={label}

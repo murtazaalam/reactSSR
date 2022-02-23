@@ -21,7 +21,7 @@ const ContentHeaderImage = (props) => {
               <br />
             </div>
             <br />
-            <div className="btn-grad">
+            <div>
               <BasicModal
                 text="Book Demo ►"
                 name="Home"

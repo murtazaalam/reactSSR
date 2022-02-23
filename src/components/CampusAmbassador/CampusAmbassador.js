@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./CampusAmbassador.css";
 import "mui-player/dist/mui-player.min.css";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { Link } from "react-router-dom";
 const CampusAmbassador = () => {
   // var Mp = new MuiPlayer({
@@ -10,7 +10,7 @@ const CampusAmbassador = () => {
   // src:'video/ca.mp4',
   // })
   return (
-    <div className="background">
+    <div className="background" id="campusAmbassador">
       <Container className="section-spacing">
         <section>
           <div className="techvanto-campus-ambassador">
@@ -44,14 +44,9 @@ const CampusAmbassador = () => {
                 </div>
                 <span className="text-large">Campus Ambassador</span>
                 <br />
-                <button className="btn-grad btn-background-blue campus-btn">
-                  <Link
-                    style={{ color: "white", textDecoration: "none" }}
-                    to="/coming-soon"
-                  >
-                    Know More
-                  </Link>
-                </button>
+                <Button style={{ textTransform: "capitalise" }}>
+                  <Link to="/coming-soon">Know More</Link>
+                </Button>
               </p>
             </div>
           </div>

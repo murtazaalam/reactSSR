@@ -51,7 +51,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 16px;
-  color: #be9656;
+  color: var(--color-secondary);
 }
 
 .singlePostAuthor {

@@ -1,39 +1,18 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { toast } from "react-toastify";
 import { makeStyles } from "@material-ui/core/styles";
 import RegisterApi from "../../../apis/api/SignUp";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 const useStyles = makeStyles(theme => ({
   btnSignUp:{
     marginTop: '20px',
@@ -45,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUp({ classess }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState();
   const [name, validateName] = useState(false);
@@ -119,6 +98,17 @@ export default function SignUp() {
       mobile === false && password === false &&
       confirmPass === false) {
       RegisterApi(body, setError, setLoader);
+      if(setError === "Registration Success"){
+        toast.success(setError, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
     else{
       setLoader(false);
@@ -178,6 +168,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classess.root}
                   required
                   fullWidth
                   id="email"
@@ -191,6 +182,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classess.root}
                   required
                   fullWidth
                   type="number"
@@ -205,6 +197,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.root}
                   required
                   fullWidth
                   name="password"
@@ -219,6 +212,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.root}
                   required
                   fullWidth
                   name="repassword"

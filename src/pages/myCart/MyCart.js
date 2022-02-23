@@ -5,7 +5,7 @@ import cartImage from "../../assets/images/cart1.jpg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./myCart.css";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,19 +16,22 @@ import verifyOrderApi from "../../apis/api/OrderVerify";
 import { Rating } from "@material-ui/lab";
 import Loading from "../../components/Loader";
 import PaymentSuccessDialog from "../../components/PaymentSuccessDialog";
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutAction } from "../../redux/slices/auth.slices";
 
 function MyCart() {
   const [loading, setLoading] = useState(false);
   const [cartItems, setCartItems] = useState();
   const [paymentMessage, setPaymentMessage] = useState("");
   const [deleteCount, setDeleteCount] = useState("");
-  const [successAlert, setSuccessAlert] = useState(false);
   const [open, setOpen] = useState(false);
-  let totalPrice = 0;
+  const [session, isSession] = useState();
+  const navigate = useNavigate();
   const Razorpay = useRazorpay();
+  let dispatch = useDispatch();
 
   useEffect(() => {
-    getFromCartApi(setCartItems, setLoading);
+    getFromCartApi(setCartItems, isSession);
   }, []);
   const handleClose = () => {
     setOpen(false);
@@ -60,7 +63,7 @@ function MyCart() {
     }
   };
   if (deleteCount > 0) {
-    getFromCartApi(setCartItems);
+    getFromCartApi(setCartItems, isSession);
   }
 
   const checkout = async () => {
@@ -112,7 +115,19 @@ function MyCart() {
     });
     rzp1.open();
   };
-
+  if(session === "Unauthorized" || session === "Session Expired"){
+    toast.warn(session, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    dispatch(logoutAction);
+    navigate('/');
+  }
   return (
     <div>
       <div>
