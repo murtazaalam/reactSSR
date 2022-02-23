@@ -13,8 +13,10 @@ export default async function LoginApi(data, setError, setLoader) {
     .catch((error) => {
       setLoader(false);
       if (error.response.data) {
-        if(error.response.data.message) return setError(error.response.data.message);
-        if(error.response.data.error[0].msg) return setError(error.response.data.error[0].msg);
+        if (error.response.data.message)
+          return setError(error.response.data.message);
+        if (error.response.data.error[0].msg)
+          return setError(error.response.data.error[0].msg);
       } else if (error.request) {
         //setApiError(true);
       } else {

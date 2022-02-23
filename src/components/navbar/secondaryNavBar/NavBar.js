@@ -33,7 +33,7 @@ import "./navBar.css";
 import Login from "../../Login/Login";
 import { cartItemList, userAuth } from "../../../recoil/store";
 import { ToastContainer, toast } from "react-toastify";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 import Paper from "@mui/material/Paper";
 import { logoutAction } from "../../../redux/slices/auth.slices";
@@ -56,6 +56,8 @@ const NavBar = (props) => {
   const [cartCount, setCartCount] = useState(0);
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
+  const [error, setError] = useState();
+  const isUserLogIn = useRecoilValue(userAuth);
   const [loggedin, isUser] = useState();
   let dispatch = useDispatch();
 
@@ -66,9 +68,7 @@ const NavBar = (props) => {
     right: false,
   });
 
-  let { admin, isLogin } = useSelector((state) => 
-    state.AuthReducer
-  )
+  let { admin, isLogin } = useSelector((state) => state.AuthReducer);
   let schoolCourses = [];
   let intermediateCourses = [];
   let collegeCourses = [];
@@ -99,8 +99,8 @@ const NavBar = (props) => {
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
     ) {
       return;
     }
@@ -124,7 +124,7 @@ const NavBar = (props) => {
   useEffect(() => {
     const getCartData = async () => {
       if (!cartData) {
-        let data = await getFromCartApi(setCartData, isUser);
+        let data = await getFromCartApi(setCartData, setLoading, setError);
         setCartCount(data?.length);
       }
     };
@@ -154,7 +154,7 @@ const NavBar = (props) => {
     });
   }
 
-  if(loading === true){
+  if (loading === true) {
     toast.error("Weak Network", {
       position: "bottom-right",
       autoClose: 5000,
@@ -166,7 +166,7 @@ const NavBar = (props) => {
     });
     setLoading(false);
   }
-  
+
   //JSON.parse(localStorage.getItem) to retrieve
   localStorage.setItem("forSchool", JSON.stringify(schoolCourses));
   localStorage.setItem("forIntermediate", JSON.stringify(intermediateCourses));
@@ -176,51 +176,51 @@ const NavBar = (props) => {
   //   <Box
   //     sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
   //     role="presentation"
-      
+
   //     onKeyDown={toggleDrawer(anchor, false)}
   //   >
   //     <ListItem button>
-        // <Accordion
-        //   className="techvanto-navbar-service-accordian"
-        //   style={{ boxShadow: "none" }}
-        // >
-        //   <AccordionSummary
-        //     expandIcon={<ExpandMoreIcon />}
-        //     aria-controls="panel1a-content"
-        //     id="panel1a-header"
-        //   >
-        //     <Typography>Services</Typography>
-        //   </AccordionSummary>
-        //   <AccordionDetails>
-        //     <List>
-        //       {Services.map((data, index) => (
-        //         <ListItem
-        //           component={Link}
-        //           to={data.link}
-        //           button
-        //           key={data.text}
-        //         >
-        //           <ListItemText primary={data.text} />
-        //         </ListItem>
-        //       ))}
-        //       <ListItem>
-        //         <ListItemText primary="list is working" />
-        //       </ListItem>
-        //     </List>
-        //   </AccordionDetails>
-        // </Accordion>
+  // <Accordion
+  //   className="techvanto-navbar-service-accordian"
+  //   style={{ boxShadow: "none" }}
+  // >
+  //   <AccordionSummary
+  //     expandIcon={<ExpandMoreIcon />}
+  //     aria-controls="panel1a-content"
+  //     id="panel1a-header"
+  //   >
+  //     <Typography>Services</Typography>
+  //   </AccordionSummary>
+  //   <AccordionDetails>
+  //     <List>
+  //       {Services.map((data, index) => (
+  //         <ListItem
+  //           component={Link}
+  //           to={data.link}
+  //           button
+  //           key={data.text}
+  //         >
+  //           <ListItemText primary={data.text} />
+  //         </ListItem>
+  //       ))}
+  //       <ListItem>
+  //         <ListItemText primary="list is working" />
+  //       </ListItem>
+  //     </List>
+  //   </AccordionDetails>
+  // </Accordion>
   //     </ListItem>
   //   </Box>;
   // };
 
   const list = (anchor) => (
-      <Box
-        sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-        role="presentation"
-        onClick={toggleDrawer(anchor, false)}
-        onKeyDown={toggleDrawer(anchor, false)}
-      >
-        <List>
+    <Box
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
         <Accordion
           className="techvanto-navbar-service-accordian"
           style={{ boxShadow: "none" }}
@@ -267,14 +267,12 @@ const NavBar = (props) => {
           className="secondary-navbar"
           style={{ whiteSpace: "nowrap" }}
         >
-          <Toolbar className="main-logo" style={{ paddingTop: "3px", width: '250px' }}>
+          <Toolbar
+            className="main-logo"
+            style={{ paddingTop: "3px", width: "250px" }}
+          >
             <Link to="/">
-              <img
-                src={logoOnScroll}
-                height="100%"
-                width="250px"
-                alt="Logo"
-              />
+              <img src={logoOnScroll} height="100%" width="250px" alt="Logo" />
             </Link>
           </Toolbar>
           <Toolbar>
@@ -542,7 +540,10 @@ const NavBar = (props) => {
                 </>
               ) : (
                 <>
-                  <button className="btn-grad btn-nav" onClick={handleClickOpen}>
+                  <button
+                    className="btn-grad btn-nav"
+                    onClick={handleClickOpen}
+                  >
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"

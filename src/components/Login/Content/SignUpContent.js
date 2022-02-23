@@ -13,13 +13,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import RegisterApi from "../../../apis/api/SignUp";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
 
-const useStyles = makeStyles(theme => ({
-  btnSignUp:{
-    marginTop: '20px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+const useStyles = makeStyles((theme) => ({
+  btnSignUp: {
+    marginTop: "20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 }));
 
 const theme = createTheme();
@@ -39,44 +39,51 @@ export default function SignUp({ classess }) {
 
   const validation = (event) => {
     let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(event.target.name === "name"){
-      if(event.target.value == ""){
+    if (event.target.name === "name") {
+      if (event.target.value == "") {
         return validateName(true);
       }
-      validateName(false)
+      validateName(false);
     }
-    if(event.target.name === "email"){
-      if(!event.target.value.match(emailValidate)){ 
+    if (event.target.name === "email") {
+      if (!event.target.value.match(emailValidate)) {
         return validateEmail(true);
       }
       validateEmail(false);
     }
-    if(event.target.name === "mobile"){
-      if(event.target.value.length !== 10 || event.target.value == "" || !Number(event.target.value)){
+    if (event.target.name === "mobile") {
+      if (
+        event.target.value.length !== 10 ||
+        event.target.value == "" ||
+        !Number(event.target.value)
+      ) {
         return validateMobile(true);
       }
       validateMobile(false);
     }
-    if(event.target.name === "password"){
-      let strongPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    if (event.target.name === "password") {
+      let strongPassword =
+        /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
       setPass(event.target.value);
-      if(event.target.value == ""){
+      if (event.target.value == "") {
         validatePassword(true);
         return validationMessage("Enter Password");
       }
-      if(!event.target.value.match(strongPassword)){
+      if (!event.target.value.match(strongPassword)) {
         validatePassword(true);
-        return validationMessage("Password must contain at least one numeric, one uppercase, one lowercase and one special character");
+        return validationMessage(
+          "Password must contain at least one numeric, one uppercase, one lowercase and one special character"
+        );
       }
-      validatePassword(false); 
+      validatePassword(false);
     }
-    if(event.target.name === "repassword"){
-      if(event.target.value !== pass) {
+    if (event.target.name === "repassword") {
+      if (event.target.value !== pass) {
         return confirmPassword(true);
       }
       confirmPassword(false);
     }
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -87,19 +94,24 @@ export default function SignUp({ classess }) {
     let body = {
       name: data.get("name"),
       email: data.get("email"),
-      mobile: data.get("mobile"),
+      phone: data.get("mobile"),
       password: data.get("password"),
     };
-    if (!body.name || !body.email || !body.mobile || !body.password) {
+    if (!body.name || !body.email || !body.phone || !body.password) {
       setLoader(false);
       return setError("Star Fields Are Required");
     }
-    if(name === false && email === false && 
-      mobile === false && password === false &&
-      confirmPass === false) {
-        console.log("hhh")
+    if (
+      name === false &&
+      email === false &&
+      mobile === false &&
+      password === false &&
+      confirmPass === false
+    ) {
+      console.log("hhh");
       RegisterApi(body, setError, setLoader);
-      if(setError === "Registration Success"){
+      console.log("sd");
+      if (setError === "Registration Success") {
         toast.success(setError, {
           position: "bottom-right",
           autoClose: 5000,
@@ -110,8 +122,7 @@ export default function SignUp({ classess }) {
           progress: undefined,
         });
       }
-    }
-    else{
+    } else {
       setLoader(false);
       return setError("Star Fields Are Required");
     }
@@ -164,7 +175,7 @@ export default function SignUp({ classess }) {
                   autoFocus
                   onChange={(e) => validation(e)}
                   error={name}
-                  helperText={name ? 'Enter Your Name.' : ''}
+                  helperText={name ? "Enter Your Name." : ""}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -178,7 +189,7 @@ export default function SignUp({ classess }) {
                   autoComplete="email"
                   onChange={(e) => validation(e)}
                   error={email}
-                  helperText={email ? 'Invalid Email.' : ''}
+                  helperText={email ? "Invalid Email." : ""}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -193,7 +204,7 @@ export default function SignUp({ classess }) {
                   autoComplete="mobile"
                   onChange={(e) => validation(e)}
                   error={mobile}
-                  helperText={mobile ? 'Invalid Mobile Number.' : ''}
+                  helperText={mobile ? "Invalid Mobile Number." : ""}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -208,7 +219,7 @@ export default function SignUp({ classess }) {
                   autoComplete="new-password"
                   onChange={(e) => validation(e)}
                   error={password}
-                  helperText={password ? message : ''}
+                  helperText={password ? message : ""}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -223,17 +234,20 @@ export default function SignUp({ classess }) {
                   autoComplete="re-password"
                   onChange={(e) => validation(e)}
                   error={confirmPass}
-                  helperText={confirmPass ? 'Password does not match.' : ''}
+                  helperText={confirmPass ? "Password does not match." : ""}
                 />
               </Grid>
             </Grid>
             <button
-              style={loader ? {backgroundColor: 'var(--color-disable)'} : {backgroundColor: 'var(--color-secondary)'}}
+              style={
+                loader
+                  ? { backgroundColor: "var(--color-disable)" }
+                  : { backgroundColor: "var(--color-secondary)" }
+              }
               className={`btn-grad full-width ${classes.btnSignUp}`}
               disabled={loader ? true : false}
             >
-              {loader ? <img src={ButtonLoader} width="80" /> : 'SignUp'}
-              
+              {loader ? <img src={ButtonLoader} width="80" /> : "SignUp"}
             </button>
           </Box>
         </Box>

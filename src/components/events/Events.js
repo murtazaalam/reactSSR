@@ -7,7 +7,6 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import EventBackgroundImage from "../../assets/images/event_header_image.svg";
 import EventImage from "../../assets/images/event_icon_demo.svg";
 import eventsApi from "../../apis/api/GetEvents";
 import "./events.css";
@@ -40,12 +39,16 @@ const Events = (props) => {
       <Box
         component="section"
         className="page-heading"
-        sx={{ background: `url(${EventBackgroundImage})` }}
+        sx={{
+          background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/Events.jpg)`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
       >
         <div className="course-container">
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
-              <li className="breadcrumb-item">
+              <li className="breadcrumb-item active">
                 <p className="home">
                   Home
                   <div className="line"></div>

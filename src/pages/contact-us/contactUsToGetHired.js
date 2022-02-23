@@ -3,7 +3,7 @@ import Banner from "../../components/Generic/Banner/Banner";
 import { Grid } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import LeftPanel from "../../components/contactUs/forHiring/leftPanel";
-import { Typography, Container } from "@mui/material";
+import { Typography, Container, Box } from "@mui/material";
 import { HiringPartners } from "../../components";
 import RightPanel from "../../components/contactUs/forHiring/RightPanel";
 import "./contact-us.css";
@@ -11,11 +11,27 @@ import EventBackgroundImage from "../../assets/images/contactUs-hirinh.webp";
 function contactUsToGetHired() {
   return (
     <>
-      <Banner
-        backgroundImage={EventBackgroundImage}
-        breadcrumb="contact-us-to-get-hired"
-        heading="Contact Us"
-      />
+      <Box
+        className="page-heading"
+        sx={{
+          background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/contact+us.jpg)`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="course-container">
+          <nav aria-label="breadcrumb">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item active">
+                Home
+                <div className="line"></div>
+              </li>
+              <li className="breadcrumb-item active">Contact Us</li>
+            </ol>
+          </nav>
+          <h1 className="event-heading">Contact Us</h1>
+        </div>
+      </Box>
       <Grid container>
         <Grid item xs={8} className="left-card-position">
           <div>

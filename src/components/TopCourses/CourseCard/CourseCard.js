@@ -16,6 +16,7 @@ export default function CourseCard({
   price,
   discount,
   rating,
+  fromMycourse,
 }) {
   console.log(id);
   return (

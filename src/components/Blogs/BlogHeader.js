@@ -9,17 +9,19 @@ function BlogHeader() {
       <Box
         component="section"
         className="page-heading"
-        // sx={{ background: `url(${(BlogHead1, BlogHead2)})` }}
+        sx={{
+          background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/blog+page.jpg)`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
       >
         <div className="course-container">
           {/* <img src={BlogHead1} alt="" width="15" /> */}
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <a href="/" className="home">
-                  Home
-                  <div className="line"></div>
-                </a>
+              <li className="breadcrumb-item active">
+                Home
+                <div className="line"></div>
               </li>
               <li className="breadcrumb-item active">Blogs</li>
             </ol>

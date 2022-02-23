@@ -96,7 +96,6 @@ const CourseBody = ({ course }) => {
     }
   };
   useEffect(() => {
-    console.log(window.location.href);
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
   }, []);
@@ -336,7 +335,9 @@ const CourseBody = ({ course }) => {
                     </span>
                     <span className="heading">Duration</span>
                   </p>
-                  <p className="sub-heading">{course && course.duration} hours</p>
+                  <p className="sub-heading">
+                    {course && course.duration} hours
+                  </p>
                 </div>
                 <div className="other">
                   <p>
@@ -345,7 +346,9 @@ const CourseBody = ({ course }) => {
                     </span>
                     <span className="heading">Lession</span>
                   </p>
-                  <p className="sub-heading">{course && course.lession} Lectures</p>
+                  <p className="sub-heading">
+                    {course && course.lession} Lectures
+                  </p>
                 </div>
                 <div className="other">
                   <p>

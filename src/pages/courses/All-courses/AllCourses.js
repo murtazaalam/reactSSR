@@ -104,9 +104,12 @@ function AllCourses() {
     <>
       {/* Header */}
       <Box
-        component="section"
         className="page-heading"
-        sx={{ background: `url(${EventBackgroundImage})` }}
+        sx={{
+          background: `url(${"https://tv-academy-assets.s3.eu-west-2.amazonaws.com/all+courses.jpg"})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
       >
         <div className="course-container">
           <nav aria-label="breadcrumb">
@@ -143,8 +146,8 @@ function AllCourses() {
               {/* List and Empty View */}
 
               <div className="list-wrap">
-                {console.log("rendering")}
-                {data}
+                {/* {data ? data : <h1>sd</h1>} */}
+                {data ? data : console.log("sdsd")}
               </div>
             </div>
           )}

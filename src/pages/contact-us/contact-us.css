@@ -16,3 +16,9 @@
   margin-top: 10px !important;
   margin-left: 10px !important;
 }
+@media only screen and (max-width: 600px) {
+  .contactus {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+  }
+}
