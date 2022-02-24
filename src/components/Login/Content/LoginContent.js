@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function LoginContent(props) {
   const [error, setError] = useState("");
-  const [user, setUser] = useRecoilState(userAuth);
+  const [users, setUser] = useRecoilState(userAuth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validateEmail, setValidateEmail] = useState(false);
@@ -78,20 +78,22 @@ export default function LoginContent(props) {
       return setError("Invalid Email");
     }
     let res = await LoginApi(body, setError, setLoader);
-    if (res === "Login Success") {
-      setUser(true);
-      emptyState();
-      //window.location.reload();
-      toast.success("Login Success", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      dispatch(loginAction({admin:body}))
+    if(res){
+      if (res.message === "Login Success") {
+        setUser(true);
+        emptyState();
+        //window.location.reload();
+        toast.success("Login Success", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(loginAction({admin:res.user}))
+      }
     }
     // event.preventDefault();
     // setError("");

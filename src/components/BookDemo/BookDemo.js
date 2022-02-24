@@ -11,43 +11,65 @@ import {
 import needAssistance from "../../assets/Svgs/needAssistance.svg";
 import "./BookDemo.css";
 import { CardActions } from "@material-ui/core";
+import { ToastContainer, toast } from "react-toastify";
 import sendQueryApi from "../../apis/api/SendQuery";
 import ButtonLoader from "../../assets/images/button_loader.gif";
+import { useSelector } from "react-redux";
 
 const BookADemo = () => {
+
+  let { admin, isLogin } = useSelector((state) => state.AuthReducer);
+
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
-  const [query, setQuery] = React.useState("");
+  const [query, setQuery] = React.useState();
   const [message, setMessage] = React.useState("");
   const [loader, setLoader] = React.useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     let body;
     const data =new FormData(e.currentTarget);
     setMessage("")
     setLoader(true);
-    if(localStorage.getItem('token')){
-      body = {
-        query : data.get('query')
-      }
-      sendQueryApi(body, setMessage, setLoader);
-    }else{
       let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       body = {
         name : data.get("name"),
         email : data.get("email"),
-        query : data.get("query")
+        query : data.get("query") ? data.get("query") : null
       }
       if(!body.email.match(emailValidate)){
         setLoader(false);
         setMessage("Invalid Email");
         return;
       }
-      sendQueryApi(body, setMessage, setLoader);
-    }
-    
+      else{
+        let success = await sendQueryApi(body, setMessage, setLoader);
+        toast.success(success, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        if(success === "Query Sent"){
+          emptyState();
+        }
+      }
   };
+  const emptyState = () => {
+    if(isLogin){
+      setQuery("");
+    }
+    else{
+      setName("")
+      setEmail("");
+      setQuery("");
+    }
+  };
+  
   return (
     <section>
       <Container>
@@ -68,6 +90,7 @@ const BookADemo = () => {
               >
                   {message}
               </p>
+
               <CardContent className="card-content">
                 <TextField
                   id="name"
@@ -75,21 +98,20 @@ const BookADemo = () => {
                   label="Name"
                   sx={{ pb: 1 }}
                   variant="outlined"
-                  value={name}
-                  required={localStorage.getItem('token') ? false : true}
+                  value={isLogin ? admin.name : name}
+                  required
                   onChange={(e) => setName(e.target.value)}
-                  style={localStorage.getItem('token') ? {display: 'none'} : {display: 'inherit'}}
                 />
                 <TextField
                   id="email"
+                  type="email"
                   name="email"
                   label="Email Id"
                   variant="outlined"
-                  value={email}
+                  value={isLogin ? admin.email : email}
                   sx={{ pb: 1 }}
-                  required={localStorage.getItem('token') ? false : true}
+                  required
                   onChange={(e) => setEmail(e.target.value)}
-                  style={localStorage.getItem('token') ? {display: 'none'} : {display: 'inherit'}}
                 />
               
                 <TextField
@@ -101,8 +123,6 @@ const BookADemo = () => {
                   sx={{ pb: 1 }}
                   multiline
                   rows={2}
-                  required
-                  // maxRows={4}
                   onChange={(e) => setQuery(e.target.value)}
                 />
               </CardContent>

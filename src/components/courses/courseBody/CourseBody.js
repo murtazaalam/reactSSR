@@ -426,7 +426,7 @@ const CourseBody = ({ course }) => {
           )}
         </div>
       </div>
-      {/* <div class="thought">
+      <div class="thought">
         <h2>Leave a Review</h2>
         <p>
           Your email address will not be published. Required fields are marked *
@@ -460,7 +460,7 @@ const CourseBody = ({ course }) => {
             </button>
           </div>
         </form>
-      </div> */}
+      </div>
     </>
   );
 };

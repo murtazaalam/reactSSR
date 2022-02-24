@@ -1,14 +1,15 @@
 import routes from '../routes/Services.routes';
 import axios from 'axios';
 
-export default function sendQueryApi(body, setMessage, setLoader){
-    axios.post(routes.SendQuery, body,{
+export default async function sendQueryApi(body, setMessage, setLoader){
+    return await axios.post(routes.SendQuery, body,{
         headers:{
             'token':localStorage.getItem('token') ? localStorage.getItem('token') : ''
         }
     }).then((res) => {
         setMessage(res.data.message);
         setLoader(false);
+        return res.data.message;
     }).catch((error) => {
         if (error.response.data) {
             setLoader(false);

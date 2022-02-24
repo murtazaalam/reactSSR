@@ -75,6 +75,7 @@ const NavBar = (props) => {
   const logoutHandler = () => {
     dispatch(logoutAction());
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setIsLogged(false);
   };
   const [user, setUser] = useState(false);
