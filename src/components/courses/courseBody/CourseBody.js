@@ -26,8 +26,11 @@ import "./courseBody.css";
 import Login from "../../Login/Login";
 import Paper from "@mui/material/Paper";
 import myOrdersApi from "../../../apis/api/MyOders";
-
+import { useSelector } from "react-redux";
 import { RWebShare } from "react-web-share";
+import ButtonLoader from "../../../assets/images/button_loader.gif";
+import addReviewApi from "../../../apis/api/AddReview";
+
 function PaperComponent(props) {
   return (
     <Draggable
@@ -44,7 +47,14 @@ const CourseBody = ({ course }) => {
   const [timeBadge, setTimerBadge] = useState(true);
   const [baughtCourses, setBaughtCourses] = useState([]);
   const [isBaughtCourse, setIsBaughtCourse] = useState(false);
+  const [loader, setLoader] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [comment, setComment] = React.useState("");
+  const [formError, setFormError] = useState(false);
+  const [error, setError] = useState();
 
+  let { admin, isLogin } = useSelector((state) => state.AuthReducer);
   useEffect(() => {
     if (baughtCourses.length !== 0) {
       myOrdersApi(setBaughtCourses);
@@ -154,20 +164,71 @@ const CourseBody = ({ course }) => {
     return Object.keys(obj).length === 0;
   }
 
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const data =new FormData(e.currentTarget);
+    let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    setFormError(false);
+    setLoader(true);
+    if(!data.get("email").match(emailValidate)){
+      setFormError(true);
+      setLoader(false);
+      return;
+    }
+    else{
+      let body = {
+        name: data.get("name"),
+        email: data.get("email"),
+        comment: data.get("comment") ? data.get("comment") : null,
+      }
+      try{
+        let res = await addReviewApi(body, setError, setLoader);
+          if(res === "Thanks For Your Review"){
+            toast.success(res, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            emptyState();
+          }
+          else{
+            toast.error(res, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setOpen(true);
+          }
+        
+      }catch(error){
+        console.log("error=", error);
+      }
+    }
+  }
+  const inputValue = (value) => {
+    setEmail(value);
+    let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(!email.match(emailValidate)){
+      setFormError(true);
+      return;
+    }
+    setFormError(false);
+  }
+
+  const emptyState = () => {
+    setComment("");
+  };
   return (
     <>
       <div className="course-tab-container">
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
 
         <Typography component="div">
           <Box sx={{ width: "100%", typography: "body1" }}>
@@ -431,32 +492,50 @@ const CourseBody = ({ course }) => {
         <p>
           Your email address will not be published. Required fields are marked *
         </p>
-        <form className="row review-form">
+        <form className="row review-form" onSubmit={handleSubmit}>
           <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field">
             <input
               type="text"
               className="form-control"
               placeholder="Your Name *"
+              name="name"
+              value={isLogin ? admin.name : name}
+              onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field">
+          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field" style={{position: 'relative'}}>
             <input
               type="text"
               className="form-control"
               placeholder="Your Email *"
+              name="email"
+              value={isLogin ? admin.email : email}
+              onChange={(e) => inputValue(e.target.value)}
+              style={formError ? {borderColor: 'var(--color-secondary)'} : {borderColor: '#f8f8f8'}}
+              required
             />
+            <p className="email-error" style={formError ? {display: 'block'} : {display: 'none'}}>Invalid Email</p>
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field">
             <textarea
               className="form-control"
               placeholder="Your Comment"
+              name="comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
               rows="4"
             ></textarea>
           </div>
 
           <div className="col-lg-6 col-md-6 col-sm-6 comment-btn-box">
-            <button type="submit" className="btn-grad">
-              Submit
+            <button 
+            type="submit" 
+            className="btn-grad btn-review"
+            disabled={loader ? true : false}
+            style={loader ? {backgroundColor: 'var(--color-disable)'} : {backgroundColor: 'var(--color-secondary)'}}
+            >
+              {loader ? <img src={ButtonLoader} width="80" /> : 'Submit'}
             </button>
           </div>
         </form>

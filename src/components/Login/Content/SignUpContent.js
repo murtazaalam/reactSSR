@@ -110,22 +110,23 @@ export default function SignUp({ classess }) {
       password === false &&
       confirmPass === false
     ) {
-      console.log("out")
       try{
-        let success = await RegisterApi(body, setError, setLoader);
-        console.log("in", success);
-        if (success === "Registration Success") {
-          toast.success(success, {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          dispatch(loginAction({isLogin:true}));
-      }
+        let res = await RegisterApi(body, setError, setLoader);
+        if(res){
+          if (res.message === "Registration Success") {
+            toast.success("Registration Success", {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            dispatch(loginAction({admin:res.user,isLogin:true}));
+        }
+        }
+        
       }catch(err){
 
       }

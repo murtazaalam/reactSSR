@@ -3,7 +3,7 @@ import endpoint from "./Index.routes";
 const routes = {
   GetCourses: endpoint + "all-courses",
   GetEvents: endpoint + "all-events",
-  SignUp: "http://ec2-18-206-58-123.compute-1.amazonaws.com:5000/auth/register",
+  SignUp: endpoint + "auth/register",
   Login: endpoint + "auth/login",
   OrderTest: endpoint + "add-order",
   AddToCart: endpoint + "add-to-cart",
@@ -16,5 +16,6 @@ const routes = {
   Blogs: endpoint + "blogs",
   SendQuery: endpoint + "add-query",
   TopCourse: endpoint + "top-courses",
+  AddReview: "http://localhost:5000/add-review"
 };
 export default routes;

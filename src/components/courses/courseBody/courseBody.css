@@ -147,6 +147,16 @@
   position: relative;
   right: 42px;
 }
+.btn-review{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.email-error{
+  position: absolute;
+  color: var(--color-secondary) !important;
+}
 @media screen and (min-width: 1024px) {
   .tab-course-description {
     width: 60%;

@@ -10,7 +10,7 @@ export default async function RegisterApi(body, setError, setLoader){
       .then((res) => {
         setLoader(false);
         localStorage.setItem("token",res.data.token);
-        return res.data.message;
+        return res.data;
     }).catch((error) => {
         if (error.response.data) {
           setLoader(false);

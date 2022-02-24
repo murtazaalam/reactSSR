@@ -11,7 +11,7 @@ import {
 import needAssistance from "../../assets/Svgs/needAssistance.svg";
 import "./BookDemo.css";
 import { CardActions } from "@material-ui/core";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import sendQueryApi from "../../apis/api/SendQuery";
 import ButtonLoader from "../../assets/images/button_loader.gif";
 import { useSelector } from "react-redux";

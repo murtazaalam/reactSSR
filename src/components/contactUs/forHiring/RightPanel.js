@@ -11,16 +11,24 @@ import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./rightPanel.css";
 function RightPanel() {
+
   const [info, setInfo] = useState({
     name: "",
     email: "",
-    phoneNo: Number,
+    phone: "",
     profileRequired: [],
   });
   const submitForm = (e) => {
     e.preventDefault();
     console.log(info);
+
   };
+  const formValidate = (event) => {
+    //setInfo({...info, name: value})
+    if(event.name === "name") setInfo({...info, name: event.value});
+    if(event.name === "email") setInfo({...info, email: event.value});
+    if(event.name === "phone") setInfo({...info, phone: event.value});
+  }
   return (
     <>
       <form onSubmit={submitForm} className="right-panel-form">
@@ -29,8 +37,11 @@ function RightPanel() {
           <OutlinedInput
             id="name"
             value={info.name}
-            onChange={(e) => setInfo({ ...info, name: e.target.value })}
+            onChange={(e) => formValidate(e.target)}
             label="Enter Your Good Name"
+            name="name"
+            error
+            helperText={"Invalid Email."}
             required
             endAdornment={
               <InputAdornment position="end">
@@ -44,7 +55,8 @@ function RightPanel() {
           <OutlinedInput
             id="email"
             value={info.email}
-            onChange={(e) => setInfo({ ...info, email: e.target.value })}
+            name="email"
+            onChange={(e) => formValidate(e.target)}
             label="Email Address"
             required
             endAdornment={
@@ -55,13 +67,16 @@ function RightPanel() {
           />
         </FormControl>
         <FormControl className="input-margin">
-          <InputLabel htmlFor="phoneNo">Mobile number</InputLabel>
+          <InputLabel htmlFor="phoneNo" error>Mobile number</InputLabel>
           <OutlinedInput
             id="phonNo"
-            value={info.phoneNo}
-            onChange={(e) => setInfo({ ...info, phoneNo: e.target.value })}
+            value={info.phone}
+            onChange={(e) => formValidate(e.target)}
             label="phone number"
+            name="phone"
+            type="number"
             required
+            error
             endAdornment={
               <InputAdornment position="end">
                 <PhoneAndroidIcon />

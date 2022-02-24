@@ -136,13 +136,13 @@ const NavBar = (props) => {
 
   if (allCourse) {
     allCourse?.forEach((item) => {
-      if (item.category === "For School") {
+      if (item.category === "School") {
         schoolCourses.push(item);
       }
-      if (item.category === "For Intermediate") {
+      if (item.category === "Intermediate") {
         intermediateCourses.push(item);
       }
-      if (item.category === "For College") {
+      if (item.category === "College") {
         collegeCourses.push(item);
       }
     });
