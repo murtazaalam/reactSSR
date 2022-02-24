@@ -5,7 +5,7 @@ import { CardContent, Typography } from "@mui/material";
 function leftPanel(props) {
   return (
     <>
-      <Card variant="outlined" style={{ width: "94%" }}>
+      <Card variant="outlined">
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {props.heading}

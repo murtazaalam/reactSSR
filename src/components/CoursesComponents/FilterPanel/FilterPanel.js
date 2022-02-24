@@ -9,7 +9,6 @@ import FormControl from "@mui/material/FormControl";
 import "./FilterPanel.css";
 
 const FilterPanel = ({ category, changeChecked }) => {
-  console.log(ratingList);
   return (
     <div>
       {/* Category */}

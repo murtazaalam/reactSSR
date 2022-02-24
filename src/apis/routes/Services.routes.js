@@ -2,7 +2,7 @@ import endpoint from "./Index.routes";
 
 const routes = {
   GetCourses: endpoint + "all-courses",
-  GetEvents: endpoint + "techvanto-events",
+  GetEvents: endpoint + "all-events",
   SignUp: "http://ec2-18-206-58-123.compute-1.amazonaws.com:5000/auth/register",
   Login: endpoint + "auth/login",
   OrderTest: endpoint + "add-order",

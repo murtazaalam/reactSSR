@@ -18,6 +18,18 @@
   display: flex;
   flex: 1;
 }
+
+@media (max-width: 550px) {
+  .course-panelList-wrap {
+    display: block !important;
+  }
+}
+@media (max-width: 1050px) {
+  .list-wrap {
+    padding: 0 10em 0 0;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .course-panel-wrap {
   /* background: red; */
   flex-basis: 300px;

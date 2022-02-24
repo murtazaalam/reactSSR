@@ -18,7 +18,6 @@ export default function CourseCard({
   rating,
   fromMycourse,
 }) {
-  console.log(id);
   return (
     <Link to={`/courses/${id}`} style={{ textDecoration: "none" }}>
       <Card sx={{ width: "340px" }} className="technovanto-course-card">
