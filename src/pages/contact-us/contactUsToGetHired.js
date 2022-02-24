@@ -32,41 +32,46 @@ function contactUsToGetHired() {
           <h1 className="event-heading">Contact Us</h1>
         </div>
       </Box>
-      <Grid container>
-        <Grid item xs={8} className="left-card-position">
-          <div>
-            <LeftPanel heading="PLacement Opportunities" />
-          </div>
-        </Grid>
-        <Grid
-          item
-          xs={4}
-          //   style={{ border: "2px solid black" }}
-          className="right-form-position"
-        >
-          <div>
-            <h5>
-              Contact Us for placement Opportunities
-              <InfoIcon />
-            </h5>
+      <div className="contactus">
+        <Grid container>
+          <Grid item xs={6.5} className="left-card-position">
+            <div>
+              <LeftPanel heading="PLacement Opportunities" />
+            </div>
+          </Grid>
+          <Grid
+            item
+            xs={4}
+            //   style={{ border: "2px solid black" }}
+            className="right-form-position"
+          >
+            <div>
+              <h5>
+                Contact Us for placement Opportunities
+                <InfoIcon />
+              </h5>
 
-            <RightPanel />
-          </div>
-        </Grid>
+              <RightPanel />
+            </div>
+          </Grid>
 
-        <Grid item xs={12}>
-          <div className="bg-image bg-image hiring-partner-section">
-            <Container className="section-spacing">
-              <Typography component="div" className="techvanto-whyus ">
-                <Typography component="h2" className="techvanto-whyus-heading">
-                  Hiring Partners
+          <Grid item xs={12}>
+            <div className="bg-image bg-image hiring-partner-section">
+              <Container className="section-spacing">
+                <Typography component="div" className="techvanto-whyus ">
+                  <Typography
+                    component="h2"
+                    className="techvanto-whyus-heading"
+                  >
+                    Hiring Partners
+                  </Typography>
                 </Typography>
-              </Typography>
-              <HiringPartners />
-            </Container>
-          </div>
+                <HiringPartners />
+              </Container>
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Tab, Typography, Box } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
+import Tabs from "@mui/material/Tabs";
 import TabPanel from "@mui/lab/TabPanel";
 import ServiceCard from "../widgets/ServiceCard/ServiceCard";
 import "./ServiceGrid.css";
@@ -29,7 +29,9 @@ const ServiceGrid = () => {
               <Typography component="h2" className="techvanto-whyus-heading">
                 Our Services
               </Typography>
-              <TabList
+              <Tabs
+                variant="scrollable"
+                value={value}
                 onChange={handleChange}
                 aria-label="lab API tabs"
                 className="services-tabs"
@@ -39,7 +41,7 @@ const ServiceGrid = () => {
                 <Tab label="UNDERGRADS" value="3" />
                 <Tab label="COMPANIES" value="4" />
                 <Tab label="Schools" value="5" />
-              </TabList>
+              </Tabs>
             </Box>
             <TabPanel value="1">
               <div className="row service-grid">

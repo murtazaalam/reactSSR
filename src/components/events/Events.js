@@ -16,24 +16,26 @@ const Events = (props) => {
   const [events, setEventData] = useState();
   const [upcomingTab, setUpcomingTab] = useState(true);
   const [pastTab, setPastTab] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-      if (!events) {
-        eventsApi(props.category, setEventData);
-      }
+    if (!events) {
+      eventsApi(props.category, setEventData, setLoading, setError);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events]);
   const setEventCategory = (category) => {
     setEventData([]);
-    eventsApi(category, setEventData);
-    if(category === "upcoming"){
+    eventsApi(category, setEventData, setLoading, setError);
+    if (category === "upcoming") {
       setUpcomingTab(true);
       setPastTab(false);
-    }else{
+    } else {
       setUpcomingTab(false);
       setPastTab(true);
     }
-  }
+  };
   return (
     <>
       <Box
@@ -60,7 +62,7 @@ const Events = (props) => {
           <h1 className="event-heading">Events</h1>
         </div>
       </Box>
-      {events ? (
+      {!loading ? (
         <Box component="section" className="courses-area">
           <Box component="div" className="event-aria">
             <Typography component="h3">Events</Typography>
@@ -74,14 +76,22 @@ const Events = (props) => {
               <Box component="div" className="row event-menu">
                 <Typography
                   component="h6"
-                  style={upcomingTab ? {fontWeight: 800, color: 'var(--color-secondary)'} : {fontWeight: 600, color: 'black'}}
+                  style={
+                    upcomingTab
+                      ? { fontWeight: 800, color: "var(--color-secondary)" }
+                      : { fontWeight: 600, color: "black" }
+                  }
                   onClick={() => setEventCategory("upcoming")}
                 >
                   Upcoming Events
                 </Typography>
                 <Typography
                   component="h6"
-                  style={pastTab ? {fontWeight: 800, color: 'var(--color-secondary)'} : {fontWeight: 600, color: 'black'}}
+                  style={
+                    pastTab
+                      ? { fontWeight: 800, color: "var(--color-secondary)" }
+                      : { fontWeight: 600, color: "black" }
+                  }
                   onClick={() => setEventCategory("past")}
                 >
                   Past Events
@@ -91,7 +101,7 @@ const Events = (props) => {
               <Box component="h6" className=""></Box>
             </div>
             <div className="col-lg-9 col-md-9 col-sm-6 col-12">
-              {events &&
+              {events ? (
                 events.map((event, index) => {
                   return (
                     <Link to={`/event/${event._id}`} key={event._id}>
@@ -153,7 +163,10 @@ const Events = (props) => {
                       </Card>
                     </Link>
                   );
-                })}
+                })
+              ) : (
+                <h1>sds</h1>
+              )}
             </div>
           </Box>
         </Box>

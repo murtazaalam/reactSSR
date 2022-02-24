@@ -162,9 +162,9 @@ const NavBar = (props) => {
   }
 
   //JSON.parse(localStorage.getItem) to retrieve
-  localStorage.setItem("forSchool", JSON.stringify(schoolCourses));
-  localStorage.setItem("forIntermediate", JSON.stringify(intermediateCourses));
-  localStorage.setItem("forCollege", JSON.stringify(collegeCourses));
+  localStorage.setItem("School", JSON.stringify(schoolCourses));
+  localStorage.setItem("Intermediate", JSON.stringify(intermediateCourses));
+  localStorage.setItem("College", JSON.stringify(collegeCourses));
 
   // const list = (anchor) => {
   //   <Box
@@ -226,30 +226,30 @@ const NavBar = (props) => {
       </List>
 
       <List>
-        <a className="sidebar-link" href="/all-courses/all">
+        <Link className="sidebar-link" to="/all-courses/all">
           Courses
-        </a>
+        </Link>
       </List>
       <List>
-        <a className="sidebar-link" href="/events">
+        <Link className="sidebar-link" to="/events">
           Events
-        </a>
+        </Link>
       </List>
       <List>
-        <a className="sidebar-link" href="/interview-questions">
+        <Link className="sidebar-link" to="/interview-questions">
           Interview Questions
-        </a>
+        </Link>
       </List>
       <List>
-        <a className="sidebar-link" href="/blogs">
+        <Link className="sidebar-link" to="/blogs">
           Blogs
-        </a>
+        </Link>
       </List>
       {isLogin ? (
         <List>
-          <a className="sidebar-link" href="/my-courses">
+          <Link className="sidebar-link" to="/my-courses">
             My Courses
-          </a>
+          </Link>
         </List>
       ) : (
         <button className="btn-grad btn-nav" onClick={handleClickOpen}>
@@ -352,7 +352,7 @@ const NavBar = (props) => {
                       </li>
                       <li>
                         <a>
-                          <Link to="/all-courses/college"> Colleges</Link>
+                          <Link to="/all-courses/college">Colleges</Link>
                           <div className="course-list">
                             <div
                               className="image-section"

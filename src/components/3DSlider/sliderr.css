@@ -118,9 +118,6 @@
     color: white;
     font-size: 16px;
   }
-  .story-text {
-    border-bottom: 3px solid var(--color-secondary);
-  }
 }
 @media screen and (min-width: 600px) {
   .story-text {

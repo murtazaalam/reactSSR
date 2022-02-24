@@ -16,9 +16,38 @@
   margin-top: 10px !important;
   margin-left: 10px !important;
 }
-@media only screen and (max-width: 600px) {
-  .contactus {
+
+@media only screen and (max-width: 900px) {
+  .contactus .css-11lq3yg-MuiGrid-root {
     display: flex !important;
-    flex-direction: column-reverse !important;
+    flex-direction: column !important;
+  }
+  .contactus .css-gj1fbr-MuiGrid-root {
+    max-width: none !important;
+    width: 26rem !important;
+  }
+
+  /* .contactus .css-1v5z4dq-MuiPaper-root-MuiCard-root {
+    width: 800px !important;
+  } */
+}
+@media only screen and (max-width: 970px) {
+  .right-form-position {
+    position: inherit;
+  }
+  .contactus {
+    display: flex;
+    flex-direction: column;
+  }
+  .contactus .css-gj1fbr-MuiGrid-root {
+    width: 26rem !important;
+  }
+  .contactus .MuiGrid-root {
+    justify-content: center !important;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .contactus .css-gj1fbr-MuiGrid-root {
+    width: fit-content !important;
   }
 }

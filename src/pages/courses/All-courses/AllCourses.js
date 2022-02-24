@@ -14,18 +14,18 @@ function AllCourses() {
   const { categoryRoute } = useParams();
 
   const [selectedCategory, setSelectedCategory] = useState([
-    { id: 1, checked: false, label: "For School" },
-    { id: 2, checked: false, label: "For College" },
-    { id: 3, checked: false, label: "For Intermediate" },
+    { id: 1, checked: false, label: "School" },
+    { id: 2, checked: false, label: "College" },
+    { id: 3, checked: false, label: "Intermediate" },
     { id: 4, checked: false, label: "All" },
   ]);
   const [category, setCategory] = useState("");
   const [list, setList] = useRecoilState(courseList);
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(true);
-  console.log(category);
 
   const handleChangeChecked = (id) => {
+    console.log(id);
     setCategory(selectedCategory[id - 1].label);
     const categoryStateList = selectedCategory;
     const changeCheckedCategories = categoryStateList.map((item) =>
@@ -39,16 +39,16 @@ function AllCourses() {
   console.log(selectedCategory);
 
   const fetchdata = async () => {
-    let forSchool = await JSON.parse(localStorage.getItem("forSchool"));
-    let forCollege = await JSON.parse(localStorage.getItem("forCollege"));
-    let forIntermediate = await JSON.parse(
+    let School = await JSON.parse(localStorage.getItem("forSchool"));
+    let College = await JSON.parse(localStorage.getItem("forCollege"));
+    let Intermediate = await JSON.parse(
       localStorage.getItem("forIntermediate")
     );
-    setList([...forSchool, ...forCollege, ...forIntermediate]);
+    setList([...School, ...College, ...Intermediate]);
     const categoryStateList = selectedCategory;
     const changeCheckedCategories = categoryStateList.map((item) =>
       item.label.toLowerCase().includes(categoryRoute.toLowerCase())
-        ? { ...item, checked: !item.checked }
+        ? { ...item, checked: true }
         : { ...item, checked: false }
     );
     setSelectedCategory(changeCheckedCategories);
@@ -77,6 +77,8 @@ function AllCourses() {
     })
 
     .map((data) => {
+      console.log(category === data.category);
+
       return category === data.category ||
         category === "" ||
         category === "All" ? (
@@ -94,8 +96,6 @@ function AllCourses() {
         </>
       ) : null;
     });
-
-  console.log(data);
   useEffect(() => {
     fetchdata();
   }, []);

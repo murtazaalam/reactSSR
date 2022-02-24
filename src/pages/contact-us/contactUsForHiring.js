@@ -34,7 +34,7 @@ function contactUsForHiring() {
       </Box>
       <div className="contactus">
         <Grid container>
-          <Grid item xs={7} className="left-card-position">
+          <Grid item xs={6.5} className="left-card-position">
             <div>
               <LeftPanel heading="For Hiring" />
             </div>
