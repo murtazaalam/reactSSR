@@ -16,7 +16,7 @@ function RightPanel() {
     name: "",
     email: "",
     phone: "",
-    profileRequired: [],
+    profileRequired: [data[1].title],
   });
   const submitForm = (e) => {
     e.preventDefault();
@@ -25,9 +25,9 @@ function RightPanel() {
   };
   const formValidate = (event) => {
     //setInfo({...info, name: value})
-    if(event.name === "name") setInfo({...info, name: event.value});
-    if(event.name === "email") setInfo({...info, email: event.value});
-    if(event.name === "phone") setInfo({...info, phone: event.value});
+    if (event.name === "name") setInfo({ ...info, name: event.value });
+    if (event.name === "email") setInfo({ ...info, email: event.value });
+    if (event.name === "phone") setInfo({ ...info, phone: event.value });
   }
   return (
     <>
@@ -87,6 +87,8 @@ function RightPanel() {
         <FormControl className="input-margin">
           <Autocomplete
             multiple
+            onSelect={(e) => {console.log(e)}}
+            onClick={(e) => {console.log(e)}}
             id="tags-filled"
             options={data.map((option) => option.title)}
             defaultValue={[data[1].title]}
@@ -108,14 +110,30 @@ function RightPanel() {
                 placeholder="Job Profiles "
                 value={info.profileRequired}
                 onChange={(e) => {
-                  console.log(params.inputProps.value);
-                  setInfo({
-                    ...info,
-                    profileRequired: [
-                      ...info.profileRequired,
-                      params.inputProps.value,
-                    ],
-                  });
+
+                  console.log("params",params);
+
+                  // console.log(e.target.value);
+                  // if(e.target.value === 13) console.log("hi");
+                  // setInfo({
+                  //   ...info,
+                  //   profileRequired: [
+                  //     ...info.profileRequired,
+                  //     params.inputProps.value,
+                  //   ],
+                  // });
+                }}
+                onKeyDown={(e) => {
+                  console.log(e.target.value);
+                  if (e.key === "Enter") {
+                    setInfo({
+                      ...info,
+                      profileRequired: [
+                        ...info.profileRequired,
+                        params.inputProps.value,
+                      ],
+                    });
+                  }
                 }}
               />
             )}

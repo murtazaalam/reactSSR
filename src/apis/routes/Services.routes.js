@@ -16,6 +16,6 @@ const routes = {
   Blogs: endpoint + "blogs",
   SendQuery: endpoint + "add-query",
   TopCourse: endpoint + "top-courses",
-  AddReview: "http://localhost:5000/add-review"
+  AddReview: endpoint + "add-review"
 };
 export default routes;

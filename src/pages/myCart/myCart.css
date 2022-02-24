@@ -53,6 +53,16 @@ input {
   border-color: #d9534f;
   color: white;
 }
-.table-wrap .css-1qaznj3-MuiCardContent-root{
+.table-wrap .css-1qaznj3-MuiCardContent-root {
   width: 424px;
+}
+@media (max-width: 900px) {
+  .cart-form {
+    flex-direction: column;
+  }
+  .cart-left-card {
+    width: max-content;
+    flex-direction: column;
+    width: 340px;
+  }
 }

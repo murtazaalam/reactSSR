@@ -246,11 +246,18 @@ const NavBar = (props) => {
         </Link>
       </List>
       {isLogin ? (
-        <List>
-          <Link className="sidebar-link" to="/my-courses">
-            My Courses
-          </Link>
-        </List>
+        <>
+          <List>
+            <Link className="sidebar-link" to="/my-courses">
+              My Courses
+            </Link>
+          </List>
+          <List>
+            <Link className="sidebar-link" to="/my-cart">
+              My Cart
+            </Link>
+          </List>
+        </>
       ) : (
         <button className="btn-grad btn-nav" onClick={handleClickOpen}>
           <span className={scroll === false ? "color-white" : "color-black"}>

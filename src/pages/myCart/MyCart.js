@@ -206,10 +206,6 @@ function MyCart() {
                   {/* cart form */}
                   <form action="#" className="cart-form">
                     <div className="table-wrap">
-                      {cartItems.length > 0 && (
-                        <p>{cartItems.length} Courses in the cart.</p>
-                      )}
-
                       {cartItems.map((item, index) => (
                         <Card
                           sx={{
@@ -217,6 +213,7 @@ function MyCart() {
                             justifyContent: "space-between",
                             marginBottom: "20px",
                           }}
+                          className="cart-left-card"
                           key={index}
                         >
                           <div
@@ -249,6 +246,7 @@ function MyCart() {
                                 variant="subtitle1"
                                 color="text.secondary"
                                 component="div"
+                                sx={{ height: "92px", overflow: "auto" }}
                               >
                                 {item.description}
                               </Typography>
