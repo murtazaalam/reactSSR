@@ -17,15 +17,11 @@ export default function Single() {
   console.log("checking", blogItem);
   return (
     <div className="single">
-      <Banner
-        backgroundImage={blogItem && `${blogItem.blog_image}`}
-        heading="Blog"
-      />
       <Box
         component="section"
         className="page-heading"
         sx={{
-          background: `url(${blogItem.blog_image})`,
+          background: `url(${blogItem && blogItem.blog_image})`,
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}

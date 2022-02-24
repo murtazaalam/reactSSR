@@ -170,13 +170,17 @@ const CourseBody = ({ course }) => {
         />
 
         <Typography component="div">
-          <Box sx={{ width: "100%", typography: "body1" }}>
+          <Box
+            sx={{ width: "100%", typography: "body1" }}
+            className="course-body"
+          >
             <TabContext value={value}>
               <Box className="techvanto-service">
                 <TabList
                   onChange={handleChange}
                   aria-label="lab API tabs"
                   className="services-tabs"
+                  variant="scrollable"
                 >
                   <Tab label="Overview" value="1" />
                   <Tab label="Curriculum" value="2" />

@@ -20,6 +20,21 @@
 .tab-desc {
   justify-content: left;
 }
+@media (max-width: 1339px) {
+  .course-body {
+    padding-top: 40rem;
+  }
+}
+@media (max-width: 700px) {
+  .course-body {
+    padding-top: 33rem;
+  }
+}
+@media (max-width: 700px) {
+  .video-section {
+    margin-top: 40px;
+  }
+}
 .curriculum {
   display: flex;
   flex-direction: column;

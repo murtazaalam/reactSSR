@@ -13,7 +13,10 @@ const CampusAmbassador = () => {
     <div className="background" id="campusAmbassador">
       <Container className="section-spacing">
         <section>
-          <div className="techvanto-campus-ambassador campus-ambs-aria">
+          <div
+            className="techvanto-campus-ambassador campus-ambs-aria"
+            style={{ placeContent: "center" }}
+          >
             <div className="techvanto-campus-ambassador-left">
               <div className="techvanto-campus-ambassador-left-image">
                 <div>

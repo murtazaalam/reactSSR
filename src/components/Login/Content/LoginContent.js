@@ -16,20 +16,20 @@ import LoginApi from "../../../apis/api/Login";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
 import { useRecoilState } from "recoil";
 import { userAuth } from "../../../recoil/store";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { loginAction } from "../../../redux/slices/auth.slices";
 
 const theme = createTheme();
 
-const useStyles = makeStyles(theme => ({
-  btnLogin:{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '10px'
-  }
+const useStyles = makeStyles((theme) => ({
+  btnLogin: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "10px",
+  },
 }));
 
 export default function LoginContent(props) {
@@ -48,20 +48,20 @@ export default function LoginContent(props) {
     setPassword("");
   };
   const validation = (event) => {
-    
     let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(event.target.name === "email"){
+    if (event.target.name === "email") {
       setEmail(event.target.value);
-      if(!event.target.value.match(emailValidate)) return setValidateEmail(true);
+      if (!event.target.value.match(emailValidate))
+        return setValidateEmail(true);
       setValidateEmail(false);
     }
-    if(event.target.name === "password"){
+    if (event.target.name === "password") {
       setPassword(event.target.value);
-      if(event.target.value == "") return setvalidatePassword(true);
-      setvalidatePassword(false); 
+      if (event.target.value == "") return setvalidatePassword(true);
+      setvalidatePassword(false);
     }
-  }
-  const handleSubmit = async(event) => {
+  };
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setLoader(true);
     setError("");
@@ -69,11 +69,11 @@ export default function LoginContent(props) {
       email: email,
       password: password,
     };
-    if (!body.email || !body.password){ 
+    if (!body.email || !body.password) {
       setLoader(false);
       return setError("Email And Password Required");
     }
-    if(validateEmail === true){ 
+    if (validateEmail === true) {
       setLoader(false);
       return setError("Invalid Email");
     }
@@ -82,7 +82,7 @@ export default function LoginContent(props) {
       setUser(true);
       emptyState();
       //window.location.reload();
-      toast.success("Login Success", {
+      toast.success("Login Successoo", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -91,7 +91,7 @@ export default function LoginContent(props) {
         draggable: true,
         progress: undefined,
       });
-      dispatch(loginAction({admin:body}))
+      dispatch(loginAction({ admin: body }));
     }
     // event.preventDefault();
     // setError("");
@@ -121,7 +121,7 @@ export default function LoginContent(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <ToastContainer
+      {/* <ToastContainer
         position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -131,7 +131,7 @@ export default function LoginContent(props) {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />
+      /> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -193,7 +193,7 @@ export default function LoginContent(props) {
               onChange={(e) => validation(e)}
               autoFocus
               error={validateEmail}
-              helperText={validateEmail ? 'Invalid Email.' : ''}
+              helperText={validateEmail ? "Invalid Email." : ""}
             />
             <TextField
               margin="normal"
@@ -208,7 +208,7 @@ export default function LoginContent(props) {
               onChange={(e) => validation(e)}
               autoComplete="current-password"
               error={validatePassword}
-              helperText={validatePassword ? 'Enter Password.' : ''}
+              helperText={validatePassword ? "Enter Password." : ""}
             />
             {/* <FormControlLabel
               sx={{ ml: "0 !important" }}
@@ -217,13 +217,15 @@ export default function LoginContent(props) {
             /> */}
             <button
               type="submit"
-              style={loader ? {backgroundColor: 'var(--color-disable)'} : {backgroundColor: 'var(--color-secondary)'}
+              style={
+                loader
+                  ? { backgroundColor: "var(--color-disable)" }
+                  : { backgroundColor: "var(--color-secondary)" }
               }
               disabled={loader ? true : false}
               className={`btn-grad full-width ${classes.btnLogin}`}
             >
-              {loader ? <img src={ButtonLoader} width="80" /> : 'LogIn'}
-              
+              {loader ? <img src={ButtonLoader} width="80" /> : "LogIn"}
             </button>
             {/* <Grid container>
               <Grid item xs>

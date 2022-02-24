@@ -135,13 +135,13 @@ const NavBar = (props) => {
 
   if (allCourse) {
     allCourse?.forEach((item) => {
-      if (item.category === "For School") {
+      if (item.category === "School") {
         schoolCourses.push(item);
       }
-      if (item.category === "For Intermediate") {
+      if (item.category === "Intermediate") {
         intermediateCourses.push(item);
       }
-      if (item.category === "For College") {
+      if (item.category === "College") {
         collegeCourses.push(item);
       }
     });
@@ -245,11 +245,18 @@ const NavBar = (props) => {
         </Link>
       </List>
       {isLogin ? (
-        <List>
-          <Link className="sidebar-link" to="/my-courses">
-            My Courses
-          </Link>
-        </List>
+        <>
+          <List>
+            <Link className="sidebar-link" to="/my-courses">
+              My Courses
+            </Link>
+          </List>
+          <List>
+            <Link className="sidebar-link" to="/my-cart">
+              My Cart
+            </Link>
+          </List>
+        </>
       ) : (
         <button className="btn-grad btn-nav" onClick={handleClickOpen}>
           <span className={scroll === false ? "color-white" : "color-black"}>
