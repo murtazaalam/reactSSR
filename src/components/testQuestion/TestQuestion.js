@@ -86,7 +86,7 @@ const TestQuestion = () => {
                 <Box component="h6" className=""></Box>
               </div>
               <div className="questions-wrap col-lg-9 col-md-9 col-sm-6 col-12">
-                {subject &&
+                {subject.length > 0 ?
                   subject.map((item, index) => {
                     if (!questionList) {
                       if (index === 0) {
@@ -126,7 +126,19 @@ const TestQuestion = () => {
                         </>
                       );
                     }
-                  })}
+                  }):
+                  <>
+                    <h1
+                      style={{
+                        fontSize: '24px',
+                        fontWeight: '600',
+                        textAlign: 'center'
+                      }}
+                    >
+                      No Questions Available
+                    </h1>
+                  </>
+                  }
                 {/* <div className="pagination">
                             <Stack spacing={2}>
                                 <Pagination count={5} color="success" />

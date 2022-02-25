@@ -215,7 +215,7 @@ const NavBar = (props) => {
         </div>
         <Container
           maxWidth="lg"
-          className="secondary-navbar"
+          className="secondary-navbar" 
           style={{ whiteSpace: "nowrap" }}
         >
           <Toolbar
