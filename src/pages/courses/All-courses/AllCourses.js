@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "../../../components/CoursesComponents/SearchBar/SearchBar";
 import FilterPanel from "../../../components/CoursesComponents/FilterPanel/FilterPanel.js";
 import Box from "@mui/material/Box";
-import EventBackgroundImage from "../../../assets/images/event_header_image.svg";
 import "./All-courses.css";
 import { useRecoilState } from "recoil";
 import { courseList } from "../../../recoil/store";
 import CourseCard from "../../../components/TopCourses/CourseCard/CourseCard";
 import { useParams } from "react-router-dom";
 import Loading from "../../../components/Loader";
+import AllCourseApi from "../../../apis/api/AllCourse";
 
 function AllCourses() {
   const { categoryRoute } = useParams();
@@ -23,6 +23,7 @@ function AllCourses() {
   const [list, setList] = useRecoilState(courseList);
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(true);
+  const [, setCourseByCategory] = useState();
 
   const handleChangeChecked = (id) => {
     console.log(id);
@@ -38,13 +39,8 @@ function AllCourses() {
   };
   console.log(selectedCategory);
 
-  const fetchdata = async () => {
-    let School = await JSON.parse(localStorage.getItem("forSchool"));
-    let College = await JSON.parse(localStorage.getItem("forCollege"));
-    let Intermediate = await JSON.parse(
-      localStorage.getItem("forIntermediate")
-    );
-    setList([...School, ...College, ...Intermediate]);
+  const fetchdata = () => {
+    AllCourseApi(setList, setCourseByCategory, setLoading);
     const categoryStateList = selectedCategory;
     const changeCheckedCategories = categoryStateList.map((item) =>
       item.label.toLowerCase().includes(categoryRoute.toLowerCase())
@@ -77,8 +73,6 @@ function AllCourses() {
     })
 
     .map((data) => {
-      console.log(category === data.category);
-
       return category === data.category ||
         category === "" ||
         category === "All" ? (

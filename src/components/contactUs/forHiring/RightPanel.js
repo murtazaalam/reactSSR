@@ -52,6 +52,7 @@ function RightPanel({formType}) {
   const submitForm = async(e) => {
     e.preventDefault();
     setLoader(true);
+    console.log(">>", info);
     if(nameError === false && 
       emailError === false && 
       phoneError === false)
@@ -90,6 +91,13 @@ function RightPanel({formType}) {
     }
   };
   
+  const getProfileArray = (event, value) => {
+    event.preventDefault();
+    setInfo({
+      ...info,
+      profile:value
+    });
+  }
   return (
     <>
       <form onSubmit={submitForm} className="right-panel-form">
@@ -148,9 +156,8 @@ function RightPanel({formType}) {
         <FormControl className="input-margin">
           <Autocomplete
             multiple
-            onSelect={(e) => {console.log(e.target)}}
-            onClick={(e) => {console.log(e)}}
             id="tags-filled"
+            onChange={getProfileArray}
             options={data.map((option) => option.title)}
             defaultValue={[data[1].title]}
             freeSolo
@@ -169,21 +176,21 @@ function RightPanel({formType}) {
               <TextField
                 {...params}
                 variant="outlined"
-                onSelect={(e) => {console.log(e.target);}}
+                //onSelect={(e) => {console.log(e.target);}}
                 label="Profiles"
                 placeholder="Job Profiles "
                 value={info.profile}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    setInfo({
-                      ...info,
-                      profile: [
-                        ...info.profile,
-                        params.inputProps.value,
-                      ],
-                    });
-                  }
-                }}
+                // onKeyDown={(e) => {
+                //   if (e.key === "Enter") {
+                //     setInfo({
+                //       ...info,
+                //       profile: [
+                //         ...info.profile,
+                //         params.inputProps.value,
+                //       ],
+                //     });
+                //   }
+                // }}
               />
             )}
           />

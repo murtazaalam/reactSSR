@@ -9,11 +9,6 @@ import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Draggable from "react-draggable";
@@ -26,7 +21,6 @@ import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
 import SchoolIcon from "../../../assets/images/new-course-icon-school.svg";
 import IntermediateIcon from "../../../assets/images/new-course-icon-intermediate.svg";
 import CollegeIconIcon from "../../../assets/images/new-course-icon-college.svg";
-import Services from "../../../data/services/Services";
 import AllCourseApi from "../../../apis/api/AllCourse";
 import getFromCartApi from "../../../apis/api/GetFromCart";
 import "./navBar.css";
@@ -50,7 +44,8 @@ function PaperComponent(props) {
 
 const NavBar = (props) => {
   const [scroll, setScroll] = useState(false);
-  const [allCourse, setAllCourse] = useState();
+  const [allCourse, setAllCourse] = useState({});
+  const [coursesByCategory, setCoursesByCategory] = useState({});
   const [loading, setLoading] = useState();
   const [cartData, setCartData] = useState();
   const [cartCount, setCartCount] = useState(0);
@@ -68,10 +63,6 @@ const NavBar = (props) => {
   });
 
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
-  let schoolCourses = [];
-  let intermediateCourses = [];
-  let collegeCourses = [];
-
   const logoutHandler = () => {
     dispatch(logoutAction());
     localStorage.removeItem("token");
@@ -90,6 +81,9 @@ const NavBar = (props) => {
     setOpen(false);
     setOpen(false);
   };
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -126,27 +120,8 @@ const NavBar = (props) => {
     setCartItem(cartData);
   }, []);
   useEffect(() => {
-    const getAllCourses = async () => {
-      if (!allCourse) {
-        AllCourseApi(setAllCourse, setLoading);
-      }
-    };
-    getAllCourses();
-  }, [allCourse]);
-
-  if (allCourse) {
-    allCourse?.forEach((item) => {
-      if (item.category === "School") {
-        schoolCourses.push(item);
-      }
-      if (item.category === "Intermediate") {
-        intermediateCourses.push(item);
-      }
-      if (item.category === "College") {
-        collegeCourses.push(item);
-      }
-    });
-  }
+    AllCourseApi(setAllCourse, setCoursesByCategory, setLoading);
+  }, []);
 
   if (loading === true) {
     toast.error("Weak Network", {
@@ -162,50 +137,9 @@ const NavBar = (props) => {
   }
 
   //JSON.parse(localStorage.getItem) to retrieve
-  localStorage.setItem("School", JSON.stringify(schoolCourses));
-  localStorage.setItem("Intermediate", JSON.stringify(intermediateCourses));
-  localStorage.setItem("College", JSON.stringify(collegeCourses));
-
-  // const list = (anchor) => {
-  //   <Box
-  //     sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : "100vw" }}
-  //     role="presentation"
-
-  //     onKeyDown={toggleDrawer(anchor, false)}
-  //   >
-  //     <ListItem button>
-  // <Accordion
-  //   className="techvanto-navbar-service-accordian"
-  //   style={{ boxShadow: "none" }}
-  // >
-  //   <AccordionSummary
-  //     expandIcon={<ExpandMoreIcon />}
-  //     aria-controls="panel1a-content"
-  //     id="panel1a-header"
-  //   >
-  //     <Typography>Services</Typography>
-  //   </AccordionSummary>
-  //   <AccordionDetails>
-  //     <List>
-  //       {Services.map((data, index) => (
-  //         <ListItem
-  //           component={Link}
-  //           to={data.link}
-  //           button
-  //           key={data.text}
-  //         >
-  //           <ListItemText primary={data.text} />
-  //         </ListItem>
-  //       ))}
-  //       <ListItem>
-  //         <ListItemText primary="list is working" />
-  //       </ListItem>
-  //     </List>
-  //   </AccordionDetails>
-  // </Accordion>
-  //     </ListItem>
-  //   </Box>;
-  // };
+  // localStorage.setItem("School", JSON.stringify(schoolCourses));
+  // localStorage.setItem("Intermediate", JSON.stringify(intermediateCourses));
+  // localStorage.setItem("College", JSON.stringify(collegeCourses));
 
   const list = (anchor) => (
     <Box
@@ -255,6 +189,11 @@ const NavBar = (props) => {
           <List>
             <Link className="sidebar-link" to="/my-cart">
               My Cart
+            </Link>
+          </List>
+          <List>
+            <Link className="sidebar-link" to="/" onClick={logoutHandler}>
+              Logout
             </Link>
           </List>
         </>
@@ -328,8 +267,8 @@ const NavBar = (props) => {
                             <div className="school-course-list">
                               <span>Courses</span>
                               <ul>
-                                {schoolCourses &&
-                                  schoolCourses.map((item) => {
+                                {isEmpty(coursesByCategory) === false &&
+                                  coursesByCategory.School.map((item) => {
                                     return (
                                       <li key={item._id}>
                                         <a href={`/courses/${item._id}`}>
@@ -373,8 +312,8 @@ const NavBar = (props) => {
                             <div className="school-course-list">
                               <span>Courses</span>
                               <ul>
-                                {collegeCourses &&
-                                  collegeCourses.map((item) => {
+                                {isEmpty(coursesByCategory) === false &&
+                                  coursesByCategory.College.map((item) => {
                                     return (
                                       <li key={item._id}>
                                         <a href={`/courses/${item._id}`}>
@@ -420,8 +359,8 @@ const NavBar = (props) => {
                             <div className="school-course-list">
                               <span>Courses</span>
                               <ul>
-                                {intermediateCourses &&
-                                  intermediateCourses.map((item) => {
+                                {isEmpty(coursesByCategory) === false &&
+                                  coursesByCategory.Intermediate.map((item) => {
                                     return (
                                       <li key={item._id}>
                                         <a

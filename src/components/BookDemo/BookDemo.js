@@ -7,6 +7,7 @@ import {
   CardContent,
   IconButton,
   Card,
+  Grid,
 } from "@mui/material";
 import needAssistance from "../../assets/Svgs/needAssistance.svg";
 import "./BookDemo.css";
@@ -17,7 +18,6 @@ import ButtonLoader from "../../assets/images/button_loader.gif";
 import { useSelector } from "react-redux";
 
 const BookADemo = () => {
-
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
   const [email, setEmail] = React.useState("");
@@ -26,57 +26,57 @@ const BookADemo = () => {
   const [message, setMessage] = React.useState("");
   const [loader, setLoader] = React.useState(false);
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let body;
-    const data =new FormData(e.currentTarget);
-    setMessage("")
+    const data = new FormData(e.currentTarget);
+    setMessage("");
     setLoader(true);
-      let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      body = {
-        name : data.get("name"),
-        email : data.get("email"),
-        query : data.get("query") ? data.get("query") : null
+    let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    body = {
+      name: data.get("name"),
+      email: data.get("email"),
+      query: data.get("query") ? data.get("query") : null,
+    };
+    if (!body.email.match(emailValidate)) {
+      setLoader(false);
+      setMessage("Invalid Email");
+      return;
+    } else {
+      let success = await sendQueryApi(body, setMessage, setLoader);
+      toast.success(success, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      if (success === "Query Sent") {
+        emptyState();
       }
-      if(!body.email.match(emailValidate)){
-        setLoader(false);
-        setMessage("Invalid Email");
-        return;
-      }
-      else{
-        let success = await sendQueryApi(body, setMessage, setLoader);
-        toast.success(success, {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        if(success === "Query Sent"){
-          emptyState();
-        }
-      }
+    }
   };
   const emptyState = () => {
-    if(isLogin){
+    if (isLogin) {
       setQuery("");
-    }
-    else{
-      setName("")
+    } else {
+      setName("");
       setEmail("");
       setQuery("");
     }
   };
-  
+
   return (
     <section>
-      <Container>
-        <div className="techvanto-book-a-demo display-grid fr2">
+      <Grid container>
+        <Grid item xs={12} md={7}>
           <div>
             <img src={needAssistance} alt="bookademo"></img>
           </div>
+        </Grid>
+        <Grid item xs={12} md={5}>
           <div>
             {/* <Card className="inhert-width" sx={{ p: 2 }}> */}
             <form onSubmit={handleSubmit} className="form-book">
@@ -85,10 +85,15 @@ const BookADemo = () => {
                 title="Need Assistance?"
                 subheader=""
               />
-              <p style={message === "Query Sent" ? {color: 'var(--color-green-icon)'} : {color: 'var(--color-secondary)'}}
+              <p
+                style={
+                  message === "Query Sent"
+                    ? { color: "var(--color-green-icon)" }
+                    : { color: "var(--color-secondary)" }
+                }
                 className="query-message"
               >
-                  {message}
+                {message}
               </p>
 
               <CardContent className="card-content">
@@ -113,7 +118,7 @@ const BookADemo = () => {
                   required
                   onChange={(e) => setEmail(e.target.value)}
                 />
-              
+
                 <TextField
                   id="query"
                   name="query"
@@ -128,20 +133,22 @@ const BookADemo = () => {
               </CardContent>
               <CardActions>
                 <button
-                  style={loader ? {backgroundColor: 'var(--color-disable)'} : {backgroundColor: 'var(--color-secondary)'}
+                  style={
+                    loader
+                      ? { backgroundColor: "var(--color-disable)" }
+                      : { backgroundColor: "var(--color-secondary)" }
                   }
                   disabled={loader ? true : false}
                   className="btn-grad book-demo"
                 >
-                  {loader ? <img src={ButtonLoader} width="80" /> : 'Submit'}
+                  {loader ? <img src={ButtonLoader} width="80" /> : "Submit"}
                 </button>
-                
               </CardActions>
             </form>
             {/* </Card> */}
           </div>
-        </div>
-      </Container>
+        </Grid>
+      </Grid>
     </section>
   );
 };
