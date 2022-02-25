@@ -1,5 +1,4 @@
 import React from "react";
-import Banner from "../../components/Generic/Banner/Banner";
 import { Grid } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import LeftPanel from "../../components/contactUs/forHiring/leftPanel";
@@ -7,7 +6,6 @@ import { Typography, Container, Box } from "@mui/material";
 import { HiringPartners } from "../../components";
 import RightPanel from "../../components/contactUs/forHiring/RightPanel";
 import "./contact-us.css";
-import EventBackgroundImage from "../../assets/images/contactUs-hirinh.webp";
 function contactUsToGetHired() {
   return (
     <>

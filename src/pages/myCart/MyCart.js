@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import useRazorpay from "react-razorpay";
-import Banner from "../../components/Generic/Banner/Banner";
-import cartImage from "../../assets/images/cart1.jpg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./myCart.css";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
@@ -14,10 +12,9 @@ import getFromCartApi from "../../apis/api/GetFromCart";
 import addOrderApi from "../../apis/api/AddOrder";
 import verifyOrderApi from "../../apis/api/OrderVerify";
 import { Rating } from "@material-ui/lab";
-import { Navigate } from "react-router-dom";
 import Loading from "../../components/Loader";
 import PaymentSuccessDialog from "../../components/PaymentSuccessDialog";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logoutAction } from "../../redux/slices/auth.slices";
 
 function MyCart() {

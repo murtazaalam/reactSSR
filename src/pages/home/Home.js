@@ -23,7 +23,9 @@ const Home = () => {
       <ContentHeaderImage
         title="Indulge in limitless learning"
         overview="Anytime, Anywhere."
-        background={backgroundImage}
+        background={
+          window.matchMedia("(max-width: 668px)").matches ? "" : backgroundImage
+        }
       />
       <br />
       <WhatAndWhyWeDo />

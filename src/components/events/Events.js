@@ -150,7 +150,6 @@ const Events = (props) => {
                                   <Button
                                     className="btn-grad"
                                     size="small"
-                                    size="small"
                                     sx={{ color: "#1c477c" }}
                                   >
                                     See Detail

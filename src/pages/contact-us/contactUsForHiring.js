@@ -1,8 +1,6 @@
 import React from "react";
-import EventBackgroundImage from "../../assets/images/contactUs-hirinh.webp";
 import { Grid, Box } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
-import Banner from "../../components/Generic/Banner/Banner";
 import LeftPanel from "../../components/contactUs/forHiring/leftPanel";
 import { AboutUs, TopClient } from "../../components";
 import RightPanel from "../../components/contactUs/forHiring/RightPanel";
@@ -34,14 +32,15 @@ function contactUsForHiring() {
       </Box>
       <div className="contactus">
         <Grid container>
-          <Grid item xs={6.5} className="left-card-position">
+          <Grid item md={6.5} xs={12} className="left-card-position">
             <div>
               <LeftPanel heading="For Hiring" />
             </div>
           </Grid>
           <Grid
             item
-            xs={4}
+            md={4}
+            xs={12}
             //   style={{ border: "2px solid black" }}
             className="right-form-position"
           >
