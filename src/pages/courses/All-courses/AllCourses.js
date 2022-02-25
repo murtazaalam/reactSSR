@@ -146,7 +146,11 @@ function AllCourses() {
       <Box
         className="page-heading"
         sx={{
-          background: `url(${"https://tv-academy-assets.s3.eu-west-2.amazonaws.com/all+courses.jpg"})`,
+          background: `#1C477C url(${
+          window.matchMedia("(max-width: 668px)").matches
+            ? ""
+            : "https://tv-academy-assets.s3.eu-west-2.amazonaws.com/all+courses.jpg"
+        }) 0 0 no-repeat`,
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}

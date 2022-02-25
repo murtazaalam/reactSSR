@@ -288,14 +288,13 @@
 @media screen and (min-width: 300px){
   .secondary-navbar .css-1t29gy6-MuiToolbar-root button {
     position: absolute;
-    left: -20px;
+    left: -25px;
   }
-
 }
-@media screen and (min-width: 300px){
-  .secondary-navbar .css-1t29gy6-MuiToolbar-root button {
-    position: absolute;
-    left: -16px;
+@media screen and (min-width: 768px){
+  
+  .secondary-navbar .css-1t29gy6-MuiToolbar-root button{
+    left: 0px;
   }
 
 }
