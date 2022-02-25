@@ -63,6 +63,6 @@ input {
   .cart-left-card {
     width: max-content;
     flex-direction: column;
-    width: 340px;
+    width: 321px;
   }
 }

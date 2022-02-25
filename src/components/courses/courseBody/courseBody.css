@@ -28,11 +28,16 @@
 @media (max-width: 700px) {
   .course-body {
     padding-top: 33rem;
+    text-align: justify;
+    padding-left: 17px;
   }
 }
 @media (max-width: 700px) {
   .video-section {
     margin-top: 40px;
+  }
+  .course-tab-container {
+    margin: 52px 2px 52px 2px;
   }
 }
 .curriculum {
@@ -162,13 +167,13 @@
   position: relative;
   right: 42px;
 }
-.btn-review{
+.btn-review {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
-.email-error{
+.email-error {
   position: absolute;
   color: var(--color-secondary) !important;
 }

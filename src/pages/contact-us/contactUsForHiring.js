@@ -37,7 +37,13 @@ function contactUsForHiring() {
       </Box>
       <div className="contactus">
         <Grid container>
-          <Grid item md={6.5} xs={12} className="left-card-position">
+          <Grid
+            item
+            md={6.5}
+            xs={12}
+            sx={{ pb: 6 }}
+            className="left-card-position"
+          >
             <div>
               <LeftPanel heading="For Hiring" />
             </div>
