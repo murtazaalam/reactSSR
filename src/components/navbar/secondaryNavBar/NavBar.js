@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
@@ -256,7 +256,7 @@ const NavBar = (props) => {
                     <ul className="dropdown-menu-multi-level">
                       <li>
                         <a>
-                          <Link to="/all-courses/school"> Schools</Link>
+                          <NavLink to="/all-courses/school">Schools</NavLink>
                           <div className="course-list school-course">
                             <div className="image-section">
                               <img src={`${SchoolIcon}`} alt="" />
