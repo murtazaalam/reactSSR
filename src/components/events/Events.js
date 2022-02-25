@@ -36,13 +36,19 @@ const Events = (props) => {
       setPastTab(true);
     }
   };
+  console.log(window.matchMedia("(max-width: 668px)").matches);
   return (
     <>
       <Box
         component="section"
         className="page-heading"
         sx={{
-          background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/Events.jpg)`,
+          // background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/Events.jpg)`,
+          background: `#1C477C url(${
+            window.matchMedia("(max-width: 668px)").matches
+              ? ""
+              : "https://tv-academy-assets.s3.eu-west-2.amazonaws.com/Events.jpg"
+          }) 0 0 no-repeat`,
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
@@ -127,38 +133,38 @@ const Events = (props) => {
                               {event.date}
                             </Typography>
                             <Typography component="p">
-                                {event.category === "upcoming"  && (
-                                  <Link
-                                    to={`/event/${event._id}`}
-                                    style={{ textDecoration: "none" }}
+                              {event.category === "upcoming" && (
+                                <Link
+                                  to={`/event/${event._id}`}
+                                  style={{ textDecoration: "none" }}
+                                >
+                                  <Button
+                                    className="btn-grad"
+                                    size="small"
+                                    sx={{ color: "#1c477c" }}
                                   >
-                                    <Button
-                                      className="btn-grad"
-                                      size="small"
-                                      sx={{ color: "#1c477c" }}
-                                    >
-                                      Register Now
-                                    </Button>
-                                  </Link>
-                                )}
-                              </Typography>
-                              <Typography component="p">
-                                  {event.category === "past" && (
-                                    <Link
-                                      to={`/event/${event._id}`}
-                                      style={{ textDecoration: "none" }}
-                                    >
-                                      <Button
-                                        className="btn-grad"
-                                        size="small"
-                                        size="small"
-                                        sx={{ color: "#1c477c" }}
-                                      >
-                                        See Detail
-                                      </Button>
-                                    </Link>
-                                  )}
-                              </Typography>
+                                    Register Now
+                                  </Button>
+                                </Link>
+                              )}
+                            </Typography>
+                            <Typography component="p">
+                              {event.category === "past" && (
+                                <Link
+                                  to={`/event/${event._id}`}
+                                  style={{ textDecoration: "none" }}
+                                >
+                                  <Button
+                                    className="btn-grad"
+                                    size="small"
+                                    size="small"
+                                    sx={{ color: "#1c477c" }}
+                                  >
+                                    See Detail
+                                  </Button>
+                                </Link>
+                              )}
+                            </Typography>
                           </Typography>
                         </CardActions>
                       </Card>

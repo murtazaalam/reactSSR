@@ -1,7 +1,5 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import BlogHead1 from "../../assets/Svgs/blogsHeader1.svg";
-import BlogHead2 from "../../assets/Svgs/blogsHeader2.svg";
 
 function BlogHeader() {
   return (
@@ -10,7 +8,12 @@ function BlogHeader() {
         component="section"
         className="page-heading"
         sx={{
-          background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/blog+page.jpg)`,
+          background: `#1C477C url(${
+            window.matchMedia("(max-width: 668px)").matches
+              ? ""
+              : "https://tv-academy-assets.s3.eu-west-2.amazonaws.com/blog+page.jpg"
+          }) 0 0 no-repeat`,
+
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}

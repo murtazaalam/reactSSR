@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   card: {
-    maxWidth: "100%",
+    width: "100%",
   },
   media: {
     height: 240,
@@ -38,11 +38,12 @@ function BlogsContent(props) {
   return (
     <Container maxWidth="lg" className={classes.blogsContainer}>
       <Grid container spacing={3}>
-        {blogItems && blogItems.map((item, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <BlogsCard classes={classes} content={item} />
-          </Grid>
-        ))}
+        {blogItems &&
+          blogItems.map((item, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <BlogsCard classes={classes} content={item} />
+            </Grid>
+          ))}
       </Grid>
     </Container>
   );

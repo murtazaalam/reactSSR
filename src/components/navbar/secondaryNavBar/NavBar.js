@@ -4,7 +4,6 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
@@ -231,9 +230,7 @@ const NavBar = (props) => {
               onClick={toggleDrawer("left", true)}
               className="techvanto-navbar-menu-icon menu-icon"
             >
-              <MenuIcon
-                sx={scroll === false ? { color: "white" } : { color: "black" }}
-              />
+              <MenuIcon sx={{ color: "white" }} />
             </Button>
             <SwipeableDrawer
               anchor={"left"}

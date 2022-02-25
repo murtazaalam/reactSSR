@@ -72,7 +72,7 @@ html {
 
 @media only screen and (max-width: 865px) {
   .techvanto-whyus-heading {
-    font-size: 1.5rem !important;
+    font-size: 1.3rem !important;
   }
 }
 
@@ -98,6 +98,14 @@ html {
 
 .section-spacing {
   margin: 20px 17% 20px 17%;
+}
+@media (max-width: 700px) {
+  .section-spacing {
+    margin: 0;
+  }
+  .text-small {
+    font-size: 10px !important;
+  }
 }
 .display-grid {
   display: grid;
@@ -128,7 +136,7 @@ html {
   background: var(--color-background);
   padding: 18px;
 }
-.btn-inner-alignment{
+.btn-inner-alignment {
   display: flex;
   justify-content: center;
   align-items: center;

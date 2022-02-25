@@ -26,6 +26,9 @@
     max-width: none !important;
     width: 26rem !important;
   }
+  .left-card-position {
+    margin: 0 !important;
+  }
 
   /* .contactus .css-1v5z4dq-MuiPaper-root-MuiCard-root {
     width: 800px !important;

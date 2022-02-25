@@ -12,7 +12,12 @@ function contactUsForHiring() {
       <Box
         className="page-heading"
         sx={{
-          background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/contact+us.jpg)`,
+          background: `#1C477C url(${
+            window.matchMedia("(max-width: 668px)").matches
+              ? ""
+              : "https://tv-academy-assets.s3.eu-west-2.amazonaws.com/contact+us.jpg"
+          }) 0 0 no-repeat`,
+
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
@@ -32,7 +37,13 @@ function contactUsForHiring() {
       </Box>
       <div className="contactus">
         <Grid container>
-          <Grid item md={6.5} xs={12} className="left-card-position">
+          <Grid
+            item
+            md={6.5}
+            xs={12}
+            sx={{ pb: 6 }}
+            className="left-card-position"
+          >
             <div>
               <LeftPanel heading="For Hiring" />
             </div>
