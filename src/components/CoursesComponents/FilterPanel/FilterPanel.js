@@ -13,7 +13,6 @@ const FilterPanel = ({ category, changeChecked }) => {
     <div>
       {/* Category */}
       <div className="input-group">
-        <p className="label">Category</p>
         <FormControl id="demo-radio-buttons-group-label">
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"

@@ -33,6 +33,10 @@ const Accordion = styled((props) => (
     fontWeight: "bold",
     fontSize: "larger",
   },
+
+  "& .MuiButtonBase-root": {
+    width: "100%",
+  },
 }));
 
 const AccordionSummary = styled((props) => (
@@ -43,7 +47,7 @@ const AccordionSummary = styled((props) => (
     {...props}
   />
 ))(({ theme }) => ({
-  backgroundColor: "#1c477c",
+  backgroundColor: "#1c477c !important",
   color: "white",
   flexDirection: "row-reverse",
 
@@ -278,7 +282,7 @@ const Footer = () => {
           </AccordionSummary>
           <AccordionDetails>
             <div>
-              <p className="text-small" style={{ textAlign: "center" }}>
+              <p className="text-small" style={{ placeContent: "center" }}>
                 R7, 3rd floor, MG Road, Ghitorni, New Delhi 110030
               </p>
 
