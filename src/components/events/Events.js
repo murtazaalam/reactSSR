@@ -126,38 +126,39 @@ const Events = (props) => {
                             <Typography component="p" className="event-date">
                               {event.date}
                             </Typography>
-
                             <Typography component="p">
-                              {event.category === "upcoming" && (
-                                <Link
-                                  to={`/event/${event._id}`}
-                                  style={{ textDecoration: "none" }}
-                                >
-                                  <Button
-                                    className="btn-grad"
-                                    size="small"
-                                    sx={{ color: "#1c477c" }}
+                                {event.category === "upcoming"  && (
+                                  <Link
+                                    to={`/event/${event._id}`}
+                                    style={{ textDecoration: "none" }}
                                   >
-                                    Register Now
-                                  </Button>
-                                </Link>
-                              )}
-                              {event.category === "past" && (
-                                <Link
-                                  to={`/event/${event._id}`}
-                                  style={{ textDecoration: "none" }}
-                                >
-                                  <Button
-                                    className="btn-grad"
-                                    size="small"
-                                    size="small"
-                                    sx={{ color: "#1c477c" }}
-                                  >
-                                    See Detail
-                                  </Button>
-                                </Link>
-                              )}
-                            </Typography>
+                                    <Button
+                                      className="btn-grad"
+                                      size="small"
+                                      sx={{ color: "#1c477c" }}
+                                    >
+                                      Register Now
+                                    </Button>
+                                  </Link>
+                                )}
+                              </Typography>
+                              <Typography component="p">
+                                  {event.category === "past" && (
+                                    <Link
+                                      to={`/event/${event._id}`}
+                                      style={{ textDecoration: "none" }}
+                                    >
+                                      <Button
+                                        className="btn-grad"
+                                        size="small"
+                                        size="small"
+                                        sx={{ color: "#1c477c" }}
+                                      >
+                                        See Detail
+                                      </Button>
+                                    </Link>
+                                  )}
+                              </Typography>
                           </Typography>
                         </CardActions>
                       </Card>

@@ -20,7 +20,7 @@ import Draggable from "react-draggable";
 import Skeleton from "@mui/material/Skeleton";
 
 import addToCartApi from "../../../apis/api/AddToCart";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./courseBody.css";
 import Login from "../../Login/Login";
@@ -459,7 +459,7 @@ const CourseBody = ({ course }) => {
                         Add to cart
                       </button>
                       <Login
-                        open={open}
+                        open={isLogin ? false : open}
                         handleClose={handleClose}
                         PaperComponent={PaperComponent}
                       />

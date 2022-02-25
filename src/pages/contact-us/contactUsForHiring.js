@@ -51,7 +51,7 @@ function contactUsForHiring() {
                 <InfoIcon />
               </h5>
 
-              <RightPanel />
+              <RightPanel formType={"hiring"} />
             </div>
           </Grid>
 

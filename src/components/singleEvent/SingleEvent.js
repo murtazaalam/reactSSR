@@ -5,10 +5,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-
+import { useParams } from "react-router-dom";
 import "./singleEvent.css";
 import { Typography, Card } from "@mui/material";
 import { CheckCircle } from "@material-ui/icons";
+import singleEventApi from "../../apis/api/SingleEvent";
 
 const useStyles = makeStyles({
   root: {
@@ -35,15 +36,23 @@ const useStyles = makeStyles({
     padding: "10px 52px",
   },
 });
-const SingleEvent = ({ event }) => {
+const SingleEvent = () => {
   const classes = useStyles();
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [name, setName] = useState();
   const [checked, setChecked] = useState(true);
+  const [event, setEventData] = useState();
+  const params = useParams();
   const handleChange = () => {
     setChecked(!checked);
   };
+
+  useEffect(() => {
+    if(!event){
+      singleEventApi(params.id, setEventData);
+    }
+  },[]);
   return (
     <>
       <Box

@@ -128,6 +128,11 @@ html {
   background: var(--color-background);
   padding: 18px;
 }
+.btn-inner-alignment{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @media only screen and (max-width: 1000px) {
   .fr4 {
     grid-template-columns: 1fr 1fr;

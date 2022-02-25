@@ -16,6 +16,8 @@ const routes = {
   Blogs: endpoint + "blogs",
   SendQuery: endpoint + "add-query",
   TopCourse: endpoint + "top-courses",
-  AddReview: endpoint + "add-review"
+  AddReview: endpoint + "add-review",
+  AddHiring : endpoint + "add-hiring",
+  AddPlacement : endpoint + "add-placement-opportunity"
 };
 export default routes;

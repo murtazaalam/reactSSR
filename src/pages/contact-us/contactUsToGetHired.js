@@ -51,7 +51,7 @@ function contactUsToGetHired() {
                 <InfoIcon />
               </h5>
 
-              <RightPanel />
+              <RightPanel formType={"placement"} />
             </div>
           </Grid>
 
