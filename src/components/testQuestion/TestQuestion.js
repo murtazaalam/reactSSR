@@ -63,8 +63,8 @@ const TestQuestion = () => {
               sx={{ display: "flex", paddingTop: "20px" }}
               className="event-body"
             >
-              <div className="col-lg-3 col-md-3 col-sm-6 col-12 leftside-interview">
-                <Box component="div" className="row" className="event-menu">
+              <div className="col-lg-3 col-md-3 col-sm-6 col-12">
+                <Box component="div" className="row event-menu">
                   {subject &&
                     subject.map((item, index) => {
                       console.log(">>>>", activeTavb);
