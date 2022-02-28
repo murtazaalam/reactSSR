@@ -24,9 +24,13 @@
   justify-content: center;
   background-color: var(--color-primary);
 }
-
 .secondary-navbar .css-1t29gy6-MuiToolbar-root {
   padding-left: 10px;
+  position: relative;
+}
+.secondary-navbar .css-1t29gy6-MuiToolbar-root button {
+  position: absolute;
+  left: -28px;
 }
 .menu-item {
   display: flex;
@@ -281,7 +285,21 @@
 .navbar-category {
   display: none !important;
 }
+@media screen and (min-width: 300px){
+  .secondary-navbar .css-1t29gy6-MuiToolbar-root button {
+    position: absolute;
+    left: -25px;
+  }
+}
+@media screen and (min-width: 768px){
+  
+  .secondary-navbar .css-1t29gy6-MuiToolbar-root button{
+    left: 0px;
+  }
+
+}
 @media screen and (min-width: 600px) {
+
 }
 @media screen and (min-width: 1025px) {
 }
@@ -298,6 +316,10 @@
   .secondary-navbar {
     justify-content: flex-end;
     flex-direction: row;
+  }
+  .secondary-navbar .css-1t29gy6-MuiToolbar-root button{
+    position: relative;
+    left: 0px;
   }
   .secondary-navbar .css-1t29gy6-MuiToolbar-root {
     padding-left: 24px;

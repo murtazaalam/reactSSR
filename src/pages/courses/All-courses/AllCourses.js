@@ -6,7 +6,7 @@ import "./All-courses.css";
 import { useRecoilState } from "recoil";
 import { courseList } from "../../../recoil/store";
 import CourseCard from "../../../components/TopCourses/CourseCard/CourseCard";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Loading from "../../../components/Loader";
 import AllCourseApi from "../../../apis/api/AllCourse";
 import { styled } from "@mui/material/styles";
@@ -53,6 +53,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 function AllCourses() {
   const { categoryRoute } = useParams();
+  const naviagate = useNavigate(); 
 
   const [selectedCategory, setSelectedCategory] = useState([
     { id: 1, checked: false, label: "School" },
@@ -67,12 +68,23 @@ function AllCourses() {
   const [, setCourseByCategory] = useState();
   const [expanded, setExpanded] = React.useState("panel1");
 
+  let cat = categoryRoute.charAt(0).toUpperCase()+categoryRoute.slice(1).toLowerCase();
+  selectedCategory.forEach((item) => {
+    if(item.label === cat) {
+      item.checked = true;
+    }
+    else{
+      item.checked = false;
+    }
+    
+  })
+  //console.log("selectedcategory =>", selectedCategory);
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
   const handleChangeChecked = (id) => {
-    console.log(id);
+    naviagate('/all-courses/'+selectedCategory[id - 1].label.toLocaleLowerCase());
     setCategory(selectedCategory[id - 1].label);
     const categoryStateList = selectedCategory;
     const changeCheckedCategories = categoryStateList.map((item) =>
@@ -81,9 +93,7 @@ function AllCourses() {
         : { ...item, checked: false }
     );
     setSelectedCategory(changeCheckedCategories);
-    console.log(selectedCategory[id - 1].label);
   };
-  console.log(selectedCategory);
 
   const fetchdata = () => {
     AllCourseApi(setList, setCourseByCategory, setLoading);
@@ -146,7 +156,11 @@ function AllCourses() {
       <Box
         className="page-heading"
         sx={{
-          background: `url(${"https://tv-academy-assets.s3.eu-west-2.amazonaws.com/all+courses.jpg"})`,
+          background: `#1C477C url(${
+          window.matchMedia("(max-width: 668px)").matches
+            ? ""
+            : "https://tv-academy-assets.s3.eu-west-2.amazonaws.com/all+courses.jpg"
+        }) 0 0 no-repeat`,
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
@@ -196,6 +210,7 @@ function AllCourses() {
               <>
                 <p className="label">Category</p>
                 <FilterPanel
+                  categoryFromParams={categoryRoute}
                   category={selectedCategory}
                   changeChecked={handleChangeChecked}
                 />

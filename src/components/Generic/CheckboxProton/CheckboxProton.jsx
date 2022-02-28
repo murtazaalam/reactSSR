@@ -1,10 +1,9 @@
 import React from "react";
-import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 // import { Category } from "@material-ui/icons";
 import Radio from "@mui/material/Radio";
-import FormControl from "@mui/material/FormControl";
+
 
 const useStyles = makeStyles({
   root: {
@@ -30,6 +29,7 @@ const useStyles = makeStyles({
 const CheckboxProton = ({ changeChecked, category }) => {
   const classes = useStyles();
   const { checked, label, id } = category;
+  
   return (
     <div>
       <FormControlLabel
