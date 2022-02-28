@@ -103,9 +103,6 @@ html {
   .section-spacing {
     margin: 0;
   }
-  .text-small {
-    font-size: 10px !important;
-  }
 }
 .display-grid {
   display: grid;
@@ -122,10 +119,6 @@ html {
 .fr2 {
   grid-template-columns: 2fr 2fr;
 }
-.text-small {
-  font-size: 14px;
-}
-
 .text-extra-small {
   font-size: 10px;
 }

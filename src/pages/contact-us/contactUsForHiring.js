@@ -35,7 +35,7 @@ function contactUsForHiring() {
           <h1 className="event-heading">Contact Us</h1>
         </div>
       </Box>
-      <div className="contactus">
+      <div className="contactus contactus-section">
         <Grid container>
           <Grid
             item
@@ -53,7 +53,7 @@ function contactUsForHiring() {
             md={4}
             xs={12}
             //   style={{ border: "2px solid black" }}
-            className="right-form-position"
+            className="right-form-position form-hiring"
           >
             <div>
               <h5>
@@ -72,6 +72,7 @@ function contactUsForHiring() {
             </section>
           </Grid>
         </Grid>
+        <div style={{height: '40px'}}></div>
       </div>
     </>
   );

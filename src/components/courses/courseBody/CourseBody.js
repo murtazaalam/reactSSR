@@ -497,7 +497,7 @@ const CourseBody = ({ course }) => {
           Your email address will not be published. Required fields are marked *
         </p>
         <form className="row review-form" onSubmit={handleSubmit}>
-          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field">
+          <div className="col-lg-6 col-md-12 col-sm-12 thought-input-field">
             <input
               type="text"
               className="form-control"
@@ -508,7 +508,7 @@ const CourseBody = ({ course }) => {
               required
             />
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field" style={{position: 'relative'}}>
+          <div className="col-lg-6 col-md-12 col-sm-12 thought-input-field" style={{position: 'relative'}}>
             <input
               type="text"
               className="form-control"
@@ -521,7 +521,7 @@ const CourseBody = ({ course }) => {
             />
             <p className="email-error" style={formError ? {display: 'block'} : {display: 'none'}}>Invalid Email</p>
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field">
+          <div className="col-lg-6 col-md-12 col-sm-12 thought-input-field">
             <textarea
               className="form-control"
               placeholder="Your Comment"

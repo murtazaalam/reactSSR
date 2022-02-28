@@ -1,20 +1,17 @@
 .techvanto-hiring-partner {
   height: 75px;
   margin: 10px;
-  max-width: 200px;
+  max-width: 260px;
 }
 
-.hiring-partner-section {
-  min-height: 280px;
-}
 .hiring-partner-section .css-1oqqzyl-MuiContainer-root {
   max-width: 1800px;
 }
 .techvanto-top-client-slider ul li{
-  width: 160px !important;
+  text-align: center;
 }
 @media screen and (min-width: 600px){
   .techvanto-top-client-slider ul li{
-    width: 240px !important;
+    
   }
 }

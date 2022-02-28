@@ -139,7 +139,7 @@ const Events = (props) => {
                                   style={{ textDecoration: "none" }}
                                 >
                                   <Button
-                                    className="btn-grad"
+                                    className="btn-grad btn-design"
                                     size="small"
                                     sx={{ color: "#1c477c" }}
                                   >
@@ -155,7 +155,7 @@ const Events = (props) => {
                                   style={{ textDecoration: "none" }}
                                 >
                                   <Button
-                                    className="btn-grad"
+                                    className="btn-grad btn-design"
                                     size="small"
                                     size="small"
                                     sx={{ color: "#1c477c" }}

@@ -67,7 +67,6 @@ const TestQuestion = () => {
                 <Box component="div" className="row" className="event-menu">
                   {subject &&
                     subject.map((item, index) => {
-                      console.log(">>>>", activeTavb);
                       return (
                         <Typography
                           component="h6"
@@ -87,7 +86,6 @@ const TestQuestion = () => {
                       );
                     })}
                 </Box>
-
                 <Box component="h6" className=""></Box>
               </div>
               <div className="questions-wrap col-lg-9 col-md-9 col-sm-6 col-12">
