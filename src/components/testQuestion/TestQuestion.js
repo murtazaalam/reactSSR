@@ -105,7 +105,7 @@ const TestQuestion = () => {
                                     {val.question}
                                   </h5>
                                   <p className="interview-answer">
-                                    {val.answer}
+                                    {val?.answer}
                                   </p>
                                 </>
                               );
