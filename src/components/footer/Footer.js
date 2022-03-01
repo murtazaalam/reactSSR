@@ -92,7 +92,11 @@ const Footer = () => {
             <AccordionDetails>
               {topCourses.map((data, index) => (
                 <a
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                    placeContent: "center",
+                  }}
                   href={`/courses/${data._id}`}
                   className="techvanto-footer-text text-small"
                 >

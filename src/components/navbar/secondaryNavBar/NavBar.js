@@ -214,7 +214,7 @@ const NavBar = (props) => {
         </div>
         <Container
           maxWidth="lg"
-          className="secondary-navbar" 
+          className="secondary-navbar"
           style={{ whiteSpace: "nowrap" }}
         >
           <Toolbar
@@ -265,7 +265,7 @@ const NavBar = (props) => {
                               <span>Courses</span>
                               <ul>
                                 {isEmpty(coursesByCategory) === false &&
-                                  coursesByCategory.School.map((item) => {
+                                  coursesByCategory.School?.map((item) => {
                                     return (
                                       <li key={item._id}>
                                         <a href={`/courses/${item._id}`}>
@@ -310,7 +310,7 @@ const NavBar = (props) => {
                               <span>Courses</span>
                               <ul>
                                 {isEmpty(coursesByCategory) === false &&
-                                  coursesByCategory.College.map((item) => {
+                                  coursesByCategory.College?.map((item) => {
                                     return (
                                       <li key={item._id}>
                                         <a href={`/courses/${item._id}`}>
@@ -357,32 +357,34 @@ const NavBar = (props) => {
                               <span>Courses</span>
                               <ul>
                                 {isEmpty(coursesByCategory) === false &&
-                                  coursesByCategory.Intermediate.map((item) => {
-                                    return (
-                                      <li key={item._id}>
-                                        <a
-                                          // onClick={refreshPage}
-                                          href={`/courses/${item._id}`}
-                                        >
-                                          {item.course_name}
-                                        </a>
-                                        <div className="course-desc desc">
-                                          <div className="desc-heading">
-                                            Description
-                                          </div>
-                                          <div
-                                            style={{
-                                              width: "225px",
-                                              textAlign: "justify",
-                                              whiteSpace: "pre-wrap",
-                                            }}
+                                  coursesByCategory.Intermediate?.map(
+                                    (item) => {
+                                      return (
+                                        <li key={item._id}>
+                                          <a
+                                            // onClick={refreshPage}
+                                            href={`/courses/${item._id}`}
                                           >
-                                            {item.description}
+                                            {item.course_name}
+                                          </a>
+                                          <div className="course-desc desc">
+                                            <div className="desc-heading">
+                                              Description
+                                            </div>
+                                            <div
+                                              style={{
+                                                width: "225px",
+                                                textAlign: "justify",
+                                                whiteSpace: "pre-wrap",
+                                              }}
+                                            >
+                                              {item.description}
+                                            </div>
                                           </div>
-                                        </div>
-                                      </li>
-                                    );
-                                  })}
+                                        </li>
+                                      );
+                                    }
+                                  )}
                               </ul>
                             </div>
                           </div>
