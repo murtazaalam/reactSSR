@@ -5,10 +5,10 @@
   margin-right: 15px;
 }
 .top-course-aria{
-  display: inline-block;
+  overflow-x: overlay;
+  display: flex;
 }
 .top-course-aria a{
-  display: inline-block;
   margin: 16px;
 }
 

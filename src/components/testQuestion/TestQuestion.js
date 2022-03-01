@@ -130,8 +130,8 @@ const TestQuestion = () => {
                         </>
                       );
                     }
-                  })
-                ) : (
+                  }))
+                 : (
                   <>
                     <h1
                       style={{

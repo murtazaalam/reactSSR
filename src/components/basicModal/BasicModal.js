@@ -22,7 +22,7 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <a href="/#need-assistance" className="btn-grad full-width">
+      <a href="#need-assistance" className="btn-grad btn-demo">
         {props.text}
       </a>
       <Modal

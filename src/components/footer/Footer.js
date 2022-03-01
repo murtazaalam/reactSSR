@@ -307,7 +307,7 @@ const Footer = () => {
 
         <Container className="maxWidthNone">
           <div className="techvanto-footer-grid">
-            <div style={{ height: "-webkit-fill-available" }} className="social-icons">
+            <div style={{ height: "106px" }} className="social-icons">
               <div className="techvanto-footer-text-header color">
                 <img src={logo} alt="" />{" "}
               </div>

@@ -15,10 +15,8 @@ import ChromeReaderModeIcon from "@material-ui/icons/ChromeReaderMode";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ShareIcon from "@material-ui/icons/Share";
 import Badge from "@material-ui/core/Badge";
-
 import Draggable from "react-draggable";
 import Skeleton from "@mui/material/Skeleton";
-
 import addToCartApi from "../../../apis/api/AddToCart";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -55,6 +53,8 @@ const CourseBody = ({ course }) => {
   const [error, setError] = useState();
 
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
+
+  const currentUrl = window.location.href;
   useEffect(() => {
     if (baughtCourses.length !== 0) {
       myOrdersApi(setBaughtCourses);
@@ -453,7 +453,7 @@ const CourseBody = ({ course }) => {
                   <RWebShare
                     data={{
                       text: "Web Share - GfG",
-                      url: `https://stag.techvantoacademy.com/courses/${course._id}`,
+                      url: currentUrl,
                       title: "GfG",
                     }}
                     onClick={() => console.log("shared successfully!")}
