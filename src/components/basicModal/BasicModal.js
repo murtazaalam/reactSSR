@@ -22,9 +22,9 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <button href="#need-assistance" className="btn-grad full-width">
+      <a href="#need-assistance" className="btn-grad btn-demo">
         {props.text}
-      </button>
+      </a>
       <Modal
         open={open}
         onClose={handleClose}
