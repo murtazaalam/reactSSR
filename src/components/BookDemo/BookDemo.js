@@ -1,12 +1,9 @@
 import * as React from "react";
-//import { Form } from "react-final-form";
 import {
   TextField,
-  Container,
   CardHeader,
   CardContent,
   IconButton,
-  Card,
   Grid,
 } from "@mui/material";
 import needAssistance from "../../assets/Svgs/needAssistance.svg";
@@ -78,7 +75,6 @@ const BookADemo = () => {
         </Grid>
         <Grid item xs={12} md={5}>
           <div>
-            {/* <Card className="inhert-width" sx={{ p: 2 }}> */}
             <form onSubmit={handleSubmit} className="form-book">
               <CardHeader
                 action={<IconButton aria-label=""></IconButton>}
@@ -145,7 +141,6 @@ const BookADemo = () => {
                 </button>
               </CardActions>
             </form>
-            {/* </Card> */}
           </div>
         </Grid>
       </Grid>

@@ -31,7 +31,6 @@ function RightPanel({formType}) {
   });
 
   const formValidate = (event) => {
-    //setInfo({...info, name: value})
     if (event.name === "name") {
       setInfo({ ...info, name: event.value });
       if(event.value == "") return setNameError(true);
@@ -176,21 +175,9 @@ function RightPanel({formType}) {
               <TextField
                 {...params}
                 variant="outlined"
-                //onSelect={(e) => {console.log(e.target);}}
                 label="Profiles"
                 placeholder="Job Profiles "
                 value={info.profile}
-                // onKeyDown={(e) => {
-                //   if (e.key === "Enter") {
-                //     setInfo({
-                //       ...info,
-                //       profile: [
-                //         ...info.profile,
-                //         params.inputProps.value,
-                //       ],
-                //     });
-                //   }
-                // }}
               />
             )}
           />

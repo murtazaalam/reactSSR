@@ -172,7 +172,7 @@ const Events = (props) => {
                   );
                 })
               ) : (
-                <h1>sds</h1>
+                <h1>No Event Available</h1>
               )}
             </div>
           </Box>

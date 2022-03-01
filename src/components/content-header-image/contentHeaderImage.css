@@ -1,12 +1,10 @@
 .techvanto-content-header-image {
   min-height: 70vh !important;
-
-  /* background: #578bc0 url("../../assets/Svgs/hero.svg") 0 0 no-repeat; */
   background-size: auto 100% !important;
   background-position: right !important;
 }
 .techvanto-content-header-image .css-1oqqzyl-MuiContainer-root {
-  max-width: 1894px;
+  max-width: 1894px !important;
 }
 .techvanto-header-content {
   display: flex;

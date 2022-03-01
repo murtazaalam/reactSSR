@@ -4,11 +4,7 @@ import "mui-player/dist/mui-player.min.css";
 import { Button, Container } from "@mui/material";
 import { Link } from "react-router-dom";
 const CampusAmbassador = () => {
-  // var Mp = new MuiPlayer({
-  //     container:'#mui-player',
-  // title:'Title',
-  // src:'video/ca.mp4',
-  // })
+  
   return (
     <div className="background" id="campusAmbassador">
       <Container className="section-spacing">

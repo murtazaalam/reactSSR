@@ -6,7 +6,6 @@ import "./Footer.css";
 import { Link } from "react-router-dom";
 import getTopCourseApi from "../../apis/api/TopCourses";
 import insta from "../../assets/images/instagram.ico";
-
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
