@@ -1,6 +1,6 @@
 .primary-navbar {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   padding: 18px;
   color: white;
   font-size: 10px;
@@ -12,7 +12,7 @@
   display: none;
 }
 .text-medium {
-  font-size: 12px;
+  font-size: 6px;
 }
 
 @media screen and (min-width: 540px) {

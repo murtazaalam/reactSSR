@@ -36,8 +36,12 @@ function Login({ open, handleClose, PaperComponent }) {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
+    console.log("helo");
     setValue(newValue);
   };
+  const handleTabChange = () => {
+    console.log("helo000");
+  }
 
   return (
     <div>
@@ -49,7 +53,6 @@ function Login({ open, handleClose, PaperComponent }) {
         aria-labelledby="draggable-dialog-title"
       >
         <TabContext value={value}>
-          <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
             <Box>
               <TabList
                 onChange={handleChange}
@@ -59,23 +62,22 @@ function Login({ open, handleClose, PaperComponent }) {
                   sx={{ textTransform: "capitalize" }}
                   label="Login"
                   value="1"
+                  onChange={handleTabChange}
                 />
                 <Tab
                   sx={{ textTransform: "capitalize" }}
                   label="Signup"
                   value="2"
+                  onChange={handleTabChange}
                 />
               </TabList>
             </Box>
-          </DialogTitle>
-          <DialogContent>
             <TabPanel value="1">
               <LoginContent classes={classes} handleClose={handleClose} />
             </TabPanel>
             <TabPanel value="2">
               <SignUp classess={classes} />
             </TabPanel>
-          </DialogContent>
         </TabContext>
       </Dialog>
     </div>

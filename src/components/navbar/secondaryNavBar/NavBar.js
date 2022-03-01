@@ -212,10 +212,9 @@ const NavBar = (props) => {
         >
           <Toolbar
             className="main-logo"
-            style={{ paddingTop: "3px", width: "250px" }}
           >
             <Link to="/">
-              <img src={logoOnScroll} height="100%" width="250px" alt="Logo" />
+              <img src={logoOnScroll} alt="Logo" className="logo-image" />
             </Link>
           </Toolbar>
           <Toolbar>
