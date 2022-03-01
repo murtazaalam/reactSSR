@@ -158,64 +158,61 @@ const CourseBody = ({ course }) => {
     return Object.keys(obj).length === 0;
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data =new FormData(e.currentTarget);
+    const data = new FormData(e.currentTarget);
     let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     setFormError(false);
     setLoader(true);
-    if(!data.get("email").match(emailValidate)){
+    if (!data.get("email").match(emailValidate)) {
       setFormError(true);
       setLoader(false);
       return;
-    }
-    else{
+    } else {
       let body = {
         name: data.get("name"),
         email: data.get("email"),
         comment: data.get("comment") ? data.get("comment") : null,
-      }
-      try{
+      };
+      try {
         let res = await addReviewApi(body, setError, setLoader);
-          if(res === "Thanks For Your Review"){
-            toast.success(res, {
-              position: "bottom-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            emptyState();
-          }
-          else{
-            toast.error(res, {
-              position: "bottom-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            setOpen(true);
-          }
-        
-      }catch(error){
+        if (res === "Thanks For Your Review") {
+          toast.success(res, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          emptyState();
+        } else {
+          toast.error(res, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setOpen(true);
+        }
+      } catch (error) {
         console.log("error=", error);
       }
     }
-  }
+  };
   const inputValue = (value) => {
     setEmail(value);
     let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(!email.match(emailValidate)){
+    if (!email.match(emailValidate)) {
       setFormError(true);
       return;
     }
     setFormError(false);
-  }
+  };
 
   const emptyState = () => {
     setComment("");
@@ -223,7 +220,6 @@ const CourseBody = ({ course }) => {
   return (
     <>
       <div className="course-tab-container">
-
         <Typography component="div">
           <Box
             sx={{ width: "100%", typography: "body1" }}
@@ -313,8 +309,12 @@ const CourseBody = ({ course }) => {
             <div className="video-box">
               {course && (
                 <div className="video">
-                  {course.thumbnail && (
-                    <img src={course.thumbnail} className="img-fluid" alt="" />
+                  {course.posterImageUrl && (
+                    <img
+                      src={course.posterImageUrl}
+                      className="img-fluid"
+                      alt=""
+                    />
                   )}
                   {/* {course.video && (
                     <iframe
@@ -325,7 +325,7 @@ const CourseBody = ({ course }) => {
                       allowfullscreen
                     ></iframe>
                   )} */}
-                  {!course.thumbnail && (
+                  {!course.posterImageUrl && (
                     <img
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRckyYf2C8fp95kgcVhT2L-gJgEz5_UUuIWnA&usqp=CAU"
                       className="img-fluid"
@@ -453,7 +453,7 @@ const CourseBody = ({ course }) => {
                   <RWebShare
                     data={{
                       text: "Web Share - GfG",
-                      url: `http://localhost:3000/courses/${course._id}`,
+                      url: `https://stag.techvantoacademy.com/courses/${course._id}`,
                       title: "GfG",
                     }}
                     onClick={() => console.log("shared successfully!")}
@@ -486,7 +486,10 @@ const CourseBody = ({ course }) => {
               required
             />
           </div>
-          <div className="col-lg-6 col-md-12 col-sm-12 thought-input-field" style={{position: 'relative'}}>
+          <div
+            className="col-lg-6 col-md-12 col-sm-12 thought-input-field"
+            style={{ position: "relative" }}
+          >
             <input
               type="text"
               className="form-control"
@@ -494,10 +497,19 @@ const CourseBody = ({ course }) => {
               name="email"
               value={isLogin ? admin.email : email}
               onChange={(e) => inputValue(e.target.value)}
-              style={formError ? {borderColor: 'var(--color-secondary)'} : {borderColor: '#f8f8f8'}}
+              style={
+                formError
+                  ? { borderColor: "var(--color-secondary)" }
+                  : { borderColor: "#f8f8f8" }
+              }
               required
             />
-            <p className="email-error" style={formError ? {display: 'block'} : {display: 'none'}}>Invalid Email</p>
+            <p
+              className="email-error"
+              style={formError ? { display: "block" } : { display: "none" }}
+            >
+              Invalid Email
+            </p>
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12 thought-input-field">
             <textarea
@@ -511,13 +523,17 @@ const CourseBody = ({ course }) => {
           </div>
 
           <div className="col-lg-6 col-md-6 col-sm-6 comment-btn-box">
-            <button 
-            type="submit" 
-            className="btn-grad btn-review"
-            disabled={loader ? true : false}
-            style={loader ? {backgroundColor: 'var(--color-disable)'} : {backgroundColor: 'var(--color-secondary)'}}
+            <button
+              type="submit"
+              className="btn-grad btn-review"
+              disabled={loader ? true : false}
+              style={
+                loader
+                  ? { backgroundColor: "var(--color-disable)" }
+                  : { backgroundColor: "var(--color-secondary)" }
+              }
             >
-              {loader ? <img src={ButtonLoader} width="80" /> : 'Submit'}
+              {loader ? <img src={ButtonLoader} width="80" /> : "Submit"}
             </button>
           </div>
         </form>

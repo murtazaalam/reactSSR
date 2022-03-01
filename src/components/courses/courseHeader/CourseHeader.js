@@ -1,12 +1,26 @@
+import { Box } from "@mui/system";
 import * as React from "react";
-import { Link } from "react-router-dom";
 import "./courseHeader.css";
 
 const CourseHeader = (props) => {
   return (
     <>
-      <section className="page-heading">
+      <Box
+        component="section"
+        className="page-heading"
+        sx={{
+          background: `#1C477C url(${
+            window.matchMedia("(max-width: 668px)").matches
+              ? ""
+              : props.headerImageUrl
+          }) 0 0 no-repeat`,
+
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
         <div className="course-container">
+          {/* <img src={BlogHead1} alt="" width="15" /> */}
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
               <li className="breadcrumb-item active">
@@ -27,7 +41,7 @@ const CourseHeader = (props) => {
             </div>
           </div>
         </div>
-      </section>
+      </Box>
     </>
   );
 };

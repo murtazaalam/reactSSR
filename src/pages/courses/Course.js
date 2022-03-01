@@ -28,6 +28,7 @@ const Courses = () => {
             title={course.course_name}
             category={course.category}
             subtitle="subtitle"
+            headerImageUrl={course.headerImageUrl}
           />
           <CourseBody course={course} />
         </>
