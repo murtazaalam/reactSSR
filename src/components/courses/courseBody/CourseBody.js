@@ -250,9 +250,16 @@ const CourseBody = ({ course }) => {
                   </Typography>
 
                   {/* MAP Learning Objectives */}
-                  <Typography component="p" className="tab-course-description">
-                    {course && course.description}
-                  </Typography>
+
+                  {course &&
+                    course.preRequisites?.map((data) => (
+                      <Typography
+                        component="p"
+                        className="tab-course-description"
+                      >
+                        {data}
+                      </Typography>
+                    ))}
 
                   {/* Prerequisites */}
                   <Typography sx={{ pt: "24px" }} component="h2">
@@ -260,9 +267,15 @@ const CourseBody = ({ course }) => {
                   </Typography>
 
                   {/* MAP Prerequisites  */}
-                  <Typography component="p" className="tab-course-description">
-                    {course && course.description}
-                  </Typography>
+                  {course &&
+                    course.learningObjective?.map((data) => (
+                      <Typography
+                        component="p"
+                        className="tab-course-description"
+                      >
+                        {data}
+                      </Typography>
+                    ))}
 
                   {/* Training Benefits */}
                   <Typography sx={{ pt: "24px" }} component="h2">
@@ -270,9 +283,15 @@ const CourseBody = ({ course }) => {
                   </Typography>
 
                   {/* MAP Training Benefits */}
-                  <Typography component="p" className="tab-course-description">
-                    {course && course.description}
-                  </Typography>
+                  {course &&
+                    course.training_benefits?.map((data) => (
+                      <Typography
+                        component="p"
+                        className="tab-course-description"
+                      >
+                        {data}
+                      </Typography>
+                    ))}
                 </div>
               </TabPanel>
               <TabPanel value="2">
@@ -291,7 +310,11 @@ const CourseBody = ({ course }) => {
                             </Typography>
                           </AccordionSummary>
                           <AccordionDetails>
-                            <Typography>{curriculum.detail}</Typography>
+                            <ul>
+                              {curriculum.detail?.map((data) => (
+                                <li>{data}</li>
+                              ))}
+                            </ul>
                           </AccordionDetails>
                         </Accordion>
                       );
