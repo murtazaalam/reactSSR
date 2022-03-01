@@ -22,7 +22,7 @@ function FormRow() {
     <>
       <Grid item md={3} sm={6} xs={12}>
         <Item className="techvanto-whyus-grid-item">
-          <CloudUploadTwoToneIcon className="techvanto-whyus-cloudupload-icon" />
+          <CloudUploadTwoToneIcon className="techvanto-whyus-cloudupload-icon" sx={{color: 'var(--color-secondary)'}} />
           <CountUp end={60} duration={1} redraw={true}>
             {({ countUpRef, start }) => (
               <VisibilitySensor onChange={start} delayedCall>
@@ -39,7 +39,7 @@ function FormRow() {
       </Grid>
       <Grid item md={3} sm={6} xs={12}>
         <Item className="techvanto-whyus-grid-item">
-          <SupervisorAccountRoundedIcon className="techvanto-whyus-cloudupload-icon" />
+          <SupervisorAccountRoundedIcon className="techvanto-whyus-cloudupload-icon" sx={{color: 'var(--color-secondary)'}} />
           <CountUp end={10000} duration={1} redraw={true}>
             {({ countUpRef, start }) => (
               <VisibilitySensor onChange={start} delayedCall>
@@ -56,7 +56,7 @@ function FormRow() {
       </Grid>
       <Grid item md={3} sm={6} xs={12}>
         <Item className="techvanto-whyus-grid-item">
-          <LocalLibraryIcon className="techvanto-whyus-cloudupload-icon" />
+          <LocalLibraryIcon className="techvanto-whyus-cloudupload-icon" sx={{color: 'var(--color-secondary)'}} />
           <CountUp end={32} duration={1} redraw={true}>
             {({ countUpRef, start }) => (
               <VisibilitySensor onChange={start} delayedCall>
@@ -75,7 +75,7 @@ function FormRow() {
 
       <Grid item md={3} sm={6} xs={12}>
         <Item className="techvanto-whyus-grid-item">
-          <VolunteerActivismTwoToneIcon className="techvanto-whyus-cloudupload-icon" />
+          <VolunteerActivismTwoToneIcon className="techvanto-whyus-cloudupload-icon" sx={{color: 'var(--color-secondary)'}} />
           <CountUp end={3669} duration={1} redraw={true}>
             {({ countUpRef, start }) => (
               <VisibilitySensor onChange={start} delayedCall>

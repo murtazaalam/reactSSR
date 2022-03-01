@@ -13,7 +13,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 96%;
+}
+.form-book .MuiCardActions-spacing{
+  justify-content: center;
 }
 .query-message {
   text-align: center;
@@ -62,6 +65,11 @@
 .card-content {
   display: flex;
   flex-direction: column;
+}
+@media screen and (min-width: 400px){
+  .book-demo {
+    width: 100%;
+  }
 }
 @media screen and (max-width: 780px) {
   .techvanto-book-a-demo {

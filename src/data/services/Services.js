@@ -21,7 +21,7 @@ import iit from "../../assets/images/servicesIcon/IIT.png";
 import ncert from "../../assets/images/servicesIcon/NCERT.png";
 import getCompanies from "../../assets/images/servicesIcon/Get companies.png";
 import getTraining from "../../assets/images/servicesIcon/Get training proof.png";
-import connectWith from "../../assets/images/servicesIcon/Connect with +2 student.png";
+import connectWith from "../../assets/images/servicesIcon/people.png";
 import managementSystem from "../../assets/images/servicesIcon/management system.png";
 import logical from "../../assets/images/servicesIcon/Logical.png";
 import reasoning from "../../assets/images/servicesIcon/Reasoning.png";

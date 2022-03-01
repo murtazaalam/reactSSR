@@ -52,6 +52,26 @@
   background-color: var(--color-secondary);
   bottom: 0;
 }
+
+.techvanto-footer-grid .css-yw020d-MuiAccordionSummary-expandIconWrapper{
+  color: #fff !important;
+}
+@media screen and (min-width: 768px){
+  .social-icons{
+    width: 216px;
+  }
+}
+@media screen and (min-width: 1280px){
+  .social-icons{
+    width: auto;
+  }
+}
+.lower-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 12px;
+}
 .techvanto-footer-policies {
   height: 90px;
   width: 100%;
@@ -78,6 +98,7 @@
   padding: 0 10px 0 12px;
   position: relative;
   bottom: 40px;
+  margin-top: 10px;
 }
 
 .techvanto-footer-grid {
@@ -123,6 +144,35 @@
 .techvanto-footer-link {
   text-decoration: none;
   color: var(--color-white);
+}
+.text-small{
+  font-size: 8px;
+}
+.text-small p{
+  margin: 0;
+
+}
+@media only screen and (min-width: 321px) {
+  .text-small{
+    font-size: 9px;
+  }
+}
+@media only screen and (min-width: 500px) {
+  .text-small{
+    font-size: 12px;
+  }
+  .lower-footer{
+    justify-content: flex-start;
+  }
+  .pp-margin{
+    margin: 0 8px;
+  }
+  .t-margin{
+    margin-right: 8px;
+  }
+  .p-margin{
+    margin-left: 8px;
+  }
 }
 @media (min-width: 1200px) {
   .techvanto-footer .css-1oqqzyl-MuiContainer-root {

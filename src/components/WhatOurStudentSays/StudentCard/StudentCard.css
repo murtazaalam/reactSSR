@@ -85,9 +85,8 @@ img {
   color: var(--color-secondary-text);
   font-weight: 400;
   text-align: center;
-
-  overflow: overlay;
   margin-bottom: initial;
+  overflow-x: auto;
 }
 
 .btn {

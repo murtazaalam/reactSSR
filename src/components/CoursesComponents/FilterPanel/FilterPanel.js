@@ -1,9 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
 import CheckboxProton from "../../Generic/CheckboxProton/CheckboxProton";
 import RadioGroup from "@mui/material/RadioGroup";
-import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import "./FilterPanel.css";
 

@@ -44,7 +44,6 @@
 .event-card-box h6 {
   width: 100%;
   text-align: center;
-  /* border-bottom: 1px solid; */
   padding: 8px 0;
   font-weight: 600;
 }
@@ -81,6 +80,10 @@
 }
 .event-body {
   flex-direction: column;
+}
+.btn-design{
+  text-decoration: underline !important;
+  font-weight: 800 !important;
 }
 .pagination {
   display: flex;

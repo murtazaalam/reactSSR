@@ -22,8 +22,6 @@
   border-radius: 21px;
   padding: 5px 30px 5px 30px;
 }
-.techvanto-video {
-}
 @media screen and (min-width: 620px) {
   .techvanto-video {
     width: 400px;
@@ -60,12 +58,6 @@
   display: block;
   text-align: left !important;
 }
-/* .techvanto-know-more-button {
-  border-radius: 15px !important;
-  background-color: #dd1642 !important;
-
-  display: inline-flex;
-} */
 .techvanto-know-more-button button {
   color: white;
 }
@@ -73,11 +65,6 @@
   transition: 2s;
   background-color: var(--color-primary) !important;
 }
-/* .campus-ambs-aria {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
 @media only screen and (max-width: 1050px) {
   .techvanto-campus-ambassador {
     grid-template-columns: 1fr !important;

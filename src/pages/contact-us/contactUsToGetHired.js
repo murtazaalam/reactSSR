@@ -35,7 +35,7 @@ function contactUsToGetHired() {
           <h1 className="event-heading">Contact Us</h1>
         </div>
       </Box>
-      <div className="contactus">
+      <div className="contactus contactus-section">
         <Grid container>
           <Grid
             item
@@ -45,14 +45,14 @@ function contactUsToGetHired() {
             className="left-card-position"
           >
             <div>
-              <LeftPanel heading="PLacement Opportunities" />
+              <LeftPanel heading="PLacement Opportunities form-hiring" />
             </div>
           </Grid>
           <Grid
             item
             xs={4}
             //   style={{ border: "2px solid black" }}
-            className="right-form-position"
+            className="right-form-position form-hiring"
           >
             <div>
               <h5>
@@ -63,7 +63,7 @@ function contactUsToGetHired() {
               <RightPanel formType={"placement"} />
             </div>
           </Grid>
-
+          <div style={{height: '20px'}}></div>
           <Grid item xs={12}>
             <div className="bg-image bg-image hiring-partner-section">
               <Container className="section-spacing">
@@ -80,6 +80,7 @@ function contactUsToGetHired() {
             </div>
           </Grid>
         </Grid>
+        <div style={{height: '40px'}}></div>
       </div>
     </>
   );

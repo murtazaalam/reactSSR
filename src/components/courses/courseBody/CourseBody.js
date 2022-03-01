@@ -72,7 +72,6 @@ const CourseBody = ({ course }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  //for timer
 
   const daysHoursMinSecs = { day: 2, hours: 0, minutes: 0, seconds: 30 };
   const { day = 0, hours = 0, minutes = 0, seconds = 60 } = daysHoursMinSecs;
@@ -84,10 +83,6 @@ const CourseBody = ({ course }) => {
   ]);
 
   const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -110,7 +105,6 @@ const CourseBody = ({ course }) => {
     return () => clearInterval(timerId);
   }, []);
 
-  // console.log(open);
   const addToCart = async (id) => {
     let body = {
       course_name: course.course_name,
@@ -245,7 +239,6 @@ const CourseBody = ({ course }) => {
                 >
                   <Tab label="Overview" value="1" />
                   <Tab label="Curriculum" value="2" />
-                  {/* <Tab label="Review" value="3" /> */}
                 </TabList>
               </Box>
               <TabPanel value="1">
@@ -310,9 +303,6 @@ const CourseBody = ({ course }) => {
                   </div>
                 )}
               </TabPanel>
-              {/* <TabPanel value="3">
-              
-              </TabPanel> */}
             </TabContext>
           </Box>
         </Typography>
@@ -366,7 +356,6 @@ const CourseBody = ({ course }) => {
                         {timeBadge === true ? (
                           <span className="updated-price">
                             <Badge
-                              // ${days!== 0 && days.toString().padStart(1, "0")}d
                               badgeContent={` ${hrs
                                 .toString()
                                 .padStart(2, "0")}:${mins
@@ -436,12 +425,6 @@ const CourseBody = ({ course }) => {
                   <p className="sub-heading">{course && course.access}</p>
                 </div>
                 <div>
-                  {/* <button onClick={handleClickOpen}>open</button>
-                  <Login
-                    open={open}
-                    handleClose={handleClose}
-                    PaperComponent={PaperComponent}
-                  /> */}
                   {isBaughtCourse ? (
                     <button type="button" className="btn-grad">
                       Purchased
@@ -465,12 +448,7 @@ const CourseBody = ({ course }) => {
                       />
                     </>
                   )}
-
-                  {/* <p className="add-to-cart-msg">
-                    {itemMessage && itemMessage}
-                  </p> */}
                 </div>
-
                 <div className="share-now">
                   <RWebShare
                     data={{
@@ -497,7 +475,7 @@ const CourseBody = ({ course }) => {
           Your email address will not be published. Required fields are marked *
         </p>
         <form className="row review-form" onSubmit={handleSubmit}>
-          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field">
+          <div className="col-lg-6 col-md-12 col-sm-12 thought-input-field">
             <input
               type="text"
               className="form-control"
@@ -508,7 +486,7 @@ const CourseBody = ({ course }) => {
               required
             />
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field" style={{position: 'relative'}}>
+          <div className="col-lg-6 col-md-12 col-sm-12 thought-input-field" style={{position: 'relative'}}>
             <input
               type="text"
               className="form-control"
@@ -521,7 +499,7 @@ const CourseBody = ({ course }) => {
             />
             <p className="email-error" style={formError ? {display: 'block'} : {display: 'none'}}>Invalid Email</p>
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12 thought-input-field">
+          <div className="col-lg-6 col-md-12 col-sm-12 thought-input-field">
             <textarea
               className="form-control"
               placeholder="Your Comment"

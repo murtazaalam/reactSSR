@@ -4,12 +4,12 @@ import ExpertCard from "./ExpertCard/ExpertCard";
 import { Typography, Container } from "@mui/material";
 import AliceCarousel from "react-alice-carousel";
 //import "./StudentSays.css";
-import expert1 from "../../assets/images/experts/expert1.jpg";
-import expert2 from "../../assets/images/experts/expert2.jpg";
-import expert3 from "../../assets/images/experts/expert3.jpg";
-import expert4 from "../../assets/images/experts/expert4.jpg";
-import expert5 from "../../assets/images/experts/expert5.jpg";
-import expert6 from "../../assets/images/experts/expert6.jpg";
+import expert1 from "../../assets/images/experts/expert5.jpg";
+import expert2 from "../../assets/images/experts/expert4.jpg";
+import expert3 from "../../assets/images/experts/expert6.jpg";
+import expert4 from "../../assets/images/experts/expert2.jpg";
+import expert5 from "../../assets/images/experts/expert1.jpg";
+import expert6 from "../../assets/images/experts/expert3.jpg";
 import expert7 from "../../assets/images/experts/expert7.jpg";
 import expert8 from "../../assets/images/experts/expert8.png";
 const responsive = {
@@ -22,39 +22,39 @@ const OurIndustryExperts = (props) => {
   const itemData = [
     {
       pic: expert1,
-      title1: "Software Engineer",
-      title2: "Bharat Airtel",
-      author: "Himanshu Singhal",
-    },
-    {
-      pic: expert2,
-      title1: "Sr. IOS Developer",
-      title2: "GetMySlice",
-      author: "Rahul Saini",
-    },
-    {
-      pic: expert3,
-      title1: "Angular Developer",
-      title2: "Trainman",
-      author: "Rishabh",
-    },
-    {
-      pic: expert4,
-      title1: "Software Engineer",
-      title2: "Salesforce",
-      author: "Anoosha Chandra",
-    },
-    {
-      pic: expert5,
       title1: "Sr. Full Stack Developer",
       title2: "Verizon Data Service",
       author: "Deepa Paikar",
     },
     {
-      pic: expert6,
+      pic: expert2,
+      title1: "Software Engineer",
+      title2: "Salesforce",
+      author: "Anoosha Chandra",
+    },
+    {
+      pic: expert3,
       title1: "Sr. Mechanical Engineer",
       title2: "Mercedes-Benz",
       author: "Ashish Jha",
+    },
+    {
+      pic: expert4,
+      title1: "Sr. IOS Developer",
+      title2: "GetMySlice",
+      author: "Rahul Saini",
+    },
+    {
+      pic: expert5,
+      title1: "Software Engineer",
+      title2: "Bharat Airtel",
+      author: "Himanshu Singhal",
+    },
+    {
+      pic: expert6,
+      title1: "Angular Developer",
+      title2: "Trainman",
+      author: "Rishabh",
     },
     {
       pic: expert7,

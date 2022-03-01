@@ -1,5 +1,4 @@
 import React from "react";
-//import ComingSoon from "react-coming-soon";
 import "./ComingSoon.css";
 import comingSoon from "../../assets/Svgs/comingSoon.svg";
 function ComingSoon() {

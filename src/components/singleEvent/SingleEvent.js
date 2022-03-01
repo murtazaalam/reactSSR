@@ -10,6 +10,7 @@ import "./singleEvent.css";
 import { Typography, Card } from "@mui/material";
 import { CheckCircle } from "@material-ui/icons";
 import singleEventApi from "../../apis/api/SingleEvent";
+import './singleEvent.css';
 
 const useStyles = makeStyles({
   root: {
@@ -81,21 +82,21 @@ const SingleEvent = () => {
       <Box
         component="div"
         sx={{ flexGrow: 1, mt: 2, mb: 2 }}
-        className={classes.sectionPadding}
+        className="event-box"
       >
         <Grid container spacing={2}>
-          <Grid item xs={2}>
+          <Grid item xs={12} sm={12} md={2} xl={2}>
             <Typography variant="h5" sx={{ fontWeight: "bold" }}>
               Overview
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={12} md={6} xl={6}>
             <Typography variant="p" sx={{ lineHeight: "28px" }}>
               {event && event.description}
             </Typography>
           </Grid>
-          <Grid item xs={4} sx={{ position: "relative", bottom: "8rem" }}>
-            <Card sx={{ p: 2 }}>
+          <Grid item xs={12} sm={12} md={4} xl={4}>
+            <Card sx={{ p: 2 }} className="event-form">
               <Box component="form" noValidate sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"

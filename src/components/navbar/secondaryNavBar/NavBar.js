@@ -51,7 +51,6 @@ const NavBar = (props) => {
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const [error, setError] = useState();
-  const isUserLogIn = useRecoilValue(userAuth);
   let dispatch = useDispatch();
 
   const [drawable, setDrawable] = useState({
@@ -121,7 +120,6 @@ const NavBar = (props) => {
   useEffect(() => {
     AllCourseApi(setAllCourse, setCoursesByCategory, setLoading);
   }, []);
-
   if (loading === true) {
     toast.error("Weak Network", {
       position: "bottom-right",
@@ -134,11 +132,6 @@ const NavBar = (props) => {
     });
     setLoading(false);
   }
-
-  //JSON.parse(localStorage.getItem) to retrieve
-  // localStorage.setItem("School", JSON.stringify(schoolCourses));
-  // localStorage.setItem("Intermediate", JSON.stringify(intermediateCourses));
-  // localStorage.setItem("College", JSON.stringify(collegeCourses));
 
   const list = (anchor) => (
     <Box

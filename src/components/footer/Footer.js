@@ -6,7 +6,6 @@ import "./Footer.css";
 import { Link } from "react-router-dom";
 import getTopCourseApi from "../../apis/api/TopCourses";
 import insta from "../../assets/images/instagram.ico";
-
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
@@ -308,7 +307,7 @@ const Footer = () => {
 
         <Container className="maxWidthNone">
           <div className="techvanto-footer-grid">
-            <div style={{ height: "-webkit-fill-available" }}>
+            <div style={{ height: "-webkit-fill-available" }} className="social-icons">
               <div className="techvanto-footer-text-header color">
                 <img src={logo} alt="" />{" "}
               </div>
@@ -543,22 +542,21 @@ const Footer = () => {
             </div>
             <div
               className="text-small"
-              style={{ display: "flex", placeContent: "space-between" }}
             >
-              <div style={{ display: "flex" }}>
-                <Link to="/terms-and-conditions" style={{ color: "white" }}>
+              <div className="lower-footer">
+                <Link to="/terms-and-conditions" style={{ color: "white" }} className="text-small t-margin">
                   <p>Terms & Conditions </p>
                 </Link>
                 /
-                <Link to="/privacy-policy" style={{ color: "white" }}>
+                <Link to="/privacy-policy" style={{ color: "white" }} className="text-small pp-margin">
                   <p>Privacy Policy </p>
                 </Link>
                 /
-                <Link to="/placement-policy" style={{ color: "white" }}>
+                <Link to="/placement-policy" style={{ color: "white" }} className="text-small pp-margin">
                   <p>Placement Policy </p>
                 </Link>
                 /
-                <Link to="/payment-policy" style={{ color: "white" }}>
+                <Link to="/payment-policy" style={{ color: "white" }} className="text-small p-margin">
                   <p>Payment Policy </p>
                 </Link>
               </div>

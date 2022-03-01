@@ -67,7 +67,6 @@ const TestQuestion = () => {
                 <Box component="div" className="row event-menu">
                   {subject &&
                     subject.map((item, index) => {
-                      console.log(">>>>", activeTavb);
                       return (
                         <Typography
                           component="h6"
@@ -87,13 +86,12 @@ const TestQuestion = () => {
                       );
                     })}
                 </Box>
-
                 <Box component="h6" className=""></Box>
               </div>
               <div className="questions-wrap col-lg-9 col-md-9 col-sm-6 col-12">
-                {subject.length > 0 ? (
+                {subject.length > 0 & questionList ?
                   subject.map((item, index) => {
-                    if (!questionList) {
+                    if (questionList) {
                       if (index === 0) {
                         return (
                           <>
@@ -137,9 +135,9 @@ const TestQuestion = () => {
                   <>
                     <h1
                       style={{
-                        fontSize: "24px",
-                        fontWeight: "600",
-                        textAlign: "center",
+                        fontSize: '24px',
+                        fontWeight: '600',
+                        textAlign: 'left'
                       }}
                     >
                       No Questions Available

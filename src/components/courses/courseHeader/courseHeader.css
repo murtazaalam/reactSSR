@@ -74,9 +74,6 @@
 .other p .icon {
   margin-right: 4px;
 }
-.updated-price {
-  /* color: var(--color-green-icon); */
-}
 .updated-price .MuiBadge-badge {
   top: -3px;
   padding: 10px 10px;

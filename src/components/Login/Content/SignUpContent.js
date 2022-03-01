@@ -8,12 +8,16 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import IconButton from '@mui/material/IconButton';
 import { toast } from "react-toastify";
 import { makeStyles } from "@material-ui/core/styles";
 import RegisterApi from "../../../apis/api/SignUp";
+import InputAdornment from '@mui/material/InputAdornment';
 import ButtonLoader from "../../../assets/images/button_loader.gif";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../../redux/slices/auth.slices";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const useStyles = makeStyles((theme) => ({
   btnSignUp: {
@@ -23,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
 }));
+const handleClickShowPassword = () => {
 
+}
 const theme = createTheme();
 
 export default function SignUp({ classess }) {
@@ -35,6 +41,7 @@ export default function SignUp({ classess }) {
   const [message, validationMessage] = useState("");
   const [confirmPass, confirmPassword] = useState(false);
   const [loader, setLoader] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [pass, setPass] = useState();
   let dispatch = useDispatch();
   const classes = useStyles();
@@ -222,12 +229,21 @@ export default function SignUp({ classess }) {
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   id="password"
                   autoComplete="new-password"
                   onChange={(e) => validation(e)}
                   error={password}
                   helperText={password ? message : ""}
+                  endAdornment={<InputAdornment position="end">
+                    <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                  </InputAdornment>}
                 />
               </Grid>
               <Grid item xs={12}>

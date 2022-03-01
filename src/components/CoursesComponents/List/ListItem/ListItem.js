@@ -17,7 +17,6 @@ const ListItem = ({
     <footer>
       <p>
         <b>{serviceTime}</b>
-        {/* <span> Delivery Fee ${deliveryFee}</span> */}
       </p>
       {myCourseCheck ? (
         <p>
