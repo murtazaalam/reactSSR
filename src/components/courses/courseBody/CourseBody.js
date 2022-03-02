@@ -28,6 +28,7 @@ import { useSelector } from "react-redux";
 import { RWebShare } from "react-web-share";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
 import addReviewApi from "../../../apis/api/AddReview";
+import { lighten } from "@material-ui/core";
 
 function PaperComponent(props) {
   return (
@@ -250,16 +251,12 @@ const CourseBody = ({ course }) => {
                   </Typography>
 
                   {/* MAP Learning Objectives */}
-
-                  {course &&
-                    course.preRequisites?.map((data) => (
-                      <Typography
-                        component="p"
-                        className="tab-course-description"
-                      >
-                        {data}
-                      </Typography>
-                    ))}
+                  <ol>
+                    {course &&
+                      course.preRequisites?.map((data) => (
+                        <li className="tab-course-description">{data}</li>
+                      ))}
+                  </ol>
 
                   {/* Prerequisites */}
                   <Typography sx={{ pt: "24px" }} component="h2">
@@ -267,15 +264,12 @@ const CourseBody = ({ course }) => {
                   </Typography>
 
                   {/* MAP Prerequisites  */}
-                  {course &&
-                    course.learningObjective?.map((data) => (
-                      <Typography
-                        component="p"
-                        className="tab-course-description"
-                      >
-                        {data}
-                      </Typography>
-                    ))}
+                  <ol>
+                    {course &&
+                      course.learningObjective?.map((data) => (
+                        <li className="tab-course-description">{data}</li>
+                      ))}
+                  </ol>
 
                   {/* Training Benefits */}
                   <Typography sx={{ pt: "24px" }} component="h2">
@@ -283,15 +277,12 @@ const CourseBody = ({ course }) => {
                   </Typography>
 
                   {/* MAP Training Benefits */}
-                  {course &&
-                    course.training_benefits?.map((data) => (
-                      <Typography
-                        component="p"
-                        className="tab-course-description"
-                      >
-                        {data}
-                      </Typography>
-                    ))}
+                  <ol>
+                    {course &&
+                      course.training_benefits?.map((data) => (
+                        <li className="tab-course-description">{data}</li>
+                      ))}
+                  </ol>
                 </div>
               </TabPanel>
               <TabPanel value="2">
