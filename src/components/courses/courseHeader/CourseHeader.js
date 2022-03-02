@@ -9,11 +9,11 @@ const CourseHeader = (props) => {
         component="section"
         className="page-heading"
         sx={{
-          background: `url(${
+          background: ` #1C477C url(${
             window.matchMedia("(max-width: 668px)").matches
               ? ""
               : props.headerImageUrl
-          })`,
+          }) 0 0 no-repeat `,
 
           backgroundPosition: "center",
           backgroundSize: "cover",
