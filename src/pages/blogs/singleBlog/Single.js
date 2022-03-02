@@ -19,7 +19,8 @@ export default function Single() {
         component="section"
         className="page-heading"
         sx={{
-          background: `url(${blogItem && blogItem.blog_image})`,
+          background: ` #1C477C 0 0 no-repeat `,
+
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
