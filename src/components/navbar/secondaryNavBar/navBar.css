@@ -24,7 +24,7 @@
   justify-content: center;
   background-color: var(--color-primary);
 }
-.secondary-navbar .css-1t29gy6-MuiToolbar-root {
+.secondary-navbar .main-logo{
   padding-left: 10px;
   position: relative;
 }
@@ -34,7 +34,7 @@
   top: -2px;
   position: relative;
 }
-.secondary-navbar .css-1t29gy6-MuiToolbar-root button {
+.secondary-navbar .menu-icon {
   position: absolute;
   left: -28px;
 }
@@ -292,14 +292,14 @@
   display: none !important;
 }
 @media screen and (min-width: 300px){
-  .secondary-navbar .css-1t29gy6-MuiToolbar-root button {
+  .secondary-navbar .menu-icon {
     position: absolute;
     left: -25px;
   }
 }
 @media screen and (min-width: 768px){
   
-  .secondary-navbar .css-1t29gy6-MuiToolbar-root button{
+  .secondary-navbar .menu-icon{
     left: 0px;
   }
 
@@ -323,7 +323,7 @@
     justify-content: flex-end;
     flex-direction: row;
   }
-  .secondary-navbar .css-1t29gy6-MuiToolbar-root button{
+  .secondary-navbar .menu-icon{
     position: relative;
     left: 0px;
   }

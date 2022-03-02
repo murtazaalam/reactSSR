@@ -1,7 +1,7 @@
 import routes from "../routes/Services.routes";
 import axios from "axios";
 
-export default async function addToCartApi(body) {
+export default async function addToCartApi(body, setCartLoader) {
   return await axios
     .post(routes.AddToCart, body, {
       headers: {
@@ -9,9 +9,11 @@ export default async function addToCartApi(body) {
       },
     })
     .then((res) => {
+      setCartLoader(false);
       return res.data.message;
     })
     .catch((error) => {
+      setCartLoader(false);
       if (error.response) {
         //setApiError(true);
         return error.response.data.message;

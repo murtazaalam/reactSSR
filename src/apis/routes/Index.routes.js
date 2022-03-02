@@ -1,3 +1,3 @@
 const endpoint = 'https://stagbk.techvantoacademy.com/'
-//23.20.14.174
+//18.206.58.123
 export default endpoint;

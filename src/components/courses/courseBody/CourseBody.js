@@ -50,6 +50,7 @@ const CourseBody = ({ course }) => {
   const [name, setName] = React.useState("");
   const [comment, setComment] = React.useState("");
   const [formError, setFormError] = useState(false);
+  const [cartLoader, setCartLoader] = useState(false);
   const [error, setError] = useState();
 
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
@@ -106,6 +107,7 @@ const CourseBody = ({ course }) => {
   }, []);
 
   const addToCart = async (id) => {
+    setCartLoader(true);
     let body = {
       course_name: course.course_name,
       course_image: course.thumbnail,
@@ -117,8 +119,7 @@ const CourseBody = ({ course }) => {
       price: course.price,
       course_id: id,
     };
-    let message = await addToCartApi(body);
-    console.log(message);
+    let message = await addToCartApi(body, setCartLoader);
     if (message === "Item Already Added") {
       toast.warn("Course already added ", {
         position: "bottom-right",
@@ -140,6 +141,7 @@ const CourseBody = ({ course }) => {
         progress: undefined,
       });
     else if (message === "Unauthorized") {
+      setCartLoader(false);
       setOpen(true);
       console.log(open);
     } else {
@@ -152,6 +154,7 @@ const CourseBody = ({ course }) => {
         draggable: true,
         progress: undefined,
       });
+      setCartLoader(false);
     }
   };
   function isEmpty(obj) {
@@ -252,10 +255,11 @@ const CourseBody = ({ course }) => {
                   {/* MAP Learning Objectives */}
 
                   {course &&
-                    course.preRequisites?.map((data) => (
+                    course.preRequisites?.map((data, index) => (
                       <Typography
                         component="p"
                         className="tab-course-description"
+                        key={index}
                       >
                         {data}
                       </Typography>
@@ -268,10 +272,11 @@ const CourseBody = ({ course }) => {
 
                   {/* MAP Prerequisites  */}
                   {course &&
-                    course.learningObjective?.map((data) => (
+                    course.learningObjective?.map((data, index) => (
                       <Typography
                         component="p"
                         className="tab-course-description"
+                        key={index}
                       >
                         {data}
                       </Typography>
@@ -284,10 +289,11 @@ const CourseBody = ({ course }) => {
 
                   {/* MAP Training Benefits */}
                   {course &&
-                    course.training_benefits?.map((data) => (
+                    course.training_benefits?.map((data, index) => (
                       <Typography
                         component="p"
                         className="tab-course-description"
+                        key={index}
                       >
                         {data}
                       </Typography>
@@ -311,8 +317,8 @@ const CourseBody = ({ course }) => {
                           </AccordionSummary>
                           <AccordionDetails>
                             <ul>
-                              {curriculum.detail?.map((data) => (
-                                <li>{data}</li>
+                              {curriculum.detail?.map((data, i) => (
+                                <li key={i}>{data}</li>
                               ))}
                             </ul>
                           </AccordionDetails>
@@ -456,13 +462,24 @@ const CourseBody = ({ course }) => {
                     <>
                       <button
                         type="button"
-                        className="btn-grad"
+                        className="btn-grad btn-cart"
                         onClick={() => addToCart(course._id)}
+                        disabled={cartLoader ? true : false}
+                        style={
+                          cartLoader
+                            ? { backgroundColor: "var(--color-disable)" }
+                            : { backgroundColor: "var(--color-secondary)" }
+                        }
                       >
-                        <span>
-                          <ShoppingCartIcon />
-                        </span>
-                        Add to cart
+                        
+                        {cartLoader ? <img src={ButtonLoader} width="80" /> : 
+                        <>
+                          <span>
+                            <ShoppingCartIcon />
+                          </span>
+                          Add to cart
+                        </>
+                        }
                       </button>
                       <Login
                         open={isLogin ? false : open}

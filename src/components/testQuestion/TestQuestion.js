@@ -88,10 +88,11 @@ const TestQuestion = () => {
                 </Box>
                 <Box component="h6" className=""></Box>
               </div>
+              {subject &&
               <div className="questions-wrap col-lg-9 col-md-9 col-sm-6 col-12">
-                {(subject.length > 0) & questionList ? (
+                {(subject.length > 0) ? (
                   subject.map((item, index) => {
-                    if (questionList) {
+                    if (!questionList) {
                       if (index === 0) {
                         return (
                           <>
@@ -145,6 +146,18 @@ const TestQuestion = () => {
                   </>
                 )}
               </div>
+              }
+              {!subject &&
+                <h1
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "600",
+                    textAlign: "left",
+                  }}
+                >
+                  No Questions Available
+                </h1>
+              }
             </Box>
           </Box>
         </>

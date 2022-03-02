@@ -3,6 +3,7 @@ import * as React from "react";
 import "./courseHeader.css";
 
 const CourseHeader = (props) => {
+  console.log(">>>>",props.headerImageUrl)
   return (
     <>
       <Box

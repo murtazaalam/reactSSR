@@ -14,6 +14,10 @@
   place-content: space-between;
   text-align: start;
 }
+.maxWidthNone{
+  max-width: 1894px !important;
+}
+
 .techvant-footer-upper-part {
   /* min-height: 480px; */
   width: 100%;
@@ -55,8 +59,8 @@
 .social-icons{
   margin-bottom: 20px;
 }
-.techvanto-footer-grid .css-yw020d-MuiAccordionSummary-expandIconWrapper{
-  color: #fff !important;
+.arrow-icon{
+  fill: #fff !important;
 }
 @media screen and (min-width: 768px){
   .social-icons{
@@ -81,6 +85,7 @@
   align-items: center;
 }
 .techvanto-policies {
+  max-width: 1894px !important;
   display: block;
   color: white;
 }
@@ -174,11 +179,6 @@
   }
   .p-margin{
     margin-left: 8px;
-  }
-}
-@media (min-width: 1200px) {
-  .techvanto-footer .css-1oqqzyl-MuiContainer-root {
-    max-width: none !important;
   }
 }
 @media screen and (min-width: 400px){

@@ -11,7 +11,7 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-
+import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -41,7 +41,7 @@ const Accordion = styled((props) => (
 const AccordionSummary = styled((props) => (
   <MuiAccordionSummary
     expandIcon={
-      <ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem", fill: "white" }} />
+      <ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem", fill: "white" }} className="arrow-icon" />
     }
     {...props}
   />
@@ -65,6 +65,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const Footer = () => {
   const [topCourses, setTopCourses] = React.useState([]);
+  const history = useNavigate();
   React.useEffect(() => {
     getTopCourseApi(setTopCourses);
   }, []);
@@ -73,6 +74,10 @@ const Footer = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
+
+  const handleCourse = (id) => {
+    history.push(`/courses/${id}`)
+  }
 
   const mobileFooter = (
     <>
@@ -90,19 +95,19 @@ const Footer = () => {
             </AccordionSummary>
             <AccordionDetails>
               {topCourses.map((data, index) => (
-                <a
+                <Link
                   style={{
                     textDecoration: "none",
                     color: "white",
                     placeContent: "center",
                   }}
-                  href={`/courses/${data._id}`}
+                  to={`/courses/${data._id}`}
                   className="techvanto-footer-text text-small"
                 >
                   <p className="techvanto-footer-text text-small">
                     {data.course_name}
                   </p>
-                </a>
+                </Link>
               ))}
             </AccordionDetails>
           </Accordion>
@@ -118,17 +123,17 @@ const Footer = () => {
             {Services.map(
               (data, index) =>
                 index <= 6 && (
-                  <a
+                  <Link
                     style={{
                       textDecoration: "none",
                       color: "white",
                       placeContent: "center",
                     }}
-                    href="/coming-soon"
+                    to="/coming-soon"
                     className="techvanto-footer-text text-small"
                   >
                     <p>{data.text}</p>
-                  </a>
+                  </Link>
                 )
             )}
           </AccordionDetails>
@@ -141,44 +146,44 @@ const Footer = () => {
             <Typography>FAQ</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <a
+            <Link
               style={{
                 textDecoration: "none",
                 color: "white",
                 placeContent: "center",
               }}
-              href="/coming-soon"
+              to="/coming-soon"
               className="techvanto-footer-text text-small"
             >
               <p className="techvanto-footer-text text-small">
                 Discussion Forum
               </p>
-            </a>
+            </Link>
 
-            <a
+            <Link
               style={{
                 textDecoration: "none",
                 color: "white",
                 placeContent: "center",
               }}
-              href="/blogs"
+              to="/blogs"
               className="techvanto-footer-text text-small"
             >
               <p className="techvanto-footer-text text-small">Blog</p>
-            </a>
-            <a
+            </Link>
+            <Link
               style={{
                 textDecoration: "none",
                 color: "white",
                 placeContent: "center",
               }}
-              href="/coming-soon"
+              to="/coming-soon"
               className="techvanto-footer-text text-small"
             >
               <p className="techvanto-footer-text text-small">
                 Reasearch & Project
               </p>
-            </a>
+            </Link>
           </AccordionDetails>
         </Accordion>
         <Accordion
@@ -189,44 +194,44 @@ const Footer = () => {
             <Typography>Oppurtunities</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <a
+            <Link
               style={{
                 textDecoration: "none",
                 color: "white",
                 placeContent: "center",
               }}
-              href="/events"
+              to="/events"
               className="techvanto-footer-text text-small"
             >
               <p className="techvanto-footer-text text-small">
                 Upcoming And Past Events
               </p>
-            </a>
+            </Link>
 
-            <a
+            <Link
               style={{
                 textDecoration: "none",
                 color: "white",
                 placeContent: "center",
               }}
-              href="/#campusAmbassador"
+              to="/#campusAmbassador"
               className="techvanto-footer-text text-small"
             >
               <p className="techvanto-footer-text text-small">
                 Campus Ambassador
               </p>
-            </a>
-            <a
+            </Link>
+            <Link
               style={{
                 textDecoration: "none",
                 color: "white",
                 placeContent: "center",
               }}
-              href="/coming-soon"
+              to="/coming-soon"
               className="techvanto-footer-text text-small"
             >
               <p className="techvanto-footer-text text-small">Carrer/ Jobs</p>
-            </a>
+            </Link>
           </AccordionDetails>
         </Accordion>
         <Accordion
@@ -237,43 +242,43 @@ const Footer = () => {
             <Typography>Contact Us</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <a
+            <Link
               style={{
                 textDecoration: "none",
                 color: "white",
                 placeContent: "center",
               }}
-              href="/contact-us-for-hiring"
+              to="/contact-us-for-hiring"
               className="techvanto-footer-text text-small"
             >
               <p className="techvanto-footer-text text-small">Hire With Us</p>
-            </a>
+            </Link>
 
-            <a
+            <Link
               style={{
                 textDecoration: "none",
                 color: "white",
                 placeContent: "center",
               }}
-              href="/contact-us-to-get-hired"
+              to="/contact-us-to-get-hired"
               className="techvanto-footer-text text-small"
             >
               <p className="techvanto-footer-text text-small">Get Hired</p>
-            </a>
-            <a
+            </Link>
+            <Link
               style={{
                 textDecoration: "none",
                 color: "white",
                 placeContent: "center",
               }}
-              href="/coming-soon"
+              to="/coming-soon"
               className="techvanto-footer-text text-small"
             >
               <p className="techvanto-footer-text text-small">
                 {" "}
                 Train Your Team
               </p>
-            </a>
+            </Link>
           </AccordionDetails>
         </Accordion>
         <Accordion
@@ -313,9 +318,9 @@ const Footer = () => {
               </div>
               <div className="text-small techvanto-footer-text-header follow-links">
                 <p className="social">
-                  <a
+                  <Link
                     rel="noopener noreferrer"
-                    href="https://www.facebook.com/techvantoacademy/"
+                    to="https://www.facebook.com/techvantoacademy/"
                     className="social-link icon-link-padding"
                     target="_blank"
                     style={{ color: "red" }}
@@ -329,10 +334,10 @@ const Footer = () => {
                     >
                       <path d="M148 45h-18.47c-7.36 0-8.89 3-8.89 10.64v16.75H148l-2.86 27.36h-24.5v95.75h-41V99.75H52.25V72.39h27.36V40.82C79.61 16.63 92.34 4 121 4h27Z" />
                     </svg>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     rel="noopener noreferrer"
-                    href="https://twitter.com/TechvantoA?t=AZr-Uor2sg4-L2vvynXk4A&s=08"
+                    to="https://twitter.com/TechvantoA?t=AZr-Uor2sg4-L2vvynXk4A&s=08"
                     className="social-link icon-link-padding"
                     target="_blank"
                   >
@@ -345,10 +350,10 @@ const Footer = () => {
                     >
                       <path d="M197.41 39.58a79.67 79.67 0 0 1-23 6.29A40 40 0 0 0 192 23.76a80 80 0 0 1-25.39 9.7 40 40 0 0 0-68.08 36.45 113.51 113.51 0 0 1-82.38-41.76 40 40 0 0 0 12.37 53.37 39.88 39.88 0 0 1-18.1-5 40 40 0 0 0 32.06 39.69 40 40 0 0 1-18 .68 40 40 0 0 0 37.34 27.76 80.41 80.41 0 0 1-59.23 16.56 113.14 113.14 0 0 0 61.27 17.95c74.21 0 116.14-62.67 113.6-118.89a81.42 81.42 0 0 0 19.95-20.69Z" />
                     </svg>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     rel="noopener noreferrer"
-                    href="https://www.linkedin.com/company/techvantoacademy"
+                    to="https://www.linkedin.com/company/techvantoacademy"
                     className="social-link icon-link-padding"
                     target="_blank"
                   >
@@ -361,10 +366,10 @@ const Footer = () => {
                     >
                       <path d="M47.65 194.5H11.76V62.88h35.89ZM29.71 47.71a21.11 21.11 0 1 1 20.93-21.1 21 21 0 0 1-20.93 21.1ZM191.23 194.5h-35.89v-67c0-40.3-47.86-37.25-47.86 0v67h-35.9V62.88h35.9V84c16.7-30.94 83.75-33.22 83.75 29.63Z" />
                     </svg>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     rel="noopener noreferrer"
-                    href="https://instagram.com/techvanto.academy?utm_medium=copy_link"
+                    to="https://instagram.com/techvanto.academy?utm_medium=copy_link"
                     className="social-link icon-link-padding"
                     target="_blank"
                   >
@@ -373,7 +378,7 @@ const Footer = () => {
                       alt=""
                       style={{ bottom: "6px", width: "28px" }}
                     />
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
@@ -392,15 +397,17 @@ const Footer = () => {
                     </div>
                     <div>
                       {topCourses.map((data, index) => (
-                        <a
+                        <Link
                           style={{ textDecoration: "none", color: "white" }}
-                          href={`/courses/${data._id}`}
+                          to={`/courses/${data._id}`}
                           className="techvanto-footer-text text-small"
+                          key={index}
+                          onClick={() => handleCourse(data._id)}
                         >
                           <p className="techvanto-footer-text text-small">
                             {data.course_name}
                           </p>
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -413,13 +420,13 @@ const Footer = () => {
                   {Services.map(
                     (data, index) =>
                       index <= 6 && (
-                        <a
+                        <Link
                           style={{ textDecoration: "none", color: "white" }}
-                          href="/coming-soon"
+                          to="/coming-soon"
                           className="techvanto-footer-text text-small"
                         >
                           <p>{data.text}</p>
-                        </a>
+                        </Link>
                       )
                   )}
                 </div>
@@ -428,90 +435,90 @@ const Footer = () => {
                   <div className="techvanto-footer-text-header color ">
                     FAQ{" "}
                   </div>
-                  <a
+                  <Link
                     style={{ textDecoration: "none", color: "white" }}
-                    href="/coming-soon"
+                    to="/coming-soon"
                     className="techvanto-footer-text text-small"
                   >
                     <p className="techvanto-footer-text text-small">
                       Discussion Forum
                     </p>
-                  </a>
+                  </Link>
 
-                  <a
+                  <Link
                     style={{ textDecoration: "none", color: "white" }}
-                    href="/blogs"
+                    to="/blogs"
                     className="techvanto-footer-text text-small"
                   >
                     <p className="techvanto-footer-text text-small">Blog</p>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     style={{ textDecoration: "none", color: "white" }}
-                    href="/coming-soon"
+                    to="/coming-soon"
                     className="techvanto-footer-text text-small"
                   >
                     <p className="techvanto-footer-text text-small">
                       Reasearch & Project
                     </p>
-                  </a>
+                  </Link>
 
                   <div className="techvanto-footer-text-header color">
                     Oppurtunities{" "}
                   </div>
-                  <a
+                  <Link
                     style={{ textDecoration: "none", color: "white" }}
-                    href="/events"
+                    to="/events"
                     className="techvanto-footer-text text-small"
                   >
                     <p className="techvanto-footer-text text-small">
                       Upcoming And Past Events
                     </p>
-                  </a>
-                  <a
-                    href="/#campusAmbassador"
+                  </Link>
+                  <Link
+                    to="/#campusAmbassador"
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     <p className="techvanto-footer-text text-small">
                       Campus Ambassador
                     </p>{" "}
-                  </a>
-                  <a
-                    href="/coming-soon"
+                  </Link>
+                  <Link
+                    to="/coming-soon"
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     <p className="techvanto-footer-text text-small">
                       Carrer/ Jobs
                     </p>
-                  </a>
+                  </Link>
                 </div>
                 <div style={{ height: "-webkit-fill-available" }}>
                   <div className="techvanto-footer-text-header color">
                     Contact Us
                   </div>
-                  <a
-                    href="/contact-us-for-hiring"
+                  <Link
+                    to="/contact-us-for-hiring"
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     <p className="techvanto-footer-text text-small">
                       Hire With Us
                     </p>
-                  </a>
-                  <a
-                    href="/contact-us-to-get-hired"
+                  </Link>
+                  <Link
+                    to="/contact-us-to-get-hired"
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     <p className="techvanto-footer-text text-small">
                       Get Hired
                     </p>
-                  </a>
-                  <a
-                    href="/coming-soon"
+                  </Link>
+                  <Link
+                    to="/coming-soon"
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     <p className="techvanto-footer-text text-small">
                       Train Your Team
                     </p>
-                  </a>
+                  </Link>
 
                   <div className="techvanto-footer-text-header color">
                     Contact{" "}
@@ -545,19 +552,19 @@ const Footer = () => {
             >
               <div className="lower-footer">
                 <Link to="/terms-and-conditions" style={{ color: "white" }} className="text-small t-margin">
-                  <p>Terms & Conditions </p>
+                  <span>Terms & Conditions </span>
                 </Link>
                 /
                 <Link to="/privacy-policy" style={{ color: "white" }} className="text-small pp-margin">
-                  <p>Privacy Policy </p>
+                  <span>Privacy Policy </span>
                 </Link>
                 /
                 <Link to="/placement-policy" style={{ color: "white" }} className="text-small pp-margin">
-                  <p>Placement Policy </p>
+                  <span>Placement Policy </span>
                 </Link>
                 /
                 <Link to="/payment-policy" style={{ color: "white" }} className="text-small p-margin">
-                  <p>Payment Policy </p>
+                  <span>Payment Policy </span>
                 </Link>
               </div>
             </div>

@@ -3,7 +3,7 @@
   background-size: auto 100% !important;
   background-position: right !important;
 }
-.techvanto-content-header-image .css-1oqqzyl-MuiContainer-root {
+.techvanto-content-header-image div:nth-child(1) {
   max-width: 1894px !important;
 }
 .techvanto-header-content {
