@@ -45,7 +45,7 @@ function contactUsForHiring() {
             className="left-card-position"
           >
             <div>
-              <LeftPanel heading="For Hiring" />
+              <LeftPanel heading="For Hiring" formType="hiring" />
             </div>
           </Grid>
           <Grid

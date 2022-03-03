@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { NavHashLink } from 'react-router-hash-link';
 import { useRecoilState, useRecoilValue } from "recoil";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
@@ -387,7 +388,7 @@ const NavBar = (props) => {
                   </div>
                 </div>
                 <div className="item">
-                  <a href="/#services" className="menu-text">
+                <NavHashLink to="/#services" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -395,7 +396,16 @@ const NavBar = (props) => {
                     >
                       Services
                     </span>
-                  </a>
+                    </NavHashLink>
+                  {/* <a href="/#services" className="menu-text">
+                    <span
+                      className={
+                        scroll === false ? "color-white" : "color-black"
+                      }
+                    >
+                      Services
+                    </span>
+                  </a> */}
                 </div>
                 <div className="item">
                   <Link to="/events" className="menu-text">

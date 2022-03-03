@@ -1,4 +1,5 @@
 import * as React from "react";
+import { HashLink } from 'react-router-hash-link';
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import logo from "../../assets/images/logo-print-hd-transparent-removebg-preview.png";
@@ -22,9 +23,10 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <a href="#need-assistance" className="btn-grad btn-demo">
+      <HashLink to="#need-assistance" className="btn-grad btn-demo">{props.text}</HashLink>
+      {/* <a href="#need-assistance" className="btn-grad btn-demo">
         {props.text}
-      </a>
+      </a> */}
       <Modal
         open={open}
         onClose={handleClose}

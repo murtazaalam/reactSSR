@@ -324,9 +324,12 @@ function MyCart() {
                             <button
                               type="button"
                               className="btn-grad full-width"
+                              disabled={true}
+                              style={{backgroundColor: "var(--color-disable)",color: "var(--color-secondary)"}}
+                              
                               // onClick={checkout}
                             >
-                              Checkout
+                              Work is in progress..
                             </button>
                           </CardActions>
                         </Card>
