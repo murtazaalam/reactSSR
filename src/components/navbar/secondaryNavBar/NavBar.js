@@ -262,7 +262,7 @@ const NavBar = (props) => {
                                   coursesByCategory.School?.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <a href={`/courses/${item._id}`}>
+                                        <a href={`/#/courses/${item._id}`}>
                                           {item.course_name}
                                         </a>
                                         <div className="course-desc desc">
@@ -307,7 +307,7 @@ const NavBar = (props) => {
                                   coursesByCategory.College?.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <a href={`/courses/${item._id}`}>
+                                        <a href={`/#/courses/${item._id}`}>
                                           {item.course_name}
                                         </a>
                                         <div className="course-desc desc">
@@ -357,7 +357,7 @@ const NavBar = (props) => {
                                         <li key={item._id}>
                                           <a
                                             // onClick={refreshPage}
-                                            href={`/courses/${item._id}`}
+                                            href={`/#/courses/${item._id}`}
                                           >
                                             {item.course_name}
                                           </a>
