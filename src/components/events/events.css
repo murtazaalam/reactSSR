@@ -18,9 +18,14 @@
   }
 }
 .event-card-box {
+  transition: transform 0.5s;
   display: inline-block;
   margin: 10px 6px;
   width: 100%;
+}
+
+.event-card-box:hover {
+  transform: scale(1.05);
 }
 .courses-area {
   padding: 50px 52px 8px;

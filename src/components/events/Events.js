@@ -113,7 +113,7 @@ const Events = (props) => {
                   return (
                     <Link to={`/event/${event._id}`} key={event._id}>
                       <Card
-                        sx={{ width: "auto", minHeight: 320 }}
+                        sx={{ width: "355px", minHeight: 320 }}
                         className="event-card-box"
                         key={index}
                       >
