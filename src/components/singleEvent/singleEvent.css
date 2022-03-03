@@ -1,17 +1,20 @@
-.event-box{
-    padding: 0px 18px;
+.event-box {
+  padding: 0px 18px;
 }
-@media screen and (min-width: 768px){
-    .event-box{
-        padding: 0px 46px;
-    }
+@media screen and (min-width: 768px) {
+  .event-box {
+    padding: 0px 46px;
+  }
 }
-@media screen and (min-width: 900px){
-    .event-form{
-        position: relative;
-        bottom: 120px;
-    }
-    .event-box{
-        padding: 0px 54px;
-    }
+@media screen and (min-width: 900px) {
+  .event-box {
+    padding: 0px 54px;
+  }
+}
+.hover {
+  transition: transform 0.2s;
+  border: inset;
+}
+.hover:hover {
+  transform: scale(1.5);
 }

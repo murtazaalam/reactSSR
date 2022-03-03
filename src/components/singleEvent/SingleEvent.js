@@ -8,9 +8,9 @@ import TextField from "@mui/material/TextField";
 import { useParams } from "react-router-dom";
 import "./singleEvent.css";
 import { Typography, Card } from "@mui/material";
-import { CheckCircle } from "@material-ui/icons";
 import singleEventApi from "../../apis/api/SingleEvent";
-import './singleEvent.css';
+import "./singleEvent.css";
+import img from "../../assets/images/upcomingEvent.jpeg";
 
 const useStyles = makeStyles({
   root: {
@@ -50,10 +50,10 @@ const SingleEvent = () => {
   };
 
   useEffect(() => {
-    if(!event){
+    if (!event) {
       singleEventApi(params.id, setEventData);
     }
-  },[]);
+  }, []);
   return (
     <>
       <Box
@@ -87,14 +87,27 @@ const SingleEvent = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={2} xl={2}>
             <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-              Overview
+              Description
             </Typography>
+            <div>
+              <img src={event?.event_image} className="hover" alt="" />
+            </div>
           </Grid>
           <Grid item xs={12} sm={12} md={6} xl={6}>
-            <Typography variant="p" sx={{ lineHeight: "28px" }}>
-              {event && event.description}
-            </Typography>
+            {event &&
+              event.description.map((data, index) => (
+                <>
+                  <Typography variant="h6" sx={{ lineHeight: "28px", pt: 3 }}>
+                    {data?.title}
+                  </Typography>
+
+                  {data?.detail.map((d, i) => (
+                    <Typography style={{ lineHeight: "28px" }}>{d}</Typography>
+                  ))}
+                </>
+              ))}
           </Grid>
+
           <Grid item xs={12} sm={12} md={4} xl={4}>
             <Card sx={{ p: 2 }} className="event-form">
               <Box component="form" noValidate sx={{ mt: 1 }}>
@@ -122,7 +135,6 @@ const SingleEvent = () => {
                   value={email}
                   className={classes.root}
                   onChange={(e) => setEmail(e.target.value)}
-                  autoFocus
                 />
 
                 <TextField
