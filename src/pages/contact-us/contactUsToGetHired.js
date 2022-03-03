@@ -50,7 +50,8 @@ function contactUsToGetHired() {
           </Grid>
           <Grid
             item
-            xs={4}
+            md={4}
+            xs={12}
             //   style={{ border: "2px solid black" }}
             className="right-form-position form-hiring"
           >

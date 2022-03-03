@@ -178,6 +178,8 @@ const CourseBody = ({ course }) => {
         progress: undefined,
       });
       setCartLoader(false);
+      dispatch(logoutAction());
+      setOpen(true);
     }
   };
   function isEmpty(obj) {

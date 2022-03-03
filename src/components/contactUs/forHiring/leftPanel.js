@@ -3,7 +3,6 @@ import "./leftPanel.css";
 import Card from "@mui/material/Card";
 import { CardContent, Typography } from "@mui/material";
 function leftPanel(props) {
-  console.log(">>>",props.formType);
   return (
     <>
       <Card variant="outlined">
