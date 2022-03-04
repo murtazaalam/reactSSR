@@ -7,12 +7,14 @@ import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import "./CourseCard.css";
+import { Tooltip } from "@mui/material";
 
 export default function CourseCard({
   id,
   title,
   pic,
   gradient,
+  noOfReviews,
   price,
   discount,
   rating,
@@ -23,7 +25,7 @@ export default function CourseCard({
       <Card className="technovanto-course-card mobile-view-course-card">
         <div
           style={{
-            background: `linear-gradient(${gradient})`
+            background: `linear-gradient(${gradient})`,
           }}
           className="card-grad"
         >
@@ -31,7 +33,7 @@ export default function CourseCard({
             component="div"
             className="techvanto-all-course-image course-image-box"
           >
-            <img src={`${pic}`} className="course-pic" />
+            <img src={`${pic}`} className="course-pic" alt="" />
           </CardMedia>
         </div>
         <CardContent
@@ -44,7 +46,7 @@ export default function CourseCard({
             </Chip> */}
           </Typography>
           <Chip
-            label={`Rs ${price}`}
+            label={`Rs${price - discount}`}
             style={{ float: "right", background: "#f1effe" }}
           />
         </CardContent>
@@ -53,19 +55,21 @@ export default function CourseCard({
             display: "flex",
           }}
         >
-          <Rating
-            name="size-small"
-            // defaultValue={1}
-            value={rating}
-            precision={0.1}
-            readOnly
-            size={"small"}
-            style={{ paddingTop: "0.5rem", left: 5 }}
-          />
-          {/* <span className="technovanto-course-card-review">
-            <b>{Math.round(avarageRating * 10) / 10}</b> (
-            {review ? review.length : 0} reviews)
-          </span> */}
+          <Tooltip title={`${rating} out of 5`}>
+            <span>
+              <Rating
+                name="size-small"
+                value={rating}
+                precision={0.1}
+                readOnly
+                size={"small"}
+                style={{ paddingTop: "0.5rem", left: 5 }}
+              />
+            </span>
+          </Tooltip>{" "}
+          <span className="technovanto-course-card-review">
+            {"\u00a0\u00a0"}({noOfReviews} reviews)
+          </span>
         </div>
       </Card>
     </Link>

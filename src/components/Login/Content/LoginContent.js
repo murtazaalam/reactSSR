@@ -3,12 +3,8 @@ import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -16,10 +12,11 @@ import LoginApi from "../../../apis/api/Login";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
 import { useRecoilState } from "recoil";
 import { userAuth } from "../../../recoil/store";
-import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../../redux/slices/auth.slices";
+import { cartAction } from "../../../redux/slices/cart.slice";
+import getFromCartApi from "../../../apis/api/GetFromCart";
 
 const theme = createTheme();
 
@@ -40,6 +37,8 @@ export default function LoginContent(props) {
   const [validateEmail, setValidateEmail] = useState(false);
   const [validatePassword, setvalidatePassword] = useState(false);
   const [loader, setLoader] = React.useState(false);
+  const [cartData, setCartData] = React.useState();
+  const [loading, setLoading] = React.useState();
   const classes = useStyles();
   let dispatch = useDispatch();
 
@@ -92,7 +91,9 @@ export default function LoginContent(props) {
           draggable: true,
           progress: undefined,
         });
-        dispatch(loginAction({admin:res.user}))
+        dispatch(loginAction({admin:res.user}));
+        let data = await getFromCartApi(setCartData, setLoading, setError);
+        dispatch(cartAction({cartCount:data?.length}));
       }
     }
   };

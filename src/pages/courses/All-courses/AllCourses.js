@@ -53,7 +53,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 function AllCourses() {
   const { categoryRoute } = useParams();
-  const naviagate = useNavigate(); 
+  const naviagate = useNavigate();
 
   const [selectedCategory, setSelectedCategory] = useState([
     { id: 1, checked: false, label: "School" },
@@ -68,23 +68,25 @@ function AllCourses() {
   const [, setCourseByCategory] = useState();
   const [expanded, setExpanded] = React.useState("panel1");
 
-  let cat = categoryRoute.charAt(0).toUpperCase()+categoryRoute.slice(1).toLowerCase();
+  let cat =
+    categoryRoute.charAt(0).toUpperCase() +
+    categoryRoute.slice(1).toLowerCase();
   selectedCategory.forEach((item) => {
-    if(item.label === cat) {
+    if (item.label === cat) {
       item.checked = true;
-    }
-    else{
+    } else {
       item.checked = false;
     }
-    
-  })
+  });
   //console.log("selectedcategory =>", selectedCategory);
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
   const handleChangeChecked = (id) => {
-    naviagate('/all-courses/'+selectedCategory[id - 1].label.toLocaleLowerCase());
+    naviagate(
+      "/all-courses/" + selectedCategory[id - 1].label.toLocaleLowerCase()
+    );
     setCategory(selectedCategory[id - 1].label);
     const categoryStateList = selectedCategory;
     const changeCheckedCategories = categoryStateList.map((item) =>
@@ -140,7 +142,8 @@ function AllCourses() {
             gradient={data.gradient}
             price={data.price}
             discount={data.discount}
-            rating={3}
+            rating={data.avgRating}
+            noOfReviews={data.noOfReviews}
             // review={data.reviews}
           ></CourseCard>
         </>
@@ -157,10 +160,10 @@ function AllCourses() {
         className="page-heading course-mobile-view"
         sx={{
           background: `#1C477C url(${
-          window.matchMedia("(max-width: 668px)").matches
-            ? ""
-            : "https://tv-academy-assets.s3.eu-west-2.amazonaws.com/all+courses.jpg"
-        }) 0 0 no-repeat`,
+            window.matchMedia("(max-width: 668px)").matches
+              ? ""
+              : "https://tv-academy-assets.s3.eu-west-2.amazonaws.com/all+courses.jpg"
+          }) 0 0 no-repeat`,
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
@@ -189,9 +192,7 @@ function AllCourses() {
           <div className="course-panel-wrap">
             {/* Side Panels */}
             {window.matchMedia("(max-width: 700px)").matches ? (
-              <Accordion
-                onChange={handleChange("panel1")}
-              >
+              <Accordion onChange={handleChange("panel1")}>
                 <AccordionSummary
                   aria-controls="panel1d-content"
                   id="panel1d-header"

@@ -47,15 +47,14 @@ function MyCourses() {
         {loading ? (
           <Loading />
         ) : course.length === 0 ? (
-          <Card sx={{ p: 2, mb: 15, mt: 2, textAlignLast: "center" }}>
-            <h6>
+          <Box sx={{ p: 2, mb: 15, mt: 15, textAlignLast: "center" }}>
+            <h5>
               {" "}
-              No Courses!!! Go to <Link to="/all-courses/all">
-                Marketplace
-              </Link>{" "}
-              and get some courses.
-            </h6>
-          </Card>
+              <span style={{ fontWeight: "bolder" }}>No Courses!!!</span> Go to{" "}
+              <Link to="/all-courses/all">Marketplace</Link> and get some
+              courses.
+            </h5>
+          </Box>
         ) : (
           <>
             {error ? (
@@ -71,10 +70,11 @@ function MyCourses() {
                           id={data._id}
                           title={data.course_name}
                           pic={data.course_image}
+                          noOfReviews={data.reviews}
                           // gradient,
                           // price,
                           // discount,
-                          // rating,
+                          rating={data.avg_rating}
                           //couseData={data}
                           fromMycourse={true}
                           // review={data.reviews}

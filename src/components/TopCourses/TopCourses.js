@@ -32,8 +32,9 @@ const TopCourses = () => {
                         pic={data.thumbnail}
                         gradient={data.gradient}
                         price={data.price}
-                        rating={data.avg_rating}
+                        rating={data.avgRating}
                         couseData={data}
+                        noOfReviews={data.noOfReviews}
                         // review={data.reviews}
                       ></CourseCard>
                     );

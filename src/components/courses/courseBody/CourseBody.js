@@ -83,17 +83,15 @@ const CourseBody = ({ course }) => {
   const now = new Date();
   let futureDate;
   let diffHour;
-  
 
-  if(course.discount_limit_date){
+  if (course.discount_limit_date) {
     futureDate = new Date(course.discount_limit_date);
-    diffHour = Math.floor((futureDate - now)/3600000)
-    diffHour > 0 ? diffHour = diffHour : diffHour = 0;
-  }
-  else{
+    diffHour = Math.floor((futureDate - now) / 3600000);
+    diffHour > 0 ? (diffHour = diffHour) : (diffHour = 0);
+  } else {
     diffHour = 0;
   }
-  
+
   const daysHoursMinSecs = { day: 0, hours: diffHour, minutes: 0, seconds: 0 };
   const { day = 0, hours = 0, minutes = 0, seconds = 60 } = daysHoursMinSecs;
   const [[days, hrs, mins, secs], setTime] = useState([
@@ -132,13 +130,14 @@ const CourseBody = ({ course }) => {
       course_name: course.course_name,
       course_image: course.thumbnail,
       description: course.description,
-      avg_rating: course.avg_rating,
+      avg_rating: course.avgRating,
       gradient: course.gradient,
       discount: course.discount,
-      reviews: course.reviews,
+      reviews: course.noOfReviews,
       price: course.price,
       course_id: id,
     };
+    console.log(body);
     let message = await addToCartApi(body, setCartLoader);
     if (message === "Item Already Added") {
       toast.warn("Course already added ", {
@@ -290,7 +289,9 @@ const CourseBody = ({ course }) => {
                   <ol className="desc-list-box">
                     {course &&
                       course.preRequisites?.map((data, index) => (
-                        <li className="tab-course-description" key={index}>{data}</li>
+                        <li className="tab-course-description" key={index}>
+                          {data}
+                        </li>
                       ))}
                   </ol>
 
@@ -303,7 +304,9 @@ const CourseBody = ({ course }) => {
                   <ol className="desc-list-box">
                     {course &&
                       course.learningObjective?.map((data, index) => (
-                        <li className="tab-course-description" key={index}>{data}</li>
+                        <li className="tab-course-description" key={index}>
+                          {data}
+                        </li>
                       ))}
                   </ol>
 
@@ -316,7 +319,9 @@ const CourseBody = ({ course }) => {
                   <ol className="desc-list-box">
                     {course &&
                       course.training_benefits?.map((data, index) => (
-                        <li className="tab-course-description" key={index}>{data}</li>
+                        <li className="tab-course-description" key={index}>
+                          {data}
+                        </li>
                       ))}
                   </ol>
                 </div>
@@ -406,7 +411,13 @@ const CourseBody = ({ course }) => {
                         {timeBadge === true ? (
                           <span className="updated-price">
                             <Badge
-                              badgeContent={`${hrs.toString().padStart(2, "0")}:${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`}
+                              badgeContent={`${hrs
+                                .toString()
+                                .padStart(2, "0")}:${mins
+                                .toString()
+                                .padStart(2, "0")}:${secs
+                                .toString()
+                                .padStart(2, "0")}`}
                               color="primary"
                             >
                               {course.price - course.discount}
@@ -433,9 +444,7 @@ const CourseBody = ({ course }) => {
                     </span>
                     <span className="heading">Duration</span>
                   </p>
-                  <p className="sub-heading">
-                    {course && course.duration} hours
-                  </p>
+                  <p className="sub-heading">{course && course.duration}</p>
                 </div>
                 <div className="other">
                   <p>
@@ -445,7 +454,7 @@ const CourseBody = ({ course }) => {
                     <span className="heading">Lession</span>
                   </p>
                   <p className="sub-heading">
-                    {course && course.lession} Lectures
+                    {course && course.noOfLectures} Lectures
                   </p>
                 </div>
                 <div className="other">
@@ -456,7 +465,7 @@ const CourseBody = ({ course }) => {
                     <span className="heading">Enrolled</span>
                   </p>
                   <p className="sub-heading">
-                    {course && course.enrolled} Students
+                    {course && course.noOfEnrollment} Students
                   </p>
                 </div>
                 <div className="other">
@@ -466,7 +475,7 @@ const CourseBody = ({ course }) => {
                     </span>
                     <span className="heading">Access</span>
                   </p>
-                  <p className="sub-heading">{course && course.access}</p>
+                  <p className="sub-heading">{course && course.accessMode}</p>
                 </div>
                 <div>
                   {isBaughtCourse ? (
@@ -486,15 +495,16 @@ const CourseBody = ({ course }) => {
                             : { backgroundColor: "var(--color-secondary)" }
                         }
                       >
-                        
-                        {cartLoader ? <img src={ButtonLoader} width="80" /> : 
-                        <>
-                          <span>
-                            <ShoppingCartIcon />
-                          </span>
-                          Add to cart
-                        </>
-                        }
+                        {cartLoader ? (
+                          <img src={ButtonLoader} width="80" alt="" />
+                        ) : (
+                          <>
+                            <span>
+                              <ShoppingCartIcon />
+                            </span>
+                            Add to cart
+                          </>
+                        )}
                       </button>
                       <Login
                         open={isLogin ? false : open}
@@ -588,7 +598,7 @@ const CourseBody = ({ course }) => {
                   : { backgroundColor: "var(--color-secondary)" }
               }
             >
-              {loader ? <img src={ButtonLoader} width="80" /> : "Submit"}
+              {loader ? <img src={ButtonLoader} width="80" alt="" /> : "Submit"}
             </button>
           </div>
         </form>

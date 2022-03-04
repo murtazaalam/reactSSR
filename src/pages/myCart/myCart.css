@@ -54,7 +54,7 @@ input {
 .table-wrap .css-1qaznj3-MuiCardContent-root {
   width: 424px;
 }
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
   .cart-form {
     flex-direction: row !important;
     width: 100%;
@@ -70,18 +70,18 @@ input {
     width: 321px;
   }
 }
-@media screen and (min-width: 1024px){
-  .cart-form .css-15d9d1s-MuiPaper-root-MuiCard-root{
+@media screen and (min-width: 1024px) {
+  .cart-form .css-15d9d1s-MuiPaper-root-MuiCard-root {
     flex-direction: column;
     width: 54%;
   }
 }
-@media screen and (min-width: 1280px){
-  .cart-form .css-15d9d1s-MuiPaper-root-MuiCard-root{
+@media screen and (min-width: 1280px) {
+  .cart-form .css-15d9d1s-MuiPaper-root-MuiCard-root {
     flex-direction: row;
     width: 100%;
   }
-  .cart-form .table-wrap{
+  .cart-form .table-wrap {
     margin-right: 10px;
   }
 }

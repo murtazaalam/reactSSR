@@ -4,7 +4,6 @@ import "mui-player/dist/mui-player.min.css";
 import { Button, Container } from "@mui/material";
 import { Link } from "react-router-dom";
 const CampusAmbassador = () => {
-  
   return (
     <div className="background" id="campusAmbassador">
       <Container className="section-spacing">

@@ -14,7 +14,7 @@
   place-content: space-between;
   text-align: start;
 }
-.maxWidthNone{
+.maxWidthNone {
   max-width: 1894px !important;
 }
 
@@ -56,23 +56,23 @@
   background-color: var(--color-secondary);
   bottom: 0;
 }
-.social-icons{
+.social-icons {
   margin-bottom: 20px;
 }
-.arrow-icon{
+.arrow-icon {
   fill: #fff !important;
 }
-@media screen and (min-width: 768px){
-  .social-icons{
+@media screen and (min-width: 768px) {
+  .social-icons {
     width: 216px;
   }
 }
-@media screen and (min-width: 1280px){
-  .social-icons{
+@media screen and (min-width: 1280px) {
+  .social-icons {
     width: auto;
   }
 }
-.lower-footer{
+.lower-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -152,62 +152,64 @@
   text-decoration: none;
   color: var(--color-white);
 }
-.text-small{
+.text-small {
   font-size: 8px;
 }
-.text-small p{
+.text-small p {
   margin-bottom: 1rem;
-
+}
+.css-1806x29-MuiPaper-root-MuiAccordion-root {
+  background-color: var(--color-primary) !important;
 }
 @media only screen and (min-width: 321px) {
-  .text-small{
+  .text-small {
     font-size: 9px;
   }
 }
 @media only screen and (min-width: 500px) {
-  .text-small{
+  .text-small {
     font-size: 12px;
   }
-  .lower-footer{
+  .lower-footer {
     justify-content: flex-start;
   }
-  .pp-margin{
+  .pp-margin {
     margin: 0 8px;
   }
-  .t-margin{
+  .t-margin {
     margin-right: 8px;
   }
-  .p-margin{
+  .p-margin {
     margin-left: 8px;
   }
 }
-@media screen and (min-width: 400px){
-  .social-icons{
+@media screen and (min-width: 400px) {
+  .social-icons {
     margin-bottom: 40px;
   }
 }
 @media screen and (min-width: 500px) {
-  .social-icons{
+  .social-icons {
     margin-bottom: 78px;
   }
 }
 @media screen and (min-width: 650px) {
-  .social-icons{
+  .social-icons {
     margin-bottom: 204px;
   }
 }
 @media screen and (min-width: 900px) {
-  .social-icons{
+  .social-icons {
     margin-bottom: 174px;
   }
 }
 @media screen and (min-width: 1024px) {
-  .social-icons{
+  .social-icons {
     margin-bottom: 126px;
   }
 }
 @media screen and (min-width: 1280px) {
-  .social-icons{
+  .social-icons {
     margin-bottom: 156px;
   }
 }

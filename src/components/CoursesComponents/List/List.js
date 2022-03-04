@@ -16,6 +16,7 @@ const List = ({ list }) => {
           price={data.price}
           discount={discount}
           rating={data.rating}
+          noOfReviews={data.noOfReviews}
         ></CourseCard>
       ))}
     </div>

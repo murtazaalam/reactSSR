@@ -8,7 +8,6 @@ import { CardActions } from "@material-ui/core";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import "./BlogCard.css";
 import Avatar from "@material-ui/core/Avatar";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { Link } from "react-router-dom";
 
 export default function BlogsCard({ classes, content }) {
@@ -34,7 +33,7 @@ export default function BlogsCard({ classes, content }) {
       </Link>
       <CardActions className={classes.cardActions}>
         <Box className={classes.author}>
-          <Avatar src={`${content.author_image}`} />
+          <Avatar src={`${content.author_image}`} alt={content.author_name} />
           <Box ml={2}>
             <Typography variant="subtitle2" component="p">
               {content.author_name}

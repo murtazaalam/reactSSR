@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { NavHashLink } from 'react-router-hash-link';
-import { useRecoilState, useRecoilValue } from "recoil";
+import { NavHashLink } from "react-router-hash-link";
+import { useRecoilState } from "recoil";
 import AppBar from "@mui/material/AppBar";
-import { Container, Typography, Button } from "@mui/material";
+import { Container, Typography, Button, Avatar } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -16,6 +16,7 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PrimaryNavBar from "../primaryNavBar/PrimaryNavBar";
+// import { HashLink } from "react-router-hash-link";
 // import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
 import SchoolIcon from "../../../assets/images/new-course-icon-school.svg";
@@ -150,6 +151,12 @@ const NavBar = (props) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+      {admin && (
+        <List>
+          <Avatar alt={admin?.name.toUpperCase()} src="authorImage/png" /> Hey,{" "}
+          {admin.name}
+        </List>
+      )}
       <List>
         <Typography>
           <a className="sidebar-link" href="/#services">
@@ -176,6 +183,16 @@ const NavBar = (props) => {
       <List>
         <Link className="sidebar-link" to="/blogs">
           Blogs
+        </Link>
+      </List>
+      <List>
+        <Link to="/contact-us-for-hiring" className="sidebar-link">
+          For Hiring
+        </Link>
+      </List>
+      <List>
+        <Link to="/contact-us-to-get-hired" className="sidebar-link">
+          To Get Hired
         </Link>
       </List>
       {isLogin ? (
@@ -399,7 +416,7 @@ const NavBar = (props) => {
                   </div>
                 </div>
                 <div className="item">
-                <NavHashLink to="/#services" className="menu-text">
+                  <NavHashLink to="/#services" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -407,7 +424,7 @@ const NavBar = (props) => {
                     >
                       Services
                     </span>
-                    </NavHashLink>
+                  </NavHashLink>
                   {/* <a href="/#services" className="menu-text">
                     <span
                       className={
