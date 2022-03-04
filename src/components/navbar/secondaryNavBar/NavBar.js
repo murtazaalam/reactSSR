@@ -15,6 +15,7 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PrimaryNavBar from "../primaryNavBar/PrimaryNavBar";
+import { HashLink } from "react-router-hash-link";
 // import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
 import SchoolIcon from "../../../assets/images/new-course-icon-school.svg";
@@ -387,7 +388,16 @@ const NavBar = (props) => {
                   </div>
                 </div>
                 <div className="item">
-                  <a href="/#services" className="menu-text">
+                  <Link
+                    // to="/#services"
+                    to={{
+                      pathname: "/#",
+                      // search: "?sort=name",
+                      hash: "services",
+                      // state: { fromDashboard: true },
+                    }}
+                    className="menu-text"
+                  >
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -395,7 +405,7 @@ const NavBar = (props) => {
                     >
                       Services
                     </span>
-                  </a>
+                  </Link>
                 </div>
                 <div className="item">
                   <Link to="/events" className="menu-text">
