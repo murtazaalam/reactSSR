@@ -74,7 +74,7 @@ function MyCourses() {
                           // gradient,
                           // price,
                           // discount,
-                          // rating,
+                          rating={data.avg_rating}
                           //couseData={data}
                           fromMycourse={true}
                           // review={data.reviews}
