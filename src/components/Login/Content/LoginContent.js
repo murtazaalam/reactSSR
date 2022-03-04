@@ -95,30 +95,6 @@ export default function LoginContent(props) {
         dispatch(loginAction({admin:res.user}))
       }
     }
-    // event.preventDefault();
-    // setError("");
-    // let body = {
-    //   email: email,
-    //   password: password,
-    // };
-    // emptyState();
-    // if (!body.email || !body.password)
-    //   return setError("Email And Password Required");
-    // let res = await LoginApi(body, setError, setLoading, setUser);
-    // if (res === "Login Success") {
-    //   setUser(true);
-    //   //window.location.reload();
-    //   toast.success(res, {
-    //     position: "bottom-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //   });
-    //   navigate("/", { state: { openModel: false } });
-    // }
   };
 
   return (

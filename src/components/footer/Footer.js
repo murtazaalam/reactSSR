@@ -13,6 +13,9 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { getCourse } from "../../redux/slices/course.slice";
+
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -65,7 +68,8 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const Footer = () => {
   const [topCourses, setTopCourses] = React.useState([]);
-  const history = useNavigate();
+  const [courseData, setCourseData] = React.useState();
+  let dispatch = useDispatch();
   React.useEffect(() => {
     getTopCourseApi(setTopCourses);
   }, []);
@@ -76,9 +80,7 @@ const Footer = () => {
   };
 
   const handleCourse = (id) => {
-    //console.log("id=",id);
-    //console.log(history);
-    //history.push(`/courses/${id}`);
+    dispatch(getCourse({id, setCourseData}))
   }
 
   const mobileFooter = (

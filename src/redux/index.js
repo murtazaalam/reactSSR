@@ -4,6 +4,8 @@ import {persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, R
 import storage from "redux-persist/lib/storage";
 
 import AuthReducer from './slices/auth.slices';
+import CartReducer from './slices/cart.slice';
+import CourseReducer from './slices/course.slice';
 // import AdminsReducer from './slice/admins.slice'
 const persistConfig = {
     key: 'root',
@@ -11,7 +13,11 @@ const persistConfig = {
 
 };
 
-const rootReducer = combineReducers({AuthReducer:AuthReducer})
+const rootReducer = combineReducers({
+    AuthReducer:AuthReducer, 
+    CartReducer:CartReducer,
+    CourseReducer
+})
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({

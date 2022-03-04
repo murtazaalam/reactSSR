@@ -4,33 +4,33 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loader";
+import { useSelector } from "react-redux";
 
 const Courses = () => {
-  const [course, setCourseData] = useState({});
-
+  const [courseData, setCourseData] = useState({});
   const { id } = useParams();
+  let {course, isLoading} = useSelector((state) => state.CourseReducer)
   function isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
   useEffect(() => {
-    if (isEmpty(course)) {
-      //id of course will be sent
+    if (isEmpty(courseData)) {
       singleCourseApi(id, setCourseData);
     }
-  }, [course]);
+  }, [courseData]);
   return (
     <>
-      {isEmpty(course) ? (
+      {isEmpty(courseData) ? (
         <Loading />
       ) : (
         <>
           <CourseHeader
-            title={course.course_name}
-            category={course.category}
-            subtitle={course.subtitle}
-            headerImageUrl={course.headerImageUrl}
+            title={course ? course.course_name : courseData.course_name}
+            category={course ? course.category : courseData.category}
+            subtitle={course ? course.subtitle : courseData.subtitle}
+            headerImageUrl={course ? course.headerImageUrl : courseData.headerImageUrl}
           />
-          <CourseBody course={course} />
+          <CourseBody course={course ? course : courseData} />
         </>
       )}
     </>

@@ -8,7 +8,7 @@ const HiringPartner = (props) => {
     400: { items: 1 },
     500: { items: 2 },
     1024: { items: 4 },
-    1280: { items: 5 },
+    1280: { items: 4 },
   };
   const [images, setImages] = React.useState([]);
   React.useEffect(() => {

@@ -28,6 +28,7 @@ import Login from "../../Login/Login";
 import { cartItemList, userAuth } from "../../../recoil/store";
 import { ToastContainer, toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
+import { getCourse } from "../../../redux/slices/course.slice";
 
 import Paper from "@mui/material/Paper";
 import { logoutAction } from "../../../redux/slices/auth.slices";
@@ -48,10 +49,11 @@ const NavBar = (props) => {
   const [coursesByCategory, setCoursesByCategory] = useState({});
   const [loading, setLoading] = useState();
   const [cartData, setCartData] = useState();
-  const [cartCount, setCartCount] = useState(0);
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const [error, setError] = useState();
+  const [courseData, setCourseData] = React.useState();
+  const [cartCounting, setCartCount] = useState();
   let dispatch = useDispatch();
 
   const [drawable, setDrawable] = useState({
@@ -62,6 +64,7 @@ const NavBar = (props) => {
   });
 
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
+  let { cartCount } = useSelector((state) => state.CartReducer);
   const logoutHandler = () => {
     dispatch(logoutAction());
     localStorage.removeItem("token");
@@ -133,7 +136,10 @@ const NavBar = (props) => {
     });
     setLoading(false);
   }
-
+  const changeCourse = (id) => {
+    dispatch(getCourse({id, setCourseData}))
+  }
+  
   const list = (anchor) => (
     <Box
       sx={{
@@ -262,7 +268,9 @@ const NavBar = (props) => {
                                   coursesByCategory.School?.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <a href={`/courses/${item._id}`}>
+                                        <a href={`/#/courses/${item._id}`} 
+                                        onClick={() => changeCourse(item._id)}
+                                        >
                                           {item.course_name}
                                         </a>
                                         <div className="course-desc desc">
@@ -307,7 +315,9 @@ const NavBar = (props) => {
                                   coursesByCategory.College?.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <a href={`/courses/${item._id}`}>
+                                        <a href={`/#/courses/${item._id}`} 
+                                          onClick={() => changeCourse(item._id)}
+                                          >
                                           {item.course_name}
                                         </a>
                                         <div className="course-desc desc">
@@ -357,7 +367,8 @@ const NavBar = (props) => {
                                         <li key={item._id}>
                                           <a
                                             // onClick={refreshPage}
-                                            href={`/courses/${item._id}`}
+                                            href={`/#/courses/${item._id}`}
+                                            onClick={() => changeCourse(item._id)}
                                           >
                                             {item.course_name}
                                           </a>
@@ -461,24 +472,23 @@ const NavBar = (props) => {
                 </div>
               </div>
             </Container>
-            <div className="item user-aria">
+            <div className="item user-aria" style={{position: "relative"}}>
               {isLogin ? (
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>
                     <IconButton aria-label="cart" className="color-white">
-                      <Badge badgeContent={cartCount} color="error">
+                      <Badge badgeContent={cartCount ? cartCount : cartCounting} color="error">
                         <ShoppingCartIcon fontSize="large" />
                       </Badge>
                     </IconButton>
                   </Link>
-
+                  <Link to="/" style={{ marginRight: "30px", textDecoration: "none"}}>
+                    <span className="user-name">Hey! {admin.name.split(" ")[0]}</span>
+                  </Link>
                   <div className="dropdown">
                     <Link to="/">
                       <span
                         className="color-white"
-                        // className={
-                        //   scroll === false ? "color-white" : "color-black"
-                        // }
                       >
                         <AccountCircleIcon fontSize="large" />
                       </span>

@@ -16,12 +16,14 @@ import Loading from "../../components/Loader";
 import PaymentSuccessDialog from "../../components/PaymentSuccessDialog";
 import { useDispatch } from "react-redux";
 import { logoutAction } from "../../redux/slices/auth.slices";
+import { cartAction } from "../../redux/slices/cart.slice";
 
 function MyCart() {
   const [loading, setLoading] = useState();
   const [cartItems, setCartItems] = useState([]);
   const [paymentMessage, setPaymentMessage] = useState("");
   const [deleteCount, setDeleteCount] = useState("");
+  const [cartData, setCartData] = useState();
 
   const [open, setOpen] = useState(false);
   const [user, isUser] = useState();
@@ -53,6 +55,13 @@ function MyCart() {
         draggable: true,
         progress: undefined,
       });
+      let data = await getFromCartApi(setCartData, setLoading, setError);
+      if(data){
+        dispatch(cartAction({cartCount:data?.length}))
+      }else{
+        dispatch(cartAction({cartCount:0}))
+      }
+      
     } else if (response.status === 400) {
       toast.warn(response.message, {
         position: "bottom-right",
@@ -323,10 +332,9 @@ function MyCart() {
                             <button
                               type="button"
                               className="btn-grad full-width"
-                              disabled={true}
+                              // disabled={true}
                               style={{backgroundColor: "var(--color-disable)",color: "var(--color-secondary)"}}
-                              
-                              // onClick={checkout}
+                              onClick={checkout}
                             >
                               Work is in progress..
                             </button>

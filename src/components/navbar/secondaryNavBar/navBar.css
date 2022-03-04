@@ -28,6 +28,11 @@
   padding-left: 10px;
   position: relative;
 }
+.user-name{
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
 .logo-image{
   width: 122px;
   left: -126px;

@@ -28,7 +28,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RWebShare } from "react-web-share";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
 import addReviewApi from "../../../apis/api/AddReview";
+import { cartAction } from "../../../redux/slices/cart.slice";
 import { logoutAction } from "../../../redux/slices/auth.slices";
+import getFromCartApi from "../../../apis/api/GetFromCart";
 
 function PaperComponent(props) {
   return (
@@ -53,6 +55,10 @@ const CourseBody = ({ course }) => {
   const [formError, setFormError] = useState(false);
   const [cartLoader, setCartLoader] = useState(false);
   const [error, setError] = useState();
+  const [cartData, setCartData] = useState();
+  const [loading, setLoading] = useState();
+  const [cartCount, setCartCount] = useState();
+
   let dispatch = useDispatch();
 
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
@@ -144,7 +150,7 @@ const CourseBody = ({ course }) => {
         draggable: true,
         progress: undefined,
       });
-    } else if (message === "Item Added")
+    } else if (message === "Item Added"){
       toast.success("Course added to your cart", {
         position: "bottom-right",
         autoClose: 5000,
@@ -154,6 +160,9 @@ const CourseBody = ({ course }) => {
         draggable: true,
         progress: undefined,
       });
+      let data = await getFromCartApi(setCartData, setLoading, setError);
+      dispatch(cartAction({cartCount:data?.length}))
+    }
     else if (message === "Unauthorized") {
       toast.error(message, {
         position: "bottom-right",
