@@ -17,7 +17,7 @@ export default function Single() {
     <div className="single">
       <Box
         component="section"
-        className="page-heading"
+        className="page-heading course-mobile-view"
         sx={{
           background: ` #1C477C 0 0 no-repeat `,
 

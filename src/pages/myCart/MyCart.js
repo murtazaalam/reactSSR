@@ -222,12 +222,11 @@ function MyCart() {
                             <CardMedia
                               component="img"
                               className="techvanto-all-course-image"
-                              sx={{ width: 340 }}
-                              height="194"
-                              //  width="340"
+                              sx={{ width: 340, height: 194 }}
                               style={{
                                 backgroundImage: `url(${item.course_image})`,
                                 height: "194px",
+                                minWidth:"280px"
                               }}
                             />
                           </div>
@@ -324,9 +323,12 @@ function MyCart() {
                             <button
                               type="button"
                               className="btn-grad full-width"
+                              disabled={true}
+                              style={{backgroundColor: "var(--color-disable)",color: "var(--color-secondary)"}}
+                              
                               // onClick={checkout}
                             >
-                              Checkout
+                              Work is in progress..
                             </button>
                           </CardActions>
                         </Card>

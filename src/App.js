@@ -12,19 +12,17 @@ import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   return (
-    <React.StrictMode>
-      <RecoilRoot>
-        <HashRouter>
-          <Provider store={store}>
-            <PersistGate persistor={persistor}>
-              <SecondaryNavBar />
-              <MainRouters />
-              <Footer />
-            </PersistGate>
-          </Provider>
-        </HashRouter>
-      </RecoilRoot>
-    </React.StrictMode>
+    <RecoilRoot>
+      {/* <BrowserRouter> */}
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <SecondaryNavBar />
+          <MainRouters />
+          <Footer />
+        </PersistGate>
+      </Provider>
+      {/* </BrowserRouter> */}
+    </RecoilRoot>
   );
 }
 

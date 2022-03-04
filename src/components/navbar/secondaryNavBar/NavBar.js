@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { NavHashLink } from "react-router-hash-link";
 import { useRecoilState, useRecoilValue } from "recoil";
 import AppBar from "@mui/material/AppBar";
 import { Container, Typography, Button } from "@mui/material";
@@ -262,7 +263,7 @@ const NavBar = (props) => {
                                   coursesByCategory.School?.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <a href={`/courses/${item._id}`}>
+                                        <a href={`/#/courses/${item._id}`}>
                                           {item.course_name}
                                         </a>
                                         <div className="course-desc desc">
@@ -307,7 +308,7 @@ const NavBar = (props) => {
                                   coursesByCategory.College?.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <a href={`/courses/${item._id}`}>
+                                        <a href={`/#/courses/${item._id}`}>
                                           {item.course_name}
                                         </a>
                                         <div className="course-desc desc">
@@ -357,7 +358,7 @@ const NavBar = (props) => {
                                         <li key={item._id}>
                                           <a
                                             // onClick={refreshPage}
-                                            href={`/courses/${item._id}`}
+                                            href={`/#/courses/${item._id}`}
                                           >
                                             {item.course_name}
                                           </a>
@@ -388,16 +389,7 @@ const NavBar = (props) => {
                   </div>
                 </div>
                 <div className="item">
-                  <Link
-                    // to="/#services"
-                    to={{
-                      pathname: "/#",
-                      // search: "?sort=name",
-                      hash: "services",
-                      // state: { fromDashboard: true },
-                    }}
-                    className="menu-text"
-                  >
+                  <NavHashLink to="/#services" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -405,7 +397,16 @@ const NavBar = (props) => {
                     >
                       Services
                     </span>
-                  </Link>
+                  </NavHashLink>
+                  {/* <a href="/#services" className="menu-text">
+                    <span
+                      className={
+                        scroll === false ? "color-white" : "color-black"
+                      }
+                    >
+                      Services
+                    </span>
+                  </a> */}
                 </div>
                 <div className="item">
                   <Link to="/events" className="menu-text">

@@ -76,7 +76,9 @@ const Footer = () => {
   };
 
   const handleCourse = (id) => {
-    history.push(`/courses/${id}`)
+    //console.log("id=",id);
+    //console.log(history);
+    //history.push(`/courses/${id}`);
   }
 
   const mobileFooter = (

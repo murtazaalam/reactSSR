@@ -27,7 +27,7 @@ const TestQuestion = () => {
         <>
           <Box
             component="section"
-            className="page-heading"
+            className="page-heading course-mobile-view"
             sx={{
               background: `#1C477C url(${
                 window.matchMedia("(max-width: 668px)").matches

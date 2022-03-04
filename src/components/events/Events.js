@@ -42,7 +42,7 @@ const Events = (props) => {
     <>
       <Box
         component="section"
-        className="page-heading"
+        className="page-heading course-mobile-view"
         sx={{
           // background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/Events.jpg)`,
           background: `#1C477C url(${

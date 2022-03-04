@@ -13,26 +13,19 @@ function leftPanel(props) {
           <Typography variant="h5" component="div">
             Overview
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            adjective
-          </Typography>
+          {props.formType === "hiring" &&
           <Typography variant="body2">
-            odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-            iusto impedit!
-            <br />
-            quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-            Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-            eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-            error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-            impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-            odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-            iusto impedit! iusto impedit! iusto impedit! iusto impedit! iusto
-            impedit! iusto impedit! iusto impedit! iusto impedit! iusto impedit!
-            iusto impedit! iusto impedit! iusto impedit! iusto impedit! iusto
-            impedit! iusto impedit! iusto impedit!
-          </Typography>
+            Techvanto's students master their fields, acquire up-to-date new skills and don’t just learn to complete projects but 
+            ace in a professional space. Ours is a market-leading talent hiring pool of individuals with optimum hard skills and soft 
+            skills that helps companies discover and hire budding talents.
+          </Typography>}
+          {props.formType === "placement" &&
+          <Typography variant="body2">
+            Techvanto Academy enables fresh graduates find their way into the corporate world by providing a thorough understanding of 
+            what a recruiter wants and how they can deliver results in an organization that seeks their experience and knowledge. 
+            We help you get a job of your choice in one of the most advanced placement training programns through personalized 
+            counselling and career guidance.
+          </Typography>}
         </CardContent>
       </Card>
     </>

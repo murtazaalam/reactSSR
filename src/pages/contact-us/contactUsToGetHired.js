@@ -45,12 +45,13 @@ function contactUsToGetHired() {
             className="left-card-position"
           >
             <div>
-              <LeftPanel heading="PLacement Opportunities form-hiring" />
+              <LeftPanel heading="PLacement Opportunities form-hiring" formType="placement"/>
             </div>
           </Grid>
           <Grid
             item
-            xs={4}
+            md={4}
+            xs={12}
             //   style={{ border: "2px solid black" }}
             className="right-form-position form-hiring"
           >
