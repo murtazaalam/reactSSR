@@ -34,6 +34,7 @@ const TopCourses = () => {
                         price={data.price}
                         rating={data.avgRating}
                         couseData={data}
+                        noOfReviews={data.noOfReviews}
                         // review={data.reviews}
                       ></CourseCard>
                     );

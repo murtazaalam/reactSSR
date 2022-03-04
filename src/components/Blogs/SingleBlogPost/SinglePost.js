@@ -6,13 +6,13 @@ export default function SinglePost({ blogDetails }) {
     <>
       <div className="singlePost">
         <div className="singlePostWrapper">
-          <h1 className="singlePostTitle">
+          {/* <h1 className="singlePostTitle">
             {blogDetails && blogDetails.title}
             <div className="singlePostEdit">
               <i className="singlePostIcon far fa-edit"></i>
               <i className="singlePostIcon far fa-trash-alt"></i>
             </div>
-          </h1>
+          </h1> */}
           <div className="singlePostInfo">
             <span>
               Author:
@@ -29,7 +29,7 @@ export default function SinglePost({ blogDetails }) {
               blogDetails.description.map((data) => (
                 <>
                   <h3>{data.title}</h3>
-                  <p>{data.detail}</p>
+                  <p style={{ textAlign: "justify" }}>{data.detail}</p>
                 </>
               ))}
           </p>

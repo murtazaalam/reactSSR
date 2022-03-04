@@ -10,7 +10,7 @@ export default function myOrdersApi(setCourse, setLoading, setError) {
     })
     .then((response) => {
       setCourse(response.data);
-      console.log(response);
+      console.log(response.data);
       setLoading(false);
     })
     .catch((err) => {

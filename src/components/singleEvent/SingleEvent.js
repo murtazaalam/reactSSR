@@ -161,81 +161,83 @@ const SingleEvent = () => {
                 </>
               ))}
           </Grid>
-
-          <Grid item xs={12} sm={12} md={4} xl={4}>
-            <Card sx={{ p: 2 }} className="event-form">
-              <Box
-                component="form"
-                onSubmit={handleSubmit}
-                noValidate
-                sx={{ mt: 1 }}
-              >
-                <p className="all-error">{allError}</p>
-                <TextField
-                  margin="normal"
-                  required
-                  error={nameError}
-                  fullWidth
-                  id="name"
-                  label="Enter Name"
-                  name="name"
-                  autoComplete="name"
-                  helperText={nameError ? "Enter Your Name." : ""}
-                  value={info.name}
-                  className={classes.root}
-                  onChange={(e) => formValidate(e.target)}
-                  autoFocus
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  error={emailError}
-                  helperText={emailError ? "Invalid Email." : ""}
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  value={info.email}
-                  className={classes.root}
-                  onChange={(e) => formValidate(e.target)}
-                />
-
-                <TextField
-                  margin="normal"
-                  required
-                  error={phoneError}
-                  helperText={phoneError ? "Invalid Phone Number." : ""}
-                  fullWidth
-                  name="phone"
-                  label="phone"
-                  type="number"
-                  id="phone"
-                  className={classes.root}
-                  value={info.phone}
-                  onChange={(e) => formValidate(e.target)}
-                  autoComplete="current-phoneNumber"
-                />
-
-                <button
-                  type="submit"
-                  className="btn-grad full-width event-register"
-                  style={
-                    loader
-                      ? { backgroundColor: "var(--color-disable)" }
-                      : { backgroundColor: "var(--color-secondary)" }
-                  }
-                  disabled={loader ? true : false}
+          {console.log(event)}
+          {event?.category === "upcoming" && (
+            <Grid item xs={12} sm={12} md={4} xl={4}>
+              <Card sx={{ p: 2 }} className="event-form">
+                <Box
+                  component="form"
+                  onSubmit={handleSubmit}
+                  noValidate
+                  sx={{ mt: 1 }}
                 >
-                  {loader ? (
-                    <img src={ButtonLoader} width="80" />
-                  ) : (
-                    "Register Now"
-                  )}
-                </button>
-              </Box>
-            </Card>
-          </Grid>
+                  <p className="all-error">{allError}</p>
+                  <TextField
+                    margin="normal"
+                    required
+                    error={nameError}
+                    fullWidth
+                    id="name"
+                    label="Enter Name"
+                    name="name"
+                    autoComplete="name"
+                    helperText={nameError ? "Enter Your Name." : ""}
+                    value={info.name}
+                    className={classes.root}
+                    onChange={(e) => formValidate(e.target)}
+                    autoFocus
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    error={emailError}
+                    helperText={emailError ? "Invalid Email." : ""}
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    value={info.email}
+                    className={classes.root}
+                    onChange={(e) => formValidate(e.target)}
+                  />
+
+                  <TextField
+                    margin="normal"
+                    required
+                    error={phoneError}
+                    helperText={phoneError ? "Invalid Phone Number." : ""}
+                    fullWidth
+                    name="phone"
+                    label="phone"
+                    type="number"
+                    id="phone"
+                    className={classes.root}
+                    value={info.phone}
+                    onChange={(e) => formValidate(e.target)}
+                    autoComplete="current-phoneNumber"
+                  />
+
+                  <button
+                    type="submit"
+                    className="btn-grad full-width event-register"
+                    style={
+                      loader
+                        ? { backgroundColor: "var(--color-disable)" }
+                        : { backgroundColor: "var(--color-secondary)" }
+                    }
+                    disabled={loader ? true : false}
+                  >
+                    {loader ? (
+                      <img src={ButtonLoader} width="80" />
+                    ) : (
+                      "Register Now"
+                    )}
+                  </button>
+                </Box>
+              </Card>
+            </Grid>
+          )}
         </Grid>
       </Box>
     </>

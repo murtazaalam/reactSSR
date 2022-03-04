@@ -178,14 +178,16 @@ function MyCart() {
               <>
                 <section className="cart-content-block container">
                   {!cartItems.length && (
-                    <Card sx={{ p: 2, mb: 15, mt: 2 }}>
+                    <Box sx={{ p: 2, mb: 15, mt: 9 }}>
                       <h6>
                         {" "}
-                        Empty Cart!!! Go to{" "}
-                        <Link to="/all-courses/all">Marketplace</Link> and get
-                        some courses.
+                        <span style={{ fontWeight: "bolder" }}>
+                          Empty Cart!!!
+                        </span>
+                        Go to <Link to="/all-courses/all">Marketplace</Link> and
+                        get some courses.
                       </h6>
-                    </Card>
+                    </Box>
                   )}
                   <Typography variant="p">
                     {paymentMessage !== "" ? (
@@ -226,7 +228,7 @@ function MyCart() {
                               style={{
                                 backgroundImage: `url(${item.course_image})`,
                                 height: "194px",
-                                minWidth:"280px"
+                                minWidth: "280px",
                               }}
                             />
                           </div>
@@ -242,7 +244,7 @@ function MyCart() {
                                 variant="subtitle1"
                                 color="text.secondary"
                                 component="div"
-                                sx={{ height: "92px", overflow: "auto" }}
+                                sx={{ height: "92px", overflow: "hidden" }}
                               >
                                 {item.description}
                               </Typography>
@@ -323,10 +325,12 @@ function MyCart() {
                             <button
                               type="button"
                               className="btn-grad full-width"
-                              disabled={true}
-                              style={{backgroundColor: "var(--color-disable)",color: "var(--color-secondary)"}}
-                              
-                              // onClick={checkout}
+                              //disabled={true}
+                              style={{
+                                backgroundColor: "var(--color-disable)",
+                                color: "var(--color-secondary)",
+                              }}
+                              onClick={checkout}
                             >
                               Work is in progress..
                             </button>

@@ -9,41 +9,18 @@ export default function Sidebar({ sideBarDetail }) {
         {sideBarDetail && <img src={`${sideBarDetail.author_image}`} alt="" />}
         <p>{sideBarDetail && sideBarDetail.author_detail}</p>
       </div>
-      {/* <div className="sidebarItem">
+      <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Life">
-              Life
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Music">
-              Music
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Sport">
-              Sport
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Style">
-              Style
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Tech">
-              Tech
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Cinema">
-              Cinema
-            </Link>
-          </li>
+          {sideBarDetail?.categories.map((data, index) => (
+            <li className="sidebarListItem" key={index}>
+              <Link className="link" to="#">
+                {data}
+              </Link>
+            </li>
+          ))}
         </ul>
-      </div> */}
+      </div>
       {/* <div className="sidebarItem">
         <span className="sidebarTitle">FOLLOW US</span>
         <div className="sidebarSocial">

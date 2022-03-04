@@ -20,37 +20,38 @@
 }
 
 .technovanto-course-card-review {
-  font-size: 10px;
+  font-size: 13px;
+  align-self: center;
 }
 .card-title {
   padding: 16px 0 16px 7px !important;
   text-decoration: none;
 }
-.mobile-view-course-card{
+.mobile-view-course-card {
   width: 200px;
   height: 276px;
 }
-.card-grad{
+.card-grad {
   height: 172px;
 }
-.course-image-box{
+.course-image-box {
   display: flex !important;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
-.course-pic{
+.course-pic {
   width: 108px;
 }
-@media screen and (min-width: 540px){
-  .mobile-view-course-card{
+@media screen and (min-width: 540px) {
+  .mobile-view-course-card {
     width: 340px;
     height: 300px;
   }
-  .card-grad{
+  .card-grad {
     height: 194px;
   }
-  .course-pic{
+  .course-pic {
     width: 156px;
   }
 }

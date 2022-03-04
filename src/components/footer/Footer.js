@@ -19,6 +19,7 @@ const Accordion = styled((props) => (
   "&:not(:last-child)": {
     borderBottom: 0,
   },
+
   "&:before": {
     display: "none",
   },
@@ -41,7 +42,10 @@ const Accordion = styled((props) => (
 const AccordionSummary = styled((props) => (
   <MuiAccordionSummary
     expandIcon={
-      <ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem", fill: "white" }} className="arrow-icon" />
+      <ArrowForwardIosSharpIcon
+        sx={{ fontSize: "0.9rem", fill: "white" }}
+        className="arrow-icon"
+      />
     }
     {...props}
   />
@@ -79,7 +83,7 @@ const Footer = () => {
     //console.log("id=",id);
     //console.log(history);
     //history.push(`/courses/${id}`);
-  }
+  };
 
   const mobileFooter = (
     <>
@@ -104,9 +108,9 @@ const Footer = () => {
                     placeContent: "center",
                   }}
                   to={`/courses/${data._id}`}
-                  className="techvanto-footer-text text-small"
+                  className="techvanto-footer-text text-footer-small"
                 >
-                  <p className="techvanto-footer-text text-small">
+                  <p className="techvanto-footer-text text-footer-small">
                     {data.course_name}
                   </p>
                 </Link>
@@ -132,7 +136,7 @@ const Footer = () => {
                       placeContent: "center",
                     }}
                     to="/coming-soon"
-                    className="techvanto-footer-text text-small"
+                    className="techvanto-footer-text text-footer-small"
                   >
                     <p>{data.text}</p>
                   </Link>
@@ -155,9 +159,9 @@ const Footer = () => {
                 placeContent: "center",
               }}
               to="/coming-soon"
-              className="techvanto-footer-text text-small"
+              className="techvanto-footer-text text-footer-small"
             >
-              <p className="techvanto-footer-text text-small">
+              <p className="techvanto-footer-text text-footer-small">
                 Discussion Forum
               </p>
             </Link>
@@ -169,9 +173,9 @@ const Footer = () => {
                 placeContent: "center",
               }}
               to="/blogs"
-              className="techvanto-footer-text text-small"
+              className="techvanto-footer-text text-footer-small"
             >
-              <p className="techvanto-footer-text text-small">Blog</p>
+              <p className="techvanto-footer-text text-footer-small">Blog</p>
             </Link>
             <Link
               style={{
@@ -180,9 +184,9 @@ const Footer = () => {
                 placeContent: "center",
               }}
               to="/coming-soon"
-              className="techvanto-footer-text text-small"
+              className="techvanto-footer-text text-footer-small"
             >
-              <p className="techvanto-footer-text text-small">
+              <p className="techvanto-footer-text text-footer-small">
                 Reasearch & Project
               </p>
             </Link>
@@ -203,9 +207,9 @@ const Footer = () => {
                 placeContent: "center",
               }}
               to="/events"
-              className="techvanto-footer-text text-small"
+              className="techvanto-footer-text text-footer-small"
             >
-              <p className="techvanto-footer-text text-small">
+              <p className="techvanto-footer-text text-footer-small">
                 Upcoming And Past Events
               </p>
             </Link>
@@ -217,9 +221,9 @@ const Footer = () => {
                 placeContent: "center",
               }}
               to="/#campusAmbassador"
-              className="techvanto-footer-text text-small"
+              className="techvanto-footer-text text-footer-small"
             >
-              <p className="techvanto-footer-text text-small">
+              <p className="techvanto-footer-text text-footer-small">
                 Campus Ambassador
               </p>
             </Link>
@@ -230,9 +234,11 @@ const Footer = () => {
                 placeContent: "center",
               }}
               to="/coming-soon"
-              className="techvanto-footer-text text-small"
+              className="techvanto-footer-text text-footer-small"
             >
-              <p className="techvanto-footer-text text-small">Carrer/ Jobs</p>
+              <p className="techvanto-footer-text text-footer-small">
+                Carrer/ Jobs
+              </p>
             </Link>
           </AccordionDetails>
         </Accordion>
@@ -251,9 +257,11 @@ const Footer = () => {
                 placeContent: "center",
               }}
               to="/contact-us-for-hiring"
-              className="techvanto-footer-text text-small"
+              className="techvanto-footer-text text-footer-small"
             >
-              <p className="techvanto-footer-text text-small">Hire With Us</p>
+              <p className="techvanto-footer-text text-footer-small">
+                Hire With Us
+              </p>
             </Link>
 
             <Link
@@ -263,9 +271,11 @@ const Footer = () => {
                 placeContent: "center",
               }}
               to="/contact-us-to-get-hired"
-              className="techvanto-footer-text text-small"
+              className="techvanto-footer-text text-footer-small"
             >
-              <p className="techvanto-footer-text text-small">Get Hired</p>
+              <p className="techvanto-footer-text text-footer-small">
+                Get Hired
+              </p>
             </Link>
             <Link
               style={{
@@ -274,9 +284,9 @@ const Footer = () => {
                 placeContent: "center",
               }}
               to="/coming-soon"
-              className="techvanto-footer-text text-small"
+              className="techvanto-footer-text text-footer-small"
             >
-              <p className="techvanto-footer-text text-small">
+              <p className="techvanto-footer-text text-footer-small">
                 {" "}
                 Train Your Team
               </p>
@@ -292,12 +302,18 @@ const Footer = () => {
           </AccordionSummary>
           <AccordionDetails>
             <div>
-              <p className="text-small" style={{ placeContent: "center" }}>
+              <p
+                className="text-footer-small"
+                style={{ placeContent: "center" }}
+              >
                 R7, 3rd floor, MG Road, Ghitorni, New Delhi 110030
               </p>
 
               {/* <PermContactCalendarIcon></PermContactCalendarIcon> */}
-              <p className="text-small" style={{ placeContent: "center" }}>
+              <p
+                className="text-footer-small"
+                style={{ placeContent: "center" }}
+              >
                 +91-9646206032
               </p>
             </div>
@@ -318,7 +334,7 @@ const Footer = () => {
               <div className="techvanto-footer-text-header color">
                 <img src={logo} alt="" />{" "}
               </div>
-              <div className="text-small techvanto-footer-text-header follow-links">
+              <div className="text-footer-small techvanto-footer-text-header follow-links">
                 <p className="social">
                   <Link
                     rel="noopener noreferrer"
@@ -402,11 +418,11 @@ const Footer = () => {
                         <Link
                           style={{ textDecoration: "none", color: "white" }}
                           to={`/courses/${data._id}`}
-                          className="techvanto-footer-text text-small"
+                          className="techvanto-footer-text text-footer-small"
                           key={index}
                           onClick={() => handleCourse(data._id)}
                         >
-                          <p className="techvanto-footer-text text-small">
+                          <p className="techvanto-footer-text text-footer-small">
                             {data.course_name}
                           </p>
                         </Link>
@@ -425,7 +441,7 @@ const Footer = () => {
                         <Link
                           style={{ textDecoration: "none", color: "white" }}
                           to="/coming-soon"
-                          className="techvanto-footer-text text-small"
+                          className="techvanto-footer-text text-footer-small"
                         >
                           <p>{data.text}</p>
                         </Link>
@@ -440,9 +456,9 @@ const Footer = () => {
                   <Link
                     style={{ textDecoration: "none", color: "white" }}
                     to="/coming-soon"
-                    className="techvanto-footer-text text-small"
+                    className="techvanto-footer-text text-footer-small"
                   >
-                    <p className="techvanto-footer-text text-small">
+                    <p className="techvanto-footer-text text-footer-small">
                       Discussion Forum
                     </p>
                   </Link>
@@ -450,16 +466,18 @@ const Footer = () => {
                   <Link
                     style={{ textDecoration: "none", color: "white" }}
                     to="/blogs"
-                    className="techvanto-footer-text text-small"
+                    className="techvanto-footer-text text-footer-small"
                   >
-                    <p className="techvanto-footer-text text-small">Blog</p>
+                    <p className="techvanto-footer-text text-footer-small">
+                      Blog
+                    </p>
                   </Link>
                   <Link
                     style={{ textDecoration: "none", color: "white" }}
                     to="/coming-soon"
-                    className="techvanto-footer-text text-small"
+                    className="techvanto-footer-text text-footer-small"
                   >
-                    <p className="techvanto-footer-text text-small">
+                    <p className="techvanto-footer-text text-footer-small">
                       Reasearch & Project
                     </p>
                   </Link>
@@ -470,9 +488,9 @@ const Footer = () => {
                   <Link
                     style={{ textDecoration: "none", color: "white" }}
                     to="/events"
-                    className="techvanto-footer-text text-small"
+                    className="techvanto-footer-text text-footer-small"
                   >
-                    <p className="techvanto-footer-text text-small">
+                    <p className="techvanto-footer-text text-footer-small">
                       Upcoming And Past Events
                     </p>
                   </Link>
@@ -480,7 +498,7 @@ const Footer = () => {
                     to="/#campusAmbassador"
                     style={{ textDecoration: "none", color: "white" }}
                   >
-                    <p className="techvanto-footer-text text-small">
+                    <p className="techvanto-footer-text text-footer-small">
                       Campus Ambassador
                     </p>{" "}
                   </Link>
@@ -488,7 +506,7 @@ const Footer = () => {
                     to="/coming-soon"
                     style={{ textDecoration: "none", color: "white" }}
                   >
-                    <p className="techvanto-footer-text text-small">
+                    <p className="techvanto-footer-text text-footer-small">
                       Carrer/ Jobs
                     </p>
                   </Link>
@@ -501,7 +519,7 @@ const Footer = () => {
                     to="/contact-us-for-hiring"
                     style={{ textDecoration: "none", color: "white" }}
                   >
-                    <p className="techvanto-footer-text text-small">
+                    <p className="techvanto-footer-text text-footer-small">
                       Hire With Us
                     </p>
                   </Link>
@@ -509,7 +527,7 @@ const Footer = () => {
                     to="/contact-us-to-get-hired"
                     style={{ textDecoration: "none", color: "white" }}
                   >
-                    <p className="techvanto-footer-text text-small">
+                    <p className="techvanto-footer-text text-footer-small">
                       Get Hired
                     </p>
                   </Link>
@@ -517,7 +535,7 @@ const Footer = () => {
                     to="/coming-soon"
                     style={{ textDecoration: "none", color: "white" }}
                   >
-                    <p className="techvanto-footer-text text-small">
+                    <p className="techvanto-footer-text text-footer-small">
                       Train Your Team
                     </p>
                   </Link>
@@ -527,13 +545,13 @@ const Footer = () => {
                   </div>
                   <div className="techvanto-footer-text">
                     {/* <PermContactCalendarIcon></PermContactCalendarIcon> */}
-                    <p className="text-small">
+                    <p className="text-footer-small">
                       R7, 3rd floor, MG Road, Ghitorni, New Delhi 110030
                     </p>
                   </div>
                   <div className="techvanto-footer-text">
                     {/* <PermContactCalendarIcon></PermContactCalendarIcon> */}
-                    <p className="text-small">+91-9646206032</p>
+                    <p className="text-footer-small">+91-9646206032</p>
                   </div>
                 </div>
               </div>
@@ -549,23 +567,37 @@ const Footer = () => {
             <div className="text-small" style={{ marginTop: "1rem" }}>
               Policies
             </div>
-            <div
-              className="text-small"
-            >
+            <div className="text-small">
               <div className="lower-footer">
-                <Link to="/terms-and-conditions" style={{ color: "white" }} className="text-small t-margin">
+                <Link
+                  to="/terms-and-conditions"
+                  style={{ color: "white" }}
+                  className="text-small t-margin"
+                >
                   <span>Terms & Conditions </span>
                 </Link>
                 /
-                <Link to="/privacy-policy" style={{ color: "white" }} className="text-small pp-margin">
+                <Link
+                  to="/privacy-policy"
+                  style={{ color: "white" }}
+                  className="text-small pp-margin"
+                >
                   <span>Privacy Policy </span>
                 </Link>
                 /
-                <Link to="/placement-policy" style={{ color: "white" }} className="text-small pp-margin">
+                <Link
+                  to="/placement-policy"
+                  style={{ color: "white" }}
+                  className="text-small pp-margin"
+                >
                   <span>Placement Policy </span>
                 </Link>
                 /
-                <Link to="/payment-policy" style={{ color: "white" }} className="text-small p-margin">
+                <Link
+                  to="/payment-policy"
+                  style={{ color: "white" }}
+                  className="text-small p-margin"
+                >
                   <span>Payment Policy </span>
                 </Link>
               </div>

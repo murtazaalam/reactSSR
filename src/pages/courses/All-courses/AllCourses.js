@@ -143,6 +143,7 @@ function AllCourses() {
             price={data.price}
             discount={data.discount}
             rating={data.avgRating}
+            noOfReviews={data.noOfReviews}
             // review={data.reviews}
           ></CourseCard>
         </>
@@ -191,9 +192,7 @@ function AllCourses() {
           <div className="course-panel-wrap">
             {/* Side Panels */}
             {window.matchMedia("(max-width: 700px)").matches ? (
-              <Accordion
-                onChange={handleChange("panel1")}
-              >
+              <Accordion onChange={handleChange("panel1")}>
                 <AccordionSummary
                   aria-controls="panel1d-content"
                   id="panel1d-header"

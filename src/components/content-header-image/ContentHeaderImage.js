@@ -11,7 +11,10 @@ const ContentHeaderImage = (props) => {
     >
       <Container>
         <div className="techvanto-header-content">
-          <p className="techvanto-campus-ambassador-right-content header-text">
+          <p
+            style={{ cursor: "default" }}
+            className="techvanto-campus-ambassador-right-content header-text"
+          >
             <span className="large-text">{props.title}</span>
             <div style={{ lineHeight: "normal" }} className="small-heading">
               <span className="small-text">{props.overview} </span>

@@ -39,7 +39,7 @@ export default function Single() {
               <li className="breadcrumb-item active">Blog</li>
             </ol>
           </nav>
-          <h1 className="event-heading">Blogs</h1>
+          <h1 className="event-heading">{blogItem?.title}</h1>
         </div>
       </Box>
       <SinglePost blogDetails={blogItem} />
