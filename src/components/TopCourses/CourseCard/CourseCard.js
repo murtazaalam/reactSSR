@@ -45,6 +45,7 @@ export default function CourseCard({
             {/* <span style={{ float: "right" }}>Rs.{price - discount}</span>
             </Chip> */}
           </Typography>
+
           <Chip
             label={`Rs${price - discount}`}
             style={{ float: "right", background: "#f1effe" }}
@@ -53,6 +54,7 @@ export default function CourseCard({
         <div
           style={{
             display: "flex",
+            whiteSpace: "nowrap",
           }}
         >
           <Tooltip title={`${rating} out of 5`}>

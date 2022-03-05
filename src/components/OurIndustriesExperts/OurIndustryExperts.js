@@ -47,7 +47,7 @@ const OurIndustryExperts = (props) => {
     {
       pic: expert5,
       title1: "Software Engineer",
-      title2: "Bharat Airtel",
+      title2: "Bharati Airtel",
       author: "Himanshu Singhal",
     },
     {

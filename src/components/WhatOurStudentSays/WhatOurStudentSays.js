@@ -36,7 +36,7 @@ const WhatOurStudentSays = (props) => {
     {
       pic: feed2,
       title: "Rushali Kashyap",
-      destination: "Android Developmen",
+      destination: "Android Development",
       overview:
         "I was looking for a course that could transform my interest in Android Development into educational and professional advancement. With Techvanto Academy’s certification course, I got exactly what I was looking for!",
     },
@@ -92,7 +92,7 @@ const WhatOurStudentSays = (props) => {
     {
       pic: feed10,
       title: "Anjali Sharma",
-      destination: "Anjali Sharma",
+      destination: "Data Science",
       overview:
         "My experience with the course was amazing. Well-structured course, expert guidance and practical knowledge-I found everything to the point.",
     },

@@ -84,8 +84,8 @@ const Footer = () => {
   };
 
   const handleCourse = (id) => {
-    dispatch(getCourse({id, setCourseData}))
-  }
+    dispatch(getCourse({ id, setCourseData }));
+  };
 
   const mobileFooter = (
     <>
@@ -189,7 +189,7 @@ const Footer = () => {
               className="techvanto-footer-text text-footer-small"
             >
               <p className="techvanto-footer-text text-footer-small">
-                Reasearch & Project
+                Research & Project
               </p>
             </Link>
           </AccordionDetails>
@@ -239,7 +239,7 @@ const Footer = () => {
               className="techvanto-footer-text text-footer-small"
             >
               <p className="techvanto-footer-text text-footer-small">
-                Carrer/ Jobs
+                Career/ Jobs
               </p>
             </Link>
           </AccordionDetails>
@@ -480,7 +480,7 @@ const Footer = () => {
                     className="techvanto-footer-text text-footer-small"
                   >
                     <p className="techvanto-footer-text text-footer-small">
-                      Reasearch & Project
+                      Research & Project
                     </p>
                   </Link>
 
@@ -509,7 +509,7 @@ const Footer = () => {
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     <p className="techvanto-footer-text text-footer-small">
-                      Carrer/ Jobs
+                      Career/ Jobs
                     </p>
                   </Link>
                 </div>

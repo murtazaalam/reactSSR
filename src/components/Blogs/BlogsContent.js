@@ -23,13 +23,6 @@ const useStyles = makeStyles((theme) => ({
   author: {
     display: "flex",
   },
-  paginationContainer: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  svg: {
-    fill: "#yellow",
-  },
 }));
 
 function BlogsContent(props) {

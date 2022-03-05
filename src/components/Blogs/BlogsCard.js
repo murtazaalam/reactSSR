@@ -11,7 +11,6 @@ import Avatar from "@material-ui/core/Avatar";
 import { Link } from "react-router-dom";
 
 export default function BlogsCard({ classes, content }) {
-  console.log(">>>", content);
   return (
     <Card className={classes.card}>
       <Link to={`/blogs/${content._id}`} style={{ textDecoration: "none" }}>

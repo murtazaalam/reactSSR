@@ -3,19 +3,27 @@ import { useState, useEffect } from "react";
 import { NavHashLink } from "react-router-hash-link";
 import { useRecoilState } from "recoil";
 import AppBar from "@mui/material/AppBar";
-import { Container, Typography, Button, Avatar } from "@mui/material";
+import { Container, Button, Avatar, Tooltip } from "@mui/material";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 import { Link, NavLink } from "react-router-dom";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
+import Badge from "@mui/material/Badge";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Draggable from "react-draggable";
-import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PrimaryNavBar from "../primaryNavBar/PrimaryNavBar";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import Collapse from "@mui/material/Collapse";
+
+import ListItemButton from "@mui/material/ListItemButton";
 // import { HashLink } from "react-router-hash-link";
 // import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
@@ -33,6 +41,7 @@ import { getCourse } from "../../../redux/slices/course.slice";
 
 import Paper from "@mui/material/Paper";
 import { logoutAction } from "../../../redux/slices/auth.slices";
+import { HashLink } from "react-router-hash-link/dist/react-router-hash-link.cjs.development";
 function PaperComponent(props) {
   return (
     <Draggable
@@ -56,6 +65,12 @@ const NavBar = (props) => {
   const [courseData, setCourseData] = React.useState();
   const [cartCounting, setCartCount] = useState();
   let dispatch = useDispatch();
+  const [collapse_open, setcollapse_open] = React.useState(true);
+
+  const collapseHandler = () => {
+    console.log(collapse_open);
+    setcollapse_open(!collapse_open);
+  };
 
   const [drawable, setDrawable] = useState({
     top: false,
@@ -138,88 +153,121 @@ const NavBar = (props) => {
     setLoading(false);
   }
   const changeCourse = (id) => {
-    dispatch(getCourse({id, setCourseData}))
-  }
-  
+    dispatch(getCourse({ id, setCourseData }));
+  };
+
   const list = (anchor) => (
     <Box
+      component="nav"
       sx={{
         width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
         p: 2,
       }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      {admin && (
-        <List>
-          <Avatar alt={admin?.name.toUpperCase()} src="authorImage/png" /> Hey,{" "}
-          {admin.name}
-        </List>
-      )}
       <List>
-        <Typography>
-          <a className="sidebar-link" href="/#services">
-            Services
-          </a>
-        </Typography>
-      </List>
+        {admin && (
+          <>
+            <ListItem>
+              <Avatar alt={admin?.name.toUpperCase()} src="authorImage/png" />
+            </ListItem>
+            <ListItem sx={{ pb: 0, pt: 0 }}>
+              <ListItemText
+                primary={admin.name[0].toUpperCase() + admin.name.substring(1)}
+              />
+            </ListItem>
 
-      <List>
-        <Link className="sidebar-link" to="/all-courses/all">
-          Courses
-        </Link>
-      </List>
-      <List>
-        <Link className="sidebar-link" to="/events">
-          Events
-        </Link>
-      </List>
-      <List>
-        <Link className="sidebar-link" to="/interview-questions">
-          Interview Questions
-        </Link>
-      </List>
-      <List>
-        <Link className="sidebar-link" to="/blogs">
-          Blogs
-        </Link>
-      </List>
-      <List>
-        <Link to="/contact-us-for-hiring" className="sidebar-link">
-          For Hiring
-        </Link>
-      </List>
-      <List>
-        <Link to="/contact-us-to-get-hired" className="sidebar-link">
-          To Get Hired
-        </Link>
-      </List>
-      {isLogin ? (
-        <>
-          <List>
-            <Link className="sidebar-link" to="/my-courses">
-              My Courses
-            </Link>
+            <ListItem sx={{ pt: 0 }}>
+              <ListItemText primary={admin?.email} />
+            </ListItem>
+            <Divider />
+          </>
+        )}
+        <ListItem onClick={toggleDrawer(anchor, false)}>
+          <HashLink to="/#services" className="sidebar-link">
+            Services
+          </HashLink>
+        </ListItem>
+
+        <ListItem onClick={toggleDrawer(anchor, false)}>
+          <Link className="sidebar-link" to="/all-courses/all">
+            Courses
+          </Link>
+        </ListItem>
+        <ListItem onClick={toggleDrawer(anchor, false)}>
+          <Link className="sidebar-link" to="/events">
+            Events
+          </Link>
+        </ListItem>
+        <ListItem onClick={toggleDrawer(anchor, false)}>
+          <Link className="sidebar-link" to="/interview-questions">
+            Interview Questions
+          </Link>
+        </ListItem>
+        <ListItem onClick={toggleDrawer(anchor, false)}>
+          <Link className="sidebar-link" to="/blogs">
+            Blogs
+          </Link>
+        </ListItem>
+
+        <ListItem onClick={collapseHandler}>
+          <ListItemText primary="Contact Us" className="sidebar-link" />
+          {collapse_open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={collapse_open} unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem sx={{ pl: 4 }} onClick={toggleDrawer(anchor, false)}>
+              <Link className="sidebar-link" to="/contact-us-for-hiring">
+                Hiring With Us
+              </Link>
+            </ListItem>
+            <ListItem sx={{ pl: 4 }} onClick={toggleDrawer(anchor, false)}>
+              <Link className="sidebar-link" to="/contact-us-to-get-hired">
+                Get Hired
+              </Link>
+            </ListItem>
           </List>
-          <List>
-            <Link className="sidebar-link" to="/my-cart">
-              My Cart
-            </Link>
-          </List>
-          <List>
-            <Link className="sidebar-link" to="/" onClick={logoutHandler}>
-              Logout
-            </Link>
-          </List>
-        </>
-      ) : (
-        <button className="btn-grad btn-nav" onClick={handleClickOpen}>
-          <span className={scroll === false ? "color-white" : "color-black"}>
-            LogIn / SignUp
-          </span>
-        </button>
-      )}
+        </Collapse>
+        {/* <Link to="/contact-us-for-hiring" className="sidebar-link">
+            Hiring With Us
+          </Link>
+    
+    
+          <Link to="/contact-us-to-get-hired" className="sidebar-link">
+            Get Hired
+          </Link> */}
+
+        {isLogin ? (
+          <>
+            <ListItem>
+              <Link className="sidebar-link" to="/my-courses">
+                My Courses
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link className="sidebar-link" to="/my-cart">
+                My Cart
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link className="sidebar-link" to="/" onClick={logoutHandler}>
+                Logout
+              </Link>
+            </ListItem>
+          </>
+        ) : (
+          <ListItem>
+            <button className="btn-grad btn-nav" onClick={handleClickOpen}>
+              <span
+                className={scroll === false ? "color-white" : "color-black"}
+              >
+                LogIn / SignUp
+              </span>
+            </button>
+          </ListItem>
+        )}
+      </List>
     </Box>
   );
 
@@ -285,8 +333,9 @@ const NavBar = (props) => {
                                   coursesByCategory.School?.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <a href={`/#/courses/${item._id}`} 
-                                        onClick={() => changeCourse(item._id)}
+                                        <a
+                                          href={`/#/courses/${item._id}`}
+                                          onClick={() => changeCourse(item._id)}
                                         >
                                           {item.course_name}
                                         </a>
@@ -332,9 +381,10 @@ const NavBar = (props) => {
                                   coursesByCategory.College?.map((item) => {
                                     return (
                                       <li key={item._id}>
-                                        <a href={`/#/courses/${item._id}`} 
+                                        <a
+                                          href={`/#/courses/${item._id}`}
                                           onClick={() => changeCourse(item._id)}
-                                          >
+                                        >
                                           {item.course_name}
                                         </a>
                                         <div className="course-desc desc">
@@ -385,7 +435,9 @@ const NavBar = (props) => {
                                           <a
                                             // onClick={refreshPage}
                                             href={`/#/courses/${item._id}`}
-                                            onClick={() => changeCourse(item._id)}
+                                            onClick={() =>
+                                              changeCourse(item._id)
+                                            }
                                           >
                                             {item.course_name}
                                           </a>
@@ -481,36 +533,63 @@ const NavBar = (props) => {
                       </span>
                     </a>
                     <div className="dropdown-content-contact">
-                      <Link to="/contact-us-for-hiring">For Hiring</Link>
-                      <Link to="/contact-us-to-get-hired">To Get Hired</Link>
-                      <Link to="/coming-soon">know More</Link>
+                      <Link to="/contact-us-for-hiring">Hiring With Us</Link>
+                      <Link to="/contact-us-to-get-hired">Get Hired</Link>
+                      <Link to="/coming-soon">Know More</Link>
                     </div>
                   </div>
                 </div>
               </div>
             </Container>
-            <div className="item user-aria" style={{position: "relative"}}>
+            <div className="item user-aria" style={{ position: "relative" }}>
               {isLogin ? (
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>
                     <IconButton aria-label="cart" className="color-white">
-                      <Badge badgeContent={cartCount ? cartCount : cartCounting} color="error">
+                      <Badge
+                        badgeContent={cartCount ? cartCount : cartCounting}
+                        color="error"
+                      >
                         <ShoppingCartIcon fontSize="large" />
                       </Badge>
                     </IconButton>
                   </Link>
-                  <Link to="/" style={{ marginRight: "30px", textDecoration: "none"}}>
-                    <span className="user-name">Hey! {admin.name.split(" ")[0]}</span>
-                  </Link>
+                  {/* <Link
+                    to="/"
+                    style={{ marginRight: "30px", textDecoration: "none" }}
+                  >
+                    <span className="user-name">
+                      Hey! {admin.name.split(" ")[0]}
+                    </span>
+                  </Link> */}
                   <div className="dropdown">
                     <Link to="/">
-                      <span
-                        className="color-white"
-                      >
-                        <AccountCircleIcon fontSize="large" />
+                      <span className="color-white">
+                        <Tooltip title={admin.name}>
+                          <Badge
+                            badgeContent={`Hey! ${admin.name.split(" ")[0]}`}
+                            sx={{
+                              "& .MuiBadge-badge": {
+                                backgroundColor: "#ea395d",
+                              },
+                            }}
+                            anchorOrigin={{
+                              vertical: "top",
+                              horizontal: "right",
+                            }}
+                          >
+                            <AccountCircleIcon fontSize="large" />
+                          </Badge>
+                        </Tooltip>
                       </span>
                     </Link>
                     <div className="dropdown-content-contact">
+                      {/* <Divider>
+                        <span style={{ color: "black" }}>
+                          {admin.name[0].toUpperCase() +
+                            admin.name.substring(1)}
+                        </span>
+                      </Divider> */}
                       <Link to="/my-courses">My Courses</Link>
                       <a style={{ color: "black" }} onClick={logoutHandler}>
                         Log Out

@@ -45,7 +45,10 @@ function contactUsToGetHired() {
             className="left-card-position"
           >
             <div>
-              <LeftPanel heading="PLacement Opportunities form-hiring" formType="placement"/>
+              <LeftPanel
+                heading="PLacement Opportunities"
+                formType="placement"
+              />
             </div>
           </Grid>
           <Grid
@@ -57,14 +60,14 @@ function contactUsToGetHired() {
           >
             <div>
               <h5>
-                Contact Us for placement Opportunities
+                Contact Us for Placement Opportunities
                 <InfoIcon />
               </h5>
 
               <RightPanel formType={"placement"} />
             </div>
           </Grid>
-          <div style={{height: '20px'}}></div>
+          <div style={{ height: "20px" }}></div>
           <Grid item xs={12}>
             <div className="bg-image bg-image hiring-partner-section">
               <Container className="section-spacing">
@@ -81,7 +84,7 @@ function contactUsToGetHired() {
             </div>
           </Grid>
         </Grid>
-        <div style={{height: '40px'}}></div>
+        <div style={{ height: "40px" }}></div>
       </div>
     </>
   );

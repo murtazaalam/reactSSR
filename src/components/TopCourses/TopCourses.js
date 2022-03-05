@@ -18,10 +18,11 @@ const TopCourses = () => {
           <section>
             <Typography component="div" className="techvanto-whyus ">
               <Typography component="h2" className="techvanto-whyus-heading">
-                Top Courses:
+                Top Courses
               </Typography>
             </Typography>
             <section className="display-grid fr4 top-course-aria">
+              {console.log(topCourses)}
               {topCourses && topCourses.length !== 0
                 ? topCourses.map((data, index) => {
                     return (
@@ -34,6 +35,7 @@ const TopCourses = () => {
                         price={data.price}
                         rating={data.avgRating}
                         couseData={data}
+                        discount={data.discount}
                         noOfReviews={data.noOfReviews}
                         // review={data.reviews}
                       ></CourseCard>

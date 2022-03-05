@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import SearchBar from "../../../components/CoursesComponents/SearchBar/SearchBar";
 import FilterPanel from "../../../components/CoursesComponents/FilterPanel/FilterPanel.js";
 import Box from "@mui/material/Box";
@@ -15,6 +15,7 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
+import myOrdersApi from "../../../apis/api/MyOders";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -66,7 +67,9 @@ function AllCourses() {
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(true);
   const [, setCourseByCategory] = useState();
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [, setExpanded] = React.useState("panel1");
+  const [myOrder, setMyOrder] = useState();
+  const [orderError, setMyOrderError] = useState();
 
   let cat =
     categoryRoute.charAt(0).toUpperCase() +
@@ -99,6 +102,7 @@ function AllCourses() {
 
   const fetchdata = () => {
     AllCourseApi(setList, setCourseByCategory, setLoading);
+    // myOrdersApi(setMyOrder, setLoading, setMyOrderError);
     const categoryStateList = selectedCategory;
     const changeCheckedCategories = categoryStateList.map((item) =>
       item.label.toLowerCase().includes(categoryRoute.toLowerCase())
@@ -108,6 +112,7 @@ function AllCourses() {
     setSelectedCategory(changeCheckedCategories);
     setLoading(false);
   };
+
   const data = list
     ?.filter((val) => {
       if (searchInput === "") {
@@ -144,18 +149,26 @@ function AllCourses() {
             discount={data.discount}
             rating={data.avgRating}
             noOfReviews={data.noOfReviews}
+
             // review={data.reviews}
           ></CourseCard>
         </>
       ) : null;
     });
+
   useEffect(() => {
     fetchdata();
   }, []);
 
   return (
     <>
-      {/* Header */}
+      {/* {console.log(
+        list.filter((el) => {
+          return myOrder.find((element) => {
+            return element.course_id === el._id;
+          });
+        })
+      )} */}
       <Box
         className="page-heading course-mobile-view"
         sx={{
