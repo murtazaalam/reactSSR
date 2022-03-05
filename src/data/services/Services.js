@@ -265,7 +265,7 @@ const Services = [
   {
     id: "11",
     tab: "Colleges",
-    text: "Admission Counselling (Connect with Students)",
+    text: "Admission Counselling",
     link: "/service/one-to-one/",
     icon: connectWith,
     description:
