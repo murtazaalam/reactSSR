@@ -32,7 +32,7 @@ const CampusAmbassador = () => {
                   <span className="text-small" style={{ textAlign: "justify" }}>
                     scours the most committed learners to relay our dream of
                     upgrading the academic and professional abilities of
-                    hundreds like them. through college campus events, meet-ups,
+                    hundreds like them through college campus events, meet-ups,
                     online forums, and other channels.
                   </span>
                   <br />
