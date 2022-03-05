@@ -247,11 +247,11 @@ const Services = [
   {
     id: "11",
     tab: "Colleges",
-    text: "Get Companies",
+    text: "Getting Companies to your Campus",
     link: "/service/one-to-one/",
     icon: getCompanies,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Building a strong and impressionable recruitment paradigm is now more than possible with Techvanto Academy's successful and scalable campus hiring strategy. We take charge of connecting with companies for on-site campus drives to spout notable results.",
   },
   {
     id: "11",
