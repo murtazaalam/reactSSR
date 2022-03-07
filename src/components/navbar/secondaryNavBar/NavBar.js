@@ -520,6 +520,17 @@ const NavBar = (props) => {
                     </span>
                   </Link>
                 </div>
+                <div className="item">
+                  <Link to="/about-us" className="menu-text">
+                    <span
+                      className={
+                        scroll === false ? "color-white" : "color-black"
+                      }
+                    >
+                      About Us
+                    </span>
+                  </Link>
+                </div>
 
                 <div className="item">
                   <div className="dropdown">

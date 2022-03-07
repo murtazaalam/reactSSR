@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
-import ExpertCard from "./ExpertCard/ExpertCard";
 import { Typography, Container } from "@mui/material";
 import AliceCarousel from "react-alice-carousel";
 //import "./StudentSays.css";
+import ExpertCard from "./ExpertCard/ExpertCard";
 import expert1 from "../../assets/images/experts/expert5.jpg";
 import expert2 from "../../assets/images/experts/expert4.jpg";
 import expert3 from "../../assets/images/experts/expert6.jpg";
@@ -17,7 +17,7 @@ const responsive = {
   568: { items: 2 },
   1024: { items: 3 },
 };
-const OurIndustryExperts = (props) => {
+const OurIndustryExperts = () => {
   //const [studentSays, setStudentSays] = React.useState([]);
   const itemData = [
     {
@@ -87,7 +87,6 @@ const OurIndustryExperts = (props) => {
           responsive={responsive}
           autoPlayDirection={"rtl"}
           autoPlayStrategy={"none"}
-          // disableButtonsControls={true}
           animationEasingFunction={"ease"}
           autoPlay={false}
           controlsStrategy="alternate"
@@ -107,24 +106,3 @@ const OurIndustryExperts = (props) => {
 };
 
 export default OurIndustryExperts;
-
-// <ImageListItem sx={{ width: 400, height: 400 }}>
-//   <img
-//     className="item"
-//     data-value={index + 1}
-//     src={`${r(item).default}?w=248&fit=crop&auto=format`}
-//     onDragStart={handleDragStart}
-//     alt=""
-//     key={index}
-//   />
-//   <ImageListItemBar
-//     title={itemData[index].title}
-//     subtitle={<span>{itemData[index].author}</span>}
-//     actionIcon={
-//       <IconButton
-//         sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-//         aria-label={`info about ${item.title}`}
-//       ></IconButton>
-//     }
-//   />
-// </ImageListItem>

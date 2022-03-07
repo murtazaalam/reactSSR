@@ -19,6 +19,7 @@ import PrivacyPolicy from "../components/PrivacyPolicy";
 import PlacementPolicies from "../components/PlacementPolicies";
 import ScrollToTop from "../components/ScrollToTop";
 import PaymentPolicies from "../components/PaymentPolicies";
+import AboutUs from "../pages/about-us/AboutUs.jsx";
 const MainRouters = () => {
   return (
     <ScrollToTop>
@@ -58,6 +59,7 @@ const MainRouters = () => {
         ></Route>
         <Route path="/placement-policy" element={<PlacementPolicies />}></Route>
         <Route path="/payment-policy" element={<PaymentPolicies />}></Route>
+        <Route path="/about-us" element={<AboutUs />}></Route>
       </Routes>
     </ScrollToTop>
   );

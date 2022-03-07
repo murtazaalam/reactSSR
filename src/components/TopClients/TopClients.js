@@ -48,10 +48,11 @@ const TopClient = (props) => {
       <div className="techvanto-top-client-slider">
         <AliceCarousel
           responsive={responsive}
+          autoWidth
           autoPlayDirection={"rtl"}
           autoPlayStrategy={"none"}
           disableButtonsControls={true}
-          animationDuration={9000}
+          animationDuration={5000}
           animationEasingFunction={"linear"}
           autoPlayInterval={0}
           infinite={true}
