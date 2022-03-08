@@ -17,6 +17,8 @@ import { useDispatch } from "react-redux";
 import { loginAction } from "../../../redux/slices/auth.slices";
 import { cartAction } from "../../../redux/slices/cart.slice";
 import getFromCartApi from "../../../apis/api/GetFromCart";
+import Radio from "@mui/material/Radio";
+import { Link } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -77,7 +79,7 @@ export default function LoginContent(props) {
       return setError("Invalid Email");
     }
     let res = await LoginApi(body, setError, setLoader);
-    if(res){
+    if (res) {
       if (res.message === "Login Success") {
         setUser(true);
         emptyState();
@@ -91,120 +93,123 @@ export default function LoginContent(props) {
           draggable: true,
           progress: undefined,
         });
-        dispatch(loginAction({admin:res.user}));
+        dispatch(loginAction({ admin: res.user }));
         let data = await getFromCartApi(setCartData, setLoading, setError);
-        dispatch(cartAction({cartCount:data?.length}));
+        dispatch(cartAction({ cartCount: data?.length }));
       }
     }
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 2,
-            marginBottom: 2,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, borderRadius: "0", background: "white" }}>
-            <img src="https://i.ibb.co/jVR0Kyc/logo-3.png" alt=""></img>
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            LogIn
-          </Typography>
-          {error === "Login Success" && (
-            <Typography
-              component="p"
-              variant="p"
-              sx={{
-                fontSize: "14px",
-                fontWeight: 600,
-                color: "success.dark",
-              }}
-            >
-              {error}
-            </Typography>
-          )}
-          {error !== "Login Success" && (
-            <Typography
-              component="p"
-              variant="p"
-              sx={{
-                fontSize: "14px",
-                fontWeight: 600,
-                color: "error.dark",
-              }}
-            >
-              {error}
-            </Typography>
-          )}
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 2,
+          marginBottom: 2,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar
+          sx={{ m: 1, borderRadius: "0" }}
+          src="https://i.ibb.co/jVR0Kyc/logo-3.png"
+        ></Avatar>
+        <Typography variant="h5">Sign In</Typography>
+        {error === "Login Success" && (
+          <Typography
+            component="p"
+            variant="p"
+            sx={{
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "success.dark",
+            }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              value={email}
-              onChange={(e) => validation(e)}
-              autoFocus
-              error={validateEmail}
-              helperText={validateEmail ? "Invalid Email." : ""}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              className={classes.root}
-              value={password}
-              onChange={(e) => validation(e)}
-              autoComplete="current-password"
-              error={validatePassword}
-              helperText={validatePassword ? "Enter Password." : ""}
-            />
-            {/* <FormControlLabel
-              sx={{ ml: "0 !important" }}
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
-            <button
-              type="submit"
-              style={
-                loader
-                  ? { backgroundColor: "var(--color-disable)" }
-                  : { backgroundColor: "var(--color-secondary)" }
-              }
-              disabled={loader ? true : false}
-              className={`btn-grad full-width ${classes.btnLogin}`}
-            >
-              {loader ? <img src={ButtonLoader} width="80" /> : "LogIn"}
-            </button>
-            {/* <Grid container>
+            {error}
+          </Typography>
+        )}
+        {error !== "Login Success" && (
+          <Typography
+            component="p"
+            variant="p"
+            sx={{
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "error.dark",
+            }}
+          >
+            {error}
+          </Typography>
+        )}
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => validation(e)}
+            autoFocus
+            error={validateEmail}
+            helperText={validateEmail ? "Invalid Email." : ""}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            className={classes.root}
+            value={password}
+            onChange={(e) => validation(e)}
+            autoComplete="current-password"
+            error={validatePassword}
+            helperText={validatePassword ? "Enter Password." : ""}
+          />
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <span>
+              <Radio />
+              Remember me{" "}
+            </span>
+            <Link to="/">Forget password?</Link>
+          </div>
+
+          <button
+            type="submit"
+            style={
+              loader
+                ? { backgroundColor: "var(--color-disable)" }
+                : { backgroundColor: "var(--color-secondary)" }
+            }
+            disabled={loader ? true : false}
+            className={`btn-grad full-width ${classes.btnLogin}`}
+          >
+            {loader ? <img src={ButtonLoader} width="80" alt="" /> : "LogIn"}
+          </button>
+
+          {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
             </Grid> */}
-          </Box>
         </Box>
-      </Container>
-    </ThemeProvider>
+      </Box>
+    </Container>
   );
 }

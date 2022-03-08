@@ -1,0 +1,34 @@
+.auth {
+  margin-top: 8rem;
+  display: flex;
+  justify-content: space-around;
+}
+.auth-leftside {
+  width: 570px;
+  display: none;
+  margin: 8rem 0;
+}
+.auth-rightside {
+  margin: 8rem 0;
+}
+.auth-rightside-flex {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.member-text {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .auth-leftside {
+    display: inline;
+  }
+  .auth-rightside-flex {
+    flex-direction: column;
+  }
+  .member-text {
+    margin: 2rem 0;
+    text-align: end;
+  }
+}

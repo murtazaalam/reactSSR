@@ -23,7 +23,6 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Collapse from "@mui/material/Collapse";
 
-import ListItemButton from "@mui/material/ListItemButton";
 // import { HashLink } from "react-router-hash-link";
 // import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
@@ -610,18 +609,20 @@ const NavBar = (props) => {
                 </>
               ) : (
                 <>
-                  <button
-                    className="btn-grad btn-nav"
-                    onClick={handleClickOpen}
+                  <Link
+                    // onClick={handleClickOpen}
+                    to="/auth-user"
                   >
-                    <span
-                      className={
-                        scroll === false ? "color-white" : "color-black"
-                      }
-                    >
-                      LogIn / SignUp
-                    </span>
-                  </button>
+                    <button className="btn-grad btn-nav">
+                      <span
+                        className={
+                          scroll === false ? "color-white" : "color-black"
+                        }
+                      >
+                        LogIn / SignUp
+                      </span>
+                    </button>
+                  </Link>
 
                   <Login
                     open={isLogin ? false : open}

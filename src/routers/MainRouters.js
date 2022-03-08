@@ -20,6 +20,7 @@ import PlacementPolicies from "../components/PlacementPolicies";
 import ScrollToTop from "../components/ScrollToTop";
 import PaymentPolicies from "../components/PaymentPolicies";
 import AboutUs from "../pages/about-us/AboutUs.jsx";
+import Signup from "../pages/Auth/auth";
 const MainRouters = () => {
   return (
     <ScrollToTop>
@@ -31,6 +32,7 @@ const MainRouters = () => {
           path="/all-courses/:categoryRoute"
           element={<AllCourses></AllCourses>}
         ></Route>
+        <Route path="/auth-user" element={<Signup />}></Route>
         <Route path="/courses/:id" element={<Course></Course>}></Route>
         <Route
           path="/interview-questions"

@@ -1,0 +1,19 @@
+.otp {
+  display: flex;
+  column-gap: 12px;
+  padding: 2rem 0;
+  place-content: space-between;
+}
+.otp-input {
+  border: none;
+  border-bottom: 2px solid black;
+  width: 43px;
+  text-align: center;
+  padding: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .otp-input {
+    width: 86px;
+  }
+}
