@@ -149,7 +149,9 @@ export default function SignUp(props) {
           sx={{ m: 1, borderRadius: "0" }}
           src="https://i.ibb.co/jVR0Kyc/logo-3.png"
         ></Avatar>
-        <Typography variant="h5">Create Your Account</Typography>
+        <Typography variant="h5" className="weightBold">
+          Create Your Account
+        </Typography>
         <Typography
           component="p"
           variant="p"
@@ -256,7 +258,7 @@ export default function SignUp(props) {
             onClick={props.handleProceed}
           >
             {/* {loader ? <img src={ButtonLoader} width="80" /> : "SignUp"} */}
-            Proceed
+            Sign Up
           </button>
         </Box>
       </Box>

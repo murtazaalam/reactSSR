@@ -21,6 +21,9 @@ import ScrollToTop from "../components/ScrollToTop";
 import PaymentPolicies from "../components/PaymentPolicies";
 import AboutUs from "../pages/about-us/AboutUs.jsx";
 import Signup from "../pages/Auth/auth";
+import AuthSuccess from "../components/Login/Content/AuthSuccess";
+import ForgetPassword from "../pages/Auth/ForgetPassword";
+import ResetPassword from "../pages/Auth/ResetPassword";
 const MainRouters = () => {
   return (
     <ScrollToTop>
@@ -33,6 +36,9 @@ const MainRouters = () => {
           element={<AllCourses></AllCourses>}
         ></Route>
         <Route path="/auth-user" element={<Signup />}></Route>
+        <Route path="/reset-password" element={<ResetPassword />}></Route>
+        <Route path="/register-success" element={<AuthSuccess />}></Route>
+        <Route path="/forget-password" element={<ForgetPassword />}></Route>
         <Route path="/courses/:id" element={<Course></Course>}></Route>
         <Route
           path="/interview-questions"

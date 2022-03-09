@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import { toast } from "react-toastify";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginApi from "../../../apis/api/Login";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
 import { useRecoilState } from "recoil";
@@ -18,11 +17,11 @@ import { loginAction } from "../../../redux/slices/auth.slices";
 import { cartAction } from "../../../redux/slices/cart.slice";
 import getFromCartApi from "../../../apis/api/GetFromCart";
 import Radio from "@mui/material/Radio";
+import { useNavigate } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 
-const theme = createTheme();
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   btnLogin: {
     display: "flex",
     justifyContent: "center",
@@ -43,6 +42,7 @@ export default function LoginContent(props) {
   const [loading, setLoading] = React.useState();
   const classes = useStyles();
   let dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const emptyState = () => {
     setEmail("");
@@ -96,6 +96,7 @@ export default function LoginContent(props) {
         dispatch(loginAction({ admin: res.user }));
         let data = await getFromCartApi(setCartData, setLoading, setError);
         dispatch(cartAction({ cartCount: data?.length }));
+        navigate("/");
       }
     }
   };
@@ -116,7 +117,9 @@ export default function LoginContent(props) {
           sx={{ m: 1, borderRadius: "0" }}
           src="https://i.ibb.co/jVR0Kyc/logo-3.png"
         ></Avatar>
-        <Typography variant="h5">Sign In</Typography>
+        <Typography variant="h5" className="weightBold">
+          Sign In
+        </Typography>
         {error === "Login Success" && (
           <Typography
             component="p"
@@ -185,7 +188,7 @@ export default function LoginContent(props) {
               <Radio />
               Remember me{" "}
             </span>
-            <Link to="/">Forget password?</Link>
+            <Link to="/forget-password">Forget password?</Link>
           </div>
 
           <button
@@ -198,7 +201,7 @@ export default function LoginContent(props) {
             disabled={loader ? true : false}
             className={`btn-grad full-width ${classes.btnLogin}`}
           >
-            {loader ? <img src={ButtonLoader} width="80" alt="" /> : "LogIn"}
+            {loader ? <img src={ButtonLoader} width="80" alt="" /> : "Sign In"}
           </button>
 
           {/* <Grid container>

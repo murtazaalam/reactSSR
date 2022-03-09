@@ -2,14 +2,17 @@
 import React, { useState } from "react";
 import SignUp from "../../components/Login/Content/SignUpContent";
 import Login from "../../components/Login/Content/LoginContent";
-import authSvg from "../../assets/Svgs/auth.svg";
 import "./auth.css";
 import OtpContent from "../../components/Login/Content/OtpContent";
-function Signup() {
+import { useNavigate } from "react-router-dom";
+import AuthLayout from "../../components/Login/AuthLayout";
+function AuthPage() {
+  const navigate = useNavigate();
+
   const [modal, setModal] = useState([
     { id: 1, name: "otp", checked: false },
-    { id: 2, name: "signin", checked: false },
-    { id: 3, name: "signup", checked: true },
+    { id: 2, name: "signin", checked: true },
+    { id: 3, name: "signup", checked: false },
   ]);
 
   const handleModal = (e, id) => {
@@ -22,8 +25,12 @@ function Signup() {
     setModal(newModalInfo);
   };
 
+  const handleVerify = (e) => {
+    navigate("/register-success");
+  };
+
   const signupModal = (
-    <div className="auth-rightside-flex auth-rightside-signup">
+    <>
       <p className="member-text">
         Already a member?
         <a className="link" onClick={(e) => handleModal(e, 2)}>
@@ -31,22 +38,26 @@ function Signup() {
         </a>
       </p>
       <SignUp handleProceed={(e) => handleModal(e, 1)} />
-    </div>
+    </>
   );
   const otpModal = (
-    <div className="auth-rightside-flex auth-rightside-signup">
+    <>
       <p className="member-text">
         Already a member?
         <a className="link" onClick={(e) => handleModal(e, 2)}>
           Sign In now
         </a>
       </p>
-      <OtpContent />
-    </div>
+      <OtpContent
+        handleVerify={(e) => handleVerify(e)}
+        title="Verify Mobile Number"
+        heading="Enter OTP"
+      />
+    </>
   );
 
   const loginModal = (
-    <div className="auth-rightside-flex auth-rightside-signin">
+    <>
       <p className="member-text">
         Not a member?
         <a className="link" onClick={(e) => handleModal(e, 3)}>
@@ -54,28 +65,22 @@ function Signup() {
         </a>
       </p>
       <Login />
-    </div>
+    </>
   );
 
   return (
-    <div className="auth">
-      <div className="auth-leftside">
-        <img src={authSvg} alt="authSvg" />
-      </div>
-      <div className="auth-rightside">
-        {modal.map((m) => {
-          if (m.checked) {
-            const id = m.id;
-            console.log(id);
-            if (id === 1) return otpModal;
-            if (id === 2) return loginModal;
-            if (id === 3) return signupModal;
-          }
-        })}
-      </div>
-      {/* <div className="auth-rightside">{signupModal}</div> */}
-    </div>
+    <AuthLayout>
+      {modal.map((m) => {
+        if (m.checked) {
+          const id = m.id;
+          console.log(id);
+          if (id === 1) return otpModal;
+          if (id === 2) return loginModal;
+          if (id === 3) return signupModal;
+        }
+      })}
+    </AuthLayout>
   );
 }
 
-export default Signup;
+export default AuthPage;

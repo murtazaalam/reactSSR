@@ -116,10 +116,10 @@ function AboutUs() {
           have taken a step further in coming up with endless opportunities in
           the form of{" "}
           <span className="aboutUsSplText">
-            COURSES, TRAINING PROGRAMS, SEMINARS, CORPORATE and PLACEMENT
-            TRAINING and WORKSHOPS
+            COURSES, TRAINING PROGRAMS, SEMINARS, CORPORATE & PLACEMENT TRAINING
+            and WORKSHOPS
           </span>{" "}
-          that deal with stuff beyond the classrooms.
+          that deals with stuff beyond the classrooms.
           <p>
             Starting off in 2019, we have also ventured into the avenue of
             software development with a dedicated team of software developers
@@ -269,9 +269,9 @@ function AboutUs() {
           <h3 className="about-us-heading"> Our Values</h3>
           <br />
           <p className="values-text">
-            Our philosophy is simple- To extend everlasting support to wilful
+            Our philosophy is simple- To extend everlasting support to wilfull
             learners, come what may. Our core values reflect this philosophy,
-            highlighting the following-
+            highlighting the following:-
           </p>
           <ul className="values-list">
             <li> Bring out the best</li>
