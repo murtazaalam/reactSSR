@@ -31,6 +31,7 @@ import addReviewApi from "../../../apis/api/AddReview";
 import { cartAction } from "../../../redux/slices/cart.slice";
 import { logoutAction } from "../../../redux/slices/auth.slices";
 import getFromCartApi from "../../../apis/api/GetFromCart";
+//import myOrdersApi from "../../../apis/api/MyOders";
 
 function PaperComponent(props) {
   return (
@@ -46,7 +47,7 @@ const CourseBody = ({ course }) => {
   const [value, setValue] = useState("1");
 
   const [timeBadge, setTimerBadge] = useState(true);
-  const [baughtCourses, setBaughtCourses] = useState([]);
+  const [baughtCourses, setCourse] = useState([]);
   const [isBaughtCourse, setIsBaughtCourse] = useState(false);
   const [loader, setLoader] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -55,25 +56,31 @@ const CourseBody = ({ course }) => {
   const [formError, setFormError] = useState(false);
   const [cartLoader, setCartLoader] = useState(false);
   const [error, setError] = useState();
+  const [y, setY] = useState([]);
   const [cartData, setCartData] = useState();
   const [loading, setLoading] = useState();
-  const [cartCount, setCartCount] = useState();
+  
 
   let dispatch = useDispatch();
-
+  let baughtCourseOnly = [];
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
   const currentUrl = window.location.href;
-  useEffect(() => {
-    if (baughtCourses.length !== 0) {
-      myOrdersApi(setBaughtCourses);
-      isBaught();
+  useEffect( async() => {
+    if(isLogin){
+      let baughtData = await myOrdersApi(setCourse, setLoading, setError);
+      if(baughtData){
+        baughtCourseOnly = baughtData.filter((item) => {
+          return item.data.course_type === "course"
+        });
+        isBaught(baughtCourseOnly)
+      }
     }
   }, []);
-  const isBaught = () => {
+  const isBaught = (baughtCourses) => {
     if (baughtCourses) {
       baughtCourses.forEach((item) => {
-        if (item.course_id === course._id) setIsBaughtCourse(true);
+        if (item.data.course_id === course._id) setIsBaughtCourse(true);
       });
     }
   };
@@ -124,10 +131,24 @@ const CourseBody = ({ course }) => {
     return () => clearInterval(timerId);
   });
 
+  // useEffect( async() => {
+  //   if(isLogin){
+  //     let baughtData = await myOrdersApi(setCourse, setLoading, setError);
+  //     if(baughtData){
+  //       baughtCourseOnly = baughtData.filter((item) => {
+  //         return item.data.course_type === "course"
+  //       });
+  //       setCourse(baughtCourseOnly);
+  //     }
+  //   }
+  // }, []);
+
   const addToCart = async (id) => {
     setCartLoader(true);
     let body = {
+      course_type:"course",
       course_name: course.course_name,
+      registration_fee: course.registration_fee,
       course_image: course.thumbnail,
       description: course.description,
       avg_rating: course.avgRating,
@@ -137,7 +158,6 @@ const CourseBody = ({ course }) => {
       price: course.price,
       course_id: id,
     };
-    console.log(body);
     let message = await addToCartApi(body, setCartLoader);
     if (message === "Item Already Added") {
       toast.warn("Course already added ", {
@@ -159,7 +179,7 @@ const CourseBody = ({ course }) => {
         draggable: true,
         progress: undefined,
       });
-      let data = await getFromCartApi(setCartData, setLoading, setError);
+      let data = await getFromCartApi(setCartData, setY, setLoading, setError);
       dispatch(cartAction({cartCount:data?.length}))
     }
     else if (message === "Unauthorized") {
@@ -479,7 +499,7 @@ const CourseBody = ({ course }) => {
                 </div>
                 <div>
                   {isBaughtCourse ? (
-                    <button type="button" className="btn-grad">
+                    <button type="button" className="btn-grad btn-purchased">
                       Purchased
                     </button>
                   ) : (

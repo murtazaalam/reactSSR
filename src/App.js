@@ -4,7 +4,6 @@ import { SecondaryNavBar } from "./components";
 import Footer from "./components/footer/Footer";
 import { RecoilRoot } from "recoil";
 import React from "react";
-
 import { HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { persistor, store } from "./redux";

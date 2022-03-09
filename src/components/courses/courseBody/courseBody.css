@@ -80,6 +80,9 @@
   flex-direction: column;
   width: 100%;
 }
+.btn-purchased{
+  background-color: var(--color-purchased) !important;
+}
 .btn-cart{
   display: flex;
   justify-content: center;

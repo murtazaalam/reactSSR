@@ -30,8 +30,17 @@
 }
 .user-name{
   color: #fff;
-  font-size: 18px;
   font-weight: 600;
+  position: absolute;
+  top: -16px;
+  left: -18px;
+  background: var(--color-secondary);
+  border-radius: 10px;
+  padding: 0px 6px;
+  font-size: 12px;
+}
+.cart-badge .css-fvc8ir-MuiBadge-badge{
+  background: var(--color-secondary);
 }
 .logo-image{
   width: 122px;

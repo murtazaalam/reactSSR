@@ -1,8 +1,8 @@
 import { Grid, Container } from "@mui/material";
 import React from "react";
 import BlogsCard from "./BlogsCard";
-
 import { makeStyles } from "@material-ui/core/styles";
+
 const useStyles = makeStyles((theme) => ({
   blogsContainer: {
     paddingTop: theme.spacing(3),

@@ -20,5 +20,6 @@ const routes = {
   AddHiring : endpoint + "add-hiring",
   AddPlacement : endpoint + "add-placement-opportunity",
   AddEvent : endpoint + "event-registration",
+  GetReferals : endpoint + "referals"
 };
 export default routes;

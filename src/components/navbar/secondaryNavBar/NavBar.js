@@ -55,6 +55,7 @@ const NavBar = (props) => {
   const [error, setError] = useState();
   const [courseData, setCourseData] = React.useState();
   const [cartCounting, setCartCount] = useState();
+  const [y, setY] = useState([]);
   let dispatch = useDispatch();
 
   const [drawable, setDrawable] = useState({
@@ -115,7 +116,7 @@ const NavBar = (props) => {
   useEffect(() => {
     const getCartData = async () => {
       if (!cartData) {
-        let data = await getFromCartApi(setCartData, setLoading, setError);
+        let data = await getFromCartApi(setCartData, setY, setLoading, setError);
         setCartCount(data?.length);
       }
     };
@@ -493,16 +494,17 @@ const NavBar = (props) => {
               {isLogin ? (
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>
-                    <IconButton aria-label="cart" className="color-white">
-                      <Badge badgeContent={cartCount ? cartCount : cartCounting} color="error">
+                    <IconButton aria-label="cart" className="color-white cart-badge">
+                      <Badge badgeContent={cartCount ? cartCount : cartCounting} 
+                      >
                         <ShoppingCartIcon fontSize="large" />
                       </Badge>
                     </IconButton>
                   </Link>
-                  <Link to="/" style={{ marginRight: "30px", textDecoration: "none"}}>
-                    <span className="user-name">Hey! {admin.name.split(" ")[0]}</span>
-                  </Link>
                   <div className="dropdown">
+                    <span className="user-name">Hey!&nbsp;
+                    {admin.name.split(" ")[0].length < 7 ? admin.name.split(" ")[0] : admin.name.split(" ")[0].substr(0, 6) + '..'}
+                    </span>
                     <Link to="/">
                       <span
                         className="color-white"
@@ -511,6 +513,9 @@ const NavBar = (props) => {
                       </span>
                     </Link>
                     <div className="dropdown-content-contact">
+                      <a style={{ color: "black", textTransform: 'capitalize' }}>
+                        {admin.name.split(" ")[0]}
+                      </a>
                       <Link to="/my-courses">My Courses</Link>
                       <a style={{ color: "black" }} onClick={logoutHandler}>
                         Log Out

@@ -39,6 +39,7 @@ export default function LoginContent(props) {
   const [loader, setLoader] = React.useState(false);
   const [cartData, setCartData] = React.useState();
   const [loading, setLoading] = React.useState();
+  const [y, setY] = React.useState([]);
   const classes = useStyles();
   let dispatch = useDispatch();
 
@@ -92,7 +93,7 @@ export default function LoginContent(props) {
           progress: undefined,
         });
         dispatch(loginAction({admin:res.user}));
-        let data = await getFromCartApi(setCartData, setLoading, setError);
+        let data = await getFromCartApi(setCartData, setY, setLoading, setError);
         dispatch(cartAction({cartCount:data?.length}));
       }
     }

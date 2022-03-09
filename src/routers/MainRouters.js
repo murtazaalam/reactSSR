@@ -19,6 +19,7 @@ import PrivacyPolicy from "../components/PrivacyPolicy";
 import PlacementPolicies from "../components/PlacementPolicies";
 import ScrollToTop from "../components/ScrollToTop";
 import PaymentPolicies from "../components/PaymentPolicies";
+
 const MainRouters = () => {
   return (
     <ScrollToTop>

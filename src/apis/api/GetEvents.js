@@ -1,17 +1,18 @@
 import routes from "../routes/Services.routes";
 
-export default function eventsApi(
+export default async function eventsApi(
   category,
   setEventData,
   setLoading,
   setError
 ) {
-  fetch(routes.GetEvents + "?category=" + category)
+  return fetch(routes.GetEvents + "?category=" + category)
     .then((response) => response.json())
     .then((data) => {
       setEventData(data);
-
+      console.log("data",data);
       setLoading(false);
+      return data
     })
     .catch((error) => {
       console.log(error);

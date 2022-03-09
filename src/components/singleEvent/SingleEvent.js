@@ -9,8 +9,17 @@ import { toast } from "react-toastify";
 import "./singleEvent.css";
 import { Typography, Card } from "@mui/material";
 import singleEventApi from "../../apis/api/SingleEvent";
+import { useSelector, useDispatch } from "react-redux";
+import Chip from '@mui/material/Chip';
 import addEventApi from "../../apis/api/AddEvent";
+import addToCartApi from "../../apis/api/AddToCart";
+import getFromCartApi from "../../apis/api/GetFromCart";
 import ButtonLoader from "../../assets/images/button_loader.gif";
+import { cartAction } from "../../redux/slices/cart.slice";
+import { logoutAction } from "../../redux/slices/auth.slices";
+import Draggable from "react-draggable";
+import Paper from "@mui/material/Paper";
+import Login from "../../components/Login/Login";
 import "./singleEvent.css";
 
 const useStyles = makeStyles({
@@ -38,23 +47,33 @@ const useStyles = makeStyles({
     padding: "10px 52px",
   },
 });
-const SingleEvent = () => {
-  const classes = useStyles();
-  const [allError, setAllError] = useState();
+
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
+
+const SingleEvent = ({isEventBaught}) => {
   const [event, setEventData] = useState();
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
-  const [loader, setLoader] = useState(false);
+  const [loader, setCartLoader] = useState(false);
+  const [cartData, setCartData] = useState();
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState();
+  const [open, setOpen] = React.useState(false);
+  const [y, setY] = useState([]);
   const params = useParams();
 
-  let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-  const [info, setInfo] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
+  let dispatch = useDispatch();
+  let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
   useEffect(() => {
     if (!event) {
@@ -62,51 +81,119 @@ const SingleEvent = () => {
     }
   }, []);
 
-  const formValidate = (event) => {
-    if (event.name === "name") {
-      setInfo({ ...info, name: event.value });
-      if (event.value == "") return setNameError(true);
-      setNameError(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const addToCart = async (id) => {
+    setCartLoader(true);
+    let body = {
+      course_type: "event",
+      event_name: event.name,
+      event_description: event.description,
+      event_image: event.event_image,
+      event_date: event.date,
+      price: event.price ? event.price : 0,
+      event_id: id,
+    };
+    let message = await addToCartApi(body, setCartLoader);
+    if (message === "Item Already Added") {
+      toast.warn("Event already added ", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (message === "Item Added"){
+      toast.success("Event added to your cart", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      let data = await getFromCartApi(setCartData, setY, setLoading, setError);
+      dispatch(cartAction({cartCount:data?.length}))
     }
-    if (event.name === "email") {
-      setInfo({ ...info, email: event.value });
-      if (event.value == "" || !event.value.match(emailValidate))
-        return setEmailError(true);
-      setEmailError(false);
-    }
-    if (event.name === "phone") {
-      setInfo({ ...info, phone: event.value });
-      if (event.value != "" && event.value.length === 10)
-        return setPhoneError(false);
-      setPhoneError(true);
+    else if (message === "Unauthorized") {
+      toast.error(message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setCartLoader(false);
+      dispatch(logoutAction());
+      setOpen(true);
+    } else {
+      toast.error(message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setCartLoader(false);
+      dispatch(logoutAction());
+      setOpen(true);
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setAllError("");
-    setLoader(true);
-    if (!info.name || !info.email || !info.phone) {
-      setAllError("Start fields are required.");
-      setLoader(false);
-      return;
-    } else {
-      if (nameError === false && emailError === false && phoneError === false) {
-        let res = await addEventApi(info, setLoader);
-        toast.success(res, {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      } else {
-        setLoader(false);
-      }
-    }
-  };
+  // const formValidate = (event) => {
+  //   if (event.name === "name") {
+  //     setInfo({ ...info, name: event.value });
+  //     if (event.value == "") return setNameError(true);
+  //     setNameError(false);
+  //   }
+  //   if (event.name === "email") {
+  //     setInfo({ ...info, email: event.value });
+  //     if (event.value == "" || !event.value.match(emailValidate))
+  //       return setEmailError(true);
+  //     setEmailError(false);
+  //   }
+  //   if (event.name === "phone") {
+  //     setInfo({ ...info, phone: event.value });
+  //     if (event.value != "" && event.value.length === 10)
+  //       return setPhoneError(false);
+  //     setPhoneError(true);
+  //   }
+  // };
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   setAllError("");
+  //   setLoader(true);
+  //   if (!info.name || !info.email || !info.phone) {
+  //     setAllError("Start fields are required.");
+  //     setLoader(false);
+  //     return;
+  //   } else {
+  //     if (nameError === false && emailError === false && phoneError === false) {
+  //       let res = await addEventApi(info, setLoader);
+  //       toast.success(res, {
+  //         position: "bottom-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //       });
+  //     } else {
+  //       setLoader(false);
+  //     }
+  //   }
+  // };
   return (
     <>
       <Box
@@ -127,11 +214,10 @@ const SingleEvent = () => {
               <li className="breadcrumb-item active">{event?.name}</li>
             </ol>
           </nav>
-
           <h1 className="event-heading">{event?.name}</h1>
+          <Chip label={event?.price ? event?.price : 'Free'} sx={{background: `var(--color-secondary)`,color:'#fff'}} />
         </div>
       </Box>
-
       <Box
         component="div"
         sx={{ flexGrow: 1, mt: 2, mb: 2 }}
@@ -145,24 +231,51 @@ const SingleEvent = () => {
             <div>
               <img src={event?.event_image} className="hover" alt="" />
             </div>
+            {!isEventBaught ? 
+            <button
+              type="button"
+              onClick={() => addToCart(event._id)}
+              className="btn-grad full-width event-register"
+              style={
+                loader
+                  ? { backgroundColor: "var(--color-disable)" }
+                  : { backgroundColor: "var(--color-secondary)" }
+              }
+              disabled={loader ? true : false}
+            >
+              {loader ? (
+                <img src={ButtonLoader} width="80" />
+              ) : (
+                "Add To Cart"
+              )}
+            </button>:
+            <button
+              type="button"
+              className="btn-grad full-width btn-purchased"
+            >
+              Purchased
+            </button>
+            }
+            <Login
+              open={isLogin ? false : open}
+              handleClose={handleClose}
+              PaperComponent={PaperComponent}
+            />
           </Grid>
-          <Grid item xs={12} sm={12} md={6} xl={6}>
+          <Grid item xs={12} sm={12} md={10} xl={10}>
             {event &&
               event.description?.map((data, index) => (
                 <>
-                  {console.log(data)}
                   <Typography variant="h6" sx={{ lineHeight: "28px", pt: 3 }}>
                     {data?.title}
                   </Typography>
-
                   {data?.detail.map((d, i) => (
                     <Typography style={{ lineHeight: "28px" }}>{d}</Typography>
                   ))}
                 </>
               ))}
           </Grid>
-          {console.log(event)}
-          {event?.category === "upcoming" && (
+          {/* {event?.category === "upcoming" && (
             <Grid item xs={12} sm={12} md={4} xl={4}>
               <Card sx={{ p: 2 }} className="event-form">
                 <Box
@@ -237,7 +350,7 @@ const SingleEvent = () => {
                 </Box>
               </Card>
             </Grid>
-          )}
+          )} */}
         </Grid>
       </Box>
     </>

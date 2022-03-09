@@ -1,15 +1,43 @@
 import { Container, Typography } from "@mui/material";
 import * as React from "react";
+import { useState } from "react";
 import CourseCard from "./CourseCard/CourseCard";
 import "./TopCourses.css";
 import { Link } from "react-router-dom";
 import image from "../../assets/Svgs/course.svg";
 import getTopCourseApi from "../../apis/api/TopCourses";
+import myOrdersApi from "../../apis/api/MyOders";
+import { useSelector } from "react-redux";
 
 const TopCourses = () => {
   const [topCourses, setTopCourses] = React.useState([]);
-  React.useEffect(() => {
-    getTopCourseApi(setTopCourses);
+  const [course, setCourse] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  let baughtCourseOnly = [];
+  let {admin, isLogin} = useSelector((state) => state.AuthReducer);
+
+  React.useEffect( async() => {
+    let topCourseData = await getTopCourseApi(setTopCourses);
+    if(isLogin){
+      let baughtData = await myOrdersApi(setCourse, setLoading, setError);
+      if(baughtData){
+        baughtCourseOnly = baughtData.filter((item) => {
+          return item.data.course_type === "course"
+        });
+        setCourse(baughtCourseOnly);
+      }
+      let courseId = baughtCourseOnly.map((item) => {
+        return String(item.data.course_id)
+      })
+      let newList = [];
+      for (const item of topCourseData) {
+        let flag = courseId.includes(String(item._id));
+        newList.push({...item, isBaught:flag})
+      }
+      setTopCourses(newList)
+    }
   }, []);
   return (
     <>
@@ -24,6 +52,7 @@ const TopCourses = () => {
             <section className="display-grid fr4 top-course-aria">
               {topCourses && topCourses.length !== 0
                 ? topCourses.map((data, index) => {
+                    
                     return (
                       <CourseCard
                         key={index}
@@ -34,6 +63,7 @@ const TopCourses = () => {
                         price={data.price}
                         rating={data.avgRating}
                         couseData={data}
+                        isBaught={data.isBaught ? data.isBaught : false}
                         noOfReviews={data.noOfReviews}
                         // review={data.reviews}
                       ></CourseCard>

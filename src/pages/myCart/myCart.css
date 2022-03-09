@@ -3,6 +3,7 @@ input {
 }
 .cart-content-block {
   margin-top: 40px;
+  margin-bottom: 40px;
 }
 .cart-action {
   display: flex;
@@ -36,12 +37,33 @@ input {
   border-color: #d9534f;
   color: white;
 }
-
+.referal-aria{
+  flex-direction: row !important; 
+  width: 100%;
+  justify-content: space-between;
+}
 .green {
   font-size: smaller;
   color: green;
 }
-
+.check-icon{
+  font-size: 14px !important;
+}
+.referal-error{
+  position: absolute;
+  left: 0;
+  bottom: -36px;
+  color: var(--color-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+.btn-verify{
+  border: none;
+  padding: 0 15px;
+  background: var(--color-purchased);
+  border-radius: 4px;
+  color: #fff;
+}
 .remove-coupon1 {
   font-size: smaller;
   width: 120px;
@@ -53,6 +75,11 @@ input {
 }
 .table-wrap .css-1qaznj3-MuiCardContent-root {
   width: 424px;
+}
+.btn-checkout{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @media screen and (min-width: 768px) {
   .cart-form {
