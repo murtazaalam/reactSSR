@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import "./singleEvent.css";
+
+import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Card } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import singleEventApi from "../../apis/api/SingleEvent";
 import { useSelector, useDispatch } from "react-redux";
 import Chip from '@mui/material/Chip';
@@ -71,6 +71,7 @@ const SingleEvent = ({isEventBaught}) => {
   const [open, setOpen] = React.useState(false);
   const [y, setY] = useState([]);
   const params = useParams();
+  const classes = useStyles();
 
   let dispatch = useDispatch();
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
@@ -80,6 +81,7 @@ const SingleEvent = ({isEventBaught}) => {
       singleEventApi(params.id, setEventData);
     }
   }, []);
+  console.log(admin);
 
   const handleClose = () => {
     setOpen(false);
@@ -147,6 +149,7 @@ const SingleEvent = ({isEventBaught}) => {
       dispatch(logoutAction());
       setOpen(true);
     }
+    
   };
 
   // const formValidate = (event) => {
@@ -315,21 +318,22 @@ const SingleEvent = ({isEventBaught}) => {
                     onChange={(e) => formValidate(e.target)}
                   />
 
-                  <TextField
-                    margin="normal"
-                    required
-                    error={phoneError}
-                    helperText={phoneError ? "Invalid Phone Number." : ""}
-                    fullWidth
-                    name="phone"
-                    label="phone"
-                    type="number"
-                    id="phone"
-                    className={classes.root}
-                    value={info.phone}
-                    onChange={(e) => formValidate(e.target)}
-                    autoComplete="current-phoneNumber"
-                  />
+                    <TextField
+                      margin="normal"
+                      required
+                      error={phoneError}
+                      helperText={phoneError ? "Invalid Phone Number." : ""}
+                      fullWidth
+                      name="phone"
+                      disabled={isLogin ? true : false}
+                      label="phone"
+                      type="number"
+                      id="phone"
+                      className={classes.root}
+                      value={isLogin ? admin.phone : info.phone}
+                      onChange={(e) => formValidate(e.target)}
+                      autoComplete="current-phoneNumber"
+                    />
 
                   <button
                     type="submit"

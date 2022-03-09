@@ -17,6 +17,7 @@
 .header-text {
   padding-top: 120px;
 }
+
 .btn-grad .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
   color: white;
 }
@@ -41,6 +42,10 @@
   .small-text {
     font-size: 21px;
   }
+
+  .techvanto-header-content {
+    height: 45vh;
+  }
 }
 @media screen and (min-width: 768px) {
   .large-text {
@@ -48,9 +53,6 @@
   }
   .techvanto-content-header-image {
     min-height: 60vh !important;
-  }
-  .header-text {
-    padding-top: 24px;
   }
 }
 @media screen and (min-width: 1024px) {

@@ -31,92 +31,92 @@ const Services = [
   {
     id: "1",
     tab: "School",
-    text: "Labs",
+    text: "Hands-on Lab Training",
     link: "/service/class-projects/",
     icon: labIcon,
     description:
-      "Major and Minor projects are a part of students’ academics, but how diligently they work on it makes them stand out from others. Techvanto Academy guides learners through choosing the project, supporting documents or tools and finally the documentation. Undertake real-life projects while revamping your analytical, problem-solving, communication and soft skills tremendously",
+      "Compete with students from better-equipped schools when it comes to lab experiments while bridging the digital divide.",
   },
   {
     id: "2",
     tab: "School",
-    text: "Tution for Schools",
+    text: "New Era of Online Tutoring",
     link: "/services/workshop",
     icon: tution,
     description:
-      "Workshops are surreal, creative experiences to demonstrate the most critical part of your association with us-career advancement. Participate, collaborate and interact with learners and instructors alike. Our trainers lead you through the way of optimum learning and try to broaden your horizons with hands-on projects.",
+      "Supplement your academic curricula with tutoring of important subjects and reach your academic goals.",
   },
   {
     id: "3",
     tab: "School",
-    text: "IIT Basics",
+    text: "Make Yourself IIT-Ready",
     link: "/services/webinar",
     icon: iit,
     description:
-      "Techvanto’s free webinars provide you with the stepping stones to success. They are freely scalable and engaging. Hear out our able speakers share their own experiences while associating it with an in-depth analysis of trending topics",
+      "Experience a new era of smart coaching to secure a seat at your dream IIT.",
   },
   {
     id: "4",
     tab: "School",
-    text: "English",
+    text: "Communication-English Language",
     link: "/service/techvanto-training-program/",
     icon: English,
     description:
-      "Techvanto Academy aspires to create a vibrant and informative environment wherein students are honed to perform their best in job roles. Industrial training is one of our core competencies that pushes you to put your knowledge to work with practical implementation of concepts. Grasp a thorough understanding of high-end problems and real-world applications via our Industrial Training program",
+      "Willing to overcome your fear of English? You are at the right place. Conquer the challenges of feeling shy or making mistakes by building your English vocabulary and speaking skills the real way. We guide you from Day 1 until you learn effective communication for lasting and effective business relations and achieving your professional goals.",
   },
   {
     id: "5",
     tab: "School",
-    text: "Logical",
+    text: "Logical and Reasoning Training",
     link: "/service/interview-preprations/",
-    icon: logical,
+    icon: reasoning,
     description:
-      "If your profile is saturated with the skills you need, what’s holding you back? It could be the fickleness of qualifying interviews looming over your head. If this is so, you can give this a shot. This interview preparation shall comprise one on one sessions, mock interviews, professional networking and much more to help you gain the much-required confidence.",
+      "Logical and Reasoning-based questions form the core of many aptitude and competitive examinations. Techvanto Academy’s reasoning training allows you to discover your critical and computational thinking abilities and logic through the lens of practical problems from the beginner level.",
   },
   {
     id: "6",
     tab: "School",
-    text: "Reasoning",
+    text: "Reasoning (General)- Boost Your Reasoning Score",
     link: "/services/webinar",
-    icon: reasoning,
+    icon: logical,
     description:
-      "Summarising your professional acumen in a mere one to two-page resume could be a thorny affair. Our resume building services are quite affordable to make your content pop up before prospective recruiters.",
+      "Your journey towards getting that perfect score in the reasoning section starts here. Prepare for competitive exams like never before.",
   },
-  {
-    id: "7",
-    tab: "School",
-    text: "Management System",
-    link: "/service/one-to-one/",
-    icon: managementSystem,
-    description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
-  },
+  // {
+  //   id: "7",
+  //   tab: "School",
+  //   text: "Management System",
+  //   link: "/service/one-to-one/",
+  //   icon: managementSystem,
+  //   description:
+  //     "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+  // },
   {
     id: "8",
     tab: "Intermediate",
-    text: "Counselling",
+    text: "Career Counselling",
     link: "/service/counselling/",
     icon: counselling,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Making an informed choice about your career reaps job satisfaction and success in the long run. Worry no more about being clueless as to your career and the road ahead. Carve your own niche with expert counselling and develop the confidence to overcome career hurdles.",
   },
   {
     id: "8",
     tab: "Intermediate",
-    text: "IIT Preparation",
+    text: "Test Preparation",
     link: "/service/iit-preparation/",
     icon: iit,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Do you dream of securing a seat at your dream college? The first step towards it is to crack the entrance examination. Let the cutthroat competition not hinder you from getting closer to your goals with our test preparation training. Receive hands-on tips, test material, mock papers and much more.",
   },
   {
     id: "8",
     tab: "Intermediate",
-    text: "State/NCERT",
+    text: "Prepare for State/NCERT The Smart Way",
     link: "/service/state-ncert/",
     icon: ncert,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "From setting a preparation strategy to last-minute tips, Techvanto's ultimate preparation programme empowers you to prepare well and score higher in the state/NCERT examinations.",
   },
   {
     id: "8",
@@ -125,7 +125,7 @@ const Services = [
     link: "/service/stack-training/",
     icon: stackTraining,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Get adapted to the latest technologies including programming languages and database systems in our one-of-a-kind stack training programme.",
   },
   {
     id: "8",
@@ -134,16 +134,16 @@ const Services = [
     link: "/service/soft-skills/",
     icon: softSkills,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Gain a competitive advantage over your peers and vest yourself with strong communication, leadership and interpersonal skills in an industry-oriented and competency-based learning paradigm.",
   },
   {
     id: "8",
     tab: "Intermediate",
-    text: "Management System",
+    text: "Organise Better with a Management System",
     link: "/service/management-system/",
     icon: managementSystem,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "We equip you with a state-of-art web-based solution to manage workflow, store documents and avail necessary information from anywhere.",
   },
   {
     id: "9",
@@ -152,16 +152,16 @@ const Services = [
     link: "/service/one-to-one/",
     icon: stackTraining,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Hone your technical skills and make your way steadily in your career with start-to-finish stack training.",
   },
   {
     id: "9",
     tab: "Undergrads",
-    text: "Soft Skills",
+    text: "Soft Skills Training",
     link: "/service/one-to-one/",
     icon: softSkills,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Around 67% of HR professionals prefer to hire an applicant with strong soft skills. Soft skills instruction in this training enables students to delve deeper into the ability to work in a team, ace organizational communication, diplomacy and problem-solving skills.",
   },
   {
     id: "9",
@@ -170,25 +170,25 @@ const Services = [
     link: "/service/one-to-one/",
     icon: placementTraining,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Explore one of the most advanced placement training programmes where you shall get access to preparation material, interview sessions, one on one counselling and feedback and relevant video resources to hone your personality.",
   },
   {
     id: "9",
     tab: "Undergrads",
-    text: "Job Opportunities",
+    text: "Find a Job You Love",
     link: "/service/one-to-one/",
     icon: jobOpportunities,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Connect with employers and apply to jobs that fit your requirements through our dedicated job search platform.",
   },
   {
     id: "9",
     tab: "Undergrads",
-    text: "Internships",
+    text: "Internship Training",
     link: "/service/one-to-one/",
     icon: internships,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Securing the right internship is more important than merely landing up at one. Not only does it provide you with the relevant experience but also highlights your profile before recruiters who rely on profiles with a relevant internship history. Techvanto Academy’ Internship Training links you with top companies that will harness your existing abilities to prepare you for future challenges.",
   },
   {
     id: "9",
@@ -197,7 +197,7 @@ const Services = [
     link: "/service/one-to-one/",
     icon: capstoneAssistance,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Becoming proficient in Capstone projects shall not be a botheration anymore. From developing a research plan to finalising your project, you shall be assisted with intricate nuances to make your project stand out from that of others.",
   },
   {
     id: "10",
@@ -206,70 +206,70 @@ const Services = [
     link: "/service/one-to-one/",
     icon: hireFromUs,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Ours is a market-leading technical platform to spot a vast army of able developers, data scientists, coders and machine learning professionals with optimum hard skills and soft skills. Techvanto Academy is a crowdsourcing innovative solution where companies meet fresh and budding talents.",
   },
   {
     id: "10",
     tab: "Companies",
-    text: "Send Students For Internships",
+    text: "Sending Students for Internships",
     link: "/service/one-to-one/",
     icon: sendStudentForInternships,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Broaden the potential of your company and bring fresh perspectives on board by hiring candidates with verified and relevant skills. We are trusted by a diverse range of companies to seek a larger and quality workforce.",
   },
   {
     id: "10",
     tab: "Companies",
-    text: "Advertise Among Students",
+    text: "Boost Your Business Among Students",
     link: "/service/one-to-one/",
     icon: advertiseAmongStudents,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Leverage our expertise in advertising and marketing to reach more college students and develop branding.",
   },
   {
     id: "10",
     tab: "Companies",
-    text: "Train Staff",
+    text: "Training Staff",
     link: "/service/one-to-one/",
     icon: trainStaff,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "We believe that employees should have a rewarding and impactful role in their organisation. We indulge in effective collaborations with companies to offer intensive staff training programs. This helps them pioneer and lead their company with their role.",
   },
   {
     id: "10",
     tab: "Companies",
-    text: "Conduct Drives",
+    text: "Conduct Drives in Colleges",
     link: "/service/one-to-one/",
     icon: conductDrive,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Get connected to various colleges pan-India to pick fresh and budding talent for your workforce through college recruitment drives.",
   },
   {
     id: "11",
     tab: "Colleges",
-    text: "Get Companies",
+    text: "Getting Companies to your Campus",
     link: "/service/one-to-one/",
     icon: getCompanies,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Building a strong and impressionable recruitment paradigm is now more than possible with Techvanto Academy's successful and scalable campus hiring strategy. We take charge of connecting with companies for on-site campus drives to spout notable results.",
   },
   {
     id: "11",
     tab: "Colleges",
-    text: "Get Training Prof",
+    text: "Get Training Professionals",
     link: "/service/one-to-one/",
     icon: getTraining,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "It’s always better to receive personalised feedback from those who are a part of the industry. Techvanto Academy connects you with training professionals who will address your career-related issues and provide you with appropriate guidance.",
   },
   {
     id: "11",
     tab: "Colleges",
-    text: "Connect With +2 Students",
+    text: "Admission Counselling",
     link: "/service/one-to-one/",
     icon: connectWith,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Get relieved of feeling intimidated by college applications, our customised and highly specialised admission counselling links you to experienced advisors to secure your seat at the best possible institutions.",
   },
   {
     id: "11",
@@ -278,7 +278,7 @@ const Services = [
     link: "/service/one-to-one/",
     icon: managementSystem,
     description:
-      "Intro: Decipher the massive endeavour of online classrooms easily with personalised one on one training sessions. We understand that for career advancement, you need personal attention and coaching from an experienced industry professional and individual feedback. So sit back and comfortably achieve all that you desire",
+      "Get access to a next-generation smart management system to manage academic and administrative tasks apart from accessing features.",
   },
 ];
 

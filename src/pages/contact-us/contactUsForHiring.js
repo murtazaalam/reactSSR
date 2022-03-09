@@ -45,7 +45,7 @@ function contactUsForHiring() {
             className="left-card-position"
           >
             <div>
-              <LeftPanel heading="For Hiring" formType="hiring" />
+              <LeftPanel heading="Hire With Us" formType="hiring" />
             </div>
           </Grid>
           <Grid
@@ -72,7 +72,7 @@ function contactUsForHiring() {
             </section>
           </Grid>
         </Grid>
-        <div style={{height: '40px'}}></div>
+        <div style={{ height: "40px" }}></div>
       </div>
     </>
   );

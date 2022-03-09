@@ -46,7 +46,7 @@ const TopCourses = () => {
           <section>
             <Typography component="div" className="techvanto-whyus ">
               <Typography component="h2" className="techvanto-whyus-heading">
-                Top Courses:
+                Top Courses
               </Typography>
             </Typography>
             <section className="display-grid fr4 top-course-aria">

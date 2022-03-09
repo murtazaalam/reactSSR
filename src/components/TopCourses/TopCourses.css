@@ -4,11 +4,12 @@
   margin-top: 40px;
   margin-right: 15px;
 }
-.top-course-aria{
+.top-course-aria {
   overflow-x: overlay;
   display: flex;
+  place-content: center;
 }
-.top-course-aria a{
+.top-course-aria a {
   margin: 16px;
 }
 
@@ -17,4 +18,3 @@
     justify-content: center !important;
   }
 }
-

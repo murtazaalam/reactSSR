@@ -169,7 +169,7 @@ const CourseBody = ({ course }) => {
         draggable: true,
         progress: undefined,
       });
-    } else if (message === "Item Added"){
+    } else if (message === "Item Added") {
       toast.success("Course added to your cart", {
         position: "bottom-right",
         autoClose: 5000,
@@ -471,7 +471,7 @@ const CourseBody = ({ course }) => {
                     <span className="icon">
                       <LocalLibraryIcon />
                     </span>
-                    <span className="heading">Lession</span>
+                    <span className="heading">Lesson</span>
                   </p>
                   <p className="sub-heading">
                     {course && course.noOfLectures} Lectures

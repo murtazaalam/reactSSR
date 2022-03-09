@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import SearchBar from "../../../components/CoursesComponents/SearchBar/SearchBar";
 import FilterPanel from "../../../components/CoursesComponents/FilterPanel/FilterPanel.js";
 import Box from "@mui/material/Box";
@@ -181,7 +181,13 @@ function AllCourses() {
   
   return (
     <>
-      {/* Header */}
+      {/* {console.log(
+        list.filter((el) => {
+          return myOrder.find((element) => {
+            return element.course_id === el._id;
+          });
+        })
+      )} */}
       <Box
         className="page-heading course-mobile-view"
         sx={{

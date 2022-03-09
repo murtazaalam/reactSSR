@@ -70,6 +70,7 @@ export default function CourseCard({
         <div
           style={{
             display: "flex",
+            whiteSpace: "nowrap",
           }}
         >
           {courseType === undefined || courseType === "course" ? 

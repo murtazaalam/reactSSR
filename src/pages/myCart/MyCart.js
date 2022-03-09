@@ -82,6 +82,7 @@ function MyCart() {
       } else {
         dispatch(cartAction({ cartCount: 0 }))
       }
+      navigate('/my-cart')
 
     } else if (response.status === 400) {
       toast.warn(response.message, {
@@ -126,12 +127,12 @@ function MyCart() {
           let order = await addOrderApi(body);
           const options = {
             key: "rzp_test_oaNqGXlOP7o5Dc",
-            amount: totalPrice,
+            amount: parseInt(totalPrice)*100,
             currency: "INR",
             name: "Acme Corp",
             description: "Test Transaction",
             image: "https://example.com/your_logo",
-            order_id: order.id,
+            order_id: order.response.id,
             handler: async function (response) {
               let verificationDetail = {
                 razorpay_payment_id: response.razorpay_payment_id,
@@ -154,6 +155,7 @@ function MyCart() {
               color: "#3399cc",
             },
           };
+          console.log("amount=",options.amount)
           const rzp1 = new Razorpay(options);
           rzp1.on("payment.failed", function (response) {
             let verificationDetail = {
@@ -175,7 +177,7 @@ function MyCart() {
             order_type: "free"
           }
           let order = await addOrderApi(body);
-          if(order === "Order Added"){
+          if(order?.message === "Order Added"){
             toast.success(order, {
               position: "bottom-right",
               autoClose: 5000,

@@ -23,7 +23,7 @@ const OurIndustryExperts = (props) => {
     {
       pic: expert1,
       title1: "Sr. Full Stack Developer",
-      title2: "Verizon Data Service",
+      title2: "Verizon Data Services",
       author: "Deepa Paikar",
     },
     {
@@ -47,7 +47,7 @@ const OurIndustryExperts = (props) => {
     {
       pic: expert5,
       title1: "Software Engineer",
-      title2: "Bharat Airtel",
+      title2: "Bharati Airtel",
       author: "Himanshu Singhal",
     },
     {
