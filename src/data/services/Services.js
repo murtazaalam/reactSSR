@@ -76,7 +76,7 @@ const Services = [
   {
     id: "6",
     tab: "School",
-    text: "Reasoning (General)- Boost Your Reasoning Score",
+    text: "Boost Your Reasoning Score",
     link: "/services/webinar",
     icon: logical,
     description:
