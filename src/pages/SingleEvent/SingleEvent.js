@@ -15,29 +15,36 @@ const EventDetail = () => {
 
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
   let baughtEventOnly = [];
-  let isBaught = []
-  useEffect( async() => {
+  let isBaught = [];
+
+  const fetchData = async () => {
     if (!event) {
       singleEventApi(params.id, getEvent);
     }
-    if(isLogin) {
+    if (isLogin) {
       let baughtData = await myOrdersApi(setCourse, setLoading, setError);
-      if(baughtData){
+      if (baughtData) {
         baughtEventOnly = baughtData.filter((item) => {
-          return item.data.course_type === "event"
+          return item.data.course_type === "event";
         });
         setCourse(baughtEventOnly);
       }
     }
-  }, [event]);
-  if(baughtEvent.length > 0 && event){
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  if (baughtEvent.length > 0 && event) {
     isBaught = baughtEvent.filter((item) => {
-      return item.data.event_id === event._id
+      return item.data.event_id === event._id;
     });
   }
   return (
     <>
-      <SingleEvent event={event} isEventBaught={isBaught.length > 0 ? true : false} />
+      <SingleEvent
+        event={event}
+        isEventBaught={isBaught.length > 0 ? true : false}
+      />
     </>
   );
 };

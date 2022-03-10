@@ -3,11 +3,13 @@ import ForgetPasswordContent from "../../components/Login/Content/ForgetPassword
 import OtpContent from "../../components/Login/Content/OtpContent";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "../../components/Login/AuthLayout";
+import ResetPassword from "./ResetPassword";
 function ForgetPassword() {
   const navigate = useNavigate();
   const [modal, setModal] = useState([
     { id: 1, name: "form", checked: true },
     { id: 2, name: "otp", checked: false },
+    { id: 3, name: "resetPassword", checked: false },
   ]);
 
   const handleModal = (e, id) => {
@@ -20,8 +22,13 @@ function ForgetPassword() {
     setModal(newModalInfo);
   };
 
-  const handleOtpVerify = () => {
-    navigate("/reset-password");
+  const handleOtpVerify = (e, id) => {
+    const newModalInfo = [...modal];
+    newModalInfo.forEach((modal) => {
+      if (modal.id === id) return (modal.checked = true);
+      else return (modal.checked = false);
+    });
+    setModal(newModalInfo);
   };
 
   return (
@@ -36,9 +43,10 @@ function ForgetPassword() {
                 heading="Verification"
                 subHeading="Enter the verification code we just
             sent you on your mobile number"
-                handleVerify={(e) => handleOtpVerify()}
+                handleVerify={handleOtpVerify}
               />
             );
+          if (m.id === 3) return <ResetPassword />;
         }
       })}
     </AuthLayout>

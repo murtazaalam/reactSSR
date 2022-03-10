@@ -18,6 +18,10 @@ import { cartAction } from "../../../redux/slices/cart.slice";
 import getFromCartApi from "../../../apis/api/GetFromCart";
 import Radio from "@mui/material/Radio";
 import { useNavigate } from "react-router-dom";
+import { InputAdornment, IconButton } from "@mui/material";
+
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 import { Link } from "react-router-dom";
 
@@ -44,6 +48,9 @@ export default function LoginContent(props) {
   const classes = useStyles();
   let dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState("");
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
   const emptyState = () => {
     setEmail("");
@@ -168,12 +175,24 @@ export default function LoginContent(props) {
             fullWidth
             name="password"
             label="Password"
-            type="password"
             id="password"
             className={classes.root}
             value={password}
             onChange={(e) => validation(e)}
-            autoComplete="current-password"
+            type={showPassword ? "text" : "password"}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             error={validatePassword}
             helperText={validatePassword ? "Enter Password." : ""}
           />

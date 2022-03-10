@@ -78,7 +78,7 @@ function OtpContent(props) {
             // }}
             className={`btn-grad full-width`}
             // disabled={loader ? true : false}
-            onClick={props.handleVerify}
+            onClick={(e) => props.handleVerify(e, 3)}
           >
             {/* {loader ? <img src={ButtonLoader} width="80" /> : "SignUp"} */}
             Verify Code

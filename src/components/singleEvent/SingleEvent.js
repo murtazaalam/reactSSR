@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Card } from "@mui/material";
+import { Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import singleEventApi from "../../apis/api/SingleEvent";
 import { useSelector, useDispatch } from "react-redux";
+import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import addEventApi from "../../apis/api/AddEvent";
 import addToCartApi from "../../apis/api/AddToCart";
@@ -47,17 +47,6 @@ const useStyles = makeStyles({
     padding: "10px 52px",
   },
 });
-
-function PaperComponent(props) {
-  return (
-    <Draggable
-      handle="#draggable-dialog-title"
-      cancel={'[class*="MuiDialogContent-root"]'}
-    >
-      <Paper {...props} />
-    </Draggable>
-  );
-}
 
 const SingleEvent = ({ isEventBaught }) => {
   const [event, setEventData] = useState();

@@ -207,6 +207,11 @@ const NavBar = (props) => {
             Blogs
           </Link>
         </ListItem>
+        <ListItem onClick={toggleDrawer(anchor, false)}>
+          <Link className="sidebar-link" to="/about-us">
+            About Us
+          </Link>
+        </ListItem>
 
         <ListItem onClick={collapseHandler}>
           <ListItemText primary="Contact Us" className="sidebar-link" />

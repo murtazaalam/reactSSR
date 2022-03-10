@@ -8,7 +8,7 @@ import Blogs from "../pages/blogs/Blogs";
 import Single from "../pages/blogs/singleBlog/Single";
 import ContactUsForHiring from "../pages/contact-us/contactUsForHiring";
 import NotFound from "../components/NotFound";
-import EventDetail from "../pages/SingleEvent/SingleEvent";
+import EventDetail from "../pages/SingleEvent/UpcomingEvent.jsx";
 import TestQuestion from "../pages/testQuestion/TestQuestion";
 import ContactUsToGetHired from "../pages/contact-us/contactUsToGetHired";
 import MyCart from "../pages/myCart/MyCart";

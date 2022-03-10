@@ -13,6 +13,11 @@ import RegisterApi from "../../../apis/api/SignUp";
 import Radio from "@mui/material/Radio";
 import { Link } from "react-router-dom";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
+import { InputAdornment, IconButton } from "@mui/material";
+
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../../redux/slices/auth.slices";
 
@@ -38,6 +43,8 @@ export default function SignUp(props) {
   const [pass, setPass] = useState();
   let dispatch = useDispatch();
   const classes = useStyles();
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
   const validation = (event) => {
     let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -216,6 +223,19 @@ export default function SignUp(props) {
                 name="password"
                 label="Password"
                 type={showPassword ? "text" : "password"}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
                 id="password"
                 autoComplete="new-password"
                 onChange={(e) => validation(e)}
