@@ -31,6 +31,13 @@ function UpcomingEvent() {
           <img src={eventSvg} alt="" />
         </div>
       </div>
+      <div>
+        <h2>3 Days Free Seminar</h2>
+        <p>Date : 3rd To 5th March 2022 </p>
+        <p>Venue : Auditorium, IIT,Bhubaneswar </p>
+      </div>
+
+      <button className="btn-grad">Register</button>
     </div>
   );
 }
