@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Container, Typography } from "@mui/material";
 import * as React from "react";
 import { useState } from "react";
@@ -16,29 +17,29 @@ const TopCourses = () => {
   const [loading, setLoading] = useState(true);
 
   let baughtCourseOnly = [];
-  let {admin, isLogin} = useSelector((state) => state.AuthReducer);
+  let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
-  React.useEffect( async() => {
+  React.useEffect(async () => {
     let topCourseData = await getTopCourseApi(setTopCourses);
-    if(isLogin){
+    if (isLogin) {
       let baughtData = await myOrdersApi(setCourse, setLoading, setError);
-      if(baughtData){
+      if (baughtData) {
         baughtCourseOnly = baughtData.filter((item) => {
-          return item.data.course_type === "course"
+          return item.data.course_type === "course";
         });
         setCourse(baughtCourseOnly);
       }
       let courseId = baughtCourseOnly.map((item) => {
-        return String(item.data.course_id)
-      })
+        return String(item.data.course_id);
+      });
       let newList = [];
-      if(topCourseData){
+      if (topCourseData) {
         for (const item of topCourseData) {
           let flag = courseId.includes(String(item._id));
-          newList.push({...item, isBaught:flag})
+          newList.push({ ...item, isBaught: flag });
         }
       }
-      setTopCourses(newList)
+      setTopCourses(newList);
     }
   }, []);
   return (
@@ -54,7 +55,6 @@ const TopCourses = () => {
             <section className="display-grid fr4 top-course-aria">
               {topCourses && topCourses.length !== 0
                 ? topCourses.map((data, index) => {
-                    
                     return (
                       <CourseCard
                         key={index}

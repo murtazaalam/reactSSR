@@ -30,6 +30,26 @@ html {
   font-family: "Nunito", sans-serif !important;
   /* font-family: "Roboto Serif", sans-serif; */
 }
+::-webkit-scrollbar {
+  width: 10px;
+  height: 0.3rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--lightestgrey);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #becada;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 .primary-background {
   background-color: var(--color-primary);
 }

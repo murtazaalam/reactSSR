@@ -5,10 +5,11 @@ import AliceCarousel from "react-alice-carousel";
 
 const HiringPartner = (props) => {
   const responsive = {
-    400: { items: 1 },
+    0: { items: 1 },
     500: { items: 2 },
-    1024: { items: 4 },
-    1280: { items: 4 },
+    800: { items: 3 },
+
+    1300: { items: 4 },
   };
   const [images, setImages] = React.useState([]);
   React.useEffect(() => {

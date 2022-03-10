@@ -19,6 +19,7 @@
 }
 .emp-designation {
   font-size: 14px;
+  white-space: nowrap;
 }
 
 @media screen and (min-width: 550px) {

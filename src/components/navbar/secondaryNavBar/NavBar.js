@@ -130,7 +130,12 @@ const NavBar = (props) => {
   useEffect(() => {
     const getCartData = async () => {
       if (!cartData) {
-        let data = await getFromCartApi(setCartData, setY, setLoading, setError);
+        let data = await getFromCartApi(
+          setCartData,
+          setY,
+          setLoading,
+          setError
+        );
         setCartCount(data?.length);
       }
     };
@@ -210,6 +215,11 @@ const NavBar = (props) => {
             Blogs
           </Link>
         </ListItem>
+        <ListItem onClick={toggleDrawer(anchor, false)}>
+          <Link className="sidebar-link" to="/about-us">
+            About Us
+          </Link>
+        </ListItem>
 
         <ListItem onClick={collapseHandler}>
           <ListItemText primary="Contact Us" className="sidebar-link" />
@@ -219,7 +229,7 @@ const NavBar = (props) => {
           <List component="div" disablePadding>
             <ListItem sx={{ pl: 4 }} onClick={toggleDrawer(anchor, false)}>
               <Link className="sidebar-link" to="/contact-us-for-hiring">
-                Hire With Us
+                Hire from Us
               </Link>
             </ListItem>
             <ListItem sx={{ pl: 4 }} onClick={toggleDrawer(anchor, false)}>
@@ -544,7 +554,7 @@ const NavBar = (props) => {
                       </span>
                     </a>
                     <div className="dropdown-content-contact">
-                      <Link to="/contact-us-for-hiring">Hire With Us</Link>
+                      <Link to="/contact-us-for-hiring">Hire from Us</Link>
                       <Link to="/contact-us-to-get-hired">Get Hired</Link>
                       <Link to="/coming-soon">Know More</Link>
                     </div>
@@ -557,7 +567,8 @@ const NavBar = (props) => {
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>
                     <IconButton aria-label="cart" className="color-white">
-                      <Badge badgeContent={cartCount ? cartCount : cartCounting} 
+                      <Badge
+                        badgeContent={cartCount ? cartCount : cartCounting}
                         color="error"
                       >
                         <ShoppingCartIcon fontSize="large" />
@@ -565,8 +576,11 @@ const NavBar = (props) => {
                     </IconButton>
                   </Link>
                   <div className="dropdown">
-                    <span className="user-name">Hey!&nbsp;
-                    {admin.name.split(" ")[0].length < 7 ? admin.name.split(" ")[0] : admin.name.split(" ")[0].substr(0, 6) + '..'}
+                    <span className="user-name">
+                      Hey!&nbsp;
+                      {admin.name.split(" ")[0].length < 7
+                        ? admin.name.split(" ")[0]
+                        : admin.name.split(" ")[0].substr(0, 6) + ".."}
                     </span>
                     <Link to="/">
                       <span className="color-white">
@@ -575,8 +589,13 @@ const NavBar = (props) => {
                         </Tooltip>
                       </span>
                     </Link>
-                    <div className="dropdown-content-contact" style={{top: '34px'}}>
-                      <a style={{ color: "black", textTransform: 'capitalize' }}>
+                    <div
+                      className="dropdown-content-contact"
+                      style={{ top: "34px" }}
+                    >
+                      <a
+                        style={{ color: "black", textTransform: "capitalize" }}
+                      >
                         {admin.name.split(" ")[0]}
                       </a>
                       <Link to="/my-courses">My Courses</Link>

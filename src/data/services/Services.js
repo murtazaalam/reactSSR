@@ -58,7 +58,7 @@ const Services = [
   {
     id: "4",
     tab: "School",
-    text: "Communication-English Language",
+    text: "English Language",
     link: "/service/techvanto-training-program/",
     icon: English,
     description:
