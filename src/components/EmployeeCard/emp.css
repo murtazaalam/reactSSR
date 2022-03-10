@@ -1,0 +1,38 @@
+.emp-card {
+  width: fit-content;
+  padding: 2rem;
+  text-align-last: center;
+}
+.emp-img > img {
+  width: 75px;
+  height: 75px;
+}
+.emp-img > img {
+  border-radius: 50%;
+}
+
+.emp-name {
+  font-weight: 600;
+  font-size: 16.5px;
+  line-height: 228.4%;
+  white-space: nowrap;
+}
+.emp-designation {
+  font-size: 14px;
+}
+
+@media screen and (min-width: 550px) {
+  .emp-img {
+    width: 150px;
+  }
+  .emp-img > img {
+    width: 150px;
+    height: 150px;
+  }
+  .emp-name {
+    font-size: 20px;
+  }
+  .emp-designation {
+    font-size: 16px;
+  }
+}

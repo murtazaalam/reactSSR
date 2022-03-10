@@ -32,9 +32,11 @@ const TopCourses = () => {
         return String(item.data.course_id)
       })
       let newList = [];
-      for (const item of topCourseData) {
-        let flag = courseId.includes(String(item._id));
-        newList.push({...item, isBaught:flag})
+      if(topCourseData){
+        for (const item of topCourseData) {
+          let flag = courseId.includes(String(item._id));
+          newList.push({...item, isBaught:flag})
+        }
       }
       setTopCourses(newList)
     }

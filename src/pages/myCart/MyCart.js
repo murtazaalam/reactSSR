@@ -28,6 +28,7 @@ import FormControl from '@mui/material/FormControl';
 import SecureImage from '../../assets/images/payment-features-2.png';
 import getAllReferals from '../../apis/api/GetReferals';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { getCourse } from "../../redux/slices/course.slice";
 
 function MyCart() {
   const [loading, setLoading] = useState();
@@ -47,6 +48,7 @@ function MyCart() {
   const [referalSucces, setReferalSucces] = useState(false);
   const [refreeName, setRefreeName] = useState();
   const [isItemSelected, setIsItemSelected] = useState('');
+  const [courseData, setCourseData] = React.useState();
   const [OrderId, setOrderId] = useState();
   const [paymentId, setPaymentId] = useState()
   const navigate = useNavigate();
@@ -294,6 +296,11 @@ function MyCart() {
     }
     return;
   }
+  const courseDetail = (id, type) => {
+    if(type === "course"){
+      dispatch(getCourse({ id, setCourseData }));
+    }
+  }
   return (
     <div>
       {loading ? (
@@ -370,7 +377,9 @@ function MyCart() {
                   {/* cart form */}
                   <form action="#" className="cart-form">
                     <div className="table-wrap">
+                     
                       {cartItems.map((item, index) => (
+                        
                         <>
                           <Card
                             sx={{
@@ -392,16 +401,20 @@ function MyCart() {
                                 height: "194px",
                               }}
                             >
-                              <CardMedia
-                                component="img"
-                                className="techvanto-all-course-image"
-                                sx={{ width: 340, height: 194 }}
-                                style={{
-                                  backgroundImage: `url(${ item.course_type === "course" ? item.course_image : item.event_image})`,
-                                  height: "194px",
-                                  minWidth: "280px",
-                                }}
-                              />
+                              <a href={item.course_type === 'course' ? `/#/courses/${item.course_id}` : `/#/event/${item.event_id}`}
+                                   onClick={() => courseDetail(item.course_id, item.course_type)}
+                                  >
+                                <CardMedia
+                                  component="img"
+                                  className="techvanto-all-course-image"
+                                  sx={{ width: 340, height: 194 }}
+                                  style={{
+                                    backgroundImage: `url(${ item.course_type === "course" ? item.course_image : item.event_image})`,
+                                    height: "194px",
+                                    minWidth: "280px",
+                                  }}
+                                />
+                              </a>
                             </div>
 
                             <Box
@@ -409,7 +422,12 @@ function MyCart() {
                             >
                               <CardContent sx={{ flex: "1 0 auto" }}>
                                 <Typography component="div" variant="h5">
-                                  { item.course_type === "course" ? item.course_name : item.event_name }
+                                  <a href={item.course_type === 'course' ? `/#/courses/${item.course_id}` : `/#/event/${item.event_id}`}
+                                   onClick={() => courseDetail(item.course_id, item.course_type)}
+                                   className="cart-course-title"
+                                  >
+                                    { item.course_type === "course" ? item.course_name : item.event_name }
+                                  </a>
                                 </Typography>
                                 <Typography
                                   variant="subtitle1"

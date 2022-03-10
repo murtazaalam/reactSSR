@@ -39,7 +39,7 @@
   padding: 0px 6px;
   font-size: 12px;
 }
-.cart-badge .css-fvc8ir-MuiBadge-badge{
+.cart-badge{
   background: var(--color-secondary);
 }
 .logo-image {

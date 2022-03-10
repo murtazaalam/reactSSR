@@ -22,7 +22,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Collapse from "@mui/material/Collapse";
-
 import ListItemButton from "@mui/material/ListItemButton";
 // import { HashLink } from "react-router-hash-link";
 // import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
@@ -521,6 +520,17 @@ const NavBar = (props) => {
                     </span>
                   </Link>
                 </div>
+                <div className="item">
+                  <Link to="/about-us" className="menu-text">
+                    <span
+                      className={
+                        scroll === false ? "color-white" : "color-black"
+                      }
+                    >
+                      About Us
+                    </span>
+                  </Link>
+                </div>
 
                 <div className="item">
                   <div className="dropdown">
@@ -546,8 +556,9 @@ const NavBar = (props) => {
               {isLogin ? (
                 <>
                   <Link to="/my-cart" style={{ marginRight: "30px" }}>
-                    <IconButton aria-label="cart" className="color-white cart-badge">
+                    <IconButton aria-label="cart" className="color-white">
                       <Badge badgeContent={cartCount ? cartCount : cartCounting} 
+                        color="error"
                       >
                         <ShoppingCartIcon fontSize="large" />
                       </Badge>

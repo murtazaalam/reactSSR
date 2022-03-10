@@ -1,0 +1,234 @@
+.aboutUsBanner {
+  margin-top: 130px;
+  height: -webkit-fill-available;
+}
+
+.aboutUsContent {
+  padding: 10px;
+  text-align: justify;
+  font-size: 14px;
+  line-height: 228.4%;
+}
+.aboutUsSplText {
+  color: var(--color-secondary);
+}
+.mission-heading {
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 24px;
+  line-height: 92.9%;
+  text-align-last: center;
+}
+.vision-heading {
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 24px;
+  line-height: 92.9%;
+  text-align-last: center;
+}
+.our-mission-text {
+  text-align: justify;
+  font-size: 14px;
+  line-height: 228.4%;
+}
+.our-vision-text {
+  text-align: justify;
+  font-size: 14px;
+  line-height: 228.4%;
+}
+.our-mission-text-heading {
+  font-weight: bold;
+  font-size: 16px;
+}
+.vision-heading {
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 24px;
+  line-height: 92.9%;
+  text-align-last: center;
+}
+.about-us-heading {
+  line-height: 92.9%;
+  text-align-last: center;
+  font-size: 24px;
+  font-weight: bolder;
+}
+.lead-card .picture {
+  width: 75px;
+  height: 75px;
+  background-size: cover;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0px 0px 6px 1px rgb(0 0 0 / 50%);
+}
+
+.lead-card {
+  width: 136.45px;
+  height: 178.89px;
+  padding: 10px;
+  background: rgba(196, 196, 196, 0.15);
+  box-shadow: 0px 1.92868px 1.92868px rgba(0, 0, 0, 0.25);
+  border-radius: 7.23255px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align-last: center;
+}
+.lead-card .name {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 228.4%;
+  margin-bottom: 0;
+  white-space: pre;
+}
+
+/* .team-employee alice-carousel__stage-item {
+  width: 100px;
+} */
+.team-employee {
+  margin: 0 auto;
+}
+.lead-card .designation {
+  font-size: 14px;
+}
+.values-text {
+  text-align: justify;
+}
+.industry-subheading {
+  text-align: -webkit-center;
+}
+.industry-text {
+  font-size: 14px;
+  line-height: 228.4%;
+}
+.universities {
+  font-size: 18px;
+  line-height: 1.5rem;
+}
+
+.awards-img {
+  width: 108px;
+  height: 161px;
+}
+.awards-gallery {
+  display: flex;
+  gap: 10px;
+  place-content: center;
+  flex-wrap: wrap;
+}
+@media screen and (min-width: 550px) {
+  .aboutUsBanner {
+    margin-top: 129px;
+
+    height: 583px;
+  }
+  .aboutUsContent {
+    padding: 30px 10px;
+    font-size: 22px;
+    line-height: 228.4%;
+  }
+  .our-mission-img {
+    width: 500px;
+  }
+  .our-vision-img {
+    width: 500px;
+  }
+  .awards-img {
+    width: 215px;
+    height: 198px;
+  }
+  .mission-heading {
+    line-height: 228.4%;
+    text-align-last: start;
+    font-size: 36px;
+  }
+  .vision-heading {
+    line-height: 228.4%;
+    text-align-last: start;
+    font-size: 36px;
+  }
+  .about-us-heading {
+    line-height: 228.4%;
+    text-align-last: center;
+    font-size: 34px;
+  }
+  .underline-left {
+    margin-left: -32px;
+    padding-left: 32px;
+    border-left: 4px solid #e3eafd;
+  }
+  .underline-right {
+    margin-right: -32px;
+    padding-right: 32px;
+    border-right: 4px solid #e3eafd;
+  }
+  .our-mission-text {
+    width: 550px;
+    line-height: 228.4%;
+    font-size: 20px;
+  }
+  .our-vision-text {
+    width: 550px;
+    line-height: 228.4%;
+    font-size: 20px;
+  }
+  .our-mission-text-heading {
+    font-size: 20px;
+  }
+  .our-mission-flex {
+    display: flex;
+    flex-direction: row-reverse;
+    place-content: space-between;
+  }
+  .our-vision-flex {
+    display: flex;
+    flex-direction: row;
+    place-content: space-between;
+  }
+  .vision-heading {
+    line-height: 228.4%;
+    text-align-last: end;
+    font-size: 36px;
+  }
+  .lead-card {
+    width: 283px;
+    height: 300px;
+  }
+  .lead-card .picture {
+    width: 150px;
+    height: 150px;
+  }
+  .lead-card .name {
+    font-size: 20px;
+  }
+  .lead-card .designation {
+    font-size: 16px;
+  }
+  .team-employee {
+    width: 65%;
+  }
+  .values-text {
+    font-size: 20px;
+  }
+  .values-list {
+    font-size: 19px;
+    text-align: justify;
+  }
+  .industry-content {
+    display: flex;
+    align-items: center;
+  }
+  .industry-text {
+    font-size: 20px;
+  }
+  .industry-img {
+    width: 500px;
+  }
+}
+@media (min-width: 1200px) {
+  .our-team .css-1oqqzyl-MuiContainer-root {
+    max-width: none !important;
+  }
+}
