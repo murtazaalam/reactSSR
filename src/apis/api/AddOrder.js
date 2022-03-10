@@ -7,7 +7,7 @@ export default async function addOrderApi(body){
             'token': localStorage.getItem('token')
         },
     }).then(res => {
-        return res.data.response;
+        return res.data;
     }).catch(error => {
         if (error.response) {
             //setApiError(true)

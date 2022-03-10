@@ -5,11 +5,12 @@ export default async function addToCartApi(body, setCartLoader) {
   return await axios
     .post(routes.AddToCart, body, {
       headers: {
-        token: localStorage.getItem("token"),
-      },
+        token: localStorage.getItem("token")
+      }
     })
     .then((res) => {
       setCartLoader(false);
+      console.log(">>",res.data.message);
       return res.data.message;
     })
     .catch((error) => {

@@ -15,6 +15,7 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
+import { useSelector } from "react-redux";
 import myOrdersApi from "../../../apis/api/MyOders";
 
 const Accordion = styled((props) => (
@@ -63,13 +64,17 @@ function AllCourses() {
     { id: 4, checked: false, label: "All" },
   ]);
   const [category, setCategory] = useState("");
-  const [list, setList] = useRecoilState(courseList);
+  //const [list, setList] = useRecoilState(courseList);
+  const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(true);
-  const [, setCourseByCategory] = useState();
-  const [, setExpanded] = React.useState("panel1");
-  const [myOrder, setMyOrder] = useState();
-  const [orderError, setMyOrderError] = useState();
+  const [courseByCategory, setCourseByCategory] = useState();
+  const [expanded, setExpanded] = React.useState("panel1");
+  const [course, setCourse] = useState([]);
+  const [error, setError] = useState("");
+  let baughtCourseOnly = [];
+  
+  let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
   let cat =
     categoryRoute.charAt(0).toUpperCase() +
@@ -99,10 +104,9 @@ function AllCourses() {
     );
     setSelectedCategory(changeCheckedCategories);
   };
-
-  const fetchdata = () => {
-    AllCourseApi(setList, setCourseByCategory, setLoading);
-    // myOrdersApi(setMyOrder, setLoading, setMyOrderError);
+  const fetchdata = async() => {
+    let newList = [];
+    let listData = await AllCourseApi(setList, setCourseByCategory, setLoading);
     const categoryStateList = selectedCategory;
     const changeCheckedCategories = categoryStateList.map((item) =>
       item.label.toLowerCase().includes(categoryRoute.toLowerCase())
@@ -110,9 +114,29 @@ function AllCourses() {
         : { ...item, checked: false }
     );
     setSelectedCategory(changeCheckedCategories);
+    if(isLogin){
+      let baughtData = await myOrdersApi(setCourse, setLoading, setError);
+      if(baughtData){
+        baughtCourseOnly = baughtData.filter((item) => {
+          return item.data.course_type === "course"
+        });
+        setCourse(baughtCourseOnly);
+      }
+      let courseId = baughtCourseOnly.map((item) => {
+        return String(item.data.course_id)
+      })
+      for (const item of listData) {
+        let flag = courseId.includes(String(item._id));
+        newList.push({...item, isBaught:flag})
+      }
+      if(newList.length > 0) setList(newList)
+    }
     setLoading(false);
   };
 
+  useEffect( async() => {
+    fetchdata();
+  }, []);
   const data = list
     ?.filter((val) => {
       if (searchInput === "") {
@@ -134,32 +158,27 @@ function AllCourses() {
         return val;
       }
     })
-
     .map((data) => {
       return category === data.category ||
         category === "" ||
         category === "All" ? (
         <>
-          <CourseCard
-            id={data._id}
-            title={data.course_name}
-            pic={data.thumbnail}
-            gradient={data.gradient}
-            price={data.price}
-            discount={data.discount}
-            rating={data.avgRating}
-            noOfReviews={data.noOfReviews}
-
-            // review={data.reviews}
-          ></CourseCard>
+            <CourseCard
+              id={data._id}
+              title={data.course_name}
+              pic={data.thumbnail}
+              gradient={data.gradient}
+              price={data.price}
+              discount={data.discount}
+              rating={data.avgRating}
+              noOfReviews={data.noOfReviews}
+              isBaught={data.isBaught ? data.isBaught : false}
+              // review={data.reviews}
+            ></CourseCard>
         </>
       ) : null;
     });
-
-  useEffect(() => {
-    fetchdata();
-  }, []);
-
+  
   return (
     <>
       {/* {console.log(

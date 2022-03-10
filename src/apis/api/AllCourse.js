@@ -24,6 +24,7 @@ export default async function AllCourseApi(
         }, {});
       }
       console.log(groupByKey(data, "category"));
+      return data;
       //return groupByKey(data, "category");
     })
     .catch((error) => {

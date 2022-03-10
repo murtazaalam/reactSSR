@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default async function getFromCartApi(
   setCartItems,
+  setY,
   setLoading,
   setError
 ) {
@@ -13,6 +14,11 @@ export default async function getFromCartApi(
       },
     })
     .then((res) => {
+      let data = res.data;
+      let x = data.map((item, index) => {
+        return {id:index, isChecked: true, data:item, registrationType:"full"}
+      })
+      setY(x);
       setCartItems(res.data);
       setLoading(false);
       return res.data;

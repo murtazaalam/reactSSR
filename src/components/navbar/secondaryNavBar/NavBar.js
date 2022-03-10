@@ -25,7 +25,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Collapse from "@mui/material/Collapse";
-
 // import { HashLink } from "react-router-hash-link";
 // import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
@@ -56,6 +55,7 @@ const NavBar = (props) => {
   const [error, setError] = useState();
   const [courseData, setCourseData] = React.useState();
   const [cartCounting, setCartCount] = useState();
+  const [y, setY] = useState([]);
   let dispatch = useDispatch();
   const [collapse_open, setcollapse_open] = React.useState(true);
 
@@ -122,7 +122,12 @@ const NavBar = (props) => {
   useEffect(() => {
     const getCartData = async () => {
       if (!cartData) {
-        let data = await getFromCartApi(setCartData, setLoading, setError);
+        let data = await getFromCartApi(
+          setCartData,
+          setY,
+          setLoading,
+          setError
+        );
         setCartCount(data?.length);
       }
     };
@@ -553,42 +558,29 @@ const NavBar = (props) => {
                       </Badge>
                     </IconButton>
                   </Link>
-                  {/* <Link
-                    to="/"
-                    style={{ marginRight: "30px", textDecoration: "none" }}
-                  >
-                    <span className="user-name">
-                      Hey! {admin.name.split(" ")[0]}
-                    </span>
-                  </Link> */}
                   <div className="dropdown">
+                    <span className="user-name">
+                      Hey!&nbsp;
+                      {admin.name.split(" ")[0].length < 7
+                        ? admin.name.split(" ")[0]
+                        : admin.name.split(" ")[0].substr(0, 6) + ".."}
+                    </span>
                     <Link to="/">
                       <span className="color-white">
                         <Tooltip title={admin.name}>
-                          <Badge
-                            badgeContent={`Hey! ${admin.name.split(" ")[0]}`}
-                            sx={{
-                              "& .MuiBadge-badge": {
-                                backgroundColor: "#ea395d",
-                              },
-                            }}
-                            anchorOrigin={{
-                              vertical: "top",
-                              horizontal: "right",
-                            }}
-                          >
-                            <AccountCircleIcon fontSize="large" />
-                          </Badge>
+                          <AccountCircleIcon fontSize="large" />
                         </Tooltip>
                       </span>
                     </Link>
-                    <div className="dropdown-content-contact">
-                      {/* <Divider>
-                        <span style={{ color: "black" }}>
-                          {admin.name[0].toUpperCase() +
-                            admin.name.substring(1)}
-                        </span>
-                      </Divider> */}
+                    <div
+                      className="dropdown-content-contact"
+                      style={{ top: "34px" }}
+                    >
+                      <a
+                        style={{ color: "black", textTransform: "capitalize" }}
+                      >
+                        {admin.name.split(" ")[0]}
+                      </a>
                       <Link to="/my-courses">My Courses</Link>
                       <a style={{ color: "black" }} onClick={logoutHandler}>
                         Log Out
