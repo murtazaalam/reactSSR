@@ -262,7 +262,7 @@ const Footer = () => {
               className="techvanto-footer-text text-footer-small"
             >
               <p className="techvanto-footer-text text-footer-small">
-                Hire With Us
+                Hire from Us
               </p>
             </Link>
 
@@ -340,12 +340,14 @@ const Footer = () => {
                 <p className="social">
                   <a
                     // rel="noopener noreferrer"
-                    onClick={() =>
+                    href="https://www.facebook.com/techvantoacademy/"
+                    onClick={(e) => {
+                      e.preventDefault();
                       window.open(
                         "https://www.facebook.com/techvantoacademy/",
                         "_blank"
-                      )
-                    }
+                      );
+                    }}
                     className="social-link icon-link-padding"
                     // target="_blank"
                     style={{ color: "red" }}
@@ -362,12 +364,14 @@ const Footer = () => {
                   </a>
                   <a
                     rel="noopener noreferrer"
-                    onClick={() =>
+                    href="https://twitter.com/TechvantoA?t=AZr-Uor2sg4-L2vvynXk4A&s=08"
+                    onClick={(e) => {
+                      e.preventDefault();
                       window.open(
                         "https://twitter.com/TechvantoA?t=AZr-Uor2sg4-L2vvynXk4A&s=08",
                         "_blank"
-                      )
-                    }
+                      );
+                    }}
                     className="social-link icon-link-padding"
                     // target="_blank"
                   >
@@ -383,12 +387,14 @@ const Footer = () => {
                   </a>
                   <a
                     rel="noopener noreferrer"
-                    onClick={() =>
+                    href="https://www.linkedin.com/company/techvantoacademy"
+                    onClick={(e) => {
+                      e.preventDefault();
                       window.open(
                         "https://www.linkedin.com/company/techvantoacademy",
                         "_blank"
-                      )
-                    }
+                      );
+                    }}
                     className="social-link icon-link-padding"
                   >
                     <svg
@@ -403,12 +409,14 @@ const Footer = () => {
                   </a>
                   <a
                     rel="noopener noreferrer"
-                    onClick={() =>
+                    href="https://instagram.com/techvanto.academy?utm_medium=copy_link"
+                    onClick={(e) => {
+                      e.preventDefault();
                       window.open(
                         "https://instagram.com/techvanto.academy?utm_medium=copy_link",
                         "_blank"
-                      )
-                    }
+                      );
+                    }}
                     className="social-link icon-link-padding"
                   >
                     <img
@@ -540,7 +548,7 @@ const Footer = () => {
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     <p className="techvanto-footer-text text-footer-small">
-                      Hire With Us
+                      Hire from Us
                     </p>
                   </Link>
                   <Link
@@ -561,7 +569,7 @@ const Footer = () => {
                   </Link>
 
                   <div className="techvanto-footer-text-header color">
-                    Contact{" "}
+                    Contact Details{" "}
                   </div>
                   <div className="techvanto-footer-text">
                     {/* <PermContactCalendarIcon></PermContactCalendarIcon> */}

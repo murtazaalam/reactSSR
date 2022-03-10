@@ -221,7 +221,7 @@ const NavBar = (props) => {
           <List component="div" disablePadding>
             <ListItem sx={{ pl: 4 }} onClick={toggleDrawer(anchor, false)}>
               <Link className="sidebar-link" to="/contact-us-for-hiring">
-                Hire With Us
+                Hire from Us
               </Link>
             </ListItem>
             <ListItem sx={{ pl: 4 }} onClick={toggleDrawer(anchor, false)}>
@@ -542,7 +542,7 @@ const NavBar = (props) => {
                       </span>
                     </a>
                     <div className="dropdown-content-contact">
-                      <Link to="/contact-us-for-hiring">Hire With Us</Link>
+                      <Link to="/contact-us-for-hiring">Hire from Us</Link>
                       <Link to="/contact-us-to-get-hired">Get Hired</Link>
                       <Link to="/coming-soon">Know More</Link>
                     </div>

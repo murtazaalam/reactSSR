@@ -13,9 +13,10 @@ import industry from "../../assets/images/industry-recg.png";
 import TopClient from "../../components/TopClients/TopClients";
 
 const responsive = {
-  400: { items: 1 },
-  568: { items: 2 },
-  1024: { items: 3 },
+  0: { items: 2 },
+  889: { items: 3 },
+  1024: { items: 4 },
+  1500: { items: 5 },
 };
 
 function AboutUs() {
@@ -240,13 +241,13 @@ function AboutUs() {
           <br />
           <div className="team-employee">
             <AliceCarousel
-              autoWidth
+              // autoWidth
               responsive={responsive}
               autoPlayDirection={"rtl"}
               autoPlayStrategy={"none"}
               animationEasingFunction={"ease"}
               autoPlay={false}
-              controlsStrategy="alternate"
+              // controlsStrategy="alternate"
               mouseTracking
               infinite={true}
               items={items}
@@ -274,7 +275,7 @@ function AboutUs() {
             highlighting the following:-
           </p>
           <ul className="values-list">
-            <li> Bring out the best</li>
+            <li> Bring out the best in learners</li>
             <li> Develop exquisite career opportunities </li>
             <li>Honour our commitments to learners </li>
             <li>
