@@ -13,9 +13,10 @@ import industry from "../../assets/images/industry-recg.png";
 import TopClient from "../../components/TopClients/TopClients";
 
 const responsive = {
-  400: { items: 1 },
-  568: { items: 2 },
-  1024: { items: 3 },
+  0: { items: 2 },
+  889: { items: 3 },
+  1024: { items: 4 },
+  1500: { items: 5 },
 };
 
 function AboutUs() {
@@ -83,9 +84,6 @@ function AboutUs() {
 
   return (
     <>
-      {/* <Box className="aboutUsBanner">
-        <img src={banner} alt="about-usBanner" />
-      </Box> */}
       <Box
         component="section"
         className="page-heading aboutUsBanner"
@@ -104,7 +102,7 @@ function AboutUs() {
                 Home
                 <div className="line"></div>
               </li>
-              <li className="breadcrumb-item active">About US</li>
+              <li className="breadcrumb-item active">About Us</li>
             </ol>
           </nav>
         </div>
@@ -116,10 +114,10 @@ function AboutUs() {
           have taken a step further in coming up with endless opportunities in
           the form of{" "}
           <span className="aboutUsSplText">
-            COURSES, TRAINING PROGRAMS, SEMINARS, CORPORATE and PLACEMENT
-            TRAINING and WORKSHOPS
+            COURSES, TRAINING PROGRAMS, SEMINARS, CORPORATE & PLACEMENT TRAINING
+            and WORKSHOPS
           </span>{" "}
-          that deal with stuff beyond the classrooms.
+          that deals with stuff beyond the classrooms.
           <p>
             Starting off in 2019, we have also ventured into the avenue of
             software development with a dedicated team of software developers
@@ -240,13 +238,13 @@ function AboutUs() {
           <br />
           <div className="team-employee">
             <AliceCarousel
-              autoWidth
+              // autoWidth
               responsive={responsive}
               autoPlayDirection={"rtl"}
               autoPlayStrategy={"none"}
               animationEasingFunction={"ease"}
               autoPlay={false}
-              controlsStrategy="alternate"
+              // controlsStrategy="alternate"
               mouseTracking
               infinite={true}
               items={items}
@@ -271,10 +269,10 @@ function AboutUs() {
           <p className="values-text">
             Our philosophy is simple- To extend everlasting support to wilful
             learners, come what may. Our core values reflect this philosophy,
-            highlighting the following-
+            highlighting the following:-
           </p>
           <ul className="values-list">
-            <li> Bring out the best</li>
+            <li> Bring out the best in learners</li>
             <li> Develop exquisite career opportunities </li>
             <li>Honour our commitments to learners </li>
             <li>

@@ -7,10 +7,15 @@
 .top-course-aria {
   overflow-x: overlay;
   display: flex;
-  place-content: center;
 }
 .top-course-aria a {
   margin: 16px;
+}
+
+@media screen and (min-width: 1606px) {
+  .top-course-aria {
+    place-content: center;
+  }
 }
 @media only screen and (max-width: 1000px) {
   .techvanto-all-course-button {

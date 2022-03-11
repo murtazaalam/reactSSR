@@ -26,7 +26,7 @@ function FormRow() {
             className="techvanto-whyus-cloudupload-icon"
             sx={{ color: "var(--color-secondary)" }}
           />
-          <CountUp end={60} duration={1} redraw={true}>
+          <CountUp end={100} duration={1} redraw={true}>
             {({ countUpRef, start }) => (
               <VisibilitySensor onChange={start} delayedCall>
                 <div className="techvanto-whyus-grid-item-count">
@@ -36,7 +36,7 @@ function FormRow() {
             )}
           </CountUp>
           <Typography component="p">
-            Products <br /> Delivered
+            Workshops <br /> Delivered
           </Typography>
         </Item>
       </Grid>
@@ -66,7 +66,7 @@ function FormRow() {
             className="techvanto-whyus-cloudupload-icon"
             sx={{ color: "var(--color-secondary)" }}
           />
-          <CountUp end={32} duration={1} redraw={true}>
+          <CountUp end={30} duration={1} redraw={true}>
             {({ countUpRef, start }) => (
               <VisibilitySensor onChange={start} delayedCall>
                 <div className="techvanto-whyus-grid-item-count">
@@ -88,7 +88,7 @@ function FormRow() {
             className="techvanto-whyus-cloudupload-icon"
             sx={{ color: "var(--color-secondary)" }}
           />
-          <CountUp end={3669} duration={1} redraw={true}>
+          <CountUp end={6700} duration={1} redraw={true}>
             {({ countUpRef, start }) => (
               <VisibilitySensor onChange={start} delayedCall>
                 <div className="techvanto-whyus-grid-item-count">
