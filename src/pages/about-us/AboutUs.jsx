@@ -84,9 +84,6 @@ function AboutUs() {
 
   return (
     <>
-      {/* <Box className="aboutUsBanner">
-        <img src={banner} alt="about-usBanner" />
-      </Box> */}
       <Box
         component="section"
         className="page-heading aboutUsBanner"
@@ -105,7 +102,7 @@ function AboutUs() {
                 Home
                 <div className="line"></div>
               </li>
-              <li className="breadcrumb-item active">About US</li>
+              <li className="breadcrumb-item active">About Us</li>
             </ol>
           </nav>
         </div>

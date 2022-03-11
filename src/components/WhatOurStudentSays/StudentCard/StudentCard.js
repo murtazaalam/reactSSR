@@ -4,8 +4,11 @@ import "./StudentCard.css";
 export default function StudentCard(props) {
   return (
     <main className="main">
-      <section className="container container-width">
-        <article className="review">
+      <section
+        className="container container-width"
+        style={{ height: "25rem" }}
+      >
+        <article className="review" style={{ height: "25rem" }}>
           <div className="img-container">
             <img src={props.data.pic} alt="" id="person-img" />
           </div>

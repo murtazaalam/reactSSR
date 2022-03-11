@@ -86,6 +86,15 @@ const NavBar = (props) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setIsLogged(false);
+    toast.success("Logged Out Successfully", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
   const [user, setUser] = useState(false);
   const [open, setOpen] = React.useState(false);

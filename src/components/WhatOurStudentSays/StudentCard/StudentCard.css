@@ -49,11 +49,11 @@ img {
   height: 355px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  padding: 30px;
-  background-color: #fff;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.05);
+  padding: 20px 10px;
+  /* background-color: #fff; */
+  /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.05); */
 }
 
 #person-img {
@@ -80,13 +80,13 @@ img {
 }
 
 #info {
-  height: 100px;
-  font-size: 18px;
+  height: 1.7rem;
+
   color: var(--color-secondary-text);
   font-weight: 400;
   text-align: center;
   margin-bottom: initial;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .btn {
