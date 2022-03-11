@@ -46,7 +46,7 @@ function PaperComponent(props) {
 const CourseBody = ({ course }) => {
   const [value, setValue] = useState("1");
 
-  const [timeBadge, setTimerBadge] = useState(true);
+  const [timeBadge, setTimerBadge] = useState(false);
   const [baughtCourses, setCourse] = useState([]);
   const [isBaughtCourse, setIsBaughtCourse] = useState(false);
   const [loader, setLoader] = React.useState(false);
@@ -94,7 +94,12 @@ const CourseBody = ({ course }) => {
   if (course.discount_limit_date) {
     futureDate = new Date(course.discount_limit_date);
     diffHour = Math.floor((futureDate - now) / 3600000);
-    diffHour > 0 ? (diffHour = diffHour) : (diffHour = 0);
+    if(diffHour > 0) {
+      diffHour = diffHour;
+      setTimerBadge(true);
+    } else{
+      diffHour = 0
+    }
   } else {
     diffHour = 0;
   }

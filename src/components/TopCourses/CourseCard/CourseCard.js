@@ -31,7 +31,7 @@ export default function CourseCard({
     dispatch(getCourse({id, setCourseData}))
   }
   return (
-    <Link to={`/courses/${id}`} style={{ textDecoration: "none" }} onClick={() => handleCourse(id)}>
+    <Link to={`/${courseType === 'event' ? courseType : 'courses'}/${id}`} style={{ textDecoration: "none" }} onClick={() => handleCourse(id)}>
       <Card className="technovanto-course-card mobile-view-course-card">
         <div
           style={{

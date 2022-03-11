@@ -17,7 +17,7 @@ const Courses = () => {
     if (isEmpty(courseData)) {
       singleCourseApi(id, setCourseData);
     }
-  }, []);
+  }, [id]);
   return (
     <>
       {isEmpty(courseData) ? (

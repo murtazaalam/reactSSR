@@ -52,7 +52,6 @@ const Events = (props) => {
 
   useEffect( async() => {
     let allEventData = await eventsApi(props.category, setEventData, setLoading, setError) || []
-    console.log("out",allEventData)
     if(isLogin){
       let baughtData = await myOrdersApi(setCourse, setLoading, setError);
       if(baughtData){

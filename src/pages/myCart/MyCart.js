@@ -63,7 +63,15 @@ function MyCart() {
 
   const handleClose = () => {
     setOpen(false);
-    window.location.assign("/my-courses");
+    if(paymentMessage === "Payment Success" || 
+      paymentMessage === "Order Placed"){
+      getFromCartApi(setCartItems, setY, setLoading, setError);
+      window.location.assign("/#/my-courses");
+    }
+    else{
+      window.location.assign("/#/my-cart");
+    }
+    
   };
 
   const removeFromCart = async (id) => {
@@ -127,6 +135,7 @@ function MyCart() {
             order_type: "paid"
           };
           let order = await addOrderApi(body);
+          
           const options = {
             key: "rzp_test_oaNqGXlOP7o5Dc",
             amount: parseInt(totalPrice)*100,
@@ -157,13 +166,15 @@ function MyCart() {
               color: "#3399cc",
             },
           };
-          console.log("amount=",options.amount)
           const rzp1 = new Razorpay(options);
           rzp1.on("payment.failed", function (response) {
             let verificationDetail = {
               razorpay_payment_id: response.error.metadata.payment_id,
               order_id: response.error.metadata.order_id,
+              cart_item: body
             };
+            setOrderId(response.error.metadata.order_id);
+            setPaymentId(response.error.metadata.payment_id);
             verifyOrderApi(verificationDetail, setPaymentMessage, setOpen);
           });
           setCheckoutLoader(false);
@@ -180,15 +191,6 @@ function MyCart() {
           }
           let order = await addOrderApi(body);
           if(order?.message === "Order Added"){
-            toast.success(order, {
-              position: "bottom-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
             setCheckoutLoader(false);
             let data = await getFromCartApi(setCartData, setY, setLoading, setError);
             if (data) {
@@ -196,7 +198,9 @@ function MyCart() {
             } else {
               dispatch(cartAction({ cartCount: 0 }))
             }
-            navigate("/");
+            setOpen(true)
+            setOrderId(order.order.techvanto_order_id)
+            setPaymentMessage("Order Placed");
           }
           else{
             toast.error("Error while adding order", {
@@ -604,7 +608,6 @@ function MyCart() {
                           <div style={{backgroundColor: 'var(--color-primary)', padding: '10px'}}>
                             <img src={SecureImage} />
                           </div>
-                          
                         </Card>
                       </div>
                     )}

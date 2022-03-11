@@ -9,8 +9,10 @@ export const getCourse = createAsyncThunk(
     "getCourse", async ({id, setCourseData}, {rejectWithValue}) => {
         try {
             let data  = await singleCourseApi(id, setCourseData)
+            console.log("show data", data)
             return {data}
         } catch (e) {
+            
             return rejectWithValue(e?.message)
         }
     });

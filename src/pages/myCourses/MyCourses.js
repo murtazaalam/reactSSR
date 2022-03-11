@@ -72,7 +72,7 @@ function MyCourses() {
                           {data.data.course_type === "course" &&
                             <CourseCard
                               key={index}
-                              id={data.data._id}
+                              id={data.data.course_id}
                               title={data.data.course_name}
                               pic={data.data.course_image}
                               noOfReviews={data.data.reviews}
@@ -96,11 +96,12 @@ function MyCourses() {
                   <Grid container spacing={3}>
                     {course &&
                       course.map((data, index) => (
+                        
                         <Grid item sx={{paddingLeft: '16px !important'}}>
                           {data.data.course_type === "event" &&
                             <CourseCard
                               key={index}
-                              id={data.data._id}
+                              id={data.data.event_id}
                               title={data.data.event_name}
                               pic={data.data.event_image}
                               noOfReviews={data.data.reviews}

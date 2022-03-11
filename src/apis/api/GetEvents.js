@@ -10,7 +10,6 @@ export default async function eventsApi(
     .then((response) => response.json())
     .then((data) => {
       setEventData(data);
-      console.log("data",data);
       setLoading(false);
       return data
     })
