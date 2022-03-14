@@ -372,13 +372,13 @@ const CourseBody = ({ course, isBaughtCourse }) => {
               <div className="course-detail">
                 {course && (
                   <div className="course-price">
-                    {course.discount > 0 && (
+                    {course.discount > 0 ? (
                       <p>
                         Rs.&nbsp;
-                        {timeBadge ? (
+                        {discountTime > 0 && timeBadge ? (
                           <>
                             <del>
-                              <span>{course.price}</span>
+                              <span>{course.price - course.discount}</span>
                             </del>
                           </>
                         ) : (
@@ -387,7 +387,7 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                           </span>
                         )}
                         &nbsp;
-                        {timeBadge ? (
+                        {discountTime > 0 && timeBadge ? (
                           <span className="updated-price">
                             <Badge
                               badgeContent={`${hrs
@@ -406,14 +406,19 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                           ""
                         )}
                       </p>
-                    )}
-                    {course.discount === "0" && (
+                    ) : 
+                      <p>
+                        Rs.&nbsp;
+                        <span>{course.price}</span>
+                      </p>
+                    }
+                    {/* {course.discount === "0" && (
                       <p>
                         Rs.&nbsp;
                         <span>{course.price}</span>
                         <span>.99</span>
                       </p>
-                    )}
+                    )} */}
                   </div>
                 )}
                 <div className="other">
