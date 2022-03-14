@@ -61,6 +61,7 @@ const NavBar = (props) => {
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const [error, setError] = useState();
+  const [courseValue, setCourse] = useState();
   const [courseData, setCourseData] = React.useState();
   const [cartCounting, setCartCount] = useState();
   const [y, setY] = useState([]);
@@ -167,7 +168,7 @@ const NavBar = (props) => {
     setLoading(false);
   }
   const changeCourse = (id) => {
-    dispatch(getCourse({ id, setCourseData }));
+    dispatch(getCourse({ id, setCourseData, setCourse, setLoading, setError, isLogin }));
   };
 
   const list = (anchor) => (

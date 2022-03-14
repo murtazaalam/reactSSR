@@ -164,6 +164,7 @@ function AllCourses() {
         category === "All" ? (
         <>
             <CourseCard
+              key={data._id}
               id={data._id}
               title={data.course_name}
               pic={data.thumbnail}

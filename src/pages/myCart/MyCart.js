@@ -15,7 +15,7 @@ import { Rating } from "@material-ui/lab";
 import Loading from "../../components/Loader";
 import PaymentSuccessDialog from "../../components/PaymentSuccessDialog";
 import ButtonLoader from "../../assets/images/button_loader.gif";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../redux/slices/auth.slices";
 import { cartAction } from "../../redux/slices/cart.slice";
 import Checkbox from '@mui/material/Checkbox';
@@ -60,7 +60,7 @@ function MyCart() {
     setLoading(true);
     getFromCartApi(setCartItems, setY, setLoading, setError);
   }, []);
-
+  let { admin, isLogin } = useSelector((state) => state.AuthReducer);
   const handleClose = () => {
     setOpen(false);
     if(paymentMessage === "Payment Success" || 
@@ -191,6 +191,9 @@ function MyCart() {
           }
           let order = await addOrderApi(body);
           if(order?.message === "Order Added"){
+            setOpen(true)
+            setOrderId(order.order.techvanto_order_id)
+            setPaymentMessage("Order Placed");
             setCheckoutLoader(false);
             let data = await getFromCartApi(setCartData, setY, setLoading, setError);
             if (data) {
@@ -198,9 +201,6 @@ function MyCart() {
             } else {
               dispatch(cartAction({ cartCount: 0 }))
             }
-            setOpen(true)
-            setOrderId(order.order.techvanto_order_id)
-            setPaymentMessage("Order Placed");
           }
           else{
             toast.error("Error while adding order", {
@@ -306,319 +306,324 @@ function MyCart() {
     }
   }
   return (
-    <div>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div>
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
+    <>
+      {isLogin ? 
+      <div>
+        {loading ? (
+          <Loading />
+        ) : (
           <div>
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
             <div>
-              <Box
-                component="section"
-                className="page-heading"
-                sx={{
-                  background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/my+cart.jpg)`,
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                }}
-              >
-                <div className="course-container">
-                  {/* <img src={BlogHead1} alt="" width="15" /> */}
-                  <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                      <li className="breadcrumb-item active">
-                        Home
-                        <div className="line"></div>
-                      </li>
-                      <li className="breadcrumb-item active">My Cart</li>
-                    </ol>
-                  </nav>
-                  <h1 className="event-heading">My Cart</h1>
-                </div>
-              </Box>
-            </div>
-            {cartItems && (
-              <>
-                <section className="cart-content-block container">
-                  {!cartItems.length && (
-                    <Box sx={{ p: 2, mb: 15, mt: 9 }}>
-                      <h6>
-                        {" "}
-                        <span style={{ fontWeight: "bolder" }}>
-                          Empty Cart!!!
-                        </span>
-                        Go to <Link to="/all-courses/all">Marketplace</Link> and
-                        get some courses.
-                      </h6>
-                    </Box>
-                  )}
-                  <Typography variant="p">
-                    {paymentMessage !== "" ? (
-                      <>
-                        <PaymentSuccessDialog
-                          message={paymentMessage}
-                          orderId={OrderId}
-                          paymentId={paymentId}
-                          open={open}
-                          handleClose={handleClose}
-                        />
-                      </>
-                    ) : (
-                      ""
+              <div>
+                <Box
+                  component="section"
+                  className="page-heading"
+                  sx={{
+                    background: `url(https://tv-academy-assets.s3.eu-west-2.amazonaws.com/my+cart.jpg)`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                  }}
+                >
+                  <div className="course-container">
+                    {/* <img src={BlogHead1} alt="" width="15" /> */}
+                    <nav aria-label="breadcrumb">
+                      <ol className="breadcrumb">
+                        <li className="breadcrumb-item active">
+                          Home
+                          <div className="line"></div>
+                        </li>
+                        <li className="breadcrumb-item active">My Cart</li>
+                      </ol>
+                    </nav>
+                    <h1 className="event-heading">My Cart</h1>
+                  </div>
+                </Box>
+              </div>
+              {cartItems && (
+                <>
+                  <section className="cart-content-block container">
+                    {!cartItems.length && (
+                      <Box sx={{ p: 2, mb: 15, mt: 9 }}>
+                        <h6>
+                          {" "}
+                          <span style={{ fontWeight: "bolder" }}>
+                            Empty Cart!!!
+                          </span>
+                          Go to <Link to="/all-courses/all">Marketplace</Link> and
+                          get some courses.
+                        </h6>
+                      </Box>
                     )}
-                  </Typography>
-                  {/* cart form */}
-                  <form action="#" className="cart-form">
-                    <div className="table-wrap">
-                     
-                      {cartItems.map((item, index) => (
-                        
+                    <Typography variant="p">
+                      {paymentMessage !== "" ? (
                         <>
-                          <Card
-                            sx={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              marginBottom: "20px",
-                            }}
-                            className="cart-left-card"
-                            key={index}
-                          >
-                            <Checkbox
-                              checked={y[index]?.isChecked}
-                              onChange={(e) => handleCheckbox(e, index)}
-                              inputProps={{ 'aria-label': 'controlled' }}
-                            />
-                            <div
-                              style={{
-                                background: `linear-gradient(${item.gradient})`,
-                                height: "194px",
-                              }}
-                            >
-                              <a href={item.course_type === 'course' ? `/#/courses/${item.course_id}` : `/#/event/${item.event_id}`}
-                                   onClick={() => courseDetail(item.course_id, item.course_type)}
-                                  >
-                                <CardMedia
-                                  component="img"
-                                  className="techvanto-all-course-image"
-                                  sx={{ width: 340, height: 194 }}
-                                  style={{
-                                    backgroundImage: `url(${ item.course_type === "course" ? item.course_image : item.event_image})`,
-                                    height: "194px",
-                                    minWidth: "280px",
-                                  }}
-                                />
-                              </a>
-                            </div>
-
-                            <Box
-                              sx={{ display: "flex", flexDirection: "column" }}
-                            >
-                              <CardContent sx={{ flex: "1 0 auto" }}>
-                                <Typography component="div" variant="h5">
-                                  <a href={item.course_type === 'course' ? `/#/courses/${item.course_id}` : `/#/event/${item.event_id}`}
-                                   onClick={() => courseDetail(item.course_id, item.course_type)}
-                                   className="cart-course-title"
-                                  >
-                                    { item.course_type === "course" ? item.course_name : item.event_name }
-                                  </a>
-                                </Typography>
-                                <Typography
-                                  variant="subtitle1"
-                                  color="text.secondary"
-                                  component="div"
-                                  sx={{ height: "92px", overflow: "hidden" }}
-                                >
-                                  {item.description}
-                                </Typography>
-                                {item.course_type === "course" &&
-                                  <Rating
-                                    name="read-only"
-                                    value={item.rating}
-                                    readOnly
-                                  />
-                                }
-                                {item.course_type === "course" &&
-                                  <RadioGroup
-                                    aria-labelledby="demo-controlled-radio-buttons-group"
-                                    name="controlled-radio-buttons-group"
-                                    sx={{ display: "flex", flexDirection: "row" }}
-                                    value={y[index]?.registrationType}
-                                    onChange={(e) => handleRadio(e, index)}
-                                  >
-                                    <FormControlLabel
-                                      value="registration"
-                                      name="radio"
-                                      control={<Radio />}
-                                      label="Pay Registration Fee"
-                                    />
-                                    <FormControlLabel
-                                      value="full"
-                                      name="radio"
-                                      control={<Radio />}
-                                      label="Full Fee"
-                                    />
-                                  </RadioGroup>
-                                }
-                              </CardContent>
-                            </Box>
-                            <CardActions className="cart-action">
-                              <DeleteIcon
-                                onClick={() => removeFromCart(item._id)}
-                                style={{ placeSelf: "flex-end" }}
-                              />
-                              {item.price != 0 & item.discount !== 0 ? (
-                                <p>
-                                  {" "}
-                                  <span
-                                    style={{ textDecorationLine: "line-through" }}
-                                  >
-                                    Rs.{item.price}
-                                  </span>
-                                  {"  "}
-                                  Rs.{item.price - item.discount}
-                                </p>
-                              ) : (
-                                <p>{item.price != 0 ? `Rs.${item.price}` : 'Free'}</p>
-                              )}
-                            </CardActions>
-                          </Card>
+                          <PaymentSuccessDialog
+                            message={paymentMessage}
+                            orderId={OrderId}
+                            paymentId={paymentId}
+                            open={open}
+                            handleClose={handleClose}
+                          />
                         </>
-                      ))}
-                    </div>
-                    {cartItems.length > 0 && (
-                      <div className="cart-priceCard">
-                        <Card>
-                          <CardContent>
-                            <Typography variant="h4" color="initial">
-                              Total &nbsp;₹
-                              <span id="totalPrice">{y.reduce((sum, curr) => {
-                                //return curr.isChecked ? sum + curr.registrationType === "full" ?  (parseInt(curr.data.price) - parseInt(curr.data.discount)) : parseInt(200) : sum + 0
-                                let total = 0
-                                if (curr.isChecked) {
-                                  if (curr.registrationType === "full") {
-                                    total = total + sum + parseInt(curr.data.price) - 
-                                    parseInt(curr.data.discount ? curr.data.discount : 0)
-                                  }
-                                  else {
-                                    
-                                    total = total + sum + parseInt(curr.data.registration_fee)
-                                  }
-                                }
-                                else{
-                                  
-                                  total = sum
-                                }
-                                return total
-                              }, 0)}</span>
-                            </Typography>
-                            <Typography variant="h2"></Typography>
-                            <Typography variant="body1" color="initial">
-                              Subtotal:&nbsp; ₹
-                              <span
-                                className="price"
-                                style={{ textDecoration: "line-through" }}
-                                id="subTotal"
-                              >
-                                {cartItems.reduce(
-                                  (a, curr) =>
-                                    parseInt(a) + parseInt(curr.price),
-                                  0
-                                )}
-                              </span>
-                            </Typography>
-                            <Typography variant="body1" color="initial">
-                              Total Discount: &nbsp; ₹
-                              <span id="totalDiscount">
-                                {cartItems.reduce(
-                                  (a, curr) =>
-                                    parseInt(a) +
-                                    (parseInt(curr.discount)
-                                      ? parseInt(curr.discount)
-                                      : 0),
-                                  0
-                                )}{" "}
-                              </span>
-                            </Typography>
-                          </CardContent>
-                          <CardActions sx={{display: "flex", flexDirection: "column"}}>
-                            <FormControl
-                              sx={{ marginBottom: '30px'}}
-                              className="referal-aria"
+                      ) : (
+                        ""
+                      )}
+                    </Typography>
+                    {/* cart form */}
+                    <form action="#" className="cart-form">
+                      <div className="table-wrap">
+                      
+                        {cartItems.map((item, index) => (
+                          
+                          <>
+                            <Card
+                              sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                marginBottom: "20px",
+                              }}
+                              className="cart-left-card"
+                              key={index}
                             >
-                              <InputLabel htmlFor="component-outlined" error={referalError}>
-                                Referal Code(Optional)
-                              </InputLabel>
-                              <OutlinedInput
-                                id="component-outlined"
-                                label="Referal Code(Optional)"
-                                value={referalCode}
-                                onChange={(e) => getReferalCode(e)}
-                                error={referalError}
+                              <Checkbox
+                                checked={y[index]?.isChecked}
+                                onChange={(e) => handleCheckbox(e, index)}
+                                inputProps={{ 'aria-label': 'controlled' }}
                               />
-                              <button
-                                className="btn-verify"
-                                onClick={(e) => handleVerify(e)}
-                                disabled={verifyLoader}
-                                style={verifyLoader ? {backgroundColor: "var(--color-disable)"} :
-                                {backgroundColor: "var(--color-secondary)"}}
-                              >
-
-                                {verifyLoader ? <img src={ButtonLoader} width="40" alt="" /> : 
-                                'Verify'}
-                              </button>
-                              {referalError && <p className="referal-error">{errorText}</p>}
-                              {referalSucces && <p 
-                                className="referal-error"
+                              <div
                                 style={{
-                                  color: 'var(--color-purchased)',
-                                  fontWeight: '800'
+                                  background: `linear-gradient(${item.gradient})`,
+                                  height: "194px",
                                 }}
                               >
-                                Applied Successfully({refreeName})
-                                <CheckCircleIcon className="check-icon" />
-                              </p>}
-                            </FormControl>
-                            <button
-                              type="button"
-                              className="btn-grad full-width btn-checkout"
-                              disabled={checkoutLoader}
-                              style={checkoutLoader ? { backgroundColor: "var(--color-disable)"} : 
-                                {backgroundColor: "var(--color-secondary)" }}
-                              onClick={checkout}
-                            >
-                              {checkoutLoader ? 
-                                  <img src={ButtonLoader} width="80" alt="" />
-                                 : 
-                                    'Checkout'
+                                <a href={item.course_type === 'course' ? `/#/courses/${item.course_id}` : `/#/event/${item.event_id}`}
+                                    onClick={() => courseDetail(item.course_id, item.course_type)}
+                                    >
+                                  <CardMedia
+                                    component="img"
+                                    className="techvanto-all-course-image"
+                                    sx={{ width: 340, height: 194 }}
+                                    style={{
+                                      backgroundImage: `url(${ item.course_type === "course" ? item.course_image : item.event_image})`,
+                                      height: "194px",
+                                      minWidth: "280px",
+                                    }}
+                                  />
+                                </a>
+                              </div>
+
+                              <Box
+                                sx={{ display: "flex", flexDirection: "column" }}
+                              >
+                                <CardContent sx={{ flex: "1 0 auto" }}>
+                                  <Typography component="div" variant="h5">
+                                    <a href={item.course_type === 'course' ? `/#/courses/${item.course_id}` : `/#/event/${item.event_id}`}
+                                    onClick={() => courseDetail(item.course_id, item.course_type)}
+                                    className="cart-course-title"
+                                    >
+                                      { item.course_type === "course" ? item.course_name : item.event_name }
+                                    </a>
+                                  </Typography>
+                                  <Typography
+                                    variant="subtitle1"
+                                    color="text.secondary"
+                                    component="div"
+                                    sx={{ height: "92px", overflow: "hidden" }}
+                                  >
+                                    {item.description}
+                                  </Typography>
+                                  {item.course_type === "course" &&
+                                    <Rating
+                                      name="read-only"
+                                      value={item.rating}
+                                      readOnly
+                                    />
                                   }
-                            </button>
-                            <p style={{color: "var(--color-secondary)", margin:"0"}}>{isItemSelected}</p>
-                          </CardActions>
-                          <div style={{backgroundColor: 'var(--color-primary)', padding: '10px'}}>
-                            <img src={SecureImage} />
-                          </div>
-                        </Card>
+                                  {item.course_type === "course" &&
+                                    <RadioGroup
+                                      aria-labelledby="demo-controlled-radio-buttons-group"
+                                      name="controlled-radio-buttons-group"
+                                      sx={{ display: "flex", flexDirection: "row" }}
+                                      value={y[index]?.registrationType}
+                                      onChange={(e) => handleRadio(e, index)}
+                                    >
+                                      <FormControlLabel
+                                        value="registration"
+                                        name="radio"
+                                        control={<Radio />}
+                                        label="Pay Registration Fee"
+                                      />
+                                      <FormControlLabel
+                                        value="full"
+                                        name="radio"
+                                        control={<Radio />}
+                                        label="Full Fee"
+                                      />
+                                    </RadioGroup>
+                                  }
+                                </CardContent>
+                              </Box>
+                              <CardActions className="cart-action">
+                                <DeleteIcon
+                                  onClick={() => removeFromCart(item._id)}
+                                  style={{ placeSelf: "flex-end" }}
+                                />
+                                {item.price != 0 & item.discount !== 0 ? (
+                                  <p>
+                                    {" "}
+                                    <span
+                                      style={{ textDecorationLine: "line-through" }}
+                                    >
+                                      Rs.{item.price}
+                                    </span>
+                                    {"  "}
+                                    Rs.{item.price - item.discount}
+                                  </p>
+                                ) : (
+                                  <p>{item.price != 0 ? `Rs.${item.price}` : 'Free'}</p>
+                                )}
+                              </CardActions>
+                            </Card>
+                          </>
+                        ))}
                       </div>
-                    )}
-                  </form>
-                </section>
-              </>
-            )}
+                      {cartItems.length > 0 && (
+                        <div className="cart-priceCard">
+                          <Card>
+                            <CardContent>
+                              <Typography variant="h4" color="initial">
+                                Total &nbsp;₹
+                                <span id="totalPrice">{y.reduce((sum, curr) => {
+                                  //return curr.isChecked ? sum + curr.registrationType === "full" ?  (parseInt(curr.data.price) - parseInt(curr.data.discount)) : parseInt(200) : sum + 0
+                                  let total = 0
+                                  if (curr.isChecked) {
+                                    if (curr.registrationType === "full") {
+                                      total = total + sum + parseInt(curr.data.price) - 
+                                      parseInt(curr.data.discount ? curr.data.discount : 0)
+                                    }
+                                    else {
+                                      
+                                      total = total + sum + parseInt(curr.data.registration_fee)
+                                    }
+                                  }
+                                  else{
+                                    
+                                    total = sum
+                                  }
+                                  return total
+                                }, 0)}</span>
+                              </Typography>
+                              <Typography variant="h2"></Typography>
+                              <Typography variant="body1" color="initial">
+                                Subtotal:&nbsp; ₹
+                                <span
+                                  className="price"
+                                  style={{ textDecoration: "line-through" }}
+                                  id="subTotal"
+                                >
+                                  {cartItems.reduce(
+                                    (a, curr) =>
+                                      parseInt(a) + parseInt(curr.price),
+                                    0
+                                  )}
+                                </span>
+                              </Typography>
+                              <Typography variant="body1" color="initial">
+                                Total Discount: &nbsp; ₹
+                                <span id="totalDiscount">
+                                  {cartItems.reduce(
+                                    (a, curr) =>
+                                      parseInt(a) +
+                                      (parseInt(curr.discount)
+                                        ? parseInt(curr.discount)
+                                        : 0),
+                                    0
+                                  )}{" "}
+                                </span>
+                              </Typography>
+                            </CardContent>
+                            <CardActions sx={{display: "flex", flexDirection: "column"}}>
+                              <FormControl
+                                sx={{ marginBottom: '30px'}}
+                                className="referal-aria"
+                              >
+                                <InputLabel htmlFor="component-outlined" error={referalError}>
+                                  Referal Code(Optional)
+                                </InputLabel>
+                                <OutlinedInput
+                                  id="component-outlined"
+                                  label="Referal Code(Optional)"
+                                  value={referalCode}
+                                  onChange={(e) => getReferalCode(e)}
+                                  error={referalError}
+                                />
+                                <button
+                                  className="btn-verify"
+                                  onClick={(e) => handleVerify(e)}
+                                  disabled={verifyLoader}
+                                  style={verifyLoader ? {backgroundColor: "var(--color-disable)"} :
+                                  {backgroundColor: "var(--color-secondary)"}}
+                                >
+
+                                  {verifyLoader ? <img src={ButtonLoader} width="40" alt="" /> : 
+                                  'Verify'}
+                                </button>
+                                {referalError && <p className="referal-error">{errorText}</p>}
+                                {referalSucces && <p 
+                                  className="referal-error"
+                                  style={{
+                                    color: 'var(--color-purchased)',
+                                    fontWeight: '800'
+                                  }}
+                                >
+                                  Applied Successfully({refreeName})
+                                  <CheckCircleIcon className="check-icon" />
+                                </p>}
+                              </FormControl>
+                              <button
+                                type="button"
+                                className="btn-grad full-width btn-checkout"
+                                disabled={checkoutLoader}
+                                style={checkoutLoader ? { backgroundColor: "var(--color-disable)"} : 
+                                  {backgroundColor: "var(--color-secondary)" }}
+                                onClick={checkout}
+                              >
+                                {checkoutLoader ? 
+                                    <img src={ButtonLoader} width="80" alt="" />
+                                  : 
+                                      'Checkout'
+                                    }
+                              </button>
+                              <p style={{color: "var(--color-secondary)", margin:"0"}}>{isItemSelected}</p>
+                            </CardActions>
+                            <div style={{backgroundColor: 'var(--color-primary)', padding: '10px'}}>
+                              <img src={SecureImage} />
+                            </div>
+                          </Card>
+                        </div>
+                      )}
+                    </form>
+                  </section>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>:
+        navigate('/')
+      }
+    </>
   );
 }
 

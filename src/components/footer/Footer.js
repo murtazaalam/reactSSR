@@ -13,7 +13,7 @@ import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCourse } from "../../redux/slices/course.slice";
 
 const Accordion = styled((props) => (
@@ -73,7 +73,12 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 const Footer = () => {
   const [topCourses, setTopCourses] = React.useState([]);
   const [courseData, setCourseData] = React.useState();
+  const [course, setCourse] = React.useState();
+  const [loading, setLoading] = React.useState();
+  const [error, setError] = React.useState();
+
   let dispatch = useDispatch();
+  let { admin, isLogin } = useSelector((state) => state.AuthReducer);
   React.useEffect(() => {
     getTopCourseApi(setTopCourses);
   }, []);
@@ -84,7 +89,7 @@ const Footer = () => {
   };
 
   const handleCourse = (id) => {
-    dispatch(getCourse({ id, setCourseData }));
+    dispatch(getCourse({ id, setCourseData, setCourse, setLoading, setError, isLogin }));
   };
 
   const mobileFooter = (

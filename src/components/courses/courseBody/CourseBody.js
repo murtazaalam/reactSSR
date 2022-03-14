@@ -31,7 +31,7 @@ import addReviewApi from "../../../apis/api/AddReview";
 import { cartAction } from "../../../redux/slices/cart.slice";
 import { logoutAction } from "../../../redux/slices/auth.slices";
 import getFromCartApi from "../../../apis/api/GetFromCart";
-//import myOrdersApi from "../../../apis/api/MyOders";
+import * as moment from "moment";
 
 function PaperComponent(props) {
   return (
@@ -43,12 +43,9 @@ function PaperComponent(props) {
     </Draggable>
   );
 }
-const CourseBody = ({ course }) => {
+const CourseBody = ({ course, isBaughtCourse, diffHour }) => {
   const [value, setValue] = useState("1");
-
-  const [timeBadge, setTimerBadge] = useState(false);
-  const [baughtCourses, setCourse] = useState([]);
-  const [isBaughtCourse, setIsBaughtCourse] = useState(false);
+  const [timeBadge, setTimerBadge] = useState(diffHour > 0 ? true : false);
   const [loader, setLoader] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
@@ -59,58 +56,30 @@ const CourseBody = ({ course }) => {
   const [y, setY] = useState([]);
   const [cartData, setCartData] = useState();
   const [loading, setLoading] = useState();
-  
-
+  let {discountTime, futureDate} = useSelector((state) => state.CourseReducer)
+  //const [daysHoursMinSecs, setDaysHoursMinSecs] = useState({ day: 0, hours: discountTime, minutes: 0, seconds: 0 }); 
+  let [x, setX] = useState(discountTime*60)
   let dispatch = useDispatch();
-  let baughtCourseOnly = [];
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
   const currentUrl = window.location.href;
-  useEffect( async() => {
-    if(isLogin){
-      let baughtData = await myOrdersApi(setCourse, setLoading, setError);
-      if(baughtData){
-        baughtCourseOnly = baughtData.filter((item) => {
-          return item.data.course_type === "course"
-        });
-        isBaught(baughtCourseOnly)
-      }
-    }
-  }, []);
-  const isBaught = (baughtCourses) => {
-    if (baughtCourses) {
-      baughtCourses.forEach((item) => {
-        if (item.data.course_id === course._id) setIsBaughtCourse(true);
-      });
-    }
-  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const now = new Date();
-  let futureDate;
-  let diffHour;
+  useEffect(() => {
+    setTimeout(() => {
+      setX(parseInt(x) - 60)
+      console.log("xin=",x)
+    },60000)
+    console.log("x=",x)
+  },[x,discountTime])
+  //const { day = 0, hours = discountTime, minutes = 0, seconds = 0 } = daysHoursMinSecs;
 
-  if (course.discount_limit_date) {
-    futureDate = new Date(course.discount_limit_date);
-    diffHour = Math.floor((futureDate - now) / 3600000);
-    if(diffHour > 0) {
-      diffHour = diffHour;
-      setTimerBadge(true);
-    } else{
-      diffHour = 0
-    }
-  } else {
-    diffHour = 0;
-  }
-
-  const daysHoursMinSecs = { day: 0, hours: diffHour, minutes: 0, seconds: 0 };
-  const { day = 0, hours = 0, minutes = 0, seconds = 60 } = daysHoursMinSecs;
   const [[days, hrs, mins, secs], setTime] = useState([
-    day,
-    hours,
-    minutes,
-    seconds,
+    0,
+    discountTime,
+    0,
+    0,
   ]);
 
   const [open, setOpen] = React.useState(false);
@@ -119,8 +88,10 @@ const CourseBody = ({ course }) => {
     setOpen(false);
   };
   const tick = () => {
-    if (days === 0 && hrs === 0 && mins === 0 && secs === 0)
+   
+    if (days === 0 && hrs === 0 && mins === 0 && secs === 0){
       setTimerBadge(false);
+    }
     else if (hrs === 0 && mins === 0 && secs === 0) {
       setTime([days - 1, 23, 59, 59]);
     } else if (mins === 0 && secs === 0) {
@@ -135,19 +106,7 @@ const CourseBody = ({ course }) => {
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
   });
-
-  // useEffect( async() => {
-  //   if(isLogin){
-  //     let baughtData = await myOrdersApi(setCourse, setLoading, setError);
-  //     if(baughtData){
-  //       baughtCourseOnly = baughtData.filter((item) => {
-  //         return item.data.course_type === "course"
-  //       });
-  //       setCourse(baughtCourseOnly);
-  //     }
-  //   }
-  // }, []);
-
+  
   const addToCart = async (id) => {
     setCartLoader(true);
     let body = {
@@ -278,6 +237,14 @@ const CourseBody = ({ course }) => {
   const emptyState = () => {
     setComment("");
   };
+  const getTimer = (date) => {
+    let now = new Date();
+    let futureDate = new Date(date);
+    let miliseconds = Math.floor((futureDate - now));
+    let xs = new Date(miliseconds).toISOString().slice(11,19);
+    console.log("xss",xs);
+    return xs;
+  }
   return (
     <>
       <div className="course-tab-container">
@@ -435,6 +402,7 @@ const CourseBody = ({ course }) => {
                         &nbsp;
                         {timeBadge === true ? (
                           <span className="updated-price">
+                            
                             <Badge
                               badgeContent={`${hrs
                                 .toString()
@@ -447,6 +415,12 @@ const CourseBody = ({ course }) => {
                             >
                               {course.price - course.discount}
                             </Badge>
+                            {/* <Badge
+                              badgeContent={`${setTimeout(()=> {getTimer(futureDate)},1000)}${x/60}`}
+                              color="primary"
+                            >
+                              {course.price - course.discount}
+                            </Badge> */}
                           </span>
                         ) : (
                           ""
