@@ -375,7 +375,7 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                     {course.discount > 0 && (
                       <p>
                         Rs.&nbsp;
-                        {discountTime > 0 && timeBadge ? (
+                        {timeBadge ? (
                           <>
                             <del>
                               <span>{course.price}</span>
@@ -387,7 +387,7 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                           </span>
                         )}
                         &nbsp;
-                        {discountTime > 0 && timeBadge ? (
+                        {timeBadge ? (
                           <span className="updated-price">
                             <Badge
                               badgeContent={`${hrs
