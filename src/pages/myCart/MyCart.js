@@ -61,6 +61,7 @@ function MyCart() {
     getFromCartApi(setCartItems, setY, setLoading, setError);
   }, []);
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
+  console.log("user details = ",admin);
   const handleClose = () => {
     setOpen(false);
     if(paymentMessage === "Payment Success" || 
@@ -110,7 +111,6 @@ function MyCart() {
   if (deleteCount > 0) {
     getFromCartApi(setCartItems, setY, setLoading, setError);
   }
-
   const checkout = async () => {
     setCheckoutLoader(true);
     setIsItemSelected('');
@@ -155,9 +155,9 @@ function MyCart() {
               await verifyOrderApi(verificationDetail, setPaymentMessage, setOpen);
             },
             prefill: {
-              name: "Piyush Garg",
-              email: "youremail@example.com",
-              contact: "9999999999",
+              name: admin.name,
+              email: admin.email,
+              contact: admin.phone,
             },
             notes: {
               address: "Razorpay Corporate Office",
