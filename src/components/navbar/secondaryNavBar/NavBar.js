@@ -384,7 +384,7 @@ const NavBar = (props) => {
                       <li>
                         <a>
                           <Link to="/all-courses/college">Colleges</Link>
-                          <div className="course-list">
+                          <div className="course-list" style={{overflowY: 'auto',overflowX: 'hidden'}}>
                             <div
                               className="image-section"
                               style={{
