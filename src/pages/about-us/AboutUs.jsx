@@ -7,7 +7,9 @@ import mission from "../../assets/Svgs/about-us-mission.svg";
 import vision from "../../assets/Svgs/about-us-vision.svg";
 import "./aboutUs.css";
 import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
-
+import yashna from "../../assets/Svgs/Yashna.svg";
+import suzain from "../../assets/Svgs/suzain.svg";
+import priya from "../../assets/Svgs/Priya.svg";
 import HiringPartner from "../../components/HiringPartners/HiringPartner.js";
 import industry from "../../assets/images/industry-recg.png";
 import TopClient from "../../components/TopClients/TopClients";
@@ -47,12 +49,7 @@ function AboutUs() {
   }
   const itemData = [
     {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlAj66E2hFn-fYLZQy73_PJadXdwmiRPICYw&usqp=CAU",
-      title1: "Nishant Singh",
-      title2: "Graphic Designer",
-    },
-    {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdByeCZSVaOA1ElmxXAtSmebg9y0pMwilSDw&usqp=CAU",
+      pic: yashna,
       title1: "Yashna Mittal",
       title2: "UI/UX Designer",
     },
@@ -62,12 +59,12 @@ function AboutUs() {
       title2: "Developer",
     },
     {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdByeCZSVaOA1ElmxXAtSmebg9y0pMwilSDw&usqp=CAU",
+      pic: priya,
       title1: "Priya Chaudhary",
       title2: "Designer",
     },
     {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdByeCZSVaOA1ElmxXAtSmebg9y0pMwilSDw&usqp=CAU",
+      pic: suzain,
       title1: "Suzain Shafiq",
       title2: "Designer",
     },
@@ -184,7 +181,31 @@ function AboutUs() {
           <h3 className="about-us-heading">Our Team</h3>
           <br />
           <div className="team-lead">
-            <Grid container spacing={2} sx={{ placeContent: "center" }}>
+            <main
+              className="our-mission-flex"
+              style={{ placeContent: "center" }}
+            >
+              <div className="our-mission-img">
+                <img src={mission} alt="mission" />
+              </div>
+              <div className="our-mission-text">
+                <h5 className="our-mission-text-heading">
+                  OUR MISSION AND HOW WE LIVE IT
+                </h5>
+                <p className="underline-left">
+                  At the intersection of passion and potential stands a
+                  transforming ability to impact one’s life and that of other’s.
+                  We understand that employability is much more than what it
+                  sounds like. Furthering on the concept of Digital India, we
+                  are building up a platform that offers an ocean of life skills
+                  and soft skills for young and budding students to transmogrify
+                  their careers. Discovering the dormant creativity in oneself
+                  is a tantalising desire.
+                </p>
+              </div>
+            </main>
+
+            {/* <Grid container spacing={2} sx={{ placeContent: "center" }}>
               <Grid item>
                 <div className="lead-card">
                   <img
@@ -232,7 +253,7 @@ function AboutUs() {
                   <p className="designation">Founder</p>
                 </div>
               </Grid>
-            </Grid>
+            </Grid> */}
           </div>
           <br />
           <br />
