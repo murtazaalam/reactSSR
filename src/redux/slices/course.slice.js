@@ -6,8 +6,7 @@ const initialState = {
     course: [],
     isLoading: false,
     isBaughtCourse: false,
-    discountTime: 0,
-    futureDate: null
+    discountTime: 0
 };
 export const getCourse = createAsyncThunk(
     "getCourse", async ({id, setCourseData, setCourse, setLoading, setError, isLogin}, {rejectWithValue}) => {
@@ -38,8 +37,7 @@ export const getCourse = createAsyncThunk(
               } else {
                 diffHour = 0;
               }
-            console.log("slice hr=",diffHour)
-            return {data, isBaught, diffHour, futureDate:data.discount_limit_date}
+            return {data, isBaught, diffHour}
         } catch (e) {
             return rejectWithValue(e?.message)
         }
@@ -61,7 +59,6 @@ export const courseSlice = createSlice({
             state.isLoading = false
             state.isBaughtCourse = action?.payload?.isBaught
             state.discountTime = action?.payload?.diffHour
-            state.futureDate = action?.payload?.futureDate
         }
     }
 

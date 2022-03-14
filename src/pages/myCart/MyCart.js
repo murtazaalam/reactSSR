@@ -61,7 +61,6 @@ function MyCart() {
     getFromCartApi(setCartItems, setY, setLoading, setError);
   }, []);
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
-  console.log("user details = ",admin);
   const handleClose = () => {
     setOpen(false);
     if(paymentMessage === "Payment Success" || 
@@ -70,6 +69,7 @@ function MyCart() {
       window.location.assign("/#/my-courses");
     }
     else{
+      //navigate('/my-cart')
       window.location.assign("/#/my-cart");
     }
     
@@ -137,13 +137,18 @@ function MyCart() {
           let order = await addOrderApi(body);
           
           const options = {
-            key: "rzp_test_oaNqGXlOP7o5Dc",
+            key: "rzp_live_qzL12pXPNuRwwo",
             amount: parseInt(totalPrice)*100,
             currency: "INR",
             name: "Acme Corp",
             description: "Test Transaction",
             image: "https://example.com/your_logo",
             order_id: order.response.id,
+            modal: {
+              ondismiss: async function () {
+               //console.log("hello",response)
+              },
+            },
             handler: async function (response) {
               let verificationDetail = {
                 razorpay_payment_id: response.razorpay_payment_id,
@@ -175,6 +180,7 @@ function MyCart() {
             };
             setOrderId(response.error.metadata.order_id);
             setPaymentId(response.error.metadata.payment_id);
+            //options.modal.ondismiss(verificationDetail)
             verifyOrderApi(verificationDetail, setPaymentMessage, setOpen);
           });
           setCheckoutLoader(false);

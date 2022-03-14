@@ -23,7 +23,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "./courseBody.css";
 import Login from "../../Login/Login";
 import Paper from "@mui/material/Paper";
-import myOrdersApi from "../../../apis/api/MyOders";
 import { useSelector, useDispatch } from "react-redux";
 import { RWebShare } from "react-web-share";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
@@ -31,7 +30,6 @@ import addReviewApi from "../../../apis/api/AddReview";
 import { cartAction } from "../../../redux/slices/cart.slice";
 import { logoutAction } from "../../../redux/slices/auth.slices";
 import getFromCartApi from "../../../apis/api/GetFromCart";
-import * as moment from "moment";
 
 function PaperComponent(props) {
   return (
@@ -43,9 +41,9 @@ function PaperComponent(props) {
     </Draggable>
   );
 }
-const CourseBody = ({ course, isBaughtCourse, diffHour }) => {
+const CourseBody = ({ course, isBaughtCourse }) => {
   const [value, setValue] = useState("1");
-  const [timeBadge, setTimerBadge] = useState(diffHour > 0 ? true : false);
+  
   const [loader, setLoader] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
@@ -56,9 +54,8 @@ const CourseBody = ({ course, isBaughtCourse, diffHour }) => {
   const [y, setY] = useState([]);
   const [cartData, setCartData] = useState();
   const [loading, setLoading] = useState();
-  let {discountTime, futureDate} = useSelector((state) => state.CourseReducer)
-  //const [daysHoursMinSecs, setDaysHoursMinSecs] = useState({ day: 0, hours: discountTime, minutes: 0, seconds: 0 }); 
-  let [x, setX] = useState(discountTime*60)
+  let { discountTime } = useSelector((state) => state.CourseReducer)
+  const [timeBadge, setTimerBadge] = useState(false);
   let dispatch = useDispatch();
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
@@ -66,14 +63,6 @@ const CourseBody = ({ course, isBaughtCourse, diffHour }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  useEffect(() => {
-    setTimeout(() => {
-      setX(parseInt(x) - 60)
-      console.log("xin=",x)
-    },60000)
-    console.log("x=",x)
-  },[x,discountTime])
-  //const { day = 0, hours = discountTime, minutes = 0, seconds = 0 } = daysHoursMinSecs;
 
   const [[days, hrs, mins, secs], setTime] = useState([
     0,
@@ -81,6 +70,11 @@ const CourseBody = ({ course, isBaughtCourse, diffHour }) => {
     0,
     0,
   ]);
+
+  useEffect(() => {
+    if(discountTime > 0) setTimerBadge(true);
+    setTime([0, discountTime, 0, 0])
+  },[discountTime])
 
   const [open, setOpen] = React.useState(false);
 
@@ -237,14 +231,7 @@ const CourseBody = ({ course, isBaughtCourse, diffHour }) => {
   const emptyState = () => {
     setComment("");
   };
-  const getTimer = (date) => {
-    let now = new Date();
-    let futureDate = new Date(date);
-    let miliseconds = Math.floor((futureDate - now));
-    let xs = new Date(miliseconds).toISOString().slice(11,19);
-    console.log("xss",xs);
-    return xs;
-  }
+  
   return (
     <>
       <div className="course-tab-container">
@@ -388,7 +375,7 @@ const CourseBody = ({ course, isBaughtCourse, diffHour }) => {
                     {course.discount > 0 && (
                       <p>
                         Rs.&nbsp;
-                        {timeBadge === true ? (
+                        {discountTime > 0 && timeBadge ? (
                           <>
                             <del>
                               <span>{course.price}</span>
@@ -400,9 +387,8 @@ const CourseBody = ({ course, isBaughtCourse, diffHour }) => {
                           </span>
                         )}
                         &nbsp;
-                        {timeBadge === true ? (
+                        {discountTime > 0 && timeBadge ? (
                           <span className="updated-price">
-                            
                             <Badge
                               badgeContent={`${hrs
                                 .toString()
@@ -415,12 +401,6 @@ const CourseBody = ({ course, isBaughtCourse, diffHour }) => {
                             >
                               {course.price - course.discount}
                             </Badge>
-                            {/* <Badge
-                              badgeContent={`${setTimeout(()=> {getTimer(futureDate)},1000)}${x/60}`}
-                              color="primary"
-                            >
-                              {course.price - course.discount}
-                            </Badge> */}
                           </span>
                         ) : (
                           ""
