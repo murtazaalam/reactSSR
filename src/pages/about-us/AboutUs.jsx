@@ -72,7 +72,7 @@ function AboutUs() {
     },
     {
       pic: Murtaza,
-      title1: "Murtaza",
+      title1: "Md Murtuza Alam",
       title2: "Developer",
     },
   ];
