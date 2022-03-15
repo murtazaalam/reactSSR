@@ -16,7 +16,7 @@ export default async function getFromCartApi(
     .then((res) => {
       let data = res.data;
       let x = data.map((item, index) => {
-        return {id:index, isChecked: true, data:item, registrationType:"full"}
+        return {id:index, isChecked: true, item_id:item._id, item_type:item.course_type, data:item, registrationType:"full"}
       })
       setY(x);
       setCartItems(res.data);

@@ -50,7 +50,8 @@ function MyCart() {
   const [isItemSelected, setIsItemSelected] = useState('');
   const [courseData, setCourseData] = React.useState();
   const [OrderId, setOrderId] = useState();
-  const [paymentId, setPaymentId] = useState()
+  const [paymentId, setPaymentId] = useState();
+  const [verifiedRefralCode, setVerifiedRefralCode] = useState();
   const navigate = useNavigate();
   const Razorpay = useRazorpay();
   let dispatch = useDispatch();
@@ -61,11 +62,14 @@ function MyCart() {
     getFromCartApi(setCartItems, setY, setLoading, setError);
   }, []);
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
-  const handleClose = () => {
+  const handleClose = async() => {
     setOpen(false);
     if(paymentMessage === "Payment Success" || 
       paymentMessage === "Order Placed"){
-      getFromCartApi(setCartItems, setY, setLoading, setError);
+      let data = await getFromCartApi(setCartItems, setY, setLoading, setError);
+      if(data){
+        dispatch(cartAction({ cartCount: data?.length }))
+      }
       window.location.assign("/#/my-courses");
     }
     else{
@@ -121,6 +125,7 @@ function MyCart() {
       let cartCheckedItem = y.filter((item) => {
         return item.isChecked === true;
       })
+      
       if(cartCheckedItem.length > 0){
         cartCheckedItem.forEach((item) => {
           item.registrationType === "full" ? item.pay_state = "complete" : item.pay_state = "partial"
@@ -132,6 +137,7 @@ function MyCart() {
             total_discount: totalDiscount,
             cart_item: cartCheckedItem,
             refree_name: refreeName ? refreeName : null,
+            refral_code: verifiedRefralCode ? verifiedRefralCode : null,
             order_type: "paid"
           };
           let order = await addOrderApi(body);
@@ -141,7 +147,7 @@ function MyCart() {
             amount: parseInt(totalPrice)*100,
             currency: "INR",
             name: "Acme Corp",
-            description: "Test Transaction",
+            description: "Transaction",
             image: "https://example.com/your_logo",
             order_id: order.response.id,
             modal: {
@@ -193,6 +199,7 @@ function MyCart() {
             total_discount: 0,
             cart_item: cartCheckedItem,
             refree_name: refreeName ? refreeName : null,
+            refral_code: verifiedRefralCode ? verifiedRefralCode : null,
             order_type: "free"
           }
           let order = await addOrderApi(body);
@@ -291,11 +298,13 @@ function MyCart() {
       verifiedCode = allReferals.filter(item => {
         return item.referal_code === referalCode
       });
+      console.log("veri", verifiedCode);
       if(verifiedCode.length < 1){
         setReferalError(true)
         setErrorText("Invalid Referal Code")
       }
       else{
+        setVerifiedRefralCode(verifiedCode[0].referal_code)
         setRefreeName(verifiedCode[0].refree_name)
         setReferalSucces(true);
         setReferalError(false);
