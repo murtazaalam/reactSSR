@@ -52,7 +52,7 @@ const TopCourses = () => {
                 Top Courses
               </Typography>
             </Typography>
-            <section className="display-grid fr4 top-course-aria">
+            <section className="display-grid top-course-aria">
               {topCourses && topCourses.length !== 0
                 ? topCourses.map((data, index) => {
                     return (

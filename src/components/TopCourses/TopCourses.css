@@ -4,17 +4,24 @@
   margin-top: 40px;
   margin-right: 15px;
 }
-.top-course-aria {
+/* .top-course-aria {
   overflow-x: overlay;
   display: flex;
-}
+} */
 .top-course-aria a {
   margin: 16px;
 }
 
-@media screen and (min-width: 1606px) {
+@media screen and (min-width: 1510px) {
   .top-course-aria {
     place-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr !important;
+  }
+}
+@media screen and (min-width: 745px) {
+  .top-course-aria {
+    place-content: center;
+    grid-template-columns: 1fr 1fr;
   }
 }
 @media only screen and (max-width: 1000px) {
