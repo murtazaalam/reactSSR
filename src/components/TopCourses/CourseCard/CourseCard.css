@@ -28,7 +28,7 @@
   text-decoration: none;
 }
 .mobile-view-course-card {
-  width: 200px;
+  width: 250px;
   height: 276px;
 }
 .card-grad {
@@ -43,9 +43,9 @@
 .course-pic {
   width: 108px;
 }
-@media screen and (min-width: 540px) {
-  .mobile-view-course-card {
-    width: 340px;
+@media screen and (min-width: 300px) {
+  .technovanto-course-card {
+    width: 250px;
     height: 300px;
   }
   .card-grad {
@@ -53,5 +53,37 @@
   }
   .course-pic {
     width: 156px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .technovanto-course-card {
+    width: 250px;
+    height: 300px;
+  }
+  .card-grad {
+    height: 194px;
+  }
+  .course-pic {
+    width: 156px;
+  }
+}
+@media screen and (min-width: 1273px) {
+  .technovanto-course-card {
+    width: 290px;
+    height: 300px;
+  }
+  .card-grad {
+    height: 194px;
+  }
+  .course-pic {
+    width: 156px;
+  }
+}
+
+@media screen and (min-width: 1480px) {
+  .technovanto-course-card {
+    width: 340px;
+    height: 300px;
   }
 }

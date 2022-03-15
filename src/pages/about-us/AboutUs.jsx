@@ -10,6 +10,8 @@ import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
 import yashna from "../../assets/Svgs/Yashna.svg";
 import suzain from "../../assets/Svgs/suzain.svg";
 import priya from "../../assets/Svgs/Priya.svg";
+import Murtaza from "../../assets/Svgs/Murtaza.svg";
+import ourTeam from "../../assets/Svgs/ourTeam.svg";
 import HiringPartner from "../../components/HiringPartners/HiringPartner.js";
 import industry from "../../assets/images/industry-recg.png";
 import TopClient from "../../components/TopClients/TopClients";
@@ -53,11 +55,11 @@ function AboutUs() {
       title1: "Yashna Mittal",
       title2: "UI/UX Designer",
     },
-    {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdByeCZSVaOA1ElmxXAtSmebg9y0pMwilSDw&usqp=CAU",
-      title1: "Himani Gulati",
-      title2: "Developer",
-    },
+    // {
+    //   pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdByeCZSVaOA1ElmxXAtSmebg9y0pMwilSDw&usqp=CAU",
+    //   title1: "Himani Gulati",
+    //   title2: "Developer",
+    // },
     {
       pic: priya,
       title1: "Priya Chaudhary",
@@ -69,7 +71,7 @@ function AboutUs() {
       title2: "Designer",
     },
     {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlAj66E2hFn-fYLZQy73_PJadXdwmiRPICYw&usqp=CAU",
+      pic: Murtaza,
       title1: "Murtaza",
       title2: "Developer",
     },
@@ -183,24 +185,27 @@ function AboutUs() {
           <div className="team-lead">
             <main
               className="our-mission-flex"
-              style={{ placeContent: "center" }}
+              style={{ placeContent: "space-evenly" }}
             >
               <div className="our-mission-img">
-                <img src={mission} alt="mission" />
+                <img src={ourTeam} alt="mission" />
               </div>
-              <div className="our-mission-text">
-                <h5 className="our-mission-text-heading">
-                  OUR MISSION AND HOW WE LIVE IT
-                </h5>
-                <p className="underline-left">
-                  At the intersection of passion and potential stands a
-                  transforming ability to impact one’s life and that of other’s.
-                  We understand that employability is much more than what it
-                  sounds like. Furthering on the concept of Digital India, we
-                  are building up a platform that offers an ocean of life skills
-                  and soft skills for young and budding students to transmogrify
-                  their careers. Discovering the dormant creativity in oneself
-                  is a tantalising desire.
+              <div className="our-mission-text our-team-text">
+                <p>
+                  Our story started with a pivot. Four college graduates came
+                  back to the roots of academics, offering affordable online
+                  courses and training to people that need it. We have always
+                  reposed our trust in picking up from scratch and churning out
+                  the possible best for aspiring learners. We understand the
+                  cold feet you get while facing the cutthroat competition out
+                  there. “Been there, done that” makes us bond with our vision
+                  better. We pride ourselves on our company culture and the
+                  can-do attitude to deliver timely and budget solutions. With a
+                  strong motto of “Inspiring Generations”, we wish to pass on
+                  the baton of business expansion and digitisation to the
+                  incoming generations. Our goal is not just a business goal.
+                  It’s what we are devoted to. Looking back, we have realised
+                  this is what keeps us going.
                 </p>
               </div>
             </main>
