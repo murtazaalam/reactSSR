@@ -11,17 +11,16 @@
 .top-course-aria a {
   margin: 16px;
 }
-
-@media screen and (min-width: 1510px) {
+@media screen and (min-width: 550px) {
+  .top-course-aria {
+    place-content: center;
+    grid-template-columns: auto auto;
+  }
+}
+@media screen and (min-width: 1150px) {
   .top-course-aria {
     place-content: center;
     grid-template-columns: 1fr 1fr 1fr 1fr !important;
-  }
-}
-@media screen and (min-width: 745px) {
-  .top-course-aria {
-    place-content: center;
-    grid-template-columns: 1fr 1fr;
   }
 }
 @media only screen and (max-width: 1000px) {

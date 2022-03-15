@@ -43,7 +43,7 @@ function PaperComponent(props) {
 }
 const CourseBody = ({ course, isBaughtCourse }) => {
   const [value, setValue] = useState("1");
-  
+
   const [loader, setLoader] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
@@ -54,7 +54,7 @@ const CourseBody = ({ course, isBaughtCourse }) => {
   const [y, setY] = useState([]);
   const [cartData, setCartData] = useState();
   const [loading, setLoading] = useState();
-  let { discountTime } = useSelector((state) => state.CourseReducer)
+  let { discountTime } = useSelector((state) => state.CourseReducer);
   const [timeBadge, setTimerBadge] = useState(false);
   let dispatch = useDispatch();
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
@@ -64,17 +64,12 @@ const CourseBody = ({ course, isBaughtCourse }) => {
     setValue(newValue);
   };
 
-  const [[days, hrs, mins, secs], setTime] = useState([
-    0,
-    discountTime,
-    0,
-    0,
-  ]);
+  const [[days, hrs, mins, secs], setTime] = useState([0, discountTime, 0, 0]);
 
   useEffect(() => {
-    if(discountTime > 0) setTimerBadge(true);
-    setTime([0, discountTime, 0, 0])
-  },[discountTime])
+    if (discountTime > 0) setTimerBadge(true);
+    setTime([0, discountTime, 0, 0]);
+  }, [discountTime]);
 
   const [open, setOpen] = React.useState(false);
 
@@ -82,11 +77,9 @@ const CourseBody = ({ course, isBaughtCourse }) => {
     setOpen(false);
   };
   const tick = () => {
-   
-    if (days === 0 && hrs === 0 && mins === 0 && secs === 0){
+    if (days === 0 && hrs === 0 && mins === 0 && secs === 0) {
       setTimerBadge(false);
-    }
-    else if (hrs === 0 && mins === 0 && secs === 0) {
+    } else if (hrs === 0 && mins === 0 && secs === 0) {
       setTime([days - 1, 23, 59, 59]);
     } else if (mins === 0 && secs === 0) {
       setTime([days, hrs - 1, 59, 59]);
@@ -100,11 +93,11 @@ const CourseBody = ({ course, isBaughtCourse }) => {
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
   });
-  
+
   const addToCart = async (id) => {
     setCartLoader(true);
     let body = {
-      course_type:"course",
+      course_type: "course",
       course_name: course.course_name,
       registration_fee: course.registration_fee,
       course_image: course.thumbnail,
@@ -138,9 +131,8 @@ const CourseBody = ({ course, isBaughtCourse }) => {
         progress: undefined,
       });
       let data = await getFromCartApi(setCartData, setY, setLoading, setError);
-      dispatch(cartAction({cartCount:data?.length}))
-    }
-    else if (message === "Unauthorized") {
+      dispatch(cartAction({ cartCount: data?.length }));
+    } else if (message === "Unauthorized") {
       toast.error(message, {
         position: "bottom-right",
         autoClose: 5000,
@@ -231,7 +223,7 @@ const CourseBody = ({ course, isBaughtCourse }) => {
   const emptyState = () => {
     setComment("");
   };
-  
+
   return (
     <>
       <div className="course-tab-container">
@@ -381,19 +373,19 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                               <span>{course.price}</span>
                             </del>
                             <span className="updated-price">
-                            <Badge
-                              badgeContent={`${hrs
-                                .toString()
-                                .padStart(2, "0")}:${mins
-                                .toString()
-                                .padStart(2, "0")}:${secs
-                                .toString()
-                                .padStart(2, "0")}`}
-                              color="primary"
-                            >
-                              &nbsp;{course.price - course.discount}
-                            </Badge>
-                          </span>
+                              <Badge
+                                badgeContent={`${hrs
+                                  .toString()
+                                  .padStart(2, "0")}:${mins
+                                  .toString()
+                                  .padStart(2, "0")}:${secs
+                                  .toString()
+                                  .padStart(2, "0")}`}
+                                color="primary"
+                              >
+                                &nbsp;{course.price - course.discount}
+                              </Badge>
+                            </span>
                           </>
                         ) : (
                           <span>
@@ -401,12 +393,12 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                           </span>
                         )}
                       </p>
-                    ) : 
+                    ) : (
                       <p>
                         Rs.&nbsp;
                         <span>{course.price}</span>
                       </p>
-                    }
+                    )}
                     {/* {course.discount === "0" && (
                       <p>
                         Rs.&nbsp;
