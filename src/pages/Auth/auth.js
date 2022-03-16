@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import AuthLayout from "../../components/Login/AuthLayout";
 function AuthPage() {
   const navigate = useNavigate();
+  const [phone, setPhone] = useState();
 
   const [modal, setModal] = useState([
     { id: 1, name: "otp", checked: false },
@@ -37,7 +38,7 @@ function AuthPage() {
           Sign In now
         </a>
       </p>
-      <SignUp handleProceed={(e) => handleModal(e, 1)} />
+      <SignUp handleRegister={(e) => handleModal(e, 1)} />
     </>
   );
   const otpModal = (
@@ -52,6 +53,7 @@ function AuthPage() {
         handleVerify={(e) => handleVerify(e)}
         title="Verify Mobile Number"
         heading="Enter OTP"
+        phone={phone}
       />
     </>
   );
@@ -64,7 +66,13 @@ function AuthPage() {
           Sign Up now
         </a>
       </p>
-      <Login />
+      <Login
+        otpContent={(event, id, otp, phone) => {
+          console.log(event, id, otp, phone);
+          setPhone(phone);
+          handleModal(event, id);
+        }}
+      />
     </>
   );
 
@@ -73,7 +81,6 @@ function AuthPage() {
       {modal.map((m) => {
         if (m.checked) {
           const id = m.id;
-          console.log(id);
           if (id === 1) return otpModal;
           if (id === 2) return loginModal;
           if (id === 3) return signupModal;

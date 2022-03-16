@@ -1,10 +1,10 @@
 import React from "react";
 import "./upcomingEvent.css";
-import { makeStyles } from "@mui/styles";
 import instructor from "../../assets/Svgs/instructor.svg";
 import eventSvg from "../../assets/Svgs/singleEvent.svg";
 import CheckIcon from "@material-ui/icons/Check";
 import BookDemo from "../../components/BookDemo/BookDemo";
+import BannerSectionEvent from "./BannerSectionEvent";
 const DATA = {
   gradient:
     "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(27,121,9,1) 0%, rgba(0,212,255,1) 100%)",
@@ -26,16 +26,11 @@ const DATA = {
   ],
 };
 
-const useStyles = makeStyles({
-  banner: (data) => ({
-    background: data.gradient,
-  }),
-});
 function UpcomingEvent() {
-  const classes = useStyles(DATA);
   return (
     <div>
-      <div className={`${classes.banner} banner`}>
+      <BannerSectionEvent data={DATA} />
+      {/* <div className={`${classes.banner} banner`}>
         <div className="eventText">
           <h2 className="trainerHeading">{DATA.event_name}</h2>
           <p className="eventTextSubtitle">{DATA.event_subtitle}</p>
@@ -43,7 +38,7 @@ function UpcomingEvent() {
         <div className="eventSvg">
           <img src={eventSvg} alt="" />
         </div>
-      </div>
+      </div> */}
       <div className="section-spacing-event">
         <h2 className="trainerHeading">3 Days Free Seminar</h2>
         <p className="eventTextSubtitle">Date : 3rd To 5th March 2022 </p>

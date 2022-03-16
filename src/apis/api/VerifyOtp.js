@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default async function LoginApi(data, setError, setOTP, setLoader) {
   return await axios
-    .post(routes.Login, data)
+    .post(routes.OtpVerify, data)
     .then((res) => {
       setError(res.data.message);
       if (res.data.token) {
@@ -14,21 +14,10 @@ export default async function LoginApi(data, setError, setOTP, setLoader) {
       return res.data;
     })
     .catch((error) => {
-      console.log(error.response);
-      setLoader(false);
-      if (error.response) {
+      //   console.log(error.response);
+      if (error.response.status === 404) {
         console.log(error.response);
-        if (error.response.data.message) {
-          setError(error.response.data.message);
-          setOTP(error.response.data.otp);
-        }
-        // if (error.response.data.error[0].msg)
-        //   return setError(error.response.data.error[0].msg);
+        setError(error.response.data.message);
       }
-      // else if (error.request) {
-      //   //setApiError(true);
-      // } else {
-      //   //setApiError(true);
-      // }
     });
 }

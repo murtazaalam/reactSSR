@@ -3,6 +3,7 @@ import endpoint from "./Index.routes";
 const routes = {
   GetCourses: endpoint + "all-courses",
   GetEvents: endpoint + "all-events",
+  OtpVerify: endpoint + "auth/verify-otp",
   SignUp: endpoint + "auth/register",
   Login: endpoint + "auth/login",
   OrderTest: endpoint + "add-order",
@@ -17,9 +18,9 @@ const routes = {
   SendQuery: endpoint + "add-query",
   TopCourse: endpoint + "top-courses",
   AddReview: endpoint + "add-review",
-  AddHiring : endpoint + "add-hiring",
-  AddPlacement : endpoint + "add-placement-opportunity",
-  AddEvent : endpoint + "event-registration",
-  GetReferals : endpoint + "referals"
+  AddHiring: endpoint + "add-hiring",
+  AddPlacement: endpoint + "add-placement-opportunity",
+  AddEvent: endpoint + "event-registration",
+  GetReferals: endpoint + "referals",
 };
 export default routes;

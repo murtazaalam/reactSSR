@@ -275,9 +275,9 @@ export default function SignUp(props) {
             }
             className={`btn-grad full-width ${classes.btnSignUp}`}
             // disabled={loader ? true : false}
-            onClick={props.handleProceed}
+            onClick={props.handleRegister}
           >
-            {/* {loader ? <img src={ButtonLoader} width="80" /> : "SignUp"} */}
+            {loader ? <img src={ButtonLoader} alt="" width="80" /> : "SignUp"}
             Sign Up
           </button>
         </Box>
