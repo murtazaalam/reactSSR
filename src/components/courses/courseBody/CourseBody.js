@@ -488,9 +488,9 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                 <div className="share-now">
                   <RWebShare
                     data={{
-                      text: "Web Share - GfG",
+                      text: `Course - ${course.course_name}`,
                       url: currentUrl,
-                      title: "GfG",
+                      title: `${course.course_name}`,
                     }}
                     onClick={() => console.log("shared successfully!")}
                   >
