@@ -6,6 +6,7 @@
   margin-top: 120px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 0 10px;
   /* filter: drop-shadow(1.53287px 1.53287px 1.53287px rgba(0, 0, 0, 0.25)); */
@@ -38,7 +39,11 @@
   align-items: flex-end;
   width: 140px;
 }
-
+.trainerImageSection img{
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+}
 .eventSvg > img {
   width: inherit;
   display: none;
@@ -78,7 +83,7 @@
 }
 .trainerHeading {
   font-weight: 700;
-  font-size: 26px;
+  font-size: 20px;
   line-height: 92.9%;
 }
 .list-item-event {
@@ -89,7 +94,62 @@
 .trainer_name {
   margin-top: 20px;
 }
+.map-section{
+  height: 276px;
+  background-repeat: no-repeat;
+  background-image: url(../../assets/images/world-map.jpeg);
+  background-position: center;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.map-section .middle-box{
+  border-right: 4px solid;
+  border-left: 4px solid;
+  padding: 10px 14px
+}
+.map-section .inner-map-box{
+  padding: 10px 14px;
+}
+.map-section h3{
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+.map-section p{
+  font-size: 16px;
+  font-weight: 600;
+}
+.media-aria{
+  display: inline-block;
+  padding-left: 16px;
+}
+.event-media{
+  display: inline-block;
+  float: left;
+  margin-bottom: 10px;
+}
+.event-media-image{
+  height: 190px; 
+  width: 284px;
+}
 @media screen and (min-width: 800px) {
+  .map-section{
+    height: 400px;
+  }
+  .map-section .inner-map-box{
+    padding: 10px 40px;
+  }
+  .map-section h3{
+    font-size: 32px;
+  }
+  .map-section p{
+    font-size: 24px;
+  }
+  .map-section .middle-box{
+    padding: 10px 40px;
+  }
   .banner {
     height: 480px;
     padding: 0 30px;
@@ -120,6 +180,7 @@
   .section-spacing-event {
     margin: 60px auto;
   }
+
   .trainerHeading {
     font-size: 52px;
     line-height: 92.9%;

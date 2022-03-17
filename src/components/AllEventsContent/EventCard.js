@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import './allEventsContent.css';
-import EventIcon from '../../assets/images/servicesIcon/Get training proof.png'
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     
@@ -14,7 +14,9 @@ function EventCard({data}) {
   return (
     <div className="event-card-container">
         <div className="event-card-header" style={{background: `linear-gradient(${data.gradient})`}}>
-            <img src={`${data.thumbnail}`} width="120" alt="event-thumbnail"/>
+            <Link to={`/event/${data._id}`}>
+                <img src={`${data.thumbnail}`} width="120" alt="event-thumbnail"/>
+            </Link>
         </div>
         <div className="event-card-content">
             <div className="event-card-body">
