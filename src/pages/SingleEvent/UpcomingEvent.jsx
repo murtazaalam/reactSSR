@@ -8,7 +8,10 @@ import CheckIcon from "@material-ui/icons/Check";
 import BookDemo from "../../components/BookDemo/BookDemo";
 import singleEventApi from "../../apis/api/SingleEvent";
 import Loading from "../../components/Loader";
+import MyCarousel from "../../components/AllEventsContent/MyCarousel";
 import { useParams } from "react-router-dom";
+import VideoCard from "./VideoCard";
+import ReviewCard from "./ReviewCard"
 
 const DATA = {
   gradient:
@@ -38,6 +41,9 @@ const useStyles = makeStyles({
 });
 function UpcomingEvent() {
   const [event, setEvent] = useState();
+  const [videos, setVideoData] = useState();
+  const [reviews, setReviewData] = useState();
+
   const classes = useStyles(DATA);
   let months = ["January",
                 "February",
@@ -58,9 +64,23 @@ function UpcomingEvent() {
   let id = params.id;
   useEffect(() => {
     if(!event){
-      singleEventApi(id, setEvent);
+      getEvent()
     }
   });
+
+  const getEvent = async() => {
+    let data = await singleEventApi(id, setEvent);
+    if(data.status === "past"){
+      let videoData = data.media.map((data, index) => (
+        <VideoCard data={data} key={index}></VideoCard>
+      ));
+      let reviewData = data.review.map((data, index) => (
+        <ReviewCard data={data} key={index}></ReviewCard>
+      ))
+      setVideoData(videoData);
+      setReviewData(reviewData);
+    }
+  }
 
   return (
     <>
@@ -163,7 +183,6 @@ function UpcomingEvent() {
               {item}
             </p>)
           })
-
           }
         </div>
         <div className="trainerHighlights">
@@ -192,9 +211,17 @@ function UpcomingEvent() {
             </ul>
           </div>
         </div>
-        <div>
-          
-        </div>
+        {event.status === "past" && 
+          <div className="event-videos-carousel">
+            <MyCarousel items={videos} />
+            <h2 className="trainerHeading" style={{textAlign: 'center', margin:'44px 0px'}}>What people say about the event ?</h2>
+          </div>
+        }
+        {event.status === "past" && 
+          <div className="event-section">
+              <MyCarousel items={reviews} />
+          </div>
+        }
         <div>
           <h2 className="trainerHeading margin-top-bottom center">
             Sneak Peak Of The {event.type}

@@ -171,7 +171,7 @@ const AllEventsContent = () => {
                         <div style={{transform: 'rotate(-45deg)'}} className="event-type-icon"><sup><SpeakerPhoneIcon/></sup></div>
                         <div className="event-type-title">Live</div>
                     </div>
-                    <MyCarousel items={liveEvents} />
+                    <MyCarousel items={liveEvents} leftArrow={`event-card-left-arrow`} rightArrow={`event-card-right-arrow`} />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <div>

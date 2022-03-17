@@ -11,7 +11,7 @@ const responsive = {
     1750: { items: 5 }
   };
 
-const MyCarousel = ({items}) => {
+const MyCarousel = ({items, leftArrow, rightArrow}) => {
     return (
         <>
             <div className="event-carousel">
@@ -27,10 +27,10 @@ const MyCarousel = ({items}) => {
                     mouseTracking
                     items={items}
                     renderPrevButton={() => {
-                        return <div className="left-arrow-studentSays event-card-left-arrow">◄</div>;
+                        return <div className={`left-arrow-studentSays ${leftArrow}`}>◄</div>;
                     }}
                     renderNextButton={() => {
-                        return <div className="right-arrow-studentSays event-card-right-arrow">►</div>;
+                        return <div className={`right-arrow-studentSays ${rightArrow}`}>►</div>;
                     }}
                     />
             </div>

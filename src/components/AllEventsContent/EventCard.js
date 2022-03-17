@@ -27,7 +27,9 @@ function EventCard({data}) {
                         <span>{Months[eventDate.getMonth()-1]}</span>
                     </div>
                     <div>
-                        <h2>{data.name}</h2>
+                        <Link to={`/event/${data._id}`} style={{textDecoration: 'none', color: '#000'}}>
+                            <h2>{data.name}</h2>
+                        </Link>
                         {data.status === "past" && 
                         <span>5000 attenders</span>}
                     </div>
