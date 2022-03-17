@@ -2,15 +2,15 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Card } from "@mui/material";
+import { Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import singleEventApi from "../../apis/api/SingleEvent";
 import { useSelector, useDispatch } from "react-redux";
-import Chip from '@mui/material/Chip';
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
 import addEventApi from "../../apis/api/AddEvent";
 import addToCartApi from "../../apis/api/AddToCart";
 import getFromCartApi from "../../apis/api/GetFromCart";
@@ -48,18 +48,7 @@ const useStyles = makeStyles({
   },
 });
 
-function PaperComponent(props) {
-  return (
-    <Draggable
-      handle="#draggable-dialog-title"
-      cancel={'[class*="MuiDialogContent-root"]'}
-    >
-      <Paper {...props} />
-    </Draggable>
-  );
-}
-
-const SingleEvent = ({isEventBaught}) => {
+const SingleEvent = ({ isEventBaught }) => {
   const [event, setEventData] = useState();
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -72,6 +61,8 @@ const SingleEvent = ({isEventBaught}) => {
   const [y, setY] = useState([]);
   const params = useParams();
   const classes = useStyles();
+
+  let navigate = useNavigate();
 
   let dispatch = useDispatch();
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
@@ -109,7 +100,7 @@ const SingleEvent = ({isEventBaught}) => {
         draggable: true,
         progress: undefined,
       });
-    } else if (message === "Item Added"){
+    } else if (message === "Item Added") {
       toast.success("Event added to your cart", {
         position: "bottom-right",
         autoClose: 5000,
@@ -120,9 +111,8 @@ const SingleEvent = ({isEventBaught}) => {
         progress: undefined,
       });
       let data = await getFromCartApi(setCartData, setY, setLoading, setError);
-      dispatch(cartAction({cartCount:data?.length}))
-    }
-    else if (message === "Unauthorized") {
+      dispatch(cartAction({ cartCount: data?.length }));
+    } else if (message === "Unauthorized") {
       toast.error(message, {
         position: "bottom-right",
         autoClose: 5000,
@@ -134,7 +124,7 @@ const SingleEvent = ({isEventBaught}) => {
       });
       setCartLoader(false);
       dispatch(logoutAction());
-      setOpen(true);
+      navigate("/auth-user");
     } else {
       toast.error(message, {
         position: "bottom-right",
@@ -149,7 +139,6 @@ const SingleEvent = ({isEventBaught}) => {
       dispatch(logoutAction());
       setOpen(true);
     }
-    
   };
 
   // const formValidate = (event) => {
@@ -218,7 +207,10 @@ const SingleEvent = ({isEventBaught}) => {
             </ol>
           </nav>
           <h1 className="event-heading">{event?.name}</h1>
-          <Chip label={event?.price ? event?.price : 'Free'} sx={{background: `var(--color-secondary)`,color:'#fff'}} />
+          <Chip
+            label={event?.price ? event?.price : "Free"}
+            sx={{ background: `var(--color-secondary)`, color: "#fff" }}
+          />
         </div>
       </Box>
       <Box
@@ -234,36 +226,28 @@ const SingleEvent = ({isEventBaught}) => {
             <div>
               <img src={event?.event_image} className="hover" alt="" />
             </div>
-            {!isEventBaught ? 
-            <button
-              type="button"
-              onClick={() => addToCart(event._id)}
-              className="btn-grad full-width event-register"
-              style={
-                loader
-                  ? { backgroundColor: "var(--color-disable)" }
-                  : { backgroundColor: "var(--color-secondary)" }
-              }
-              disabled={loader ? true : false}
-            >
-              {loader ? (
-                <img src={ButtonLoader} width="80" />
-              ) : (
-                "Add To Cart"
-              )}
-            </button>:
-            <button
-              type="button"
-              className="btn-grad full-width btn-purchased"
-            >
-              Purchased
-            </button>
-            }
-            <Login
-              open={isLogin ? false : open}
-              handleClose={handleClose}
-              PaperComponent={PaperComponent}
-            />
+            {!isEventBaught ? (
+              <button
+                type="button"
+                onClick={() => addToCart(event._id)}
+                className="btn-grad full-width event-register"
+                style={
+                  loader
+                    ? { backgroundColor: "var(--color-disable)" }
+                    : { backgroundColor: "var(--color-secondary)" }
+                }
+                disabled={loader ? true : false}
+              >
+                {loader ? <img src={ButtonLoader} width="80" /> : "Add To Cart"}
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn-grad full-width btn-purchased"
+              >
+                Purchased
+              </button>
+            )}
           </Grid>
           <Grid item xs={12} sm={12} md={10} xl={10}>
             {event &&

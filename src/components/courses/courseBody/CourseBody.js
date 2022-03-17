@@ -21,7 +21,7 @@ import addToCartApi from "../../../apis/api/AddToCart";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./courseBody.css";
-import Login from "../../Login/Login";
+import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { useSelector, useDispatch } from "react-redux";
 import { RWebShare } from "react-web-share";
@@ -54,6 +54,7 @@ const CourseBody = ({ course, isBaughtCourse }) => {
   const [y, setY] = useState([]);
   const [cartData, setCartData] = useState();
   const [loading, setLoading] = useState();
+  let navigate = useNavigate();
   let { discountTime } = useSelector((state) => state.CourseReducer);
   const [timeBadge, setTimerBadge] = useState(false);
   let dispatch = useDispatch();
@@ -144,7 +145,7 @@ const CourseBody = ({ course, isBaughtCourse }) => {
       });
       setCartLoader(false);
       dispatch(logoutAction());
-      setOpen(true);
+      navigate("/auth-user");
     } else {
       toast.error(message, {
         position: "bottom-right",
@@ -477,11 +478,6 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                           </>
                         )}
                       </button>
-                      <Login
-                        open={isLogin ? false : open}
-                        handleClose={handleClose}
-                        PaperComponent={PaperComponent}
-                      />
                     </>
                   )}
                 </div>

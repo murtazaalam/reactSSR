@@ -1,4 +1,4 @@
-const endpoint = 'https://bk.techvantoacademy.com/'
+const endpoint = 'https://stagbk.techvantoacademy.com/'
 
 export default endpoint;
 //production url - https://bk.techvantoacademy.com/
