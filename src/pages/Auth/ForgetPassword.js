@@ -50,6 +50,7 @@ function ForgetPassword() {
           if (m.id === 2)
             return (
               <OtpContent
+                phone={phone}
                 heading="Verification"
                 subHeading="Enter the verification code we just
             sent you on your mobile number"
