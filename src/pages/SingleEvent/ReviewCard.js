@@ -20,7 +20,6 @@ const useStyles = makeStyles(() => ({
 }))
 const ReviewCard = ({data}) => {
     const classes = useStyles();
-    console.log(">data=",data);
     return (
         <>
             <div className={`review-card-container ${classes.container}`}>
