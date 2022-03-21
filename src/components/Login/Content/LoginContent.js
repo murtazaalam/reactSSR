@@ -1,27 +1,35 @@
 import * as React from "react";
 import { useState } from "react";
-import Avatar from "@mui/material/Avatar";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
 import { toast } from "react-toastify";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import LoginApi from "../../../apis/api/Login";
+import { useDispatch } from "react-redux";
+
+import { useNavigate } from "react-router-dom";
+
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import {
+  InputAdornment,
+  IconButton,
+  CssBaseline,
+  TextField,
+  Box,
+  Typography,
+  Container,
+  Radio,
+  Avatar,
+} from "@mui/material";
+import Visibility from "@material-ui/icons/Visibility";
+import { makeStyles } from "@material-ui/core/styles";
+
 import ButtonLoader from "../../../assets/images/button_loader.gif";
+
+import { cartAction } from "../../../redux/slices/cart.slice";
+import { loginAction } from "../../../redux/slices/auth.slices";
+
+import getFromCartApi from "../../../apis/api/GetFromCart";
+import LoginApi from "../../../apis/api/Login";
+
 import { useRecoilState } from "recoil";
 import { userAuth } from "../../../recoil/store";
-import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
-import { loginAction } from "../../../redux/slices/auth.slices";
-import { cartAction } from "../../../redux/slices/cart.slice";
-import getFromCartApi from "../../../apis/api/GetFromCart";
-import Radio from "@mui/material/Radio";
-import { useNavigate } from "react-router-dom";
-import { InputAdornment, IconButton } from "@mui/material";
-
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 import { Link } from "react-router-dom";
 
@@ -34,39 +42,42 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function LoginContent(props) {
+export default function LoginContent({ otpContent }) {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [users, setUser] = useRecoilState(userAuth);
-  const [email, setEmail] = useState("");
+  const [, setUser] = useRecoilState(userAuth);
+  const [phone, setPhone] = useState();
   const [password, setPassword] = useState("");
-  const [validateEmail, setValidateEmail] = useState(false);
+  const [validatePhone, setValidatePhone] = useState(false);
   const [validatePassword, setvalidatePassword] = useState(false);
+  const [OTP, setOTP] = useState();
   const [loader, setLoader] = React.useState(false);
-  const [cartData, setCartData] = React.useState();
-  const [loading, setLoading] = React.useState();
-  const [y, setY] = React.useState([]);
+  const [, setCartData] = React.useState();
+  const [, setLoading] = React.useState();
+  const [showPassword, setShowPassword] = useState("");
+  // const [y, setY] = React.useState([]);
+
   const classes = useStyles();
   let dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState("");
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
   const emptyState = () => {
-    setEmail("");
+    setPhone("");
     setPassword("");
   };
   const validation = (event) => {
-    let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (event.target.name === "email") {
-      setEmail(event.target.value);
-      if (!event.target.value.match(emailValidate))
-        return setValidateEmail(true);
-      setValidateEmail(false);
+    if (event.target.name === "phone") {
+      setPhone(event.target.value);
+      let num = event.target.value;
+      if (num.toString().length !== 10) {
+        return setValidatePhone(true);
+      }
+      setValidatePhone(false);
     }
     if (event.target.name === "password") {
       setPassword(event.target.value);
-      if (event.target.value == "") return setvalidatePassword(true);
+      if (!event.target.value) return setvalidatePassword(true);
       setvalidatePassword(false);
     }
   };
@@ -75,37 +86,68 @@ export default function LoginContent(props) {
     setLoader(true);
     setError("");
     let body = {
-      email: email,
+      phone: phone,
       password: password,
     };
-    if (!body.email || !body.password) {
+    if (!body.phone || !body.password) {
       setLoader(false);
+      toast.error("Email And Password Required", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return setError("Email And Password Required");
     }
-    if (validateEmail === true) {
+    if (validatePhone) {
       setLoader(false);
-      return setError("Invalid Email");
+      toast.error("Invalid Phone number", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return setError("Invalid Phone number");
     }
-    let res = await LoginApi(body, setError, setLoader);
-    if (res) {
-      if (res.message === "Login Success") {
-        setUser(true);
-        emptyState();
-        //window.location.reload();
-        toast.success("Login Success", {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        dispatch(loginAction({ admin: res.user }));
-        let data = await getFromCartApi(setCartData, setLoading, setError);
-        dispatch(cartAction({ cartCount: data?.length }));
-        navigate("/");
-      }
+    let res = await LoginApi(body, setError, setOTP, setLoader);
+    console.log(error);
+    if (res && res.status === 404) {
+      console.log(res.data.otp);
+      // emptyState();
+      otpContent(event, 1, OTP, phone);
+      toast.warn(error, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+
+    if (res && res.message === "Login Success") {
+      setUser(true);
+      emptyState();
+      toast.success("Login Success", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(loginAction({ admin: res.user }));
+      let data = await getFromCartApi(setCartData, setLoading, setError);
+      dispatch(cartAction({ cartCount: data?.length }));
+      navigate("/");
     }
   };
 
@@ -159,15 +201,17 @@ export default function LoginContent(props) {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            value={email}
+            id="PHONE"
+            label="Phone Number"
+            name="phone"
+            value={phone}
+            type="number"
+            min="10"
+            max="10"
             onChange={(e) => validation(e)}
             autoFocus
-            error={validateEmail}
-            helperText={validateEmail ? "Invalid Email." : ""}
+            error={validatePhone}
+            helperText={validatePhone ? "Invalid phone number." : ""}
           />
           <TextField
             margin="normal"
