@@ -30,40 +30,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp(props) {
+export default function SignUp({ otpContent }) {
   const [error, setError] = useState("");
   const [name, validateName] = useState(false);
-  const [email, validateEmail] = useState(false);
+  // const [email, validateEmail] = useState(false);
   const [mobile, validateMobile] = useState(false);
   const [password, validatePassword] = useState(false);
   const [message, validationMessage] = useState("");
-  const [confirmPass, confirmPassword] = useState(false);
+  // const [confirmPass, confirmPassword] = useState(false);
   const [loader, setLoader] = React.useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [otp, setOtp] = useState();
   const [pass, setPass] = useState();
-  let dispatch = useDispatch();
-  const classes = useStyles();
+  // let dispatch = useDispatch();
+  // const classes = useStyles();
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
   const validation = (event) => {
-    let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (event.target.name === "name") {
-      if (event.target.value == "") {
-        return validateName(true);
-      }
-      validateName(false);
+    // let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    // if (event.target.name === "email") {
+    //   if (!event.target.value.match(emailValidate)) {
+    //     return validateEmail(true);
+    //   }
+    //   validateEmail(false);
+    // }
+    if (event.target.name === "name" && !event.target.value) {
+      return validateName(true);
     }
-    if (event.target.name === "email") {
-      if (!event.target.value.match(emailValidate)) {
-        return validateEmail(true);
-      }
-      validateEmail(false);
-    }
+    validateName(false);
     if (event.target.name === "mobile") {
       if (
         event.target.value.length !== 10 ||
-        event.target.value == "" ||
+        !event.target.value ||
         !Number(event.target.value)
       ) {
         return validateMobile(true);
@@ -74,7 +73,7 @@ export default function SignUp(props) {
       let strongPassword =
         /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
       setPass(event.target.value);
-      if (event.target.value == "") {
+      if (!event.target.value) {
         validatePassword(true);
         return validationMessage("Enter Password");
       }
@@ -86,12 +85,12 @@ export default function SignUp(props) {
       }
       validatePassword(false);
     }
-    if (event.target.name === "repassword") {
-      if (event.target.value !== pass) {
-        return confirmPassword(true);
-      }
-      confirmPassword(false);
-    }
+    // if (event.target.name === "repassword") {
+    //   if (event.target.value !== pass) {
+    //     return confirmPassword(true);
+    //   }
+    //   confirmPassword(false);
+    // }
   };
 
   const handleSubmit = async (event) => {
@@ -102,36 +101,40 @@ export default function SignUp(props) {
     // eslint-disable-next-line no-console
     let body = {
       name: data.get("name"),
-      email: data.get("email"),
+      // email: data.get("email"),
       phone: data.get("mobile"),
       password: data.get("password"),
     };
-    if (!body.name || !body.email || !body.phone || !body.password) {
+    if (!body.name || !body.phone || !body.password) {
       setLoader(false);
       return setError("Star Fields Are Required");
     }
     if (
       name === false &&
-      email === false &&
       mobile === false &&
-      password === false &&
-      confirmPass === false
+      password === false
+      // email === false &&
+      // confirmPass === false
     ) {
       try {
-        let res = await RegisterApi(body, setError, setLoader);
-        if (res) {
-          if (res.message === "Registration Success") {
-            toast.success("Registration Success", {
-              position: "bottom-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            dispatch(loginAction({ admin: res.user, isLogin: true }));
-          }
+        let res = await RegisterApi(body, setError, setLoader, setOtp);
+        if (
+          res &&
+          res.status === 201 &&
+          res.data.message === "User Registered But Not Verified"
+        ) {
+          otpContent(event, 1, data.get("mobile"));
+          toast.success(res.data.message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+
+          // dispatch(loginAction({ admin: res.user, isLogin: true }));
         }
       } catch (err) {}
     } else {
@@ -268,17 +271,16 @@ export default function SignUp(props) {
             </span>
           </Grid>
           <button
+            type="submit"
             style={
               loader
                 ? { backgroundColor: "var(--color-disable)" }
                 : { backgroundColor: "var(--color-secondary)" }
             }
-            className={`btn-grad full-width ${classes.btnSignUp}`}
-            // disabled={loader ? true : false}
-            onClick={props.handleRegister}
+            disabled={loader ? true : false}
+            className={`btn-grad full-width `}
           >
             {loader ? <img src={ButtonLoader} alt="" width="80" /> : "SignUp"}
-            Sign Up
           </button>
         </Box>
       </Box>

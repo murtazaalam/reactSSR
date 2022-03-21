@@ -6,6 +6,8 @@ const routes = {
   OtpVerify: endpoint + "auth/verify-otp",
   SignUp: endpoint + "auth/register",
   Login: endpoint + "auth/login",
+  resendOtp: endpoint + "auth/resend-otp",
+  forgetPassword: endpoint + "auth/forgot",
   OrderTest: endpoint + "add-order",
   AddToCart: endpoint + "add-to-cart",
   GetCartItems: endpoint + "items-by-email",

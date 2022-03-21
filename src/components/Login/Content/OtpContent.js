@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 import "./otp.css";
+import ResendApi from "../../../apis/api/ResendOtp";
 
 function OtpContent(props) {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function OtpContent(props) {
   const [, setCartData] = React.useState();
   const [, setLoading] = React.useState();
   const [otp, setOtp] = useState(new Array(4).fill(""));
+  console.log(props.phone);
 
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
@@ -52,7 +54,7 @@ function OtpContent(props) {
       phone: props.phone,
       otp: otp.join("").toString(),
     };
-    console.log(body);
+    // console.log(body);
     if (!body.phone || !body.otp) {
       setLoader(false);
       toast.error("OTP Required", {
@@ -67,13 +69,29 @@ function OtpContent(props) {
       return setError("OTP Required");
     }
 
-    let res = await VerifyOtp(body, setError, setOTP, setLoader);
-    console.log(error);
-    if (error) {
-      console.log(error);
+    let res = await VerifyOtp(body, setError, setLoader);
+    if (res && res.data.message === "Registration Successful") {
+      setUser(true);
+      emptyState();
+      toast.success("Registration Successful", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(loginAction({ admin: res.data.user }));
+      let data = await getFromCartApi(setCartData, setLoading, setError);
+      dispatch(cartAction({ cartCount: data?.length }));
+      navigate("/");
+    }
+    if (res && res.status === 400) {
+      // console.log(error);
       emptyState();
       // otpContent(event, 1, OTP);
-      toast.warn(error, {
+      toast.warn(res.data.message, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -83,26 +101,16 @@ function OtpContent(props) {
         progress: undefined,
       });
     }
-    if (res) {
-      console.log(res);
-      if (res.message === "Registration Successful") {
-        setUser(true);
-        emptyState();
-        toast.success("Registration Successful", {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        dispatch(loginAction({ admin: res.user }));
-        let data = await getFromCartApi(setCartData, setLoading, setError);
-        dispatch(cartAction({ cartCount: data?.length }));
-        navigate("/");
-      }
-    }
+  };
+
+  const resendHandle = async (e) => {
+    e.preventDefault();
+    let body = {
+      phone: props.phone,
+    };
+    let res = await ResendApi(body, setLoader);
+    alert(`${res.data.message} ${res.data.otp}`);
+    console.log(res);
   };
 
   return (
@@ -142,7 +150,7 @@ function OtpContent(props) {
               </p>
             </Box>
 
-            <a href="#">Resend OTP</a>
+            <p onClick={(e) => resendHandle(e)}>Resend OTP</p>
           </Grid>
           <Grid item xs={12}>
             <div className="otp">
@@ -168,11 +176,12 @@ function OtpContent(props) {
             }
             className={`btn-grad full-width`}
             disabled={loader ? true : false}
-
-            // onClick={(e) => props.handleVerify(e, 3)}
           >
-            {loader ? <img src={ButtonLoader} width="80" alt="" /> : "SignUp"}
-            Verify Code
+            {loader ? (
+              <img src={ButtonLoader} width="80" alt="" />
+            ) : (
+              "Verify Code"
+            )}
           </button>
         </Grid>
       </Box>

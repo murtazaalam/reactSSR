@@ -1,7 +1,7 @@
 import routes from "../routes/Services.routes";
 import axios from "axios";
 
-export default async function RegisterApi(body, setError, setLoader) {
+export default async function RegisterApi(body, setError, setLoader, setOtp) {
   return await axios
     .post(routes.SignUp, body, {
       headers: {
@@ -10,11 +10,14 @@ export default async function RegisterApi(body, setError, setLoader) {
     })
     .then((res) => {
       setLoader(false);
-      localStorage.setItem("token", res.data.token);
+      console.log(res.data.otp);
+      setOtp(res.data.otp);
+      // localStorage.setItem("token", res.data.token);
       console.log(res);
-      return res.data;
+      return res;
     })
     .catch((error) => {
+      // console.log(error);
       if (error.response.data) {
         setLoader(false);
         if (error.response.data.message)

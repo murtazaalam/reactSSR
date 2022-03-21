@@ -38,7 +38,14 @@ function AuthPage() {
           Sign In now
         </a>
       </p>
-      <SignUp handleRegister={(e) => handleModal(e, 1)} />
+      <SignUp
+        otpContent={(event, id, phone) => {
+          console.log(event, id, phone);
+          setPhone(phone);
+          // setPhone(phone);
+          handleModal(event, id);
+        }}
+      />
     </>
   );
   const otpModal = (
@@ -50,7 +57,6 @@ function AuthPage() {
         </a>
       </p>
       <OtpContent
-        handleVerify={(e) => handleVerify(e)}
         title="Verify Mobile Number"
         heading="Enter OTP"
         phone={phone}

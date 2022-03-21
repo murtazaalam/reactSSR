@@ -30,5 +30,6 @@ export default async function LoginApi(data, setError, setOTP, setLoader) {
       // } else {
       //   //setApiError(true);
       // }
+      return error.response;
     });
 }

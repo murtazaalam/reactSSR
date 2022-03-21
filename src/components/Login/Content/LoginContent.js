@@ -51,7 +51,6 @@ export default function LoginContent({ otpContent }) {
   const [validatePhone, setValidatePhone] = useState(false);
   const [validatePassword, setvalidatePassword] = useState(false);
   const [OTP, setOTP] = useState();
-  // const [OtpContent, setOtpContent] = useState();
   const [loader, setLoader] = React.useState(false);
   const [, setCartData] = React.useState();
   const [, setLoading] = React.useState();
@@ -118,10 +117,10 @@ export default function LoginContent({ otpContent }) {
     }
     let res = await LoginApi(body, setError, setOTP, setLoader);
     console.log(error);
-    if (error) {
-      console.log(error);
+    if (res && res.status === 404) {
+      console.log(res.data.otp);
       // emptyState();
-      otpContent(event, 1, OTP, body.phone);
+      otpContent(event, 1, OTP, phone);
       toast.warn(error, {
         position: "bottom-right",
         autoClose: 5000,
@@ -132,25 +131,23 @@ export default function LoginContent({ otpContent }) {
         progress: undefined,
       });
     }
-    if (res) {
-      console.log(res);
-      if (res.message === "Login Success") {
-        setUser(true);
-        emptyState();
-        toast.success("Login Success", {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        dispatch(loginAction({ admin: res.user }));
-        let data = await getFromCartApi(setCartData, setLoading, setError);
-        dispatch(cartAction({ cartCount: data?.length }));
-        navigate("/");
-      }
+
+    if (res && res.message === "Login Success") {
+      setUser(true);
+      emptyState();
+      toast.success("Login Success", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(loginAction({ admin: res.user }));
+      let data = await getFromCartApi(setCartData, setLoading, setError);
+      dispatch(cartAction({ cartCount: data?.length }));
+      navigate("/");
     }
   };
 
@@ -199,13 +196,7 @@ export default function LoginContent({ otpContent }) {
             {error}
           </Typography>
         )}
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          // handleOtpContent={() => handleOtpContent(OtpContent)}
-          noValidate
-          sx={{ mt: 1 }}
-        >
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
