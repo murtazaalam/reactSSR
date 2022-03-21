@@ -1,8 +1,91 @@
 import React, { useState } from "react";
 import { Avatar, Box, TextField, Typography, Container } from "@mui/material";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import ForgetPassword from "../../../apis/api/ForgetPassword";
 
-function ForgetPasswordContent(props) {
+function ForgetPasswordContent({ otpContent }) {
+  const navigate = useNavigate();
+
   const [contact, setContact] = useState();
+  const [validatePhone, setValidatePhone] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [error, setError] = useState("");
+
+  const validation = (event) => {
+    if (event.target.name === "phone") {
+      setContact(event.target.value);
+      let num = event.target.value;
+      if (num.toString().length !== 10) {
+        return setValidatePhone(true);
+      }
+      setValidatePhone(false);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoader(true);
+    setError("");
+    let body = {
+      phone: contact,
+    };
+    if (!body.phone) {
+      setLoader(false);
+      toast.error("Email And Password Required", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return setError("Email And Password Required");
+    }
+    if (validatePhone) {
+      setLoader(false);
+      toast.error("Invalid Phone number", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return setError("Invalid Phone number");
+    }
+    let res = await ForgetPassword(body, setError, setLoader);
+    //  console.log(error);
+    if (res && res.status === 200) {
+      alert(res.data.forgotCode);
+      // emptyState();
+      otpContent(event, 2, res.data.forgotCode, contact);
+      toast.success(res.data.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // navigate("/");
+    }
+
+    if (res && res.status !== 200) {
+      toast.warn(res.data.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -31,25 +114,26 @@ function ForgetPasswordContent(props) {
         </Typography>
       </Box>
 
-      <Box component="form">
+      <Box component="form" onSubmit={handleSubmit}>
         <TextField
+          margin="normal"
           required
           fullWidth
-          name="contact"
-          type="number"
+          id="PHONE"
+          label="Phone Number"
+          name="phone"
           value={contact}
-          onChange={(e) => setContact(e.target.value)}
+          type="number"
+          min="10"
+          max="10"
+          onChange={(e) => validation(e)}
           autoFocus
-          label="Enter Mobile Number"
+          error={validatePhone}
           sx={{ mb: 4 }}
+          helperText={validatePhone ? "Invalid phone number." : ""}
         />
 
-        <button
-          className="btn-grad full-width "
-          onClick={(e) => props.handleModal(e, 2)}
-        >
-          Send Code
-        </button>
+        <button className="btn-grad full-width ">Send Code</button>
       </Box>
     </Container>
   );

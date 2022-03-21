@@ -70,7 +70,7 @@ function UpcomingEvent() {
 
   const getEvent = async() => {
     let data = await singleEventApi(id, setEvent);
-    if(data.status === "past"){
+    if(data?.status === "past"){
       let videoData = data.media.map((data, index) => (
         <VideoCard data={data} key={index}></VideoCard>
       ));
@@ -148,7 +148,7 @@ function UpcomingEvent() {
             <p style={{textAlign: "center"}}>
               {event.successStory.headline}
             </p>
-            <div>
+            <div style={{display: "flex", justifyContent: "center"}}>
               <div className="media-aria">
                 {event.successStory.media.map((item, index) => {
                   return (
@@ -161,7 +161,7 @@ function UpcomingEvent() {
                       <div className="event-media">
                         <iframe
                           src={`${item.mediaUrl}`}
-                          className="event-media-image"
+                          className="event-media-video"
                           title="YouTube video player"
                           frameborder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -176,7 +176,7 @@ function UpcomingEvent() {
               </div>
           </div>
         }
-        <div className="event-section">
+        {event.status !== "past" && <div className="event-section">
           {event.description.map((item, index) => {
             return (
             <p key={index}>
@@ -184,7 +184,7 @@ function UpcomingEvent() {
             </p>)
           })
           }
-        </div>
+        </div>}
         <div className="trainerHighlights">
           <h2 className="trainerHeading margin-top-bottom">
             Highlights about the trainer
@@ -218,7 +218,7 @@ function UpcomingEvent() {
           </div>
         }
         {event.status === "past" && 
-          <div className="event-section">
+          <div className="event-section-reviews">
               <MyCarousel items={reviews} />
           </div>
         }

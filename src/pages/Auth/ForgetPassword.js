@@ -6,6 +6,7 @@ import AuthLayout from "../../components/Login/AuthLayout";
 import ResetPassword from "./ResetPassword";
 function ForgetPassword() {
   const navigate = useNavigate();
+  const [phone, setPhone] = useState();
   const [modal, setModal] = useState([
     { id: 1, name: "form", checked: true },
     { id: 2, name: "otp", checked: false },
@@ -36,7 +37,16 @@ function ForgetPassword() {
       {modal.map((m, index) => {
         if (m.checked) {
           if (m.id === 1)
-            return <ForgetPasswordContent handleModal={handleModal} />;
+            return (
+              <ForgetPasswordContent
+                handleModal={handleModal}
+                otpContent={(event, id, forgotCode, phone) => {
+                  console.log(phone);
+                  setPhone(phone);
+                  handleModal(event, id);
+                }}
+              />
+            );
           if (m.id === 2)
             return (
               <OtpContent
