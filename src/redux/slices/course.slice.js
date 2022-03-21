@@ -1,15 +1,43 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import singleCourseApi from "../../apis/api/SingleCourse";
+import myOrdersApi from "../../apis/api/MyOders";
 
 const initialState = {
     course: [],
-    isLoading: false
+    isLoading: false,
+    isBaughtCourse: false,
+    discountTime: 0
 };
 export const getCourse = createAsyncThunk(
-    "getCourse", async ({id, setCourseData}, {rejectWithValue}) => {
+    "getCourse", async ({id, setCourseData, setCourse, setLoading, setError, isLogin}, {rejectWithValue}) => {
         try {
+            let isBaught = false;
+            const now = new Date();
+            let futureDate;
+            let diffHour;
             let data  = await singleCourseApi(id, setCourseData)
-            return {data}
+            if(isLogin){
+                let baughtData = await myOrdersApi(setCourse, setLoading, setError);
+                if(baughtData) {
+                    baughtData.forEach((item) => {
+                        if (item.data.course_id === data._id) {
+                            isBaught = true
+                        }
+                    });
+                }
+            }
+            if (data.discount_limit_date) {
+                futureDate = new Date(data.discount_limit_date);
+                diffHour = Math.floor((futureDate - now) / 3600000);
+                if(diffHour > 0) {
+                  diffHour = diffHour;
+                } else{
+                  diffHour = 0
+                }
+              } else {
+                diffHour = 0;
+              }
+            return {data, isBaught, diffHour}
         } catch (e) {
             return rejectWithValue(e?.message)
         }
@@ -29,6 +57,8 @@ export const courseSlice = createSlice({
             // console.log()
             state.course=action?.payload?.data || []
             state.isLoading = false
+            state.isBaughtCourse = action?.payload?.isBaught
+            state.discountTime = action?.payload?.diffHour
         }
     }
 

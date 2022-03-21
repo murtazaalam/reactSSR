@@ -31,6 +31,11 @@
   font-size: 14px;
   line-height: 228.4%;
 }
+.our-team-text {
+  text-align: justify;
+  font-size: 14px;
+  line-height: 228.4%;
+}
 .our-vision-text {
   text-align: justify;
   font-size: 14px;
@@ -120,7 +125,7 @@
 }
 @media screen and (min-width: 550px) {
   .aboutUsBanner {
-    margin-top: 129px;
+    margin-top: 6px !important;
 
     height: 583px;
   }
@@ -168,6 +173,11 @@
     width: 550px;
     line-height: 228.4%;
     font-size: 20px;
+  }
+  .our-mission-text {
+    width: 650px;
+    line-height: 228.4%;
+    font-size: 16px !important;
   }
   .our-vision-text {
     width: 550px;

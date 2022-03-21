@@ -1,9 +1,9 @@
 import routes from '../routes/Services.routes';
  
-export default function singleEventApi(eventId, setEventData){
-    
-    fetch(routes.GetEvents+"/"+eventId).then(response => response.json()).then((data)=>{
+export default async function singleEventApi(eventId, setEventData){
+    return await fetch(routes.GetEvents+"/"+eventId).then(response => response.json()).then((data)=>{
         setEventData(data);
+        return data;
     }).catch(error =>{
         if (error.response) {
             ////setApiError(true);

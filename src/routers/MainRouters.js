@@ -24,6 +24,9 @@ import Signup from "../pages/Auth/auth";
 import AuthSuccess from "../components/Login/Content/AuthSuccess";
 import ForgetPassword from "../pages/Auth/ForgetPassword";
 import ResetPassword from "../pages/Auth/ResetPassword";
+import AllEvents from "../pages/events/AllEvents";
+import UpcomingEvent from "../pages/SingleEvent/UpcomingEvent";
+
 const MainRouters = () => {
   return (
     <ScrollToTop>
@@ -44,6 +47,8 @@ const MainRouters = () => {
           path="/interview-questions"
           element={<TestQuestion></TestQuestion>}
         ></Route>
+        <Route path="/all-events" element={<AllEvents></AllEvents>}></Route>
+        <Route path="/event/:id" element={<UpcomingEvent></UpcomingEvent>}></Route>
         <Route path="/events" element={<Events></Events>}></Route>
         <Route path="/blogs" element={<Blogs />}></Route>
         <Route path="/blogs/:id" element={<Single />}></Route>

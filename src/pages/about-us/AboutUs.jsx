@@ -7,7 +7,11 @@ import mission from "../../assets/Svgs/about-us-mission.svg";
 import vision from "../../assets/Svgs/about-us-vision.svg";
 import "./aboutUs.css";
 import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
-
+import yashna from "../../assets/Svgs/Yashna.svg";
+import suzain from "../../assets/Svgs/suzain.svg";
+import priya from "../../assets/Svgs/Priya.svg";
+import Murtaza from "../../assets/Svgs/Murtaza.svg";
+import ourTeam from "../../assets/Svgs/ourTeam.svg";
 import HiringPartner from "../../components/HiringPartners/HiringPartner.js";
 import industry from "../../assets/images/industry-recg.png";
 import TopClient from "../../components/TopClients/TopClients";
@@ -47,34 +51,29 @@ function AboutUs() {
   }
   const itemData = [
     {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlAj66E2hFn-fYLZQy73_PJadXdwmiRPICYw&usqp=CAU",
-      title1: "Nishant Singh",
-      title2: "Graphic Designer",
-    },
-    {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdByeCZSVaOA1ElmxXAtSmebg9y0pMwilSDw&usqp=CAU",
+      pic: yashna,
       title1: "Yashna Mittal",
       title2: "UI/UX Designer",
     },
+    // {
+    //   pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdByeCZSVaOA1ElmxXAtSmebg9y0pMwilSDw&usqp=CAU",
+    //   title1: "Himani Gulati",
+    //   title2: "Developer",
+    // },
     {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdByeCZSVaOA1ElmxXAtSmebg9y0pMwilSDw&usqp=CAU",
-      title1: "Himani Gulati",
-      title2: "Developer",
-    },
-    {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdByeCZSVaOA1ElmxXAtSmebg9y0pMwilSDw&usqp=CAU",
+      pic: priya,
       title1: "Priya Chaudhary",
       title2: "Designer",
     },
     {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdByeCZSVaOA1ElmxXAtSmebg9y0pMwilSDw&usqp=CAU",
+      pic: suzain,
       title1: "Suzain Shafiq",
       title2: "Designer",
     },
     {
-      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlAj66E2hFn-fYLZQy73_PJadXdwmiRPICYw&usqp=CAU",
-      title1: "Murtaza",
-      title2: "Developer",
+      pic: Murtaza,
+      title1: "Md Murtuza Alam",
+      title2: "Software Developer",
     },
   ];
 
@@ -84,9 +83,6 @@ function AboutUs() {
 
   return (
     <>
-      {/* <Box className="aboutUsBanner">
-        <img src={banner} alt="about-usBanner" />
-      </Box> */}
       <Box
         component="section"
         className="page-heading aboutUsBanner"
@@ -105,7 +101,7 @@ function AboutUs() {
                 Home
                 <div className="line"></div>
               </li>
-              <li className="breadcrumb-item active">About US</li>
+              <li className="breadcrumb-item active">About Us</li>
             </ol>
           </nav>
         </div>
@@ -187,7 +183,34 @@ function AboutUs() {
           <h3 className="about-us-heading">Our Team</h3>
           <br />
           <div className="team-lead">
-            <Grid container spacing={2} sx={{ placeContent: "center" }}>
+            <main
+              className="our-mission-flex"
+              style={{ placeContent: "space-evenly" }}
+            >
+              <div className="our-mission-img">
+                <img src={ourTeam} alt="mission" />
+              </div>
+              <div className="our-mission-text our-team-text">
+                <p>
+                  Our story started with a pivot. Four college graduates came
+                  back to the roots of academics, offering affordable online
+                  courses and training to people that need it. We have always
+                  reposed our trust in picking up from scratch and churning out
+                  the possible best for aspiring learners. We understand the
+                  cold feet you get while facing the cutthroat competition out
+                  there. “Been there, done that” makes us bond with our vision
+                  better. We pride ourselves on our company culture and the
+                  can-do attitude to deliver timely and budget solutions. With a
+                  strong motto of “Inspiring Generations”, we wish to pass on
+                  the baton of business expansion and digitisation to the
+                  incoming generations. Our goal is not just a business goal.
+                  It’s what we are devoted to. Looking back, we have realised
+                  this is what keeps us going.
+                </p>
+              </div>
+            </main>
+
+            {/* <Grid container spacing={2} sx={{ placeContent: "center" }}>
               <Grid item>
                 <div className="lead-card">
                   <img
@@ -235,7 +258,7 @@ function AboutUs() {
                   <p className="designation">Founder</p>
                 </div>
               </Grid>
-            </Grid>
+            </Grid> */}
           </div>
           <br />
           <br />

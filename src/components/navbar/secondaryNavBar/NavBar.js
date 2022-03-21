@@ -53,6 +53,7 @@ const NavBar = (props) => {
   const [cartItem, setCartItem] = useRecoilState(cartItemList);
   const [isLogged, setIsLogged] = useRecoilState(userAuth);
   const [error, setError] = useState();
+  const [courseValue, setCourse] = useState();
   const [courseData, setCourseData] = React.useState();
   const [cartCounting, setCartCount] = useState();
   const [y, setY] = useState([]);
@@ -78,6 +79,15 @@ const NavBar = (props) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setIsLogged(false);
+    toast.success("Logged Out Successfully", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
   const [user, setUser] = useState(false);
   // const [open, setOpen] = React.useState(false);
@@ -150,7 +160,7 @@ const NavBar = (props) => {
     setLoading(false);
   }
   const changeCourse = (id) => {
-    dispatch(getCourse({ id, setCourseData }));
+    dispatch(getCourse({ id, setCourseData, setCourse, setLoading, setError, isLogin }));
   };
 
   const list = (anchor) => (
@@ -362,7 +372,7 @@ const NavBar = (props) => {
                       <li>
                         <a>
                           <Link to="/all-courses/college">Colleges</Link>
-                          <div className="course-list">
+                          <div className="course-list" style={{overflowY: 'auto',overflowX: 'hidden'}}>
                             <div
                               className="image-section"
                               style={{

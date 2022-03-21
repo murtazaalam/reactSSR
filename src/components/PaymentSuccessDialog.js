@@ -4,6 +4,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import Check from "./Check";
 import getFromCartApi from "../apis/api/GetFromCart";
+import ErrorIcon from '@mui/icons-material/Error';
 import { Button, DialogContent, Typography } from "@mui/material";
 import { DialogActions } from "@material-ui/core";
 import { useDispatch } from "react-redux";
@@ -26,18 +27,16 @@ export default function PaymentSuccessDialog(props) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>
-        <Check />
+      <DialogTitle sx={{display: 'flex', justifyContent: 'center'}}>
+        {message === "Payment Success" || message === "Order Placed" ? <Check /> : <ErrorIcon fontSize="large" color="error"/>}
       </DialogTitle>
       <DialogContent>
         <Typography variant="h4">{message}!</Typography>
         <div style={{display: 'flex', flexDirection: 'column'}}>
-          <Typography variant="span" component="span"><b>Order Id</b> : {orderId}</Typography>
-          <Typography variant="span" component="span"><b>Payment Id</b> : {paymentId}</Typography>
+          {orderId && <Typography variant="span" component="span"><b>Order Id</b> : {orderId}</Typography>}
+          {paymentId && <Typography variant="span" component="span"><b>Payment Id</b> : {paymentId}</Typography>}
         </div>
-        
       </DialogContent>
-
       <DialogActions>
         <Button onClick={handleClose} autoFocus>
           Ok

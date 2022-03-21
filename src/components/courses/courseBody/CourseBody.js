@@ -23,7 +23,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "./courseBody.css";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
-import myOrdersApi from "../../../apis/api/MyOders";
 import { useSelector, useDispatch } from "react-redux";
 import { RWebShare } from "react-web-share";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
@@ -31,15 +30,20 @@ import addReviewApi from "../../../apis/api/AddReview";
 import { cartAction } from "../../../redux/slices/cart.slice";
 import { logoutAction } from "../../../redux/slices/auth.slices";
 import getFromCartApi from "../../../apis/api/GetFromCart";
-//import myOrdersApi from "../../../apis/api/MyOders";
 
-const CourseBody = ({ course }) => {
-  let navigate = useNavigate();
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
+const CourseBody = ({ course, isBaughtCourse }) => {
   const [value, setValue] = useState("1");
 
-  const [timeBadge, setTimerBadge] = useState(true);
-  const [baughtCourses, setCourse] = useState([]);
-  const [isBaughtCourse, setIsBaughtCourse] = useState(false);
   const [loader, setLoader] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
@@ -50,53 +54,23 @@ const CourseBody = ({ course }) => {
   const [y, setY] = useState([]);
   const [cartData, setCartData] = useState();
   const [loading, setLoading] = useState();
-
+  let navigate = useNavigate();
+  let { discountTime } = useSelector((state) => state.CourseReducer);
+  const [timeBadge, setTimerBadge] = useState(false);
   let dispatch = useDispatch();
-  let baughtCourseOnly = [];
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
   const currentUrl = window.location.href;
-  useEffect(async () => {
-    if (isLogin) {
-      let baughtData = await myOrdersApi(setCourse, setLoading, setError);
-      if (baughtData) {
-        baughtCourseOnly = baughtData.filter((item) => {
-          return item.data.course_type === "course";
-        });
-        isBaught(baughtCourseOnly);
-      }
-    }
-  }, []);
-  const isBaught = (baughtCourses) => {
-    if (baughtCourses) {
-      baughtCourses.forEach((item) => {
-        if (item.data.course_id === course._id) setIsBaughtCourse(true);
-      });
-    }
-  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const now = new Date();
-  let futureDate;
-  let diffHour;
 
-  if (course.discount_limit_date) {
-    futureDate = new Date(course.discount_limit_date);
-    diffHour = Math.floor((futureDate - now) / 3600000);
-    diffHour > 0 ? (diffHour = diffHour) : (diffHour = 0);
-  } else {
-    diffHour = 0;
-  }
+  const [[days, hrs, mins, secs], setTime] = useState([0, discountTime, 0, 0]);
 
-  const daysHoursMinSecs = { day: 0, hours: diffHour, minutes: 0, seconds: 0 };
-  const { day = 0, hours = 0, minutes = 0, seconds = 60 } = daysHoursMinSecs;
-  const [[days, hrs, mins, secs], setTime] = useState([
-    day,
-    hours,
-    minutes,
-    seconds,
-  ]);
+  useEffect(() => {
+    if (discountTime > 0) setTimerBadge(true);
+    setTime([0, discountTime, 0, 0]);
+  }, [discountTime]);
 
   const [open, setOpen] = React.useState(false);
 
@@ -104,9 +78,9 @@ const CourseBody = ({ course }) => {
     setOpen(false);
   };
   const tick = () => {
-    if (days === 0 && hrs === 0 && mins === 0 && secs === 0)
+    if (days === 0 && hrs === 0 && mins === 0 && secs === 0) {
       setTimerBadge(false);
-    else if (hrs === 0 && mins === 0 && secs === 0) {
+    } else if (hrs === 0 && mins === 0 && secs === 0) {
       setTime([days - 1, 23, 59, 59]);
     } else if (mins === 0 && secs === 0) {
       setTime([days, hrs - 1, 59, 59]);
@@ -120,18 +94,6 @@ const CourseBody = ({ course }) => {
     const timerId = setInterval(() => tick(), 1000);
     return () => clearInterval(timerId);
   });
-
-  // useEffect( async() => {
-  //   if(isLogin){
-  //     let baughtData = await myOrdersApi(setCourse, setLoading, setError);
-  //     if(baughtData){
-  //       baughtCourseOnly = baughtData.filter((item) => {
-  //         return item.data.course_type === "course"
-  //       });
-  //       setCourse(baughtCourseOnly);
-  //     }
-  //   }
-  // }, []);
 
   const addToCart = async (id) => {
     setCartLoader(true);
@@ -262,6 +224,7 @@ const CourseBody = ({ course }) => {
   const emptyState = () => {
     setComment("");
   };
+
   return (
     <>
       <div className="course-tab-container">
@@ -402,48 +365,48 @@ const CourseBody = ({ course }) => {
               <div className="course-detail">
                 {course && (
                   <div className="course-price">
-                    {course.discount > 0 && (
+                    {course.discount > 0 ? (
                       <p>
                         Rs.&nbsp;
-                        {timeBadge === true ? (
+                        {discountTime > 0 && timeBadge ? (
                           <>
                             <del>
                               <span>{course.price}</span>
                             </del>
+                            <span className="updated-price">
+                              <Badge
+                                badgeContent={`${hrs
+                                  .toString()
+                                  .padStart(2, "0")}:${mins
+                                  .toString()
+                                  .padStart(2, "0")}:${secs
+                                  .toString()
+                                  .padStart(2, "0")}`}
+                                color="primary"
+                              >
+                                &nbsp;{course.price - course.discount}
+                              </Badge>
+                            </span>
                           </>
                         ) : (
                           <span>
-                            <span>{course.price}</span>
+                            <span>{course.price - course.discount}</span>
                           </span>
-                        )}
-                        &nbsp;
-                        {timeBadge === true ? (
-                          <span className="updated-price">
-                            <Badge
-                              badgeContent={`${hrs
-                                .toString()
-                                .padStart(2, "0")}:${mins
-                                .toString()
-                                .padStart(2, "0")}:${secs
-                                .toString()
-                                .padStart(2, "0")}`}
-                              color="primary"
-                            >
-                              {course.price - course.discount}
-                            </Badge>
-                          </span>
-                        ) : (
-                          ""
                         )}
                       </p>
+                    ) : (
+                      <p>
+                        Rs.&nbsp;
+                        <span>{course.price}</span>
+                      </p>
                     )}
-                    {course.discount === "0" && (
+                    {/* {course.discount === "0" && (
                       <p>
                         Rs.&nbsp;
                         <span>{course.price}</span>
                         <span>.99</span>
                       </p>
-                    )}
+                    )} */}
                   </div>
                 )}
                 <div className="other">
@@ -521,9 +484,9 @@ const CourseBody = ({ course }) => {
                 <div className="share-now">
                   <RWebShare
                     data={{
-                      text: "Web Share - GfG",
+                      text: `Course - ${course.course_name}`,
                       url: currentUrl,
-                      title: "GfG",
+                      title: `${course.course_name}`,
                     }}
                     onClick={() => console.log("shared successfully!")}
                   >

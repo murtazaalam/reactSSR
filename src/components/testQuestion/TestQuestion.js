@@ -88,12 +88,32 @@ const TestQuestion = () => {
                 </Box>
                 <Box component="h6" className=""></Box>
               </div>
-              {subject &&
-              <div className="questions-wrap col-lg-9 col-md-9 col-sm-6 col-12">
-                {(subject.length > 0) ? (
-                  subject.map((item, index) => {
-                    if (!questionList) {
-                      if (index === 0) {
+              {subject && (
+                <div className="questions-wrap col-lg-9 col-md-9 col-sm-6 col-12">
+                  {subject.length > 0 ? (
+                    subject.map((item, index) => {
+                      if (!questionList) {
+                        if (index === 0) {
+                          return (
+                            <>
+                              {item.list.map((val, i) => {
+                                return (
+                                  <>
+                                    <h5>
+                                      <span>Ques {i + 1} </span>
+                                      {val.question}
+                                    </h5>
+                                    <p className="interview-answer">
+                                      {val?.answer}
+                                    </p>
+                                  </>
+                                );
+                              })}
+                            </>
+                          );
+                        }
+                      }
+                      if (item._id === questionList) {
                         return (
                           <>
                             {item.list.map((val, i) => {
@@ -104,8 +124,7 @@ const TestQuestion = () => {
                                     {val.question}
                                   </h5>
                                   <p className="interview-answer">
-                                    <span>Ans {i + 1} </span>
-                                    {val?.answer}
+                                    {val.answer}
                                   </p>
                                 </>
                               );
@@ -113,46 +132,28 @@ const TestQuestion = () => {
                           </>
                         );
                       }
-                    }
-                    if (item._id === questionList) {
-                      return (
-                        <>
-                          {item.list.map((val, i) => {
-                            return (
-                              <>
-                                <h5>
-                                  <span>Ques {i + 1} </span>
-                                  {val.question}
-                                </h5>
-                                <p className="interview-answer">{val.answer}</p>
-                              </>
-                            );
-                          })}
-                        </>
-                      );
-                    }
-                  })
-                ) : (
-                  <>
-                    <h1
-                      style={{
-                        fontSize: "24px",
-                        fontWeight: "600",
-                        textAlign: "left",
-                      }}
-                    >
-                      No Questions Available
-                    </h1>
-                  </>
-                )}
-                {/* <div className="pagination">
+                    })
+                  ) : (
+                    <>
+                      <h1
+                        style={{
+                          fontSize: "24px",
+                          fontWeight: "600",
+                          textAlign: "left",
+                        }}
+                      >
+                        No Questions Available
+                      </h1>
+                    </>
+                  )}
+                  {/* <div className="pagination">
                             <Stack spacing={2}>
                                 <Pagination count={5} color="success" />
                             </Stack>
                         </div> */}
-              </div>
-              }
-              {!subject &&
+                </div>
+              )}
+              {!subject && (
                 <h1
                   style={{
                     fontSize: "24px",
@@ -162,7 +163,7 @@ const TestQuestion = () => {
                 >
                   No Questions Available
                 </h1>
-              }
+              )}
             </Box>
           </Box>
         </>

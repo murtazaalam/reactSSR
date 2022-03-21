@@ -147,3 +147,16 @@ To Figure Out Input And Output Devices
     "isTopCourse": 1,
     "createdAt": "1/1/22"
 }
+successStory:{
+    "headline": "some headlines here",
+    "media":[
+        {
+            "mediaType":"image",
+            "mediaLink":"url"
+        },
+        {
+            "mediaType":"video",
+            "mediaLink":"url"
+        }
+    ]
+}
