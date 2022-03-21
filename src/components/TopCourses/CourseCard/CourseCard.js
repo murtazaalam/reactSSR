@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import "./CourseCard.css";
 import { Tooltip } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCourse } from "../../../redux/slices/course.slice";
 
 export default function CourseCard({
@@ -26,12 +26,20 @@ export default function CourseCard({
   eventDate
 }) {
   const [courseData, setCourseData] = React.useState();
+  const [course ,setCourse] = React.useState();
+  const [loading, setLoading] = React.useState();
+  const [error, setError] = React.useState();
+  let { isLogin } = useSelector((state) => state.AuthReducer);
   const dispatch = useDispatch();
   const handleCourse = (id) => {
-    dispatch(getCourse({id, setCourseData}))
+    if(courseType === "event"){
+
+    }else{
+      dispatch(getCourse({id, setCourseData, setCourse, setLoading, setError, isLogin}))
+    }
   }
   return (
-    <Link to={`/courses/${id}`} style={{ textDecoration: "none" }} onClick={() => handleCourse(id)}>
+    <Link to={`/${courseType === 'event' ? courseType : 'courses'}/${id}`} style={{ textDecoration: "none" }} onClick={() => handleCourse(id)}>
       <Card className="technovanto-course-card mobile-view-course-card">
         <div
           style={{

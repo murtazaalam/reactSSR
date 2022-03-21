@@ -23,6 +23,7 @@ import Chip from "@mui/material/Chip";
 import Loading from "../Loader";
 import myOrdersApi from "../../apis/api/MyOders";
 import { useNavigate } from "react-router-dom";
+
 function PaperComponent(props) {
   return (
     <Draggable
@@ -51,12 +52,9 @@ const Events = (props) => {
   let baughtEventOnly = [];
   let navigate = useNavigate();
 
-  useEffect(async () => {
-    let allEventData =
-      (await eventsApi(props.category, setEventData, setLoading, setError)) ||
-      [];
-    console.log("out", allEventData);
-    if (isLogin) {
+  useEffect( async() => {
+    let allEventData = await eventsApi(props.category, setEventData, setLoading, setError) || []
+    if(isLogin){
       let baughtData = await myOrdersApi(setCourse, setLoading, setError);
       if (baughtData) {
         baughtEventOnly = baughtData.filter((item) => {

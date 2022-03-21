@@ -30,7 +30,10 @@ const Home = () => {
       <br />
       <WhatAndWhyWeDo />
       <br />
-      <section className="techvanto-aboutus-section section-spacing">
+      <section
+        className="techvanto-aboutus-section"
+        style={{ margin: "0 10%" }}
+      >
         <AboutUs title="About us"></AboutUs>
         <TopClient title="Our College/University partners:"></TopClient>
       </section>

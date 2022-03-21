@@ -9,11 +9,12 @@ import { useSelector } from "react-redux";
 const Courses = () => {
   const [courseData, setCourseData] = useState({});
   const { id } = useParams();
-  let {course, isLoading} = useSelector((state) => state.CourseReducer)
+  let {course, isBaughtCourse } = useSelector((state) => state.CourseReducer)
+
   function isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
-  useEffect(() => {
+  useEffect(async() => {
     if (isEmpty(courseData)) {
       singleCourseApi(id, setCourseData);
     }
@@ -30,7 +31,10 @@ const Courses = () => {
             subtitle={course ? course.subtitle : courseData.subtitle}
             headerImageUrl={course ? course.headerImageUrl : courseData.headerImageUrl}
           />
-          <CourseBody course={course ? course : courseData} />
+          <CourseBody 
+            course={course ? course : courseData}
+            isBaughtCourse={isBaughtCourse}
+          />
         </>
       )}
     </>
