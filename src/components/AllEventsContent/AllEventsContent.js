@@ -6,12 +6,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import AliceCarousel from "react-alice-carousel";
 import EventCard from './EventCard';
 import SpeakerPhoneIcon from '@mui/icons-material/SpeakerPhone';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import eventsApi from '../../apis/api/GetEvents';
 import MyCarousel from './MyCarousel';
+import EventSection from './EventSection';
+import { useSelector } from "react-redux";
+import myOrdersApi from "../../apis/api/MyOders";
 import './allEventsContent.css';
 
 const responsive = {
@@ -71,17 +73,15 @@ const AllEventsContent = () => {
     const [eventData, setEventData] = useState();
     const [loading, setLoading] = useState();
     const [error, setError] = useState();
+    const [course, setCourse] = useState();
     const [liveEvents, setLiveEvents] = useState([]);
-    const [upcomingEvents, setUpcomingEvents] = useState([]);
-    const [pastEvents, setPastEvents] = useState([]);
     const [webinars, setWebinars] = useState([]);
     const [seminars, setSeminars] = useState([]);
     const [workshops, setWorkshops] = useState([]);
     const [test, setTest] = useState([]);
-    const [liveWebinar, setLiveWebinar] = useState([]);
-    const [liveWorkshop, setLiveWorkshop] = useState([]);
-    const [liveSeminar, setLiveSeminar] = useState([]);
-    const [liveTest, setLiveTest] = useState([]);
+    const [list, setList] = useState([]);
+
+    let { isLogin } = useSelector((state) => state.AuthReducer);
 
     useEffect(() => {
         if(!eventData){
@@ -90,30 +90,35 @@ const AllEventsContent = () => {
     },[])
     
     const getEvents = async() => {
+        let newList = [];
+        let baughtEventOnly = [];
         let data = await eventsApi("", setEventData, setLoading, setError);
+
+        if(isLogin){
+            let baughtData = await myOrdersApi(setCourse, setLoading, setError);
+            if(baughtData){
+              baughtEventOnly = baughtData.filter((item) => {
+                return item.data.course_type === "event"
+              });
+              setCourse(baughtEventOnly);
+            }
+            let courseId = baughtEventOnly.map((item) => {
+              return String(item.data.event_id)
+            })
+            for (const item of data) {
+              let flag = courseId.includes(String(item._id));
+              newList.push({...item, isBaught:flag})
+            }
+            if(newList.length > 0) {
+                data = newList;
+                setEventData(newList);
+            };
+        }
         if(data){
             let liveEvent = data.filter(item => {
                 return item.status === "live"
             });
-            console.log("live events ======== ",liveEvent);
-            let liveWebEvent = liveEvent.filter(item => {
-                return item.type === "webinar"
-            });
-            let liveWorkEvent = liveEvent.filter(item => {
-                return item.type === "workshop"
-            });
-            let liveSemEvent = liveEvent.filter(item => {
-                return item.type === "seminar"
-            });
-            let liveTestEvent = liveEvent.filter(item => {
-                return item.type === "test"
-            });
-            let upEvents = data.filter(item => {
-                return item.status === "upcoming"
-            });
-            let pastEvents = data.filter(item => {
-                return item.status === "past"
-            });
+            
             let webinarEvents = data.filter(item => {
                 return item.type === "webinar"
             });
@@ -129,12 +134,7 @@ const AllEventsContent = () => {
             let liveEventsData = liveEvent.map((data, index) => (
                 <EventCard data={data} key={index}></EventCard>
             ));
-            let upcomingEventsData = upEvents.map((data, index) => (
-                <EventCard data={data} key={index}></EventCard>
-            ));
-            let pastEventsData = pastEvents.map((data, index) => (
-                <EventCard data={data} key={index}></EventCard>
-            ));
+            
             let webinarEventsData = webinarEvents.map((data, index) => (
                 <EventCard data={data} key={index}></EventCard>
             ));
@@ -147,29 +147,12 @@ const AllEventsContent = () => {
             let testEventsData = testEvents.map((data, index) => (
                 <EventCard data={data} key={index}></EventCard>
             ));
-            let liveWeb = liveWebEvent.map((data,index) => (
-                <EventCard data={data} key={index}></EventCard>
-            ))
-            let liveWork = liveWorkEvent.map((data,index) => (
-                <EventCard data={data} key={index}></EventCard>
-            ))
-            let liveSem = liveSemEvent.map((data,index) => (
-                <EventCard data={data} key={index}></EventCard>
-            ))
-            let liveTes = liveTestEvent.map((data,index) => (
-                <EventCard data={data} key={index}></EventCard>
-            ))
+            
             setLiveEvents(liveEventsData);
-            setUpcomingEvents(upcomingEventsData);
-            setPastEvents(pastEventsData);
             setWebinars(webinarEventsData);
             setSeminars(seminarEventsData);
             setWorkshops(workshopEventsData);
             setTest(testEventsData);
-            setLiveWebinar(liveWeb);
-            setLiveWorkshop(liveWork);
-            setLiveSeminar(liveSem);
-            setLiveTest(liveTes);
         }
     }
 
@@ -200,34 +183,8 @@ const AllEventsContent = () => {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    {liveWebinar.length > 0 && <div>
-                        <div className="event-type-heading">
-                            <div style={{transform: 'rotate(-45deg)'}} className="event-type-icon"><sup><SpeakerPhoneIcon/></sup></div>
-                            <div className="event-type-title">Webinars</div>
-                        </div>
-                        <MyCarousel items={liveWebinar} leftArrow={`event-card-left-arrow`} rightArrow={`event-card-right-arrow`} />
-                    </div>}
-                    {liveWorkshop.length > 0 && <div>
-                        <div className="event-type-heading">
-                            <div style={{transform: 'rotate(-45deg)'}} className="event-type-icon"><sup><SpeakerPhoneIcon/></sup></div>
-                            <div className="event-type-title">Workshop</div>
-                        </div>
-                        <MyCarousel items={liveWorkshop} leftArrow={`event-card-left-arrow`} rightArrow={`event-card-right-arrow`} />
-                    </div>}
-                    {liveSeminar.length > 0 && <div>
-                        <div className="event-type-heading">
-                            <div style={{transform: 'rotate(-45deg)'}} className="event-type-icon"><sup><SpeakerPhoneIcon/></sup></div>
-                            <div className="event-type-title">Seminar</div>
-                        </div>
-                        <MyCarousel items={liveSeminar} leftArrow={`event-card-left-arrow`} rightArrow={`event-card-right-arrow`} />
-                    </div>}
-                    {liveTest.length > 0 && <div>
-                        <div className="event-type-heading">
-                            <div style={{transform: 'rotate(-45deg)'}} className="event-type-icon"><sup><SpeakerPhoneIcon/></sup></div>
-                            <div className="event-type-title">Test</div>
-                        </div>
-                        <MyCarousel items={liveTest} leftArrow={`event-card-left-arrow`} rightArrow={`event-card-right-arrow`} />
-                    </div>}
+                    {/* <ElasticCarousel items={testingData}/> */}
+                    <EventSection items={eventData} status={`live`} />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     {liveEvents.length > 0 && <div>
@@ -267,18 +224,10 @@ const AllEventsContent = () => {
                     </div>}
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <div className="event-type-heading">
-                        <div style={{transform: 'rotate(-45deg)'}} className="event-type-icon"><sup><SpeakerPhoneIcon/></sup></div>
-                        <div className="event-type-title">Upcoming Events</div>
-                    </div>
-                    <MyCarousel items={upcomingEvents} leftArrow={`event-card-left-arrow`} rightArrow={`event-card-right-arrow`} />
+                    <EventSection items={eventData} status={`upcoming`} />
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    <div className="event-type-heading">
-                        <div style={{transform: 'rotate(-45deg)'}} className="event-type-icon"><sup><SpeakerPhoneIcon/></sup></div>
-                        <div className="event-type-title">Past Events</div>
-                    </div>
-                    <MyCarousel items={pastEvents} leftArrow={`event-card-left-arrow`} rightArrow={`event-card-right-arrow`} />
+                    <EventSection items={eventData} status={`past`} />
                 </TabPanel>
             </Box>
         </>

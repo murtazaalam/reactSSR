@@ -143,7 +143,7 @@ function MyCart() {
           let order = await addOrderApi(body);
           
           const options = {
-            key: "rzp_live_qzL12pXPNuRwwo",
+            key: "rzp_test_rDOF9MHexhjJYj",
             amount: parseInt(totalPrice)*100,
             currency: "INR",
             name: "Acme Corp",

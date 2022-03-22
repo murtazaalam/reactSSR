@@ -3,19 +3,14 @@ import singleCourseApi from "../../apis/api/SingleCourse";
 import myOrdersApi from "../../apis/api/MyOders";
 
 const initialState = {
-    course: [],
-    isLoading: false,
-    isBaughtCourse: false,
-    discountTime: 0
+    events: [],
+    isBaughtEvent: false
 };
-export const getCourse = createAsyncThunk(
-    "getCourse", async ({id, setCourseData, setCourse, setLoading, setError, isLogin}, {rejectWithValue}) => {
+export const getEvents = createAsyncThunk(
+    "getEvents", async ({id, setEventData, setCourse, setLoading, setError, isLogin}, {rejectWithValue}) => {
         try {
             let isBaught = false;
-            const now = new Date();
-            let futureDate;
-            let diffHour;
-            let data  = await singleCourseApi(id, setCourseData)
+            let data  = await singleEventApi(id, setEventData)
             if(isLogin){
                 let baughtData = await myOrdersApi(setCourse, setLoading, setError);
                 if(baughtData) {
@@ -26,24 +21,13 @@ export const getCourse = createAsyncThunk(
                     });
                 }
             } 
-            if (data.discount_limit_date) {
-                futureDate = new Date(data.discount_limit_date);
-                diffHour = Math.floor((futureDate - now) / 3600000);
-                if(diffHour > 0) {
-                  diffHour = diffHour;
-                } else{
-                  diffHour = 0
-                }
-              } else {
-                diffHour = 0;
-              }
-            return {data, isBaught, diffHour}
+            return {data, isBaught}
         } catch (e) {
             return rejectWithValue(e?.message)
         }
     });
 export const courseSlice = createSlice({
-    name: "course",
+    name: "event",
     initialState,
     extraReducers: {
         [getCourse.pending]:(state)=>{
@@ -55,10 +39,9 @@ export const courseSlice = createSlice({
         },
         [getCourse.fulfilled]:(state,action)=>{
             // console.log()
-            state.course=action?.payload?.data || []
+            state.events=action?.payload?.data || []
             state.isLoading = false
-            state.isBaughtCourse = action?.payload?.isBaught
-            state.discountTime = action?.payload?.diffHour
+            state.isBaughtEvent = action?.payload?.isBaught
         }
     }
 

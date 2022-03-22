@@ -11,7 +11,24 @@ import Loading from "../../components/Loader";
 import MyCarousel from "../../components/AllEventsContent/MyCarousel";
 import { useParams } from "react-router-dom";
 import VideoCard from "./VideoCard";
-import ReviewCard from "./ReviewCard"
+import ReviewCard from "./ReviewCard";
+import ButtonLoader from "../../assets/images/button_loader.gif";
+import { toast } from "react-toastify";
+import addToCartApi from "../../apis/api/AddToCart";
+import getFromCartApi from "../../apis/api/GetFromCart";
+import { cartAction } from "../../redux/slices/cart.slice";
+import { logoutAction } from "../../redux/slices/auth.slices";
+import { useSelector, useDispatch } from "react-redux";
+import myOrdersApi from "../../apis/api/MyOders";
+import AliceCarousel from "react-alice-carousel";
+import ElasticCarousel from "../../components/AllEventsContent/ElasticCarousel";
+
+const responsive = {
+  400: { items: 1 },
+  539: { items: 2 },
+  1023: { items: 3 },
+  1280: { items: 4 },
+};
 
 const DATA = {
   gradient:
@@ -43,7 +60,17 @@ function UpcomingEvent() {
   const [event, setEvent] = useState();
   const [videos, setVideoData] = useState();
   const [reviews, setReviewData] = useState();
+  const [loader, setLoader] = useState(false);
+  const [cartData, setCartData] = useState();
+  const [y, setY] = useState([]);
+  const [error, setError] = useState("");
+  const [course, setCourse] = useState();
+  const [loading, setLoading] = useState();
+  const [isEventBaught, setIsEventBaught] = useState(false)
 
+  let { isLogin } = useSelector((state) => state.AuthReducer);
+
+  let dispatch = useDispatch();
   const classes = useStyles(DATA);
   let months = ["January",
                 "February",
@@ -70,6 +97,20 @@ function UpcomingEvent() {
 
   const getEvent = async() => {
     let data = await singleEventApi(id, setEvent);
+    if(isLogin){
+      let baughtEventOnly = [];
+      let baughtData = await myOrdersApi(setCourse, setLoading, setError);
+      if(baughtData){
+        baughtEventOnly = baughtData.filter((item) => {
+          return item.data.course_type === "event"
+        });
+      }
+      baughtEventOnly.forEach((item) => {
+        if(item.data.event_id === data._id) {
+          setIsEventBaught(true);
+        };
+      })
+    }
     if(data?.status === "past"){
       let videoData = data.media.map((data, index) => (
         <VideoCard data={data} key={index}></VideoCard>
@@ -81,6 +122,69 @@ function UpcomingEvent() {
       setReviewData(reviewData);
     }
   }
+
+  const addToCart = async (id) => {
+    setLoader(true);
+    let body = {
+      course_type: "event",
+      event_name: event.name,
+      event_description: event.description,
+      event_image: event.thumbnail,
+      event_date: event.startDate,
+      price: event.price ? event.price : 0,
+      event_id: id,
+    };
+    let message = await addToCartApi(body, setLoader);
+    if (message === "Item Already Added") {
+      toast.warn("Event already added ", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (message === "Item Added") {
+      toast.success("Event added to your cart", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      let data = await getFromCartApi(setCartData, setY, setLoader, setError);
+      dispatch(cartAction({ cartCount: data?.length }));
+    } else if (message === "Unauthorized") {
+      toast.error(message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setLoader(false);
+      dispatch(logoutAction());
+      //navigate("/auth-user");
+    } else {
+      toast.error(message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setLoader(false);
+      dispatch(logoutAction());
+      //setOpen(true);
+    }
+  };
 
   return (
     <>
@@ -121,8 +225,31 @@ function UpcomingEvent() {
           <p className="eventTextSubtitle">
             Venue : {event.venue}{" "}
           </p>
-          {event.status === "upcoming" && <button className="btn-grad full-width">Register Now</button>}
-          {event.status === "live" && <button className="btn-grad full-width">Join Now</button>}
+          {event.status === "upcoming" && <>
+            {!isEventBaught ? (
+              <button
+                type="button"
+                onClick={() => addToCart(event._id)}
+                className="btn-grad full-width arrange-loader"
+                style={
+                  loader
+                    ? { backgroundColor: "var(--color-disable)" }
+                    : { backgroundColor: "var(--color-secondary)" }
+                }
+                disabled={loader ? true : false}
+              >
+                {loader ? <img src={ButtonLoader} width="80" /> : "Add To Cart"}
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn-grad full-width btn-purchased"
+              >
+                Purchased
+              </button>
+            )}</>
+          }
+          {event.status === "live" && <button className="btn-grad full-width" disabled={true}>Join Now</button>}
         </div>
         {event.status === "past" && 
           <div className="map-section" >
@@ -213,13 +340,49 @@ function UpcomingEvent() {
         </div>
         {event.status === "past" && 
           <div className="event-videos-carousel">
-            <MyCarousel items={videos} />
+            {/* <MyCarousel items={videos} /> */}
+            <AliceCarousel
+              className="techvanto-student-says-carousel"
+              responsive={responsive}
+              autoPlayDirection={"rtl"}
+              autoPlayStrategy={"none"}
+              animationEasingFunction={"ease"}
+              autoPlay={false}
+              controlsStrategy="alternate"
+              infinite={true}
+              mouseTracking
+              items={videos}
+              renderPrevButton={() => {
+                return <div className="left-arrow-studentSays">◄</div>;
+              }}
+              renderNextButton={() => {
+                return <div className="right-arrow-studentSays">►</div>;
+              }}
+            />
             <h2 className="trainerHeading" style={{textAlign: 'center', margin:'44px 0px'}}>What people say about the event ?</h2>
           </div>
         }
         {event.status === "past" && 
           <div className="event-section-reviews">
-              <MyCarousel items={reviews} />
+              {/* <MyCarousel items={reviews} /> */}
+              <AliceCarousel
+                  className="techvanto-student-says-carousel"
+                  responsive={responsive}
+                  autoPlayDirection={"rtl"}
+                  autoPlayStrategy={"none"}
+                  animationEasingFunction={"ease"}
+                  autoPlay={false}
+                  controlsStrategy="alternate"
+                  infinite={true}
+                  mouseTracking
+                  items={reviews}
+                  renderPrevButton={() => {
+                    return <div className="left-arrow-studentSays">◄</div>;
+                  }}
+                  renderNextButton={() => {
+                    return <div className="right-arrow-studentSays">►</div>;
+                  }}
+                />
           </div>
         }
         <div>

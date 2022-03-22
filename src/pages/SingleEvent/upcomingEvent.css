@@ -139,7 +139,13 @@
   width: 116px;
   margin: 4px;
 }
+.arrange-loader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .review-card-container{
+  width: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

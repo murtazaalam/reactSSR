@@ -30,9 +30,11 @@ const BookADemo = () => {
     setMessage("");
     setLoader(true);
     let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    console.log("user",admin)
     body = {
       name: data.get("name"),
       email: data.get("email"),
+      phone: isLogin ? admin.phone : null,
       query: data.get("query") ? data.get("query") : null,
     };
     if (!body.email.match(emailValidate)) {

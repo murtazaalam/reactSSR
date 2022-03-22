@@ -496,7 +496,7 @@ const NavBar = (props) => {
                   </a> */}
                 </div>
                 <div className="item">
-                  <Link to="/events" className="menu-text">
+                  <Link to="/all-events" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"

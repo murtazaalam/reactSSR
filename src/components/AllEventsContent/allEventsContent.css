@@ -9,7 +9,7 @@
     justify-content: center;
 }
 .event-card-container{
-    width: auto;
+    width: 234px;
     height: 376px;
     margin: 18px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -88,6 +88,7 @@
 .event-type-title{
     font-weight: 600;
     font-size: 28px;
+    margin-left: 4px;
 }
 .event-type-icon{
     height: fit-content;
@@ -103,20 +104,61 @@
     right: 0;
 }
 .event-videos-carousel{
-    padding: 10px 62px;
+    padding: 10px 20px;
 }
 
 .event-carousel li{
+    width: fit-content !important;
+}
+@media screen and (min-width: 360px){
+    .event-card-container{
+        width: 274px;
+    }
+}
+@media screen and (min-width: 375px){
+    .event-card-container{
+        width: 290px;
+    }
+}
+@media screen and (min-width: 390px){
+    .event-card-container{
+        width: 308px;
+    }
+}
+@media screen and (min-width: 400px){
+    .event-card-container{
+        width: 328px;
+    }
 }
 @media screen and (min-width: 500px){
     /* .events-card-section{
         padding: 50px 52px 8px;
     } */
     .event-card-container{
-        width: 216px;
+        width: 210px;
     }
     .event-card-highlights h2{
         font-size: 22px;
+    }
+}
+@media screen and (min-width: 768px){
+    .event-card-container{
+        width: 206px;
+    }
+}
+@media screen and (min-width: 812px){
+    .event-card-container{
+        width: 220px;
+    }
+}
+@media screen and (min-width: 912px){
+    .event-card-container{
+        width: 250px;
+    }
+}
+@media screen and (min-width: 1024px){
+    .event-card-container{
+        width: 338px;
     }
 }
 @media screen and (min-width: 1200px){
@@ -126,7 +168,7 @@
 }
 @media screen and (min-width: 1300px){
     .event-card-container{
-        width: 312px;
+        width: 310px;
     }
     .event-card-highlights h2{
         font-size: 28px;
