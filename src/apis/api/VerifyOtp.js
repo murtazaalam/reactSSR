@@ -9,6 +9,7 @@ export default async function VerifyOtp(data, setError, setLoader) {
       console.log(res);
       localStorage.setItem("token", res.data.token);
       setLoader(false);
+
       return res;
     })
     .catch((error) => {

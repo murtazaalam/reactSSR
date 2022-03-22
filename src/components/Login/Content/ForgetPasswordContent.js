@@ -56,6 +56,7 @@ function ForgetPasswordContent({ otpContent }) {
       });
       return setError("Invalid Phone number");
     }
+
     let res = await ForgetPassword(body, setError, setLoader);
     //  console.log(error);
     if (res && res.status === 200) {

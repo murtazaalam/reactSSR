@@ -24,6 +24,7 @@ function ResetPassword(props) {
   const [loader, setLoader] = useState(false);
   const [newPassword, validatePassword] = useState(false);
   const [message, validationMessage] = useState("");
+  const [confirmMessage, validationConfirmMessage] = useState("");
 
   const [error, setError] = useState("");
   const handleClickShowPassword = () => setShowNewPassword(!showNewPassword);
@@ -34,9 +35,19 @@ function ResetPassword(props) {
     setShowReEnteredPassword(!showReEnteredPassword);
 
   const [pass, setPass] = useState("");
-
+  const [confirmpass, setconfirmPass] = useState("");
+  function matchPassword() {
+    var pw1 = document.getElementById("pswd1");
+    var pw2 = document.getElementById("pswd2");
+    if (pw1 != pw2) {
+      alert("Passwords did not match");
+    } else {
+      alert("Password created successfully");
+    }
+  }
   const validation = (event) => {
     if (event.target.name === "newPassword") {
+      setPass(event.target.value);
       let strongPassword =
         /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
 
@@ -51,18 +62,17 @@ function ResetPassword(props) {
         );
       }
       validatePassword(false);
-      setPass(event.target.value);
     }
     if (event.target.name === "confirmPassword") {
+      setconfirmPass(event.target.value);
       console.log(pass);
       console.log(event.target.value);
-      console.log(event.target.value !== pass);
-      if (event.target.value !== newPassword) {
+      console.log(event.target.value === pass);
+      if (event.target.value !== pass) {
         validateConfirmPassword(true);
-        return validationMessage(
-          "Re-Entered Password does not match with the new password"
-        );
+        return validationConfirmMessage("Password doesn't match");
       }
+
       validateConfirmPassword(false);
     }
   };
@@ -92,9 +102,10 @@ function ResetPassword(props) {
       });
       return setError("Password Required");
     }
-    if (!validateConfirmPassword && !validatePassword) {
+
+    if (pass !== confirmpass) {
       setLoader(false);
-      toast.error("Invalid Phone number", {
+      toast.error("Password doesn't match", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -103,7 +114,20 @@ function ResetPassword(props) {
         draggable: true,
         progress: undefined,
       });
-      return setError("Invalid Phone number");
+      return setError("Password doesn't match");
+    }
+    if (validatePassword && validateConfirmPassword) {
+      setLoader(false);
+      toast.error("Invalid password", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return setError("Invalid password");
     }
     let res = await UpdatePassword(body, setError, setLoader);
     //  console.log(error);
@@ -187,7 +211,7 @@ function ResetPassword(props) {
                 </InputAdornment>
               ),
             }}
-            id="password"
+            id="pswd1"
             autoComplete="new-password"
             onChange={(e) => validation(e)}
             error={newPassword}
@@ -214,9 +238,10 @@ function ResetPassword(props) {
             fullWidth
             label="Confirm Password"
             // autoComplete="new-password"
+
             onChange={(e) => validation(e)}
             error={confirmPassword}
-            helperText={confirmPassword ? message : ""}
+            helperText={confirmPassword ? confirmMessage : ""}
             sx={{ mb: 6 }}
           />
 
