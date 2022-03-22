@@ -293,7 +293,7 @@ function AboutUs() {
           <h3 className="about-us-heading"> Our Values</h3>
           <br />
           <p className="values-text">
-            Our philosophy is simple- To extend everlasting support to wilful
+            Our philosophy is simple- To extend everlasting support to wilfull
             learners, come what may. Our core values reflect this philosophy,
             highlighting the following:-
           </p>
