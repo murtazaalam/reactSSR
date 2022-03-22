@@ -61,7 +61,8 @@ function ForgetPasswordContent({ otpContent }) {
     if (res && res.status === 200) {
       alert(res.data.forgotCode);
       // emptyState();
-      otpContent(event, 2, res.data.forgotCode, contact);
+      const verifyType = "forgotCode";
+      otpContent(event, 2, res.data.forgotCode, contact, verifyType);
       toast.success(res.data.message, {
         position: "bottom-right",
         autoClose: 5000,

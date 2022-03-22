@@ -1,4 +1,11 @@
-import { Avatar, Box, Grid, Typography, Container } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Grid,
+  Typography,
+  Container,
+  Button,
+} from "@mui/material";
 import ButtonLoader from "../../../assets/images/button_loader.gif";
 import { cartAction } from "../../../redux/slices/cart.slice";
 import { loginAction } from "../../../redux/slices/auth.slices";
@@ -18,9 +25,11 @@ import ResendApi from "../../../apis/api/ResendOtp";
 function OtpContent(props) {
   const navigate = useNavigate();
   let dispatch = useDispatch();
+  const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState("");
   const [, setUser] = useRecoilState(userAuth);
   const [OTP, setOTP] = useState();
+  const [Y, setY] = useState();
   // const [OtpContent, setOtpContent] = useState();
   const [loader, setLoader] = React.useState(false);
   const [, setCartData] = React.useState();
@@ -53,6 +62,7 @@ function OtpContent(props) {
     let body = {
       phone: props.phone,
       otp: otp.join("").toString(),
+      verifyType: props.verifyType,
     };
     // console.log(body);
     if (!body.phone || !body.otp) {
@@ -70,10 +80,26 @@ function OtpContent(props) {
     }
 
     let res = await VerifyOtp(body, setError, setLoader);
-    if (res && res.data.message === "Registration Successful") {
-      setUser(true);
-      emptyState();
-      toast.success("Registration Successful", {
+
+    if (res && res.status === 200) {
+      console.log(props.verifyType);
+      if (props.verifyType === "register") {
+        setUser(true);
+        emptyState();
+        dispatch(loginAction({ admin: res.data.user }));
+        let data = await getFromCartApi(
+          setCartData,
+          setY,
+          setLoading,
+          setError
+        );
+        dispatch(cartAction({ cartCount: data?.length }));
+        navigate("/");
+      }
+      if (props.verifyType === "forgotCode") {
+        props.otpResponse(event, 3);
+      }
+      toast.success(res.data.message, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -82,15 +108,11 @@ function OtpContent(props) {
         draggable: true,
         progress: undefined,
       });
-      dispatch(loginAction({ admin: res.data.user }));
-      let data = await getFromCartApi(setCartData, setLoading, setError);
-      dispatch(cartAction({ cartCount: data?.length }));
-      navigate("/");
     }
-    if (res && res.status === 400) {
-      // console.log(error);
+
+    if (res && res.status !== 200 && res.data.message) {
       emptyState();
-      // otpContent(event, 1, OTP);
+
       toast.warn(res.data.message, {
         position: "bottom-right",
         autoClose: 5000,
@@ -105,11 +127,16 @@ function OtpContent(props) {
 
   const resendHandle = async (e) => {
     e.preventDefault();
+    setDisabled(true);
     let body = {
       phone: props.phone,
+      verifyType: props.verifyType,
     };
     let res = await ResendApi(body, setLoader);
-    alert(`${res.data.message} ${res.data.otp}`);
+    alert(`${res.data.message} ${res.data.forgotCode}`);
+    setTimeout(function () {
+      setDisabled(false);
+    }, 10000);
     console.log(res);
   };
 
@@ -150,7 +177,13 @@ function OtpContent(props) {
               </p>
             </Box>
 
-            <p onClick={(e) => resendHandle(e)}>Resend OTP</p>
+            <Button
+              id="forgotPassword"
+              onClick={(e) => resendHandle(e)}
+              disabled={disabled}
+            >
+              Resend OTP
+            </Button>
           </Grid>
           <Grid item xs={12}>
             <div className="otp">

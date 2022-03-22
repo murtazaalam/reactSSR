@@ -6,6 +6,8 @@ import AuthLayout from "../../components/Login/AuthLayout";
 import ResetPassword from "./ResetPassword";
 function ForgetPassword() {
   const navigate = useNavigate();
+  const [forgotCode, setForgotCode] = useState();
+  const [verifytype, setVerifyType] = useState("");
   const [phone, setPhone] = useState();
   const [modal, setModal] = useState([
     { id: 1, name: "form", checked: true },
@@ -23,15 +25,6 @@ function ForgetPassword() {
     setModal(newModalInfo);
   };
 
-  const handleOtpVerify = (e, id) => {
-    const newModalInfo = [...modal];
-    newModalInfo.forEach((modal) => {
-      if (modal.id === id) return (modal.checked = true);
-      else return (modal.checked = false);
-    });
-    setModal(newModalInfo);
-  };
-
   return (
     <AuthLayout>
       {modal.map((m, index) => {
@@ -40,8 +33,9 @@ function ForgetPassword() {
             return (
               <ForgetPasswordContent
                 handleModal={handleModal}
-                otpContent={(event, id, forgotCode, phone) => {
-                  console.log(phone);
+                otpContent={(event, id, forgotCode, phone, verifyType) => {
+                  console.log(phone, forgotCode);
+                  setVerifyType(verifyType);
                   setPhone(phone);
                   handleModal(event, id);
                 }}
@@ -51,13 +45,19 @@ function ForgetPassword() {
             return (
               <OtpContent
                 phone={phone}
+                verifyType={verifytype}
+                otpResponse={(event, id) => {
+                  console.log(id);
+
+                  handleModal(event, id);
+                }}
                 heading="Verification"
                 subHeading="Enter the verification code we just
             sent you on your mobile number"
-                handleVerify={handleOtpVerify}
               />
             );
-          if (m.id === 3) return <ResetPassword />;
+          if (m.id === 3)
+            return <ResetPassword phone={phone} otp={forgotCode} />;
         }
       })}
     </AuthLayout>

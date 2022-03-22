@@ -1,7 +1,7 @@
 import routes from "../routes/Services.routes";
 import axios from "axios";
 
-export default async function ResendApi(data, setLoader) {
+export default async function ForgetPassword(data, setLoader) {
   return await axios
     .post(routes.forgetPassword, data)
     .then((res) => {

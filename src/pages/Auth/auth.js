@@ -9,6 +9,7 @@ import AuthLayout from "../../components/Login/AuthLayout";
 function AuthPage() {
   const navigate = useNavigate();
   const [phone, setPhone] = useState();
+  const [verifytype, setVerifyType] = useState("");
 
   const [modal, setModal] = useState([
     { id: 1, name: "otp", checked: false },
@@ -26,10 +27,6 @@ function AuthPage() {
     setModal(newModalInfo);
   };
 
-  const handleVerify = (e) => {
-    navigate("/register-success");
-  };
-
   const signupModal = (
     <>
       <p className="member-text">
@@ -39,10 +36,10 @@ function AuthPage() {
         </a>
       </p>
       <SignUp
-        otpContent={(event, id, phone) => {
+        otpContent={(event, id, phone, verifyType) => {
           console.log(event, id, phone);
           setPhone(phone);
-          // setPhone(phone);
+          setVerifyType(verifyType);
           handleModal(event, id);
         }}
       />
@@ -60,6 +57,7 @@ function AuthPage() {
         title="Verify Mobile Number"
         heading="Enter OTP"
         phone={phone}
+        verifyType={verifytype}
       />
     </>
   );
@@ -73,9 +71,10 @@ function AuthPage() {
         </a>
       </p>
       <Login
-        otpContent={(event, id, otp, phone) => {
-          console.log(event, id, otp, phone);
+        otpContent={(event, id, otp, phone, verifyType) => {
+          console.log(event, id, otp, phone, verifyType);
           setPhone(phone);
+          setVerifyType(verifyType);
           handleModal(event, id);
         }}
       />

@@ -116,27 +116,33 @@ export default function SignUp({ otpContent }) {
       // email === false &&
       // confirmPass === false
     ) {
-      try {
-        let res = await RegisterApi(body, setError, setLoader, setOtp);
-        if (
-          res &&
-          res.status === 201 &&
-          res.data.message === "User Registered But Not Verified"
-        ) {
-          otpContent(event, 1, data.get("mobile"));
-          toast.success(res.data.message, {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+      let res = await RegisterApi(body, setError, setLoader, setOtp);
+      if (res && res.status === 201 && res.data.message) {
+        otpContent(event, 1, data.get("mobile"), "register");
+        toast.success(res.data.message, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
 
-          // dispatch(loginAction({ admin: res.user, isLogin: true }));
-        }
-      } catch (err) {}
+        // dispatch(loginAction({ admin: res.user, isLogin: true }));
+      } else if (res && res.status !== 201 && res.data.message) {
+        toast.success(res.data.message, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        // dispatch(loginAction({ admin: res.user, isLogin: true }));
+      }
     } else {
       setLoader(false);
       return setError("Star Fields Are Required");
