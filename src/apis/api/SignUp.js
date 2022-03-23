@@ -17,12 +17,10 @@ export default async function RegisterApi(body, setError, setLoader, setOtp) {
       return res;
     })
     .catch((error) => {
-      // console.log(error);
       if (error.response.data) {
         setLoader(false);
-        if (error.response.data.message)
-          return setError(error.response.data.message);
-        setError(error.response.data.error[0].msg);
+        if (error.response.data.message) setError(error.response.data.message);
+        return error.response;
       } else if (error.request) {
         //setApiError(true);
         setLoader(false);

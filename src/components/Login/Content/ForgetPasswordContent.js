@@ -56,12 +56,14 @@ function ForgetPasswordContent({ otpContent }) {
       });
       return setError("Invalid Phone number");
     }
+
     let res = await ForgetPassword(body, setError, setLoader);
     //  console.log(error);
     if (res && res.status === 200) {
       alert(res.data.forgotCode);
       // emptyState();
-      otpContent(event, 2, res.data.forgotCode, contact);
+      const verifyType = "forgotCode";
+      otpContent(event, 2, res.data.forgotCode, contact, verifyType);
       toast.success(res.data.message, {
         position: "bottom-right",
         autoClose: 5000,

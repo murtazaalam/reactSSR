@@ -11,7 +11,7 @@ export default async function LoginApi(data, setError, setOTP, setLoader) {
         localStorage.setItem("token", res.data.token);
       }
       setLoader(false);
-      return res.data;
+      return res;
     })
     .catch((error) => {
       console.log(error.response);

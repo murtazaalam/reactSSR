@@ -116,12 +116,23 @@ export default function LoginContent({ otpContent }) {
       return setError("Invalid Phone number");
     }
     let res = await LoginApi(body, setError, setOTP, setLoader);
-    console.log(error);
-    if (res && res.status === 404) {
-      console.log(res.data.otp);
-      // emptyState();
-      otpContent(event, 1, OTP, phone);
-      toast.warn(error, {
+    console.log(res);
+    if (res && !res.data.otp && res.status !== 200) {
+      toast.error(res.data.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    if (res && res.data.otp) {
+      alert(res.data.otp);
+      const verifyType = "register";
+      otpContent(event, 1, OTP, phone, verifyType);
+      toast.error(res.data.message, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -132,10 +143,10 @@ export default function LoginContent({ otpContent }) {
       });
     }
 
-    if (res && res.message === "Login Success") {
+    if (res && res.status === 200) {
       setUser(true);
       emptyState();
-      toast.success("Login Success", {
+      toast.success(res.data.message, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -144,7 +155,7 @@ export default function LoginContent({ otpContent }) {
         draggable: true,
         progress: undefined,
       });
-      dispatch(loginAction({ admin: res.user }));
+      dispatch(loginAction({ admin: res.data.user }));
       let data = await getFromCartApi(setCartData, setLoading, setError);
       dispatch(cartAction({ cartCount: data?.length }));
       navigate("/");

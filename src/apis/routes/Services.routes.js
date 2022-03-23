@@ -8,6 +8,7 @@ const routes = {
   Login: endpoint + "auth/login",
   resendOtp: endpoint + "auth/resend-otp",
   forgetPassword: endpoint + "auth/forgot",
+  updatePassword: endpoint + "auth/update-password",
   OrderTest: endpoint + "add-order",
   AddToCart: endpoint + "add-to-cart",
   GetCartItems: endpoint + "items-by-email",

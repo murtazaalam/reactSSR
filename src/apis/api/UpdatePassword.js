@@ -1,9 +1,9 @@
 import routes from "../routes/Services.routes";
 import axios from "axios";
 
-export default async function ForgetPassword(data, setLoader) {
+export default async function ResendApi(data, setLoader) {
   return await axios
-    .post(routes.forgetPassword, data)
+    .post(routes.updatePassword, data)
     .then((res) => {
       // setError(res.data.message);
       console.log(res);
