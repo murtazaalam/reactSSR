@@ -30,6 +30,8 @@ import addReviewApi from "../../../apis/api/AddReview";
 import { cartAction } from "../../../redux/slices/cart.slice";
 import { logoutAction } from "../../../redux/slices/auth.slices";
 import getFromCartApi from "../../../apis/api/GetFromCart";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Tooltip from '@mui/material/Tooltip';
 
 function PaperComponent(props) {
   return (
@@ -59,21 +61,22 @@ const CourseBody = ({ course, isBaughtCourse }) => {
   let dispatch = useDispatch();
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
+ 
   const currentUrl = window.location.href;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+console.log(Math.floor(discountTime/24));
   const [[days, hrs, mins, secs], setTime] = useState([
-    0,
+    Math.floor(discountTime/24),
     discountTime,
     0,
-    0,
+    0
   ]);
 
   useEffect(() => {
     if(discountTime > 0) setTimerBadge(true);
-    setTime([0, discountTime, 0, 0])
+    setTime([Math.floor(discountTime/24), discountTime, 0, 0])
   },[discountTime])
 
   const [open, setOpen] = React.useState(false);
@@ -95,9 +98,11 @@ const CourseBody = ({ course, isBaughtCourse }) => {
     } else {
       setTime([days, hrs, mins, secs - 1]);
     }
+
   };
   useEffect(() => {
     const timerId = setInterval(() => tick(), 1000);
+    console.log(timerId);
     return () => clearInterval(timerId);
   });
   
@@ -312,7 +317,7 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                       return (
                         <Accordion key={index}>
                           <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
+                            expandIcon={isLogin ? <ExpandMoreIcon /> : <LockOutlinedIcon/> }
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                           >
@@ -320,13 +325,18 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                               {curriculum.heading}
                             </Typography>
                           </AccordionSummary>
+                          {isLogin ? 
                           <AccordionDetails>
                             <ul>
                               {curriculum.detail?.map((data, i) => (
                                 <li key={i}>{data}</li>
                               ))}
                             </ul>
-                          </AccordionDetails>
+                          </AccordionDetails> :
+                          <Tooltip title="Add" placement="top-start">
+                            <h6>Please Login First</h6>
+                          </Tooltip>
+                          }
                         </Accordion>
                       );
                     })}
@@ -382,13 +392,10 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                             </del>
                             <span className="updated-price">
                             <Badge
-                              badgeContent={`${hrs
-                                .toString()
-                                .padStart(2, "0")}:${mins
-                                .toString()
-                                .padStart(2, "0")}:${secs
-                                .toString()
-                                .padStart(2, "0")}`}
+                              badgeContent={ days > 0 ? 
+                                  `${  days } days`  : 
+                                 `${hrs}:${mins}:${secs}`
+                              }
                               color="primary"
                             >
                               &nbsp;{course.price - course.discount}
