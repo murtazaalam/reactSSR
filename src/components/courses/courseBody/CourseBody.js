@@ -31,7 +31,7 @@ import { cartAction } from "../../../redux/slices/cart.slice";
 import { logoutAction } from "../../../redux/slices/auth.slices";
 import getFromCartApi from "../../../apis/api/GetFromCart";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Tooltip from '@mui/material/Tooltip';
+import Popover from '@mui/material/Popover';
 
 function PaperComponent(props) {
   return (
@@ -62,6 +62,19 @@ const CourseBody = ({ course, isBaughtCourse }) => {
   let dispatch = useDispatch();
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  {/*const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  }; */}
+
+  const handleClosePop = () => {
+    setAnchorEl(null);
+  };
+
+  const opened = Boolean(anchorEl);
+  const id = opened ? 'simple-popover' : undefined;
  
   const currentUrl = window.location.href;
   const handleChange = (event, newValue) => {
@@ -314,27 +327,47 @@ console.log(Math.floor(discountTime/24));
                     {course.curriculum.map((curriculum, index) => {
                       return (
                         <Accordion key={index}>
+                          {isLogin ?
                           <AccordionSummary
-                            expandIcon={isLogin ? <ExpandMoreIcon /> : <LockOutlinedIcon/> }
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                          >
-                            <Typography className="curriculum-heading">
-                              {curriculum.heading}
-                            </Typography>
-                          </AccordionSummary>
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="panel1a-content"
+                          id="panel1a-header"
+                        >
+                          <Typography className="curriculum-heading">
+                            {curriculum.heading}
+                          </Typography>
+                        </AccordionSummary> :
+                        <AccordionSummary
+                        expandIcon={<LockOutlinedIcon onClick={<Popover
+                          id={id}
+                          open={opened}
+                          anchorEl={anchorEl}
+                          onClose={handleClosePop}
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                          }}
+                        >
+                          <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                        </Popover>} />}
+                        
+                      >
+                        <Typography className="curriculum-heading">
+                          {curriculum.heading}
+                        </Typography>
+                      </AccordionSummary>
+                          }
                           {isLogin ? 
                           <AccordionDetails>
-                            <ul>
-                              {curriculum.detail?.map((data, i) => (
-                                <li key={i}>{data}</li>
-                              ))}
-                            </ul>
-                          </AccordionDetails> :
-                          <Tooltip title="Add" placement="top-start">
-                            <h6>Please Login First</h6>
-                          </Tooltip>
+                          <ul>
+                            {curriculum.detail?.map((data, i) => (
+                              <li key={i}>{data}</li>
+                            ))}
+                          </ul>
+                        </AccordionDetails> :
+                        <AccordionSummary disabled/>
                           }
+                          
                         </Accordion>
                       );
                     })}
@@ -389,16 +422,17 @@ console.log(Math.floor(discountTime/24));
                               <span>{course.price}</span>
                             </del>
                             <span className="updated-price">
-                            <Badge
-                              badgeContent={ days > 0 ? 
+                              <Badge
+                                badgeContent={ days > 0 ? 
                                   `${  days } days left`  : 
                                  `${hrs}:${mins}:${secs}`
                               }
-                              color="primary"
-                            >
-                              &nbsp;{course.price - course.discount}
-                            </Badge>
-                          </span>
+
+                                color="primary"
+                              >
+                                &nbsp;{course.price - course.discount}
+                              </Badge>
+                            </span>
                           </>
                         ) : (
                           <span>
