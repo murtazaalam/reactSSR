@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.3.1",
     "@mui/lab": "^5.0.0-alpha.67",
     "@mui/material": "^5.4.0",
+    "@mui/styles": "^5.5.0",
     "@reduxjs/toolkit": "^1.7.2",
     "@testing-library/jest-dom": "^5.16.2",
     "alert": "^5.0.10",
@@ -27,6 +28,7 @@
     "react-countup": "^6.1.1",
     "react-dom": "^17.0.2",
     "react-draggable": "^4.4.4",
+    "react-elastic-carousel": "^0.11.5",
     "react-final-form": "^6.5.8",
     "react-modal": "^3.14.4",
     "react-razorpay": "^1.1.4",
@@ -42,6 +44,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
+    "styled-components": "^5.3.3",
     "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },

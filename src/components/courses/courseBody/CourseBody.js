@@ -21,7 +21,7 @@ import addToCartApi from "../../../apis/api/AddToCart";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./courseBody.css";
-import Login from "../../Login/Login";
+import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { useSelector, useDispatch } from "react-redux";
 import { RWebShare } from "react-web-share";
@@ -45,7 +45,7 @@ function PaperComponent(props) {
 }
 const CourseBody = ({ course, isBaughtCourse }) => {
   const [value, setValue] = useState("1");
-  
+
   const [loader, setLoader] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
@@ -56,7 +56,8 @@ const CourseBody = ({ course, isBaughtCourse }) => {
   const [y, setY] = useState([]);
   const [cartData, setCartData] = useState();
   const [loading, setLoading] = useState();
-  let { discountTime } = useSelector((state) => state.CourseReducer)
+  let navigate = useNavigate();
+  let { discountTime } = useSelector((state) => state.CourseReducer);
   const [timeBadge, setTimerBadge] = useState(false);
   let dispatch = useDispatch();
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
@@ -85,11 +86,9 @@ console.log(Math.floor(discountTime/24));
     setOpen(false);
   };
   const tick = () => {
-   
-    if (days === 0 && hrs === 0 && mins === 0 && secs === 0){
+    if (days === 0 && hrs === 0 && mins === 0 && secs === 0) {
       setTimerBadge(false);
-    }
-    else if (hrs === 0 && mins === 0 && secs === 0) {
+    } else if (hrs === 0 && mins === 0 && secs === 0) {
       setTime([days - 1, 23, 59, 59]);
     } else if (mins === 0 && secs === 0) {
       setTime([days, hrs - 1, 59, 59]);
@@ -105,11 +104,11 @@ console.log(Math.floor(discountTime/24));
     console.log(timerId);
     return () => clearInterval(timerId);
   });
-  
+
   const addToCart = async (id) => {
     setCartLoader(true);
     let body = {
-      course_type:"course",
+      course_type: "course",
       course_name: course.course_name,
       registration_fee: course.registration_fee,
       course_image: course.thumbnail,
@@ -143,9 +142,8 @@ console.log(Math.floor(discountTime/24));
         progress: undefined,
       });
       let data = await getFromCartApi(setCartData, setY, setLoading, setError);
-      dispatch(cartAction({cartCount:data?.length}))
-    }
-    else if (message === "Unauthorized") {
+      dispatch(cartAction({ cartCount: data?.length }));
+    } else if (message === "Unauthorized") {
       toast.error(message, {
         position: "bottom-right",
         autoClose: 5000,
@@ -157,7 +155,7 @@ console.log(Math.floor(discountTime/24));
       });
       setCartLoader(false);
       dispatch(logoutAction());
-      setOpen(true);
+      navigate("/auth-user");
     } else {
       toast.error(message, {
         position: "bottom-right",
@@ -236,7 +234,7 @@ console.log(Math.floor(discountTime/24));
   const emptyState = () => {
     setComment("");
   };
-  
+
   return (
     <>
       <div className="course-tab-container">
@@ -408,12 +406,12 @@ console.log(Math.floor(discountTime/24));
                           </span>
                         )}
                       </p>
-                    ) : 
+                    ) : (
                       <p>
                         Rs.&nbsp;
                         <span>{course.price}</span>
                       </p>
-                    }
+                    )}
                     {/* {course.discount === "0" && (
                       <p>
                         Rs.&nbsp;
@@ -492,20 +490,15 @@ console.log(Math.floor(discountTime/24));
                           </>
                         )}
                       </button>
-                      <Login
-                        open={isLogin ? false : open}
-                        handleClose={handleClose}
-                        PaperComponent={PaperComponent}
-                      />
                     </>
                   )}
                 </div>
                 <div className="share-now">
                   <RWebShare
                     data={{
-                      text: "Web Share - GfG",
+                      text: `Course - ${course.course_name}`,
                       url: currentUrl,
-                      title: "GfG",
+                      title: `${course.course_name}`,
                     }}
                     onClick={() => console.log("shared successfully!")}
                   >

@@ -22,6 +22,7 @@ import "./events.css";
 import Chip from "@mui/material/Chip";
 import Loading from "../Loader";
 import myOrdersApi from "../../apis/api/MyOders";
+import { useNavigate } from "react-router-dom";
 
 function PaperComponent(props) {
   return (
@@ -42,33 +43,34 @@ const Events = (props) => {
   const [loader, setCartLoader] = useState(false);
   const [cartData, setCartData] = useState();
   const [y, setY] = useState([]);
-  const [baughtEvent, setCourse] = useState([])
+  const [baughtEvent, setCourse] = useState([]);
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
 
   let dispatch = useDispatch();
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
   let baughtEventOnly = [];
+  let navigate = useNavigate();
 
   useEffect( async() => {
     let allEventData = await eventsApi(props.category, setEventData, setLoading, setError) || []
     if(isLogin){
       let baughtData = await myOrdersApi(setCourse, setLoading, setError);
-      if(baughtData){
+      if (baughtData) {
         baughtEventOnly = baughtData.filter((item) => {
-          return item.data.course_type === "event"
+          return item.data.course_type === "event";
         });
         setCourse(baughtEventOnly);
       }
       let courseId = baughtEventOnly.map((item) => {
-        return String(item.data.event_id)
-      })
+        return String(item.data.event_id);
+      });
       let newList = [];
       for (const item of allEventData) {
         let flag = courseId.includes(String(item._id));
-        newList.push({...item, isBaught:flag})
+        newList.push({ ...item, isBaught: flag });
       }
-      setEventData(newList)
+      setEventData(newList);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -77,29 +79,34 @@ const Events = (props) => {
     setOpen(false);
   };
 
-  const setEventCategory = async(category) => {
+  const setEventCategory = async (category) => {
     setEventData([]);
-    let upcomingEvent = await eventsApi(category, setEventData, setLoading, setError);
+    let upcomingEvent = await eventsApi(
+      category,
+      setEventData,
+      setLoading,
+      setError
+    );
     if (category === "upcoming") {
       setUpcomingTab(true);
       setPastTab(false);
-      if(isLogin){
+      if (isLogin) {
         let baughtData = await myOrdersApi(setCourse, setLoading, setError);
-        if(baughtData){
+        if (baughtData) {
           baughtEventOnly = baughtData.filter((item) => {
-            return item.data.course_type === "event"
+            return item.data.course_type === "event";
           });
           setCourse(baughtEventOnly);
         }
         let courseId = baughtEventOnly.map((item) => {
-          return String(item.data.event_id)
-        })
+          return String(item.data.event_id);
+        });
         let newList = [];
         for (const item of upcomingEvent) {
           let flag = courseId.includes(String(item._id));
-          newList.push({...item, isBaught:flag})
+          newList.push({ ...item, isBaught: flag });
         }
-        setEventData(newList)
+        setEventData(newList);
       }
     } else {
       setUpcomingTab(false);
@@ -107,11 +114,10 @@ const Events = (props) => {
     }
   };
 
- 
   const addToCart = async (id) => {
     setCartLoader(true);
     const singleEvent = events.filter((item) => {
-      return item._id === id
+      return item._id === id;
     });
     let body = {
       course_type: "event",
@@ -133,7 +139,7 @@ const Events = (props) => {
         draggable: true,
         progress: undefined,
       });
-    } else if (message === "Item Added"){
+    } else if (message === "Item Added") {
       toast.success("Event added to your cart", {
         position: "bottom-right",
         autoClose: 5000,
@@ -144,9 +150,8 @@ const Events = (props) => {
         progress: undefined,
       });
       let data = await getFromCartApi(setCartData, setY, setLoading, setError);
-      dispatch(cartAction({cartCount:data?.length}))
-    }
-    else if (message === "Unauthorized") {
+      dispatch(cartAction({ cartCount: data?.length }));
+    } else if (message === "Unauthorized") {
       toast.error(message, {
         position: "bottom-right",
         autoClose: 5000,
@@ -158,7 +163,7 @@ const Events = (props) => {
       });
       setCartLoader(false);
       dispatch(logoutAction());
-      setOpen(true);
+      navigate("/auth-user");
     } else {
       toast.error(message, {
         position: "bottom-right",
@@ -247,65 +252,63 @@ const Events = (props) => {
               {events ? (
                 events.map((event, index) => {
                   return (
-                    
-                      <Card
-                        sx={{ width: "355px", minHeight: 320 }}
-                        className="event-card-box"
-                        key={index}
+                    <Card
+                      sx={{ width: "355px", minHeight: 320 }}
+                      className="event-card-box"
+                      key={index}
+                    >
+                      <Link
+                        to={`/event/${event._id}`}
+                        style={{ textDecoration: "none", color: "#1c477c" }}
                       >
+                        <CardMedia
+                          className="event-card"
+                          image={EventImage}
+                          sx={{ objectFit: "scale-down", height: 200 }}
+                          component="img"
+                        ></CardMedia>
+                      </Link>
+                      <CardContent>
+                        {/* for dynamic use below code */}
+                        {/* <img src={`${event.image}`} width="100"/> */}
                         <Link
-                            to={`/event/${event._id}`}
-                            style={{ textDecoration: "none", 
-                            color: "#1c477c" }}
-                          >
-                          <CardMedia
-                            className="event-card"
-                            image={EventImage}
-                            sx={{ objectFit: "scale-down", height: 200 }}
-                            component="img"
-                          ></CardMedia>
+                          to={`/event/${event._id}`}
+                          style={{ textDecoration: "none", color: "#1c477c" }}
+                        >
+                          <Typography component="h6" className="event-name">
+                            {event.name}
+                          </Typography>
                         </Link>
-                        <CardContent>
-                          {/* for dynamic use below code */}
-                          {/* <img src={`${event.image}`} width="100"/> */}
-                          <Link
-                            to={`/event/${event._id}`}
-                            style={{ textDecoration: "none", 
-                            color: "#1c477c" }}
-                          >
-                            <Typography component="h6" className="event-name">
-                              {event.name}
-                            </Typography>
-                          </Link>
-                        </CardContent>
-                        <CardActions sx={{ flexDirection: "column" }}>
-                          <Typography 
-                            component="div" 
-                            className="event-details"
-                            sx={{paddingBottom: '10px'}}
-                          >
-                            <Chip label={event.date} />
+                      </CardContent>
+                      <CardActions sx={{ flexDirection: "column" }}>
+                        <Typography
+                          component="div"
+                          className="event-details"
+                          sx={{ paddingBottom: "10px" }}
+                        >
+                          <Chip label={event.date} />
 
-                            {event.category === "upcoming" && (
-                              <Typography component="p">
-                                
-                                  {event.isBaught ? 
-                                    <Button
-                                      className="btn-grad btn-design btn-purchased"
-                                      size="small"
-                                      sx={{ color: "#fff", height: "34px" }}
-                                    >
-                                      Purchased
-                                    </Button>:
-                                    <Button
-                                      className="btn-grad btn-design"
-                                      size="small"
-                                      sx={{ color: "#1c477c", height: "34px" }}
-                                      onClick={() => addToCart(event._id)}
-                                    >
-                                      Add To Cart
-                                    </Button>}
-                                {/* <Button
+                          {event.category === "upcoming" && (
+                            <Typography component="p">
+                              {event.isBaught ? (
+                                <Button
+                                  className="btn-grad btn-design btn-purchased"
+                                  size="small"
+                                  sx={{ color: "#fff", height: "34px" }}
+                                >
+                                  Purchased
+                                </Button>
+                              ) : (
+                                <Button
+                                  className="btn-grad btn-design"
+                                  size="small"
+                                  sx={{ color: "#1c477c", height: "34px" }}
+                                  onClick={() => addToCart(event._id)}
+                                >
+                                  Add To Cart
+                                </Button>
+                              )}
+                              {/* <Button
                                     className="btn-grad btn-design"
                                     size="small"
                                     sx={{ color: "#1c477c" }}
@@ -313,27 +316,27 @@ const Events = (props) => {
                                   >
                                     Add To Cart
                                   </Button> */}
-                              </Typography>
-                            )}
-                            {event.category === "past" && (
-                              <Typography component="p">
-                                <Link
-                                  to={`/event/${event._id}`}
-                                  style={{ textDecoration: "none" }}
+                            </Typography>
+                          )}
+                          {event.category === "past" && (
+                            <Typography component="p">
+                              <Link
+                                to={`/event/${event._id}`}
+                                style={{ textDecoration: "none" }}
+                              >
+                                <Button
+                                  className="btn-grad btn-design"
+                                  size="small"
+                                  sx={{ color: "#1c477c" }}
                                 >
-                                  <Button
-                                    className="btn-grad btn-design"
-                                    size="small"
-                                    sx={{ color: "#1c477c" }}
-                                  >
-                                    See Detail
-                                  </Button>
-                                </Link>
-                              </Typography>
-                            )}
-                          </Typography>
-                        </CardActions>
-                      </Card>
+                                  See Detail
+                                </Button>
+                              </Link>
+                            </Typography>
+                          )}
+                        </Typography>
+                      </CardActions>
+                    </Card>
                   );
                 })
               ) : (

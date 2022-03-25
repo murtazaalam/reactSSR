@@ -1,0 +1,373 @@
+.banner {
+  width: 100%;
+  height: 270px;
+  background-position: center center !important;
+  background-size: cover !important;
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  /* filter: drop-shadow(1.53287px 1.53287px 1.53287px rgba(0, 0, 0, 0.25)); */
+}
+.margin-top-bottom {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+.sneakPeakItem {
+  border-bottom: 3px solid #000000;
+  padding: 10px;
+}
+.sneakPeakItems {
+  margin: 20px 9%;
+}
+.sneakPeakIndex {
+  border-right: 3px solid #25bb3d;
+  transform: rotate(90deg);
+  padding-right: 20px;
+}
+.sneakPeakData {
+  padding-left: 20px;
+}
+.eventSvg {
+  display: flex;
+  align-items: flex-end;
+  width: 140px;
+}
+.trainerImageSection img{
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+}
+.eventSvg > img {
+  width: inherit;
+  display: none;
+}
+.eventText {
+  padding-top: 2rem;
+  color: white;
+  text-align-last: center;
+  padding-left: 10px;
+}
+.eventTextHeading {
+  font-weight: bolder;
+  font-size: 32px;
+}
+.eventTextSubtitle {
+  text-align: justify;
+}
+.section-spacing-event {
+  text-align-last: center;
+  margin: 30px 10px;
+  max-width: 600px;
+}
+.event-section {
+  background: #f4f4f4;
+  box-shadow: 4.06211px 4.06211px 4.06211px rgba(0, 0, 0, 0.25);
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 170.69%;
+  /* or 20px */
+
+  text-align: center;
+}
+.trainerHighlights {
+  margin: 50px auto;
+  text-align-last: center;
+}
+.trainerHeading {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 92.9%;
+}
+.list-item-event {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 188.19%;
+}
+.trainer_name {
+  margin-top: 20px;
+}
+.map-section{
+  height: 276px;
+  background-repeat: no-repeat;
+  background-image: url(../../assets/images/world-map.jpeg);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.map-section .middle-box{
+  border-right: 4px solid;
+  border-left: 4px solid;
+  padding: 10px 14px
+}
+.map-section .inner-map-box{
+  padding: 10px 14px;
+}
+.map-section h3{
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+.map-section p{
+  font-size: 16px;
+  font-weight: 600;
+}
+.media-aria{
+  display: inline-block;
+  padding-left: 2%;
+}
+.event-media{
+  display: inline-block;
+  float: left;
+}
+.event-media-video{
+  height: 112px;
+  width: 170px;
+  margin: 4px;
+}
+.event-media-image{
+  height: 112px;
+  width: 116px;
+  margin: 4px;
+}
+.arrange-loader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.review-card-container{
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.event-success-story{
+  margin-top: 48px;
+}
+@media screen and (min-width: 321px){
+  .event-media-video{
+    width: 206px;
+  }
+}
+@media screen and (min-width: 375px){
+  .event-media-image{
+    width: 150px;
+  }
+  .event-media-video{
+    width: 192px;
+  }
+}
+@media screen and (min-width: 390px){
+  .event-media-video{
+    width: 202px;
+  }
+}
+@media screen and (min-width: 400px){
+  .event-media-video{
+    width: 228px;
+  }
+}
+@media screen and (min-width: 540px){
+  .event-media-image{
+    width: 180px;
+    height: 156px;
+  }
+  .event-media-video{
+    width: 244px;
+    height: 156px;
+  }
+  .media-aria{
+    margin-left: 9%;
+  }
+}
+@media screen and (min-width: 768px){
+  .event-media-image {
+    width: 248px;
+    height: 190px;
+  }
+  .event-media-video{
+    width: 286px;
+    height: 190px;
+  }
+  .media-aria {
+    margin-left: 11%;
+  }
+}
+@media screen and (min-width: 912px){
+  .event-media-image {
+    width: 280px;
+    height: 200px;
+  }
+  .event-media-video{
+    width: 320px;
+    height: 200px;
+  }
+  .media-aria {
+    margin-left: 13%;
+  }
+}
+@media screen and (min-width: 1024px){
+  .event-media-image {
+    width: 330px;
+    height: 222px;
+  }
+  .event-media-video{
+    width: 350px;
+    height: 222px;
+  }
+  .media-aria {
+    margin-left: 13%;
+  }
+}
+@media screen and (min-width: 1200px){
+  .event-media-image {
+    width: 400px;
+    height: 260px;
+  }
+  .event-media-video{
+    width: 450px;
+    height: 260px;
+  }
+  .media-aria {
+    margin-left: 13%;
+  }
+  .event-media-videos{
+    height: 260px;
+  }
+  
+}
+@media screen and (min-width: 1281px){
+  .event-media-image {
+    width: 462px;
+    height: 400px;
+  }
+  .event-media-video{
+    width: 750px;
+    height: 400px;
+  }
+  .media-aria {
+    margin-left: 10%;
+  }
+}
+@media screen and (min-width: 800px) {
+  .map-section{
+    height: 528px;
+  }
+  .map-section .inner-map-box{
+    padding: 10px 40px;
+  }
+  .map-section h3{
+    font-size: 32px;
+  }
+  .map-section p{
+    font-size: 24px;
+  }
+  .map-section .middle-box{
+    padding: 10px 40px;
+  }
+  .banner {
+    height: 480px;
+    padding: 0 30px;
+    place-content: space-evenly;
+    flex-direction: row;
+  }
+  .sneakPeakItem {
+    font-size: 25px;
+    padding: 30px;
+  }
+  .list-item-event {
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  .trainerImageSection {
+    width: 50%;
+    place-self: center;
+  }
+  .trainer-list {
+    display: flex;
+    flex-direction: row;
+  }
+  .trainer_name {
+    font-weight: 600;
+    font-size: 25px;
+  }
+  .section-spacing-event {
+    margin: 60px auto;
+  }
+
+  .trainerHeading {
+    font-size: 52px;
+    line-height: 92.9%;
+    /* or 59px */
+  }
+  .eventSvg > img {
+    display: inline;
+  }
+  .event-section {
+    padding: 10px 275px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 271.69%;
+    /* or 49px */
+
+    text-align: center;
+  }
+  .eventSvg {
+    width: 688px;
+    height: 480px;
+  }
+  .eventText {
+    width: 678px;
+  }
+  .eventTextHeading {
+    font-size: 52px;
+  }
+  .eventTextSubtitle {
+    font-size: 20px;
+  }
+}
+@media screen and (min-width: 1280px){
+  .map-section {
+    height: 662px;
+  }
+}
+@media screen and (min-width: 1300px) {
+  .map-section {
+    height: 794px;
+  }
+  .banner {
+    height: 480px;
+    padding: 0 30px;
+    place-content: space-evenly;
+  }
+  .eventSvg > img {
+    display: inline;
+  }
+  .eventSvg {
+    width: 688px;
+    height: 480px;
+  }
+  .list-items-event {
+    padding: 30px 15px;
+  }
+  .eventText {
+    width: 678px;
+  }
+  .eventTextHeading {
+    font-size: 52px;
+  }
+  .eventTextSubtitle {
+    font-size: 20px;
+  }
+}

@@ -21,7 +21,7 @@ export default async function AllCourseApi(
           return Object.assign(hash, {
             [obj[key]]: (hash[obj[key]] || []).concat(obj),
           });
-        }, {});
+        }, {}); 
       }
       console.log(groupByKey(data, "category"));
       return data;

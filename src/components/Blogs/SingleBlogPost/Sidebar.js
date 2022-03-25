@@ -21,6 +21,7 @@ export default function Sidebar({ sideBarDetail }) {
           ))}
         </ul>
       </div>
+
       {/* <div className="sidebarItem">
         <span className="sidebarTitle">FOLLOW US</span>
         <div className="sidebarSocial">

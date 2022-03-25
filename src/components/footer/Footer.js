@@ -116,6 +116,7 @@ const Footer = () => {
                   }}
                   to={`/courses/${data._id}`}
                   className="techvanto-footer-text text-footer-small"
+                  onClick={() => handleCourse(data._id)}
                 >
                   <p className="techvanto-footer-text text-footer-small">
                     {data.course_name}

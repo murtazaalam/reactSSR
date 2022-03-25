@@ -1,26 +1,39 @@
 import * as React from "react";
 import { useState } from "react";
-import Avatar from "@mui/material/Avatar";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
 import { toast } from "react-toastify";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import LoginApi from "../../../apis/api/Login";
+import { useDispatch } from "react-redux";
+
+import { useNavigate } from "react-router-dom";
+
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import {
+  InputAdornment,
+  IconButton,
+  CssBaseline,
+  TextField,
+  Box,
+  Typography,
+  Container,
+  Radio,
+  Avatar,
+} from "@mui/material";
+import Visibility from "@material-ui/icons/Visibility";
+import { makeStyles } from "@material-ui/core/styles";
+
 import ButtonLoader from "../../../assets/images/button_loader.gif";
+
+import { cartAction } from "../../../redux/slices/cart.slice";
+import { loginAction } from "../../../redux/slices/auth.slices";
+
+import getFromCartApi from "../../../apis/api/GetFromCart";
+import LoginApi from "../../../apis/api/Login";
+
 import { useRecoilState } from "recoil";
 import { userAuth } from "../../../recoil/store";
-import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
-import { loginAction } from "../../../redux/slices/auth.slices";
-import { cartAction } from "../../../redux/slices/cart.slice";
-import getFromCartApi from "../../../apis/api/GetFromCart";
 
-const theme = createTheme();
+import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   btnLogin: {
     display: "flex",
     justifyContent: "center",
@@ -29,35 +42,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoginContent(props) {
+export default function LoginContent({ otpContent }) {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [users, setUser] = useRecoilState(userAuth);
-  const [email, setEmail] = useState("");
+  const [, setUser] = useRecoilState(userAuth);
+  const [phone, setPhone] = useState();
   const [password, setPassword] = useState("");
-  const [validateEmail, setValidateEmail] = useState(false);
+  const [validatePhone, setValidatePhone] = useState(false);
   const [validatePassword, setvalidatePassword] = useState(false);
+  const [OTP, setOTP] = useState();
   const [loader, setLoader] = React.useState(false);
-  const [cartData, setCartData] = React.useState();
-  const [loading, setLoading] = React.useState();
-  const [y, setY] = React.useState([]);
+  const [, setCartData] = React.useState();
+  const [, setLoading] = React.useState();
+  const [showPassword, setShowPassword] = useState("");
+  // const [y, setY] = React.useState([]);
+
   const classes = useStyles();
   let dispatch = useDispatch();
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
   const emptyState = () => {
-    setEmail("");
+    setPhone("");
     setPassword("");
   };
   const validation = (event) => {
-    let emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (event.target.name === "email") {
-      setEmail(event.target.value);
-      if (!event.target.value.match(emailValidate))
-        return setValidateEmail(true);
-      setValidateEmail(false);
+    if (event.target.name === "phone") {
+      setPhone(event.target.value);
+      let num = event.target.value;
+      if (num.toString().length !== 10) {
+        return setValidatePhone(true);
+      }
+      setValidatePhone(false);
     }
     if (event.target.name === "password") {
       setPassword(event.target.value);
-      if (event.target.value == "") return setvalidatePassword(true);
+      if (!event.target.value) return setvalidatePassword(true);
       setvalidatePassword(false);
     }
   };
@@ -66,146 +86,208 @@ export default function LoginContent(props) {
     setLoader(true);
     setError("");
     let body = {
-      email: email,
+      phone: phone,
       password: password,
     };
-    if (!body.email || !body.password) {
+    if (!body.phone || !body.password) {
       setLoader(false);
+      toast.error("Email And Password Required", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return setError("Email And Password Required");
     }
-    if (validateEmail === true) {
+    if (validatePhone) {
       setLoader(false);
-      return setError("Invalid Email");
+      toast.error("Invalid Phone number", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return setError("Invalid Phone number");
     }
-    let res = await LoginApi(body, setError, setLoader);
-    if(res){
-      if (res.message === "Login Success") {
-        setUser(true);
-        emptyState();
-        //window.location.reload();
-        toast.success("Login Success", {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        dispatch(loginAction({admin:res.user}));
-        let data = await getFromCartApi(setCartData, setY, setLoading, setError);
-        dispatch(cartAction({cartCount:data?.length}));
-      }
+    let res = await LoginApi(body, setError, setOTP, setLoader);
+    console.log(res);
+    if (res && !res.data.otp && res.status !== 200) {
+      toast.error(res.data.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    if (res && res.data.otp) {
+      alert(res.data.otp);
+      const verifyType = "register";
+      otpContent(event, 1, OTP, phone, verifyType);
+      toast.error(res.data.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+
+    if (res && res.status === 200) {
+      setUser(true);
+      emptyState();
+      toast.success(res.data.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(loginAction({ admin: res.data.user }));
+      let data = await getFromCartApi(setCartData, setLoading, setError);
+      dispatch(cartAction({ cartCount: data?.length }));
+      navigate("/");
     }
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 2,
-            marginBottom: 2,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, borderRadius: "0", background: "white" }}>
-            <img src="https://i.ibb.co/jVR0Kyc/logo-3.png" alt=""></img>
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            LogIn
-          </Typography>
-          {error === "Login Success" && (
-            <Typography
-              component="p"
-              variant="p"
-              sx={{
-                fontSize: "14px",
-                fontWeight: 600,
-                color: "success.dark",
-              }}
-            >
-              {error}
-            </Typography>
-          )}
-          {error !== "Login Success" && (
-            <Typography
-              component="p"
-              variant="p"
-              sx={{
-                fontSize: "14px",
-                fontWeight: 600,
-                color: "error.dark",
-              }}
-            >
-              {error}
-            </Typography>
-          )}
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 2,
+          marginBottom: 2,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar
+          sx={{ m: 1, borderRadius: "0" }}
+          src="https://i.ibb.co/jVR0Kyc/logo-3.png"
+        ></Avatar>
+        <Typography variant="h5" className="weightBold">
+          Sign In
+        </Typography>
+        {error === "Login Success" && (
+          <Typography
+            component="p"
+            variant="p"
+            sx={{
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "success.dark",
+            }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              value={email}
-              onChange={(e) => validation(e)}
-              autoFocus
-              error={validateEmail}
-              helperText={validateEmail ? "Invalid Email." : ""}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              className={classes.root}
-              value={password}
-              onChange={(e) => validation(e)}
-              autoComplete="current-password"
-              error={validatePassword}
-              helperText={validatePassword ? "Enter Password." : ""}
-            />
-            {/* <FormControlLabel
-              sx={{ ml: "0 !important" }}
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
-            <button
-              type="submit"
-              style={
-                loader
-                  ? { backgroundColor: "var(--color-disable)" }
-                  : { backgroundColor: "var(--color-secondary)" }
-              }
-              disabled={loader ? true : false}
-              className={`btn-grad full-width ${classes.btnLogin}`}
-            >
-              {loader ? <img src={ButtonLoader} width="80" /> : "LogIn"}
-            </button>
-            {/* <Grid container>
+            {error}
+          </Typography>
+        )}
+        {error !== "Login Success" && (
+          <Typography
+            component="p"
+            variant="p"
+            sx={{
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "error.dark",
+            }}
+          >
+            {error}
+          </Typography>
+        )}
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="PHONE"
+            label="Phone Number"
+            name="phone"
+            value={phone}
+            type="number"
+            min="10"
+            max="10"
+            onChange={(e) => validation(e)}
+            autoFocus
+            error={validatePhone}
+            helperText={validatePhone ? "Invalid phone number." : ""}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            id="password"
+            className={classes.root}
+            value={password}
+            onChange={(e) => validation(e)}
+            type={showPassword ? "text" : "password"}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            error={validatePassword}
+            helperText={validatePassword ? "Enter Password." : ""}
+          />
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <span>
+              <Radio />
+              Remember me{" "}
+            </span>
+            <Link to="/forget-password">Forget password?</Link>
+          </div>
+
+          <button
+            type="submit"
+            style={
+              loader
+                ? { backgroundColor: "var(--color-disable)" }
+                : { backgroundColor: "var(--color-secondary)" }
+            }
+            disabled={loader ? true : false}
+            className={`btn-grad full-width ${classes.btnLogin}`}
+          >
+            {loader ? <img src={ButtonLoader} width="80" alt="" /> : "Sign In"}
+          </button>
+
+          {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
             </Grid> */}
-          </Box>
         </Box>
-      </Container>
-    </ThemeProvider>
+      </Box>
+    </Container>
   );
 }

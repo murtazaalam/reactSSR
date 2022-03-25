@@ -30,6 +30,19 @@ html {
   font-family: "Nunito", sans-serif !important;
   /* font-family: "Roboto Serif", sans-serif; */
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.btn-disabled {
+  background: var(--color-disable) !important;
+  cursor: not-allowed;
+}
+a {
+  cursor: pointer;
+}
 ::-webkit-scrollbar {
   width: 5px;
   height: 0.3rem;
