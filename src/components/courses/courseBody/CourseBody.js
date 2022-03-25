@@ -393,7 +393,7 @@ console.log(Math.floor(discountTime/24));
                             <span className="updated-price">
                             <Badge
                               badgeContent={ days > 0 ? 
-                                  `${  days } days`  : 
+                                  `${  days } days left`  : 
                                  `${hrs}:${mins}:${secs}`
                               }
                               color="primary"
