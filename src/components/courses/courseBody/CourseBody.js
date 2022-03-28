@@ -31,7 +31,13 @@ import { cartAction } from "../../../redux/slices/cart.slice";
 import { logoutAction } from "../../../redux/slices/auth.slices";
 import getFromCartApi from "../../../apis/api/GetFromCart";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Popover from '@mui/material/Popover';
+//import Box from '@mui/material/Box';
+import Popper from '@mui/material/Popper';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import IconButton from '@mui/material/IconButton';
+
+
 
 function PaperComponent(props) {
   return (
@@ -64,17 +70,17 @@ const CourseBody = ({ course, isBaughtCourse }) => {
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  {/*const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  }; */}
+  
+  const handleClicked = (event) => {
+    setAnchorEl(anchorEl ? null :event.currentTarget);
+  }; 
 
   const handleClosePop = () => {
     setAnchorEl(null);
   };
 
   const opened = Boolean(anchorEl);
-  const id = opened ? 'simple-popover' : undefined;
+  const id = opened ? '' : undefined;
  
   const currentUrl = window.location.href;
   const handleChange = (event, newValue) => {
@@ -337,25 +343,26 @@ console.log(Math.floor(discountTime/24));
                             {curriculum.heading}
                           </Typography>
                         </AccordionSummary> :
-                        <AccordionSummary
-                        expandIcon={<LockOutlinedIcon onClick={<Popover
-                          id={id}
-                          open={opened}
-                          anchorEl={anchorEl}
-                          onClose={handleClosePop}
-                          anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'left',
-                          }}
-                        >
-                          <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
-                        </Popover>} />}
-                        
-                      >
-                        <Typography className="curriculum-heading">
-                          {curriculum.heading}
-                        </Typography>
-                      </AccordionSummary>
+                        <List>
+                            <ListItem>
+                              <div style={{display:'flex',justifyContent:'space-between',width:'100%'}}>
+                            <Typography className="curriculum-heading">
+                            {curriculum.heading}                                                    
+                            </Typography>
+                            <IconButton edge='end'>
+                                <LockOutlinedIcon
+                                aria-describedby={id} 
+                                type="button" 
+                                onClick={handleClicked} />
+                                <Popper id={id} open={opened} anchorEl={anchorEl}>
+                                  <Box sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
+                                    Login First.
+                                  </Box>
+                                </Popper>
+                              </IconButton>
+                              </div>
+                          </ListItem>                                    
+                      </List>
                           }
                           {isLogin ? 
                           <AccordionDetails>
