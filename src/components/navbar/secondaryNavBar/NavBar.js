@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-unused-vars */
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { NavHashLink } from "react-router-hash-link";
@@ -14,7 +17,7 @@ import List from "@mui/material/List";
 import Badge from "@mui/material/Badge";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Draggable from "react-draggable";
+// import Draggable from "react-draggable";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PrimaryNavBar from "../primaryNavBar/PrimaryNavBar";
@@ -22,7 +25,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Collapse from "@mui/material/Collapse";
-import ListItemButton from "@mui/material/ListItemButton";
 // import { HashLink } from "react-router-hash-link";
 // import logo from "../../../assets/images/logo-print-hd-transparent-removebg-preview.png";
 import logoOnScroll from "../../../assets/images/on-scroll-logo.png";
@@ -32,25 +34,15 @@ import CollegeIconIcon from "../../../assets/images/new-course-icon-college.svg"
 import AllCourseApi from "../../../apis/api/AllCourse";
 import getFromCartApi from "../../../apis/api/GetFromCart";
 import "./navBar.css";
-import Login from "../../Login/Login";
+// import Login from "../../Login/Login";
 import { cartItemList, userAuth } from "../../../recoil/store";
 import { ToastContainer, toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { getCourse } from "../../../redux/slices/course.slice";
 
-import Paper from "@mui/material/Paper";
+// import Paper from "@mui/material/Paper";
 import { logoutAction } from "../../../redux/slices/auth.slices";
 import { HashLink } from "react-router-hash-link/dist/react-router-hash-link.cjs.development";
-function PaperComponent(props) {
-  return (
-    <Draggable
-      handle="#draggable-dialog-title"
-      cancel={'[class*="MuiDialogContent-root"]'}
-    >
-      <Paper {...props} />
-    </Draggable>
-  );
-}
 
 const NavBar = (props) => {
   const [scroll, setScroll] = useState(false);
@@ -98,17 +90,17 @@ const NavBar = (props) => {
     });
   };
   const [user, setUser] = useState(false);
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-    setOpen(false);
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  //   setOpen(false);
+  //   setOpen(false);
+  // };
   function isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
@@ -211,7 +203,7 @@ const NavBar = (props) => {
           </Link>
         </ListItem>
         <ListItem onClick={toggleDrawer(anchor, false)}>
-          <Link className="sidebar-link" to="/events">
+          <Link className="sidebar-link" to="/all-events">
             Events
           </Link>
         </ListItem>
@@ -260,31 +252,27 @@ const NavBar = (props) => {
 
         {isLogin ? (
           <>
-            <ListItem>
+            <ListItem onClick={toggleDrawer(anchor, false)}>
               <Link className="sidebar-link" to="/my-courses">
                 My Courses
               </Link>
             </ListItem>
-            <ListItem>
+            <ListItem onClick={toggleDrawer(anchor, false)}>
               <Link className="sidebar-link" to="/my-cart">
                 My Cart
               </Link>
             </ListItem>
-            <ListItem>
+            <ListItem onClick={toggleDrawer(anchor, false)}>
               <Link className="sidebar-link" to="/" onClick={logoutHandler}>
                 Logout
               </Link>
             </ListItem>
           </>
         ) : (
-          <ListItem>
-            <button className="btn-grad btn-nav" onClick={handleClickOpen}>
-              <span
-                className={scroll === false ? "color-white" : "color-black"}
-              >
-                LogIn / SignUp
-              </span>
-            </button>
+          <ListItem onClick={toggleDrawer(anchor, false)}>
+            <Link to="/auth-user" className="sidebar-link">
+              <button className="btn-grad btn-nav">LogIn / SignUp</button>
+            </Link>
           </ListItem>
         )}
       </List>
@@ -383,47 +371,54 @@ const NavBar = (props) => {
                       </li>
                       <li>
                         <a>
-                          <Link to="/all-courses/college">Colleges</Link>
-                          <div className="course-list" style={{overflowY: 'auto',overflowX: 'hidden'}}>
+                          <Link to="/all-courses/intermediate">
+                            Colleges{" "}
+                          </Link>
+                          <div className="course-list">
                             <div
                               className="image-section"
                               style={{
                                 background:
-                                  "linear-gradient(120deg, #fc8955 0%, #fc8955 50%, #fcb82f 100%",
+                                "linear-gradient(120deg, #fc8955 0%, #fc8955 50%, #fcb82f 100%",
                               }}
                             >
                               <img src={`${CollegeIconIcon}`} alt="" />
                             </div>
-                            <div className="school-course-list">
+                            <div className="school-course-list" style={{overflowY: 'scroll'}}>
                               <span>Courses</span>
                               <ul>
                                 {isEmpty(coursesByCategory) === false &&
-                                  coursesByCategory.College?.map((item) => {
-                                    return (
-                                      <li key={item._id}>
-                                        <a
-                                          href={`/#/courses/${item._id}`}
-                                          onClick={() => changeCourse(item._id)}
-                                        >
-                                          {item.course_name}
-                                        </a>
-                                        <div className="course-desc desc">
-                                          <div className="desc-heading">
-                                            Description
-                                          </div>
-                                          <div
-                                            style={{
-                                              width: "225px",
-                                              textAlign: "justify",
-                                              whiteSpace: "pre-wrap",
-                                            }}
+                                  coursesByCategory.College?.map(
+                                    (item) => {
+                                      return (
+                                        <li key={item._id}>
+                                          <a
+                                            // onClick={refreshPage}
+                                            href={`/#/courses/${item._id}`}
+                                            onClick={() =>
+                                              changeCourse(item._id)
+                                            }
                                           >
-                                            {item.description}
+                                            {item.course_name}
+                                          </a>
+                                          <div className="course-desc desc">
+                                            <div className="desc-heading">
+                                              Description
+                                            </div>
+                                            <div
+                                              style={{
+                                                width: "225px",
+                                                textAlign: "justify",
+                                                whiteSpace: "pre-wrap",
+                                              }}
+                                            >
+                                              {item.description}
+                                            </div>
                                           </div>
-                                        </div>
-                                      </li>
-                                    );
-                                  })}
+                                        </li>
+                                      );
+                                    }
+                                  )}
                               </ul>
                             </div>
                           </div>
@@ -508,7 +503,7 @@ const NavBar = (props) => {
                   </a> */}
                 </div>
                 <div className="item">
-                  <Link to="/events" className="menu-text">
+                  <Link to="/all-events" className="menu-text">
                     <span
                       className={
                         scroll === false ? "color-white" : "color-black"
@@ -617,24 +612,20 @@ const NavBar = (props) => {
                 </>
               ) : (
                 <>
-                  <button
-                    className="btn-grad btn-nav"
-                    onClick={handleClickOpen}
+                  <Link
+                    // onClick={handleClickOpen}
+                    to="/auth-user"
                   >
-                    <span
-                      className={
-                        scroll === false ? "color-white" : "color-black"
-                      }
-                    >
-                      LogIn / SignUp
-                    </span>
-                  </button>
-
-                  <Login
-                    open={isLogin ? false : open}
-                    handleClose={handleClose}
-                    PaperComponent={PaperComponent}
-                  />
+                    <button className="btn-grad btn-nav">
+                      <span
+                        className={
+                          scroll === false ? "color-white" : "color-black"
+                        }
+                      >
+                        LogIn / SignUp
+                      </span>
+                    </button>
+                  </Link>
                 </>
               )}
             </div>
