@@ -1,24 +1,33 @@
 import { CourseHeader, CourseBody } from "../../components";
-import singleCourseApi from "../../apis/api/SingleCourse";
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCourse } from "../../redux/slices/course.slice";
 
 const Courses = () => {
   const [courseData, setCourseData] = useState({});
-  const { id } = useParams();
-  let {course, isBaughtCourse } = useSelector((state) => state.CourseReducer)
 
+  const [newCourse ,setCourse] = React.useState();
+  const [loading, setLoading] = React.useState();
+  const [error, setError] = React.useState();
+  const dispatch = useDispatch();
+
+  let { isLogin } = useSelector((state) => state.AuthReducer);
+  const { id } = useParams();
+  
   function isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
   useEffect(async() => {
     if (isEmpty(courseData)) {
-      singleCourseApi(id, setCourseData);
+      dispatch(getCourse({id, setCourseData, setCourse, setLoading, setError, isLogin}))
     }
-  }, []);
+  }, [id]);
+
+  let {course, isBaughtCourse } = useSelector((state) => state.CourseReducer)
+
   return (
     <>
       {isEmpty(courseData) ? (
@@ -26,13 +35,13 @@ const Courses = () => {
       ) : (
         <>
           <CourseHeader
-            title={course ? course.course_name : courseData.course_name}
-            category={course ? course.category : courseData.category}
-            subtitle={course ? course.subtitle : courseData.subtitle}
-            headerImageUrl={course ? course.headerImageUrl : courseData.headerImageUrl}
+            title={course && course.course_name}
+            category={course && course.category}
+            subtitle={course && course.subtitle}
+            headerImageUrl={course && course.headerImageUrl}
           />
           <CourseBody 
-            course={course ? course : courseData}
+            course={course }
             isBaughtCourse={isBaughtCourse}
           />
         </>
