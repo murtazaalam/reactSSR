@@ -36,6 +36,7 @@ import Popper from '@mui/material/Popper';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
+import Fade from '@mui/material/Fade';
 
 
 
@@ -70,9 +71,12 @@ const CourseBody = ({ course, isBaughtCourse }) => {
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [placement, setPlacement] = React.useState();
   
-  const handleClicked = (event) => {
+  const handleClicked = (newPlacement)=>(event) => {
     setAnchorEl(anchorEl ? null :event.currentTarget);
+    setOpen((prev) => placement !== newPlacement || !prev);
+    setPlacement(newPlacement);
   }; 
 
   const handleClosePop = () => {
@@ -353,11 +357,17 @@ console.log(Math.floor(discountTime/24));
                                 <LockOutlinedIcon
                                 aria-describedby={id} 
                                 type="button" 
-                                onClick={handleClicked} />
-                                <Popper id={id} open={opened} anchorEl={anchorEl}>
-                                  <Box sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
-                                    Login First.
-                                  </Box>
+                                onClick={handleClicked('top')} />
+                                <Popper id={id} open={opened} anchorEl={anchorEl} placement={placement} transition>
+                                {({ TransitionProps }) => (
+                                <Fade {...TransitionProps} timeout={100}>
+                                  <Paper>
+                                    <Typography sx={{ p: 2 }}>
+                                      Login First.
+                                    </Typography>
+                                  </Paper>
+                                </Fade>
+                                )}
                                 </Popper>
                               </IconButton>
                               </div>
@@ -373,8 +383,7 @@ console.log(Math.floor(discountTime/24));
                           </ul>
                         </AccordionDetails> :
                         <AccordionSummary disabled/>
-                          }
-                          
+                          }                      
                         </Accordion>
                       );
                     })}
