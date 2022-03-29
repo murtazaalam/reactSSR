@@ -146,9 +146,9 @@ function MyCart() {
             key: "rzp_test_rDOF9MHexhjJYj",
             amount: parseInt(totalPrice)*100,
             currency: "INR",
-            name: "Acme Corp",
+            name: "Techvanto Academy",
             description: "Transaction",
-            image: "https://example.com/your_logo",
+            image: "https://i.ibb.co/jVR0Kyc/logo-3.png",
             order_id: order.response.id,
             modal: {
               ondismiss: async function () {

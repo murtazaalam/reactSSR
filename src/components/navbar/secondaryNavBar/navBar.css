@@ -254,10 +254,12 @@
   font-weight: 600;
 }
 .image-section {
-  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  height: 97%;
   width: 144px;
   margin: 10px;
-  text-align: center;
   border-radius: 8px;
   background: linear-gradient(120deg, #1a7154 0%, #44aa65 50%, #44aa65 100%);
 }

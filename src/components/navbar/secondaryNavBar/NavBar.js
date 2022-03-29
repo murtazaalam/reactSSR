@@ -203,7 +203,7 @@ const NavBar = (props) => {
           </Link>
         </ListItem>
         <ListItem onClick={toggleDrawer(anchor, false)}>
-          <Link className="sidebar-link" to="/events">
+          <Link className="sidebar-link" to="/all-events">
             Events
           </Link>
         </ListItem>
@@ -371,47 +371,54 @@ const NavBar = (props) => {
                       </li>
                       <li>
                         <a>
-                          <Link to="/all-courses/college">Colleges</Link>
-                          <div className="course-list" style={{overflowY: 'auto',overflowX: 'hidden'}}>
+                          <Link to="/all-courses/intermediate">
+                            Colleges{" "}
+                          </Link>
+                          <div className="course-list">
                             <div
                               className="image-section"
                               style={{
                                 background:
-                                  "linear-gradient(120deg, #fc8955 0%, #fc8955 50%, #fcb82f 100%",
+                                "linear-gradient(120deg, #fc8955 0%, #fc8955 50%, #fcb82f 100%",
                               }}
                             >
                               <img src={`${CollegeIconIcon}`} alt="" />
                             </div>
-                            <div className="school-course-list">
+                            <div className="school-course-list" style={{overflowY: 'scroll'}}>
                               <span>Courses</span>
                               <ul>
                                 {isEmpty(coursesByCategory) === false &&
-                                  coursesByCategory.College?.map((item) => {
-                                    return (
-                                      <li key={item._id}>
-                                        <a
-                                          href={`/#/courses/${item._id}`}
-                                          onClick={() => changeCourse(item._id)}
-                                        >
-                                          {item.course_name}
-                                        </a>
-                                        <div className="course-desc desc">
-                                          <div className="desc-heading">
-                                            Description
-                                          </div>
-                                          <div
-                                            style={{
-                                              width: "225px",
-                                              textAlign: "justify",
-                                              whiteSpace: "pre-wrap",
-                                            }}
+                                  coursesByCategory.College?.map(
+                                    (item) => {
+                                      return (
+                                        <li key={item._id}>
+                                          <a
+                                            // onClick={refreshPage}
+                                            href={`/#/courses/${item._id}`}
+                                            onClick={() =>
+                                              changeCourse(item._id)
+                                            }
                                           >
-                                            {item.description}
+                                            {item.course_name}
+                                          </a>
+                                          <div className="course-desc desc">
+                                            <div className="desc-heading">
+                                              Description
+                                            </div>
+                                            <div
+                                              style={{
+                                                width: "225px",
+                                                textAlign: "justify",
+                                                whiteSpace: "pre-wrap",
+                                              }}
+                                            >
+                                              {item.description}
+                                            </div>
                                           </div>
-                                        </div>
-                                      </li>
-                                    );
-                                  })}
+                                        </li>
+                                      );
+                                    }
+                                  )}
                               </ul>
                             </div>
                           </div>
