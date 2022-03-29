@@ -35,16 +35,7 @@ function ResetPassword(props) {
     setShowReEnteredPassword(!showReEnteredPassword);
 
   const [pass, setPass] = useState("");
-  const [confirmpass, setconfirmPass] = useState("");
-  function matchPassword() {
-    var pw1 = document.getElementById("pswd1");
-    var pw2 = document.getElementById("pswd2");
-    if (pw1 != pw2) {
-      alert("Passwords did not match");
-    } else {
-      alert("Password created successfully");
-    }
-  }
+
   const validation = (event) => {
     if (event.target.name === "newPassword") {
       setPass(event.target.value);
@@ -64,9 +55,7 @@ function ResetPassword(props) {
       validatePassword(false);
     }
     if (event.target.name === "confirmPassword") {
-      setconfirmPass(event.target.value);
-      console.log(pass);
-      console.log(event.target.value);
+      // setconfirmPass(event.target.value);
       console.log(event.target.value === pass);
       if (event.target.value !== pass) {
         validateConfirmPassword(true);
@@ -89,7 +78,7 @@ function ResetPassword(props) {
       password: data.get("newPassword"),
       forgotCode: props.otp,
     };
-    if (!body.phone || !body.password) {
+    if (!body.phone || !body.password || !data.get("confirmPassword")) {
       setLoader(false);
       toast.error("Password Required", {
         position: "bottom-right",
@@ -102,10 +91,11 @@ function ResetPassword(props) {
       });
       return setError("Password Required");
     }
+    console.log(newPassword, confirmPassword);
 
-    if (pass !== confirmpass) {
+    if (newPassword) {
       setLoader(false);
-      toast.error("Password doesn't match", {
+      toast.error(message, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -114,11 +104,12 @@ function ResetPassword(props) {
         draggable: true,
         progress: undefined,
       });
-      return setError("Password doesn't match");
+      return setError(message);
     }
-    if (validatePassword && validateConfirmPassword) {
+    if (confirmPassword) {
+      console.log("this");
       setLoader(false);
-      toast.error("Invalid password", {
+      toast.error(confirmMessage, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -127,14 +118,12 @@ function ResetPassword(props) {
         draggable: true,
         progress: undefined,
       });
-      return setError("Invalid password");
+      return setError(confirmMessage);
     }
+    setLoader(false);
     let res = await UpdatePassword(body, setError, setLoader);
-    //  console.log(error);
+    console.log(res);
     if (res && res.status === 200) {
-      console.log(res);
-      // emptyState();
-      // otpContent(event, 3, res.data.forgotCode, contact);
       toast.success(res.data.message, {
         position: "bottom-right",
         autoClose: 5000,
@@ -148,6 +137,7 @@ function ResetPassword(props) {
     }
 
     if (res && res.status !== 200) {
+      console.log("hreer");
       toast.warn(res.data.message, {
         position: "bottom-right",
         autoClose: 5000,
@@ -159,7 +149,6 @@ function ResetPassword(props) {
       });
     }
   };
-
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -248,14 +237,18 @@ function ResetPassword(props) {
           <button
             type="submit"
             style={
-              loader
+              loader || confirmPassword || newPassword
                 ? { backgroundColor: "var(--color-disable)" }
                 : { backgroundColor: "var(--color-secondary)" }
             }
-            disabled={loader ? true : false}
+            disabled={loader || confirmPassword || newPassword ? true : false}
             className={`btn-grad full-width `}
           >
-            {loader ? <img src={ButtonLoader} alt="" width="80" /> : "SignUp"}
+            {loader ? (
+              <img src={ButtonLoader} alt="" width="80" />
+            ) : (
+              "Reset Password"
+            )}
           </button>
         </Box>
       </Box>

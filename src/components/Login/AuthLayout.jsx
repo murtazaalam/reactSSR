@@ -1,6 +1,5 @@
 import React from "react";
 import authSvg from "../../assets/Svgs/auth.svg";
-import { Avatar, Box, Container } from "@mui/material";
 
 function AuthLayout(props) {
   return (
