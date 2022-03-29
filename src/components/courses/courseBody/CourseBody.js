@@ -30,6 +30,15 @@ import addReviewApi from "../../../apis/api/AddReview";
 import { cartAction } from "../../../redux/slices/cart.slice";
 import { logoutAction } from "../../../redux/slices/auth.slices";
 import getFromCartApi from "../../../apis/api/GetFromCart";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+//import Box from '@mui/material/Box';
+import Popper from '@mui/material/Popper';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import IconButton from '@mui/material/IconButton';
+import Fade from '@mui/material/Fade';
+
+
 
 function PaperComponent(props) {
   return (
@@ -60,17 +69,39 @@ const CourseBody = ({ course, isBaughtCourse }) => {
   let dispatch = useDispatch();
   let { admin, isLogin } = useSelector((state) => state.AuthReducer);
 
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [placement, setPlacement] = React.useState();
+  
+  const handleClicked = (newPlacement)=>(event) => {
+    setAnchorEl(anchorEl ? null :event.currentTarget);
+    setOpen((prev) => placement !== newPlacement || !prev);
+    setPlacement(newPlacement);
+  }; 
+
+  const handleClosePop = () => {
+    setAnchorEl(null);
+  };
+
+  const opened = Boolean(anchorEl);
+  const id = opened ? '' : undefined;
+ 
   const currentUrl = window.location.href;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const [[days, hrs, mins, secs], setTime] = useState([0, discountTime, 0, 0]);
+console.log(Math.floor(discountTime/24));
+  const [[days, hrs, mins, secs], setTime] = useState([
+    Math.floor(discountTime/24),
+    discountTime,
+    0,
+    0
+  ]);
 
   useEffect(() => {
-    if (discountTime > 0) setTimerBadge(true);
-    setTime([0, discountTime, 0, 0]);
-  }, [discountTime]);
+    if(discountTime > 0) setTimerBadge(true);
+    setTime([Math.floor(discountTime/24), discountTime, 0, 0])
+  },[discountTime])
 
   const [open, setOpen] = React.useState(false);
 
@@ -89,9 +120,11 @@ const CourseBody = ({ course, isBaughtCourse }) => {
     } else {
       setTime([days, hrs, mins, secs - 1]);
     }
+
   };
   useEffect(() => {
     const timerId = setInterval(() => tick(), 1000);
+    console.log(timerId);
     return () => clearInterval(timerId);
   });
 
@@ -304,22 +337,53 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                     {course.curriculum.map((curriculum, index) => {
                       return (
                         <Accordion key={index}>
+                          {isLogin ?
                           <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                          >
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="panel1a-content"
+                          id="panel1a-header"
+                        >
+                          <Typography className="curriculum-heading">
+                            {curriculum.heading}
+                          </Typography>
+                        </AccordionSummary> :
+                        <List>
+                            <ListItem>
+                              <div style={{display:'flex',justifyContent:'space-between',width:'100%'}}>
                             <Typography className="curriculum-heading">
-                              {curriculum.heading}
+                            {curriculum.heading}                                                    
                             </Typography>
-                          </AccordionSummary>
+                            <IconButton edge='end'>
+                                <LockOutlinedIcon
+                                aria-describedby={id} 
+                                type="button" 
+                                onClick={handleClicked('top')} />
+                                <Popper id={id} open={opened} anchorEl={anchorEl} placement={placement} transition>
+                                {({ TransitionProps }) => (
+                                <Fade {...TransitionProps} timeout={100}>
+                                  <Paper>
+                                    <Typography sx={{ p: 2 }}>
+                                      Login First.
+                                    </Typography>
+                                  </Paper>
+                                </Fade>
+                                )}
+                                </Popper>
+                              </IconButton>
+                              </div>
+                          </ListItem>                                    
+                      </List>
+                          }
+                          {isLogin ? 
                           <AccordionDetails>
-                            <ul>
-                              {curriculum.detail?.map((data, i) => (
-                                <li key={i}>{data}</li>
-                              ))}
-                            </ul>
-                          </AccordionDetails>
+                          <ul>
+                            {curriculum.detail?.map((data, i) => (
+                              <li key={i}>{data}</li>
+                            ))}
+                          </ul>
+                        </AccordionDetails> :
+                        <AccordionSummary disabled/>
+                          }                      
                         </Accordion>
                       );
                     })}
@@ -375,13 +439,11 @@ const CourseBody = ({ course, isBaughtCourse }) => {
                             </del>
                             <span className="updated-price">
                               <Badge
-                                badgeContent={`${hrs
-                                  .toString()
-                                  .padStart(2, "0")}:${mins
-                                  .toString()
-                                  .padStart(2, "0")}:${secs
-                                  .toString()
-                                  .padStart(2, "0")}`}
+                                badgeContent={ days > 0 ? 
+                                  `${  days } days left`  : 
+                                 `${hrs}:${mins}:${secs}`
+                              }
+
                                 color="primary"
                               >
                                 &nbsp;{course.price - course.discount}
