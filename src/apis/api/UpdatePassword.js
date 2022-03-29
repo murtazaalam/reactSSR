@@ -11,8 +11,8 @@ export default async function ResendApi(data, setLoader) {
       return res;
     })
     .catch((error) => {
-      console.log(error.response);
       setLoader(false);
+      console.log(error.response);
       return error.response;
     });
 }
