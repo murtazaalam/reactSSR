@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1000 296" style="enable-background:new 0 0 1000 296;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:none;}
@@ -1245,7 +1245,7 @@
 	</g>
 	<path class="st97" d="M705.4,134.7c6.3,20.5-5.2,42.2-25.6,48.6c0,0,0,0,0,0L404,268.4c-20.5,6.2-42.2-5.3-48.5-25.8
 		c-6.2-20.4,5.2-42,25.5-48.4L656.9,109c20.5-6.3,42.2,5.1,48.5,25.5C705.4,134.6,705.4,134.6,705.4,134.7L705.4,134.7z"/>
-	<pattern  id="pattern_1_" xlink:href="#Hatching" patternTransform="matrix(1 0 0 -1 660.87 -16422.8359)">
+	<pattern  id="pattern_1_" xlinkHref="#Hatching" patternTransform="matrix(1 0 0 -1 660.87 -16422.8359)">
 	</pattern>
 	<path id="pattern" class="st98" d="M705.4,134.7c6.3,20.5-5.2,42.2-25.6,48.6c0,0,0,0,0,0L404,268.4c-20.5,6.2-42.2-5.3-48.5-25.8
 		c-6.2-20.4,5.2-42,25.5-48.4L656.9,109c20.5-6.3,42.2,5.1,48.5,25.5C705.4,134.6,705.4,134.6,705.4,134.7L705.4,134.7z"/>

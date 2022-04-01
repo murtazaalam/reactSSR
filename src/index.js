@@ -6,10 +6,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-    <HashRouter>
-        <App />
-    </HashRouter>
-    , 
+    <React.StrictMode>
+    <App />
+  </React.StrictMode>,
     document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
