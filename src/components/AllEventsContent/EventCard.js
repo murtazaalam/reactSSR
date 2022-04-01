@@ -107,8 +107,8 @@ function EventCard({data}) {
                     <h6>{data.type}</h6>
                     <div className="event-card-highlights">
                         <div className="event-card-date">
-                            <span>{eventDate.getDay() < 10 ? `0${eventDate.getDay()}` : eventDate.getDay()}</span>
-                            <span>{Months[eventDate.getMonth()-1]}</span>
+                            <span>{eventDate.getDate() < 10 ? `0${eventDate.getDate()-1}` : eventDate.getDate()-1}</span>
+                            <span>{Months[eventDate.getMonth()]}</span>
                         </div>
                         <div>
                             <Link to={`/event/${data._id}`} style={{textDecoration: 'none', color: '#000'}}>

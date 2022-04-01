@@ -206,17 +206,17 @@ function UpcomingEvent() {
             {(new Date(event.endDate) - new Date(event.startDate))/(1000 * 3600 * 24) + 1}{" "} Days Free Seminar
           </h2>
           <p className="eventTextSubtitle">
-            Date : {new Date(event.startDate).getDate()}
-              {first.includes(new Date(event.startDate).getDate()) ? "st" :
-                (second.includes(new Date(event.startDate).getDate()) ? "nd":
-                (third.includes(new Date(event.startDate).getDate()) ? "rd" : "th" )
+            Date : {new Date(event.startDate).getDate()-1}
+              {first.includes(new Date(event.startDate).getDate()-1) ? "st" :
+                (second.includes(new Date(event.startDate).getDate()-1) ? "nd":
+                (third.includes(new Date(event.startDate).getDate()-1) ? "rd" : "th" )
                 )
               } 
               {" "}To{" "} 
-              {new Date(event.endDate).getDate()}
-              {first.includes(new Date(event.endDate).getDate()) ? "st" :
-                (second.includes(new Date(event.endDate).getDate()) ? "nd":
-                (third.includes(new Date(event.endDate).getDate()) ? "rd" : "th" )
+              {new Date(event.endDate).getDate()-1}
+              {first.includes(new Date(event.endDate).getDate()-1) ? "st" :
+                (second.includes(new Date(event.endDate).getDate()-1) ? "nd":
+                (third.includes(new Date(event.endDate).getDate()-1) ? "rd" : "th" )
                 )
               }{" "}
               {months[new Date(event.startDate).getMonth()]}{" "} 
@@ -402,7 +402,7 @@ function UpcomingEvent() {
               return(
                 <div className="sneakPeakItem">
                   <span className="sneakPeakIndex">{index + 1}</span>
-                  <span className="sneakPeakData">{item}</span>
+                  <span className="sneakPeakData">{item.title}</span>
                 </div>
               )
             })}
