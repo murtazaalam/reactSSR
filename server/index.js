@@ -15,9 +15,9 @@ app.use("/static", express.static(path.join(__dirname, "..", "public")));
 app.get('/', (req, res) => {
   // const context = {}
   const app = ReactDOMServer.renderToString(
-  // <StaticRouter location={req.url} context={context}>
+  <StaticRouter location={req.url} context={context}>
     <App />
-  // </StaticRouter>
+  </StaticRouter>
   );
   const indexFile = path.resolve('./build/index.html');
 
