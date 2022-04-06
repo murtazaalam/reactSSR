@@ -14,6 +14,7 @@ app.use("/static", express.static(path.join(__dirname, "..", "public")));
 
 app.get('/', (req, res) => {
   // const context = {}
+  console.log("url====",req.url);
   const app = ReactDOMServer.renderToString(
   <StaticRouter location={req.url} context={context}>
     <App />
